@@ -1,22 +1,55 @@
 //
 //  ViewController.m
-//  newco-festivals
+//  newco-IOS
 //
-//  Created by yassen aniss on 1/2/16.
-//  Copyright © 2016 newco. All rights reserved.
+//  Created by yassen aniss on 1/27/165.
+//  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "ViewController.h"
+#import "session.h"
 
 @interface ViewController ()
 
 @end
 
-@implementation ViewController
+@implementation ViewController{
+    NSMutableArray *sessionsArray;
+    IBOutlet UITableView *sessionTableView;
+    IBOutlet UISegmentedControl *segmentedControl;
+}
 
+
+- (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
+    return [sessionsArray count];
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell * session_cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"session_cell"];
+    session_cell.textLabel.text = [sessionsArray[indexPath.row] title];
+    return session_cell;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [sessionTableView setDataSource:self];
+    [self adjustUI];
+    [self addDataToTable];
+}
+- (void) adjustUI{
+    
+    [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateSelected];
+    [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateNormal];
+
+}
+- (void) addDataToTable{
+    sessionsArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 10; i++) {
+        session *s = [[session alloc] init];
+        [s setTitle:@"you already know doh"];
+        [sessionsArray addObject: s];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
