@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 #import "colors.h"
 
+
 @interface SignInViewController ()
 @property (strong, nonatomic) IBOutlet UIView *topView;
 @property (strong, nonatomic) IBOutlet UILabel *forgotPassword;
@@ -53,14 +54,19 @@
     [self setBorder:self.bottomView width:1.0 radius:8 color:[UIColor myLightGray]];
     [self setBorder:self.topView width:1.0 radius:5 color:[UIColor myLightGray]];
     [self setBorder:self.logIn width:1.0 radius:5 color:[UIColor blackColor]];
-    
+    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back.jpg"] landscapeImagePhone:[UIImage imageNamed:@"back.jpg"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
+    item.tintColor = [UIColor blackColor];
+    self.navigationItem.leftBarButtonItem = item;
+}
+-(IBAction)goBack:(id)sender  {
+    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController pushViewController:self.navigationController.parentViewController animated:YES];
 }
 - (void)setBorder:(UIView*)obj width:(float)wid radius:(int)rad color:(UIColor*)col{
     obj.layer.borderColor = col.CGColor;
     obj.layer.borderWidth = wid;
     obj.layer.cornerRadius = rad;
 }
-
 /*
  #pragma mark - Navigation
  
