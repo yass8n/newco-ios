@@ -34,9 +34,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)viewDidLayoutSubviews {
+    
+    int bottomViewHeight = [self.bottomView bounds].size.height;
+    int bottomViewWidth = [self.bottomView bounds].size.width;
+    
+    int topViewHeight = [self.topView bounds].size.height;
+    int topViewWidth = [self.topView bounds].size.width;
+//    self.username.translatesAutoresizingMaskIntoConstraints = YES; //disables autolayout so that we can adjust the frame size
+//    self.username.frame = CGRectMake(0, 0, self.username.bounds.size.width, bottomViewHeight/4);
+    
+}
 - (void)adjustUI{
-    int bottomViewheight = [self.bottomView bounds].size.height;
-    int topViewHeight = [self.bottomView bounds].size.height;
+
     
     [self setBorder:self.username width:1.0 radius:5 color:[UIColor myLightGray]];
     [self setBorder:self.password width:1.0 radius:5 color:[UIColor myLightGray]];
