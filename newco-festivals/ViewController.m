@@ -2,12 +2,11 @@
 //  ViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss on 1/27/165.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "session.h"
 
 @interface ViewController ()
 
@@ -38,9 +37,9 @@
     [self addDataToTable];
 }
 - (void) adjustUI{
-     [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateNormal];
+    
     [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateSelected];
-   
+    [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateNormal];
 
 }
 - (void) addDataToTable{

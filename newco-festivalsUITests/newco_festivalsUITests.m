@@ -2,7 +2,7 @@
 //  newco_festivalsUITests.m
 //  newco-festivalsUITests
 //
-//  Created by yassen aniss on 1/27/16.
+//  Created by yassen aniss
 //  Copyright © 2016 newco. All rights reserved.
 //
 
