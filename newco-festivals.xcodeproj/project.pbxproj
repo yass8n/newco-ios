@@ -18,6 +18,7 @@
 		92470D1E1C389082003E6F7E /* newco_festivalsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D1D1C389082003E6F7E /* newco_festivalsTests.m */; };
 		92470D291C389082003E6F7E /* newco_festivalsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D281C389082003E6F7E /* newco_festivalsUITests.m */; };
 		924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB671C6134AC0093CAA1 /* SignInViewController.m */; };
+		924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB6A1C6136440093CAA1 /* SessionCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		92470D2A1C389082003E6F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		924ECB661C6134AC0093CAA1 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		924ECB671C6134AC0093CAA1 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		924ECB691C6136440093CAA1 /* SessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
+		924ECB6A1C6136440093CAA1 /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 				9216595A1C58CC9E006239D6 /* session.m */,
 				924ECB661C6134AC0093CAA1 /* SignInViewController.h */,
 				924ECB671C6134AC0093CAA1 /* SignInViewController.m */,
+				924ECB691C6136440093CAA1 /* SessionCell.h */,
+				924ECB6A1C6136440093CAA1 /* SessionCell.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				92470D021C389081003E6F7E /* main.m in Sources */,
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
+				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
