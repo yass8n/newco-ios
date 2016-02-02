@@ -1,9 +1,9 @@
 //
 //  SignInViewController.h
-//  newco-IOS
+//  newco-festivals
 //
-//  Created by yassen aniss on 7/22/15.
-//  Copyright (c) 2015 yassen aniss. All rights reserved.
+//  Created by yassen aniss
+//  Copyright © 2016 newco. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

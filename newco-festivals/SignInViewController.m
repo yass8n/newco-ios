@@ -1,9 +1,9 @@
 //
 //  SignInViewController.m
-//  newco-IOS
+//  newco-festivals
 //
-//  Created by yassen aniss on 7/22/15.
-//  Copyright (c) 2015 yassen aniss. All rights reserved.
+//  Created by yassen aniss
+//  Copyright © 2016 newco. All rights reserved.
 //
 
 #import "SignInViewController.h"
@@ -14,10 +14,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *forgotPassword;
 @property (strong, nonatomic) IBOutlet UILabel *wantToAttend;
 - (IBAction)logIn:(id)sender;
-@property (strong, nonatomic) IBOutlet UILabel *username;
-@property (strong, nonatomic) IBOutlet UILabel *password;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IBOutlet UIButton *logIn;
+@property (strong, nonatomic) IBOutlet UITextField *username;
+@property (strong, nonatomic) IBOutlet UITextField *password;
 
 @property (strong, nonatomic) IBOutlet UILabel *registerEventbrite;
 @end
@@ -41,12 +41,12 @@
     
     int topViewHeight = [self.topView bounds].size.height;
     int topViewWidth = [self.topView bounds].size.width;
-//    self.username.translatesAutoresizingMaskIntoConstraints = YES; //disables autolayout so that we can adjust the frame size
-//    self.username.frame = CGRectMake(0, 0, self.username.bounds.size.width, bottomViewHeight/4);
+    //    self.username.translatesAutoresizingMaskIntoConstraints = YES; //disables autolayout so that we can adjust the frame size
+    //    self.username.frame = CGRectMake(0, 0, self.username.bounds.size.width, bottomViewHeight/4);
     
 }
 - (void)adjustUI{
-
+    
     
     [self setBorder:self.username width:1.0 radius:5 color:[UIColor myLightGray]];
     [self setBorder:self.password width:1.0 radius:5 color:[UIColor myLightGray]];
@@ -62,14 +62,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)logIn:(id)sender {
 }
