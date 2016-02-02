@@ -67,11 +67,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EbP-DF-WLb">
-                                <rect key="frame" x="48" y="305" width="504" height="214"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EbP-DF-WLb">
+                                <rect key="frame" x="2" y="305" width="598" height="214"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z72-6M-KZ9">
-                                        <rect key="frame" x="8" y="150" width="488" height="44"/>
+                                        <rect key="frame" x="8" y="150" width="582" height="44"/>
                                         <color key="backgroundColor" red="0.2808086337250878" green="0.59529542150964243" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Log In">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -82,13 +82,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rS-ka-UnG">
-                                        <rect key="frame" x="0.0" y="67" width="504" height="50"/>
+                                        <rect key="frame" x="8" y="67" width="582" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDl-cM-ZRw">
-                                        <rect key="frame" x="0.0" y="8" width="504" height="49"/>
+                                        <rect key="frame" x="8" y="8" width="582" height="49"/>
                                         <accessibility key="accessibilityConfiguration" hint="Username"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -113,7 +113,7 @@
                                 <rect key="frame" x="2" y="64" width="598" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Want to Attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p39-Yw-NZJ">
-                                        <rect key="frame" x="40" y="20" width="488" height="21"/>
+                                        <rect key="frame" x="8" y="20" width="582" height="21"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" none="YES" button="YES" link="YES" staticText="YES"/>
                                         </accessibility>
@@ -125,7 +125,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Register now on EventBrite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbT-ER-ZpG">
-                                        <rect key="frame" x="40" y="49" width="496" height="21"/>
+                                        <rect key="frame" x="8" y="49" width="582" height="21"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" none="YES" button="YES" link="YES" staticText="YES"/>
                                         </accessibility>
@@ -151,11 +151,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Ff8-KP-vnX" secondAttribute="trailing" constant="5" id="2Gc-Sr-Qpo"/>
                             <constraint firstItem="EbP-DF-WLb" firstAttribute="top" secondItem="Ff8-KP-vnX" secondAttribute="bottom" constant="40" id="7jn-pe-wMP"/>
                             <constraint firstItem="EbP-DF-WLb" firstAttribute="top" secondItem="9aC-YC-231" secondAttribute="top" constant="305" id="7xf-Na-SLV"/>
+                            <constraint firstItem="EbP-DF-WLb" firstAttribute="leading" secondItem="9aC-YC-231" secondAttribute="leadingMargin" constant="5" id="961-Wa-YnI"/>
                             <constraint firstItem="wTB-78-wYE" firstAttribute="top" secondItem="79w-J8-MzC" secondAttribute="bottom" constant="52" id="ACd-rF-Rvs"/>
                             <constraint firstItem="Ff8-KP-vnX" firstAttribute="top" secondItem="MEb-Wv-k8m" secondAttribute="bottom" constant="15" id="Kie-8S-IOw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EbP-DF-WLb" secondAttribute="trailing" constant="5" id="MOE-nj-T2i"/>
                             <constraint firstItem="EbP-DF-WLb" firstAttribute="top" secondItem="Ff8-KP-vnX" secondAttribute="bottom" constant="20" id="UiY-Gd-v0d"/>
                             <constraint firstItem="Ff8-KP-vnX" firstAttribute="centerX" secondItem="9aC-YC-231" secondAttribute="centerX" id="Ygg-8S-ss6"/>
                             <constraint firstItem="Ff8-KP-vnX" firstAttribute="leading" secondItem="9aC-YC-231" secondAttribute="leadingMargin" constant="5" id="f1H-pC-rcw"/>
+                            <constraint firstItem="79w-J8-MzC" firstAttribute="top" secondItem="EbP-DF-WLb" secondAttribute="bottom" constant="15" id="oCj-18-09t"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
