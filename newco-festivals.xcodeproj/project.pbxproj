@@ -19,6 +19,7 @@
 		92470D291C389082003E6F7E /* newco_festivalsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D281C389082003E6F7E /* newco_festivalsUITests.m */; };
 		924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB671C6134AC0093CAA1 /* SignInViewController.m */; };
 		924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB6A1C6136440093CAA1 /* SessionCell.m */; };
+		924ECB741C613B0C0093CAA1 /* CustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB731C613B0C0093CAA1 /* CustomViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		924ECB671C6134AC0093CAA1 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		924ECB691C6136440093CAA1 /* SessionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCell.h; sourceTree = "<group>"; };
 		924ECB6A1C6136440093CAA1 /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
+		924ECB721C613B0C0093CAA1 /* CustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewController.h; sourceTree = "<group>"; };
+		924ECB731C613B0C0093CAA1 /* CustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				924ECB671C6134AC0093CAA1 /* SignInViewController.m */,
 				924ECB691C6136440093CAA1 /* SessionCell.h */,
 				924ECB6A1C6136440093CAA1 /* SessionCell.m */,
+				924ECB721C613B0C0093CAA1 /* CustomViewController.h */,
+				924ECB731C613B0C0093CAA1 /* CustomViewController.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */,
 				92470D081C389081003E6F7E /* ViewController.m in Sources */,
 				92470D051C389081003E6F7E /* AppDelegate.m in Sources */,
+				924ECB741C613B0C0093CAA1 /* CustomViewController.m in Sources */,
 				92470D021C389081003E6F7E /* main.m in Sources */,
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,

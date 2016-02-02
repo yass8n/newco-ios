@@ -2,7 +2,7 @@
 //  session.h
 //  newco-IOS
 //
-//  Created by yassen aniss
+//  Created by yassen aniss .
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
@@ -11,7 +11,9 @@
 @interface session : NSObject
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSData *date;
+@property (nonatomic, strong) NSString *time;
 @property (nonatomic, strong) NSString *color;
+@property (nonatomic, strong) NSString *note1;
+@property (nonatomic, strong) NSString *status;
 
 @end

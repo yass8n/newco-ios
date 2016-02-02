@@ -1,9 +1,9 @@
 //
 //  SessionCell.m
-//  newco-festivals
+//  newco-IOS
 //
-//  Created by yassen aniss
-//  Copyright © 2016 newco. All rights reserved.
+//  Created by yassen aniss .
+//  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "SessionCell.h"
@@ -16,7 +16,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
+
     // Configure the view for the selected state
 }
 
