@@ -32,28 +32,28 @@
                                                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YXQ-Y0-6ZE">
                                                             <rect key="frame" x="0.0" y="68" width="584" height="100"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZi-es-08g">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZi-es-08g">
                                                                     <rect key="frame" x="0.0" y="23" width="584" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Note1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUM-YW-jH1">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Note1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUM-YW-jH1">
                                                                     <rect key="frame" x="0.0" y="43" width="584" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atm-2F-gqA">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="487" height="23"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atm-2F-gqA">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="23"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1z9-Va-UPT">
+                                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1z9-Va-UPT">
                                                                     <rect key="frame" x="483" y="-18" width="121" height="61"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpO-zj-Wfr">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpO-zj-Wfr">
                                                                             <rect key="frame" x="20" y="20" width="81" height="21"/>
                                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -73,14 +73,28 @@
                                                             <color key="backgroundColor" red="0.81194196429999999" green="0.81194196429999999" blue="0.81194196429999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstItem="1z9-Va-UPT" firstAttribute="leading" secondItem="YXQ-Y0-6ZE" secondAttribute="leading" constant="5" id="0za-e9-uWR"/>
+                                                                <constraint firstItem="UZi-es-08g" firstAttribute="leading" secondItem="YXQ-Y0-6ZE" secondAttribute="leading" id="1it-D1-ppL"/>
+                                                                <constraint firstItem="atm-2F-gqA" firstAttribute="leading" secondItem="YXQ-Y0-6ZE" secondAttribute="leading" id="5Di-cB-KCW"/>
+                                                                <constraint firstAttribute="bottom" secondItem="IUM-YW-jH1" secondAttribute="bottom" priority="250" id="DgI-XL-xDD"/>
+                                                                <constraint firstItem="IUM-YW-jH1" firstAttribute="top" secondItem="UZi-es-08g" secondAttribute="bottom" constant="5" id="Egg-hP-dvU"/>
+                                                                <constraint firstItem="1z9-Va-UPT" firstAttribute="leading" secondItem="atm-2F-gqA" secondAttribute="trailing" constant="5" id="Fw2-1c-PNA"/>
                                                                 <constraint firstAttribute="trailing" secondItem="1z9-Va-UPT" secondAttribute="trailing" id="Q5C-ZO-IvT"/>
+                                                                <constraint firstItem="IUM-YW-jH1" firstAttribute="leading" secondItem="YXQ-Y0-6ZE" secondAttribute="leading" id="Qmo-Z4-TvX"/>
+                                                                <constraint firstItem="1z9-Va-UPT" firstAttribute="leading" secondItem="atm-2F-gqA" secondAttribute="trailing" constant="3" id="asv-Cg-lzd"/>
                                                                 <constraint firstAttribute="height" constant="100" id="gDL-uW-zXH"/>
-                                                                <constraint firstItem="1z9-Va-UPT" firstAttribute="top" secondItem="YXQ-Y0-6ZE" secondAttribute="top" constant="5" id="t7g-W4-4Ke"/>
+                                                                <constraint firstAttribute="trailing" secondItem="UZi-es-08g" secondAttribute="trailing" id="hnR-BC-tJ6"/>
+                                                                <constraint firstItem="UZi-es-08g" firstAttribute="top" secondItem="atm-2F-gqA" secondAttribute="bottom" constant="5" id="hwp-rS-lI1"/>
+                                                                <constraint firstItem="atm-2F-gqA" firstAttribute="top" secondItem="YXQ-Y0-6ZE" secondAttribute="top" id="lwh-lS-b5G"/>
+                                                                <constraint firstAttribute="trailing" secondItem="IUM-YW-jH1" secondAttribute="trailing" id="pCS-bI-vuV"/>
+                                                                <constraint firstAttribute="trailing" secondItem="atm-2F-gqA" secondAttribute="trailing" id="r6y-sh-JIW"/>
+                                                                <constraint firstItem="1z9-Va-UPT" firstAttribute="top" secondItem="YXQ-Y0-6ZE" secondAttribute="top" id="t7g-W4-4Ke"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="gDL-uW-zXH"/>
+                                                                    <exclude reference="r6y-sh-JIW"/>
                                                                     <exclude reference="0za-e9-uWR"/>
+                                                                    <exclude reference="Fw2-1c-PNA"/>
                                                                 </mask>
                                                             </variation>
                                                         </view>

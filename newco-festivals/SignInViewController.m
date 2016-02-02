@@ -2,12 +2,11 @@
 //  SignInViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss .
+//  Created by yassen aniss 
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "SignInViewController.h"
-#import "colors.h"
 #import "ViewController.h"
 
 @interface SignInViewController ()
@@ -44,11 +43,11 @@ CGFloat animatedDistance;
 }
 - (void)viewDidLayoutSubviews {
     
-    int bottomViewHeight = [self.bottomView bounds].size.height;
-    int bottomViewWidth = [self.bottomView bounds].size.width;
-    
-    int topViewHeight = [self.topView bounds].size.height;
-    int topViewWidth = [self.topView bounds].size.width;
+//    int bottomViewHeight = [self.bottomView bounds].size.height;
+//    int bottomViewWidth = [self.bottomView bounds].size.width;
+//    
+//    int topViewHeight = [self.topView bounds].size.height;
+//    int topViewWidth = [self.topView bounds].size.width;
 //    self.usernameField.translatesAutoresizingMaskIntoConstraints = YES; //disables autolayout so that we can adjust the frame size
 //    self.usernameField.frame = CGRectMake(0, 0, self.usernameField.bounds.size.width, bottomViewHeight/4);
     
@@ -56,11 +55,11 @@ CGFloat animatedDistance;
 - (void)adjustUI{
 
     
-    [CustomViewController setBorder:self.usernameField width:1.0 radius:5 color:[UIColor myLightGray]];
-    [CustomViewController setBorder:self.passwordField width:1.0 radius:5 color:[UIColor myLightGray]];
-    [CustomViewController setBorder:self.bottomView width:1.0 radius:8 color:[UIColor myLightGray]];
-    [CustomViewController setBorder:self.topView width:1.0 radius:5 color:[UIColor myLightGray]];
-    [CustomViewController setBorder:self.logIn width:1.0 radius:5 color:[UIColor blackColor]];
+    [ApplicationViewController setBorder:self.usernameField width:1.0 radius:5 color:[UIColor myLightGray]];
+    [ApplicationViewController setBorder:self.passwordField width:1.0 radius:5 color:[UIColor myLightGray]];
+    [ApplicationViewController setBorder:self.bottomView width:1.0 radius:8 color:[UIColor myLightGray]];
+    [ApplicationViewController setBorder:self.topView width:1.0 radius:5 color:[UIColor myLightGray]];
+    [ApplicationViewController setBorder:self.logIn width:1.0 radius:5 color:[UIColor blackColor]];
     UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back.jpg"] landscapeImagePhone:[UIImage imageNamed:@"back.jpg"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
     item.tintColor = [UIColor blackColor];
     self.navigationItem.leftBarButtonItem = item;

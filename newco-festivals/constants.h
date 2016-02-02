@@ -2,8 +2,8 @@
 //  constants.h
 //  newco-festivals
 //
-//  Created by yassen aniss on 2/2/16.
-//  Copyright © 2016 newco. All rights reserved.
+//  Created by yassen aniss.
+//  Copyright © 2016 yaseen aniss. All rights reserved.
 //
 
 #ifndef constants_h
