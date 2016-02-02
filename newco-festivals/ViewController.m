@@ -127,10 +127,10 @@ static const float MIN_CELL_HEIGHT = 130.0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     SessionCell * session_cell = [tableView dequeueReusableCellWithIdentifier:@"session_cell"];
-    session_cell.status.text = [self.sessionsArray[indexPath.row] status];
-    session_cell.time.text = [self.sessionsArray[indexPath.row] time];
-    session_cell.title.text = [self.sessionsArray[indexPath.row] title];
-    session_cell.note1.text = [self.sessionsArray[indexPath.row] note1];
+    session_cell.status.text = @"STATUS";
+    session_cell.time.text = @"TIME";
+    session_cell.title.text = @"TITLE";
+    session_cell.note1.text = @"NOTE";
     session_cell.outerContainer.backgroundColor = [self.sessionsArray[indexPath.row]color];
     session_cell.innnerContainer.backgroundColor = [self.sessionsArray[indexPath.row]color];
     
