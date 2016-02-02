@@ -119,11 +119,11 @@ CGFloat animatedDistance;
         animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
     }
     CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y -= animatedDistance;
+    viewFrame.origin.y += animatedDistance;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION*4];
     
     [self.view setFrame:viewFrame];
     
@@ -133,7 +133,7 @@ CGFloat animatedDistance;
 - (void)textFieldDidEndEditing:(UITextField *)textfield{
     
     CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y += animatedDistance;
+    viewFrame.origin.y -= animatedDistance;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
