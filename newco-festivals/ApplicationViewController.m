@@ -2,7 +2,7 @@
 //  ApplicationViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss 
+//  Created by yassen aniss.
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
@@ -16,20 +16,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.EVENT_COLOR_HASH = nil;
+    self.datesArray = [[NSMutableDictionary alloc] init];
     self.locationColorHash =  [[NSMutableDictionary alloc] init];
-    self.EVENT_COLOR_HASH = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                        [UIColor myRed],@"red",
-                                        [UIColor myGreen],@"green",
-                                        [UIColor myBlue],@"blue",
-                                        [UIColor myOrange],@"orange",
-                                        [UIColor myPurple],@"purple",
-                                        [UIColor myTeal],@"teal",
-                                        [UIColor myYellow],@"yellow",
-                                        [UIColor myPink],@"pink",
-                                        [UIColor myDarkBlue],@"dark_blue",
-                                        [UIColor myDarkRed],@"dark_red",
-                                         nil];
+    self.orderOfInsertedDates =[[NSMutableDictionary alloc] init];
+    self.EVENT_COLORS_ARRAY = [[NSMutableArray alloc] initWithObjects:
+                                  [UIColor myRed],
+                                  [UIColor myGreen],
+                                  [UIColor myBlue],
+                                  [UIColor myOrange],
+                                  [UIColor myPurple],
+                                  [UIColor myTeal],
+                                  [UIColor myYellow],
+                                  [UIColor myPink],
+                                  [UIColor myDarkBlue],
+                                  [UIColor myDarkRed],
+                                  nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,9 +45,17 @@
 }
 - (UIColor *) findFreeColor{
     NSUInteger count = [[self.locationColorHash allKeys] count];
-    NSArray *values = [self.EVENT_COLOR_HASH allValues];
-    NSLog(@"count = %lu and values = %lu", (unsigned long)count, (unsigned long)[values count]);
-    return [values objectAtIndex:count];
+    return [self.EVENT_COLORS_ARRAY objectAtIndex:count];
+}
++ (NSDate*) UTCtoNSDate:(NSString*)utc{
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-mm-dd HH:mm"];
+        return [formatter dateFromString:utc];
+}
++ (NSString*) myDateToFormat:(NSDate *)date withFormat:(NSString*)format{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:format];
+    return [formatter stringFromDate:date];
 }
 
 

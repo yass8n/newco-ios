@@ -1,13 +1,9 @@
 //
 //  constants.h
-//  newco-festivals
+//  newco-IOS
 //
 //  Created by yassen aniss.
-//  Copyright © 2016 yaseen aniss. All rights reserved.
+//  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
-#ifndef constants_h
-#define constants_h
-
-
-#endif /* constants_h */
+#define and stringByAppendingString:

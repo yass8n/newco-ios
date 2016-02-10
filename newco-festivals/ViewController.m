@@ -2,15 +2,16 @@
 //  ViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss 
+//  Created by yassen aniss.
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "ViewController.h"
 #import "SessionCell.h"
+#import "SessionCellHeader.h"
 
 @interface ViewController ()
-
+#import "constants.h"
 @end
 
 @implementation ViewController{
@@ -18,6 +19,7 @@
     IBOutlet UISegmentedControl *segmentedControl;
     float sysVer;
 }
+
 static const float MIN_CELL_HEIGHT = 130.0;
 
 
@@ -39,7 +41,10 @@ static const float MIN_CELL_HEIGHT = 130.0;
              NSSortDescriptor *sortStart = [[NSSortDescriptor alloc] initWithKey:@"event_start" ascending:YES];
              
              [self.sessionsArray sortUsingDescriptors:[NSMutableArray arrayWithObjects:sortStart, nil]];
-             dispatch_async(dispatch_get_main_queue(), ^{ [self->sessionTableView reloadData];});
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self reloadTableView];
+                [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(reloadTableView) userInfo:nil repeats:NO];
+             });
          }else {
              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
                                                              message:@"You must be connected to the internet to use this app."
@@ -53,24 +58,22 @@ static const float MIN_CELL_HEIGHT = 130.0;
 -(void) initializeSessionArray:(NSMutableArray*)array withData:(NSArray *) jsonArray{
     for (int i = 0; i < jsonArray.count; i++){
         NSDictionary* session_ = [jsonArray objectAtIndex:i];
-        NSString* description = [session_ objectForKey:@"description"];
+//        NSString* description = [session_ objectForKey:@"description"];
         NSString* event_key = [session_ objectForKey:@"event_key"];
         NSString* name = [session_ objectForKey:@"name"];
-        NSString* address = [session_ objectForKey:@"address"];
-        NSString* event_start = [session_ objectForKey:@"event_start"];
-        NSString* event_end = [session_ objectForKey:@"event_end"];
+//        NSString* address = [session_ objectForKey:@"address"];
+        NSDate* event_start = [ApplicationViewController UTCtoNSDate:[session_ objectForKey:@"event_start"]];
+        NSDate* event_end = [ApplicationViewController UTCtoNSDate:[session_ objectForKey:@"event_end"]];
         NSString* location = [session_ objectForKey:@"event_type"];
         NSString* id_ = [session_ objectForKey:@"id"];
-        NSArray* speakers = [session_ objectForKey:@"speakers"];
-        NSArray* artists = [session_ objectForKey:@"artists"];
+//        NSArray* speakers = [session_ objectForKey:@"speakers"];
+//        NSArray* artists = [session_ objectForKey:@"artists"];
         NSString* status = [session_ objectForKey:@"seats-title"];
-        NSString* audience = [session_ objectForKey:@"audience"];
-        
+//        NSString* audience = [session_ objectForKey:@"audience"];
+
         if (![self.locationColorHash objectForKey:location]){
             [self.locationColorHash setObject:[self findFreeColor] forKey:location];
         }
-
-        
         session *s = [[session alloc] initWithTitle: name
                                           event_key: event_key
                                          event_type: location
@@ -78,17 +81,40 @@ static const float MIN_CELL_HEIGHT = 130.0;
                                              status: status
                                               note1: location
                                               color: [self.locationColorHash objectForKey:location]
-                                        event_start: event_start];
+                                        event_start: event_start
+                                          event_end:event_end];
         [array addObject: s];
+        if (![self.datesArray objectForKey:s.worded_date]){
+            int count =  [[self.datesArray allKeys] count];
+            [self.orderOfInsertedDates setObject:s.worded_date forKey:[NSNumber numberWithInt:count]];
+            [self.datesArray setObject:[[NSMutableArray alloc] init] forKey:s.worded_date];
+        }
+        NSMutableArray * sessions_for_date = [self.datesArray objectForKey:s.worded_date];
+        [sessions_for_date addObject:s];
     }
 }
-
+-(IBAction)openMenu:(id)sender  {
+    NSLog(@"open menu");
+    //[self.navigationController pushViewController:self.navigationController.parentViewController animated:YES];
+}
 
 - (void) adjustUI{
     [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateSelected];
     [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateNormal];
     self->sessionTableView.estimatedRowHeight = 120.0;
     self->sessionTableView.rowHeight = UITableViewAutomaticDimension;
+    
+    UIButton *menu =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [menu setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
+    [menu addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [menu setFrame:CGRectMake(0, 0, 20, 20)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menu];
+    
+    UIButton *user =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [user setImage:[UIImage imageNamed:@"user.png"] forState:UIControlStateNormal];
+    [user addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [user setFrame:CGRectMake(0, 0, 20, 20)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:user];
 }
 - (void) addDataToTable{
     dispatch_queue_t que = dispatch_queue_create("getSessions", NULL);
@@ -96,6 +122,7 @@ static const float MIN_CELL_HEIGHT = 130.0;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    
 }
 //native IOS controller functions
 -(void)viewDidLoad {
@@ -104,6 +131,10 @@ static const float MIN_CELL_HEIGHT = 130.0;
     [self adjustUI];
     [self addDataToTable];
     sysVer = [[[UIDevice currentDevice] systemVersion] floatValue];
+}
+-(void)reloadTableView
+{
+    [self->sessionTableView reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -126,25 +157,54 @@ static const float MIN_CELL_HEIGHT = 130.0;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSUInteger section = indexPath.section;
+    NSDate* date = [self.orderOfInsertedDates objectForKey:[NSNumber numberWithInt:section]];
+    
+
     SessionCell * session_cell = [tableView dequeueReusableCellWithIdentifier:@"session_cell"];
-    session_cell.status.text = @"STATUS";
-    session_cell.time.text = @"TIME";
-    session_cell.title.text = @"TITLE";
-    session_cell.note1.text = @"NOTE";
-    session_cell.outerContainer.backgroundColor = [self.sessionsArray[indexPath.row]color];
-    session_cell.innnerContainer.backgroundColor = [self.sessionsArray[indexPath.row]color];
+    session_cell.status.text = [[self.datesArray objectForKey:date ][indexPath.row] status];
+    NSString* time = [[[self.datesArray objectForKey:date ][indexPath.row] start_time] and @" - " ];
+    session_cell.time.text = [time and [[self.datesArray objectForKey:date ][indexPath.row] end_time] ];
+    session_cell.title.text = [[self.datesArray objectForKey:date ][indexPath.row] title];
+    session_cell.note1.text = [[self.datesArray objectForKey:date ][indexPath.row] note1];
+    session_cell.outerContainer.backgroundColor = [[self.datesArray objectForKey:date ][indexPath.row]color];
+    session_cell.innnerContainer.backgroundColor = [[self.datesArray objectForKey:date ][indexPath.row]color];
     
     session_cell.title.lineBreakMode = NSLineBreakByWordWrapping; //used in conjunction with linebreaks = 0
     session_cell.note1.lineBreakMode = NSLineBreakByWordWrapping;
     
     [session_cell layoutIfNeeded]; //fixes issue where the first cells that are initially showing are not wrapping content for note1
     
-    [ApplicationViewController setBorder:session_cell.outerContainer width:1.0 radius:8 color:[UIColor whiteColor]];
-    [ApplicationViewController setBorder:session_cell.statusContainer width:1.0 radius:4 color:[UIColor blackColor]];
+    [ApplicationViewController setBorder:session_cell.outerContainer width:1.0 radius:6 color:[UIColor whiteColor]];
+    [ApplicationViewController setBorder:session_cell.statusContainer width:1.0 radius:3 color:[UIColor blackColor]];
+    session_cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return session_cell;
 }
-- (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.sessionsArray count];
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    return [[self.datesArray allKeys] count];
 }
+- (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
+    NSString* date = [self.orderOfInsertedDates objectForKey:[NSNumber numberWithInt:section]];
+//    NSLog(@"asdasdasd asd >>>>>>>>> %lu", (unsigned long)[[self.datesArray objectForKey:date] count]);
+
+    return [[self.datesArray objectForKey:date] count];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    // 1. Dequeue the custom header cell
+    SessionCellHeader* headerCell = [tableView dequeueReusableCellWithIdentifier:@"session_cell_header"];
+    
+    // 2. Set the various properties
+    headerCell.date.text = [self.orderOfInsertedDates objectForKey:[NSNumber numberWithInt:section]];
+    [headerCell.date sizeToFit];
+    
+    // 3. And return
+    return headerCell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 40.0;
+}
+
+
 
 @end

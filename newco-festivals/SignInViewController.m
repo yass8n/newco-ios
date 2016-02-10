@@ -2,7 +2,7 @@
 //  SignInViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss 
+//  Created by yassen aniss.
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
@@ -34,6 +34,7 @@ CGFloat animatedDistance;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
+    self.passwordField.secureTextEntry = YES;
     // Do any additional setup after loading the view.
 }
 
@@ -41,17 +42,7 @@ CGFloat animatedDistance;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewDidLayoutSubviews {
-    
-//    int bottomViewHeight = [self.bottomView bounds].size.height;
-//    int bottomViewWidth = [self.bottomView bounds].size.width;
-//    
-//    int topViewHeight = [self.topView bounds].size.height;
-//    int topViewWidth = [self.topView bounds].size.width;
-//    self.usernameField.translatesAutoresizingMaskIntoConstraints = YES; //disables autolayout so that we can adjust the frame size
-//    self.usernameField.frame = CGRectMake(0, 0, self.usernameField.bounds.size.width, bottomViewHeight/4);
-    
-}
+
 - (void)adjustUI{
 
     
@@ -119,11 +110,11 @@ CGFloat animatedDistance;
         animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
     }
     CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y += animatedDistance;
+    viewFrame.origin.y -= animatedDistance;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION*4];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
     
     [self.view setFrame:viewFrame];
     
@@ -133,7 +124,7 @@ CGFloat animatedDistance;
 - (void)textFieldDidEndEditing:(UITextField *)textfield{
     
     CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y -= animatedDistance;
+    viewFrame.origin.y += animatedDistance;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];

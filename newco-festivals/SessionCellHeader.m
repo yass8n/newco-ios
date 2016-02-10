@@ -1,14 +1,14 @@
 //
-//  SessionCell.m
+//  SessionCellHeader.m
 //  newco-IOS
 //
 //  Created by yassen aniss.
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
-#import "SessionCell.h"
+#import "SessionCellHeader.h"
 
-@implementation SessionCell
+@implementation SessionCellHeader
 
 - (void)awakeFromNib {
     // Initialization code
