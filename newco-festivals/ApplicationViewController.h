@@ -20,4 +20,7 @@
 - (UIColor *) findFreeColor;
 + (NSString*) myDateToFormat:(NSDate*) date withFormat:(NSString*)format;
 + (NSDate*) UTCtoNSDate:(NSString*)utc;
+- (void)setBackButton;
+- (UIViewController *)topViewController;
+
 @end

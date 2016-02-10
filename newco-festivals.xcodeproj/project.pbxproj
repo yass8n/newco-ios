@@ -10,6 +10,7 @@
 		9212EB3D1C61499F00D17504 /* colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212EB3C1C61499F00D17504 /* colors.m */; };
 		9216595B1C58CC9E006239D6 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 9216595A1C58CC9E006239D6 /* session.m */; };
 		923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 923D14931C6B05A400629F78 /* SessionCellHeader.m */; };
+		923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 923D14961C6B08AE00629F78 /* SessionDetailViewController.m */; };
 		92470D021C389081003E6F7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D011C389081003E6F7E /* main.m */; };
 		92470D051C389081003E6F7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D041C389081003E6F7E /* AppDelegate.m */; };
 		92470D081C389081003E6F7E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D071C389081003E6F7E /* ViewController.m */; };
@@ -49,6 +50,8 @@
 		9216595A1C58CC9E006239D6 /* session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = session.m; sourceTree = "<group>"; };
 		923D14921C6B05A400629F78 /* SessionCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionCellHeader.h; sourceTree = "<group>"; };
 		923D14931C6B05A400629F78 /* SessionCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCellHeader.m; sourceTree = "<group>"; };
+		923D14951C6B08AE00629F78 /* SessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionDetailViewController.h; sourceTree = "<group>"; };
+		923D14961C6B08AE00629F78 /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDetailViewController.m; sourceTree = "<group>"; };
 		92470CFD1C389081003E6F7E /* newco-festivals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "newco-festivals.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92470D011C389081003E6F7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92470D031C389081003E6F7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				9212EB3E1C6149A800D17504 /* constants.h */,
 				923D14921C6B05A400629F78 /* SessionCellHeader.h */,
 				923D14931C6B05A400629F78 /* SessionCellHeader.m */,
+				923D14951C6B08AE00629F78 /* SessionDetailViewController.h */,
+				923D14961C6B08AE00629F78 /* SessionDetailViewController.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
+				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

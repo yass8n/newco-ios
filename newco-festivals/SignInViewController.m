@@ -51,14 +51,9 @@ CGFloat animatedDistance;
     [ApplicationViewController setBorder:self.bottomView width:1.0 radius:8 color:[UIColor myLightGray]];
     [ApplicationViewController setBorder:self.topView width:1.0 radius:5 color:[UIColor myLightGray]];
     [ApplicationViewController setBorder:self.logIn width:1.0 radius:5 color:[UIColor blackColor]];
-    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back.jpg"] landscapeImagePhone:[UIImage imageNamed:@"back.jpg"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
-    item.tintColor = [UIColor blackColor];
-    self.navigationItem.leftBarButtonItem = item;
+    [super setBackButton];
 }
--(IBAction)goBack:(id)sender  {
-    [self.navigationController popViewControllerAnimated:YES];
-    //[self.navigationController pushViewController:self.navigationController.parentViewController animated:YES];
-}
+
 /*
 #pragma mark - Navigation
 

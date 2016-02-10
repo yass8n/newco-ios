@@ -6,9 +6,9 @@
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
-#import "session.h"
+#import "Session.h"
 
-@implementation session
+@implementation Session
 -(id)initWithTitle:(NSString *)title event_key:(NSString *)event_key event_type:(NSString *)event_type id_:(NSString*)id_ status:(NSString*)status note1:(NSString*)note1 color:(UIColor*)color event_start:(NSDate*)event_start event_end:(NSDate*)event_end{
     self = [super init];
     if (self) {

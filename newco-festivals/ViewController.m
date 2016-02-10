@@ -8,7 +8,9 @@
 
 #import "ViewController.h"
 #import "SessionCell.h"
+#import "SignInViewController.h"
 #import "SessionCellHeader.h"
+#import "SessionDetailViewController.h"
 
 @interface ViewController ()
 #import "constants.h"
@@ -74,7 +76,7 @@ static const float MIN_CELL_HEIGHT = 130.0;
         if (![self.locationColorHash objectForKey:location]){
             [self.locationColorHash setObject:[self findFreeColor] forKey:location];
         }
-        session *s = [[session alloc] initWithTitle: name
+        Session *s = [[Session alloc] initWithTitle: name
                                           event_key: event_key
                                          event_type: location
                                                 id_: id_
@@ -97,6 +99,10 @@ static const float MIN_CELL_HEIGHT = 130.0;
     NSLog(@"open menu");
     //[self.navigationController pushViewController:self.navigationController.parentViewController animated:YES];
 }
+- (IBAction)goToSignIn:(id)sender  {    
+  [self performSegueWithIdentifier:@"goToSignIn" sender:self];
+}
+
 
 - (void) adjustUI{
     [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateSelected];
@@ -112,7 +118,7 @@ static const float MIN_CELL_HEIGHT = 130.0;
     
     UIButton *user =  [UIButton buttonWithType:UIButtonTypeCustom];
     [user setImage:[UIImage imageNamed:@"user.png"] forState:UIControlStateNormal];
-    [user addTarget:self action:@selector(openMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [user addTarget:self action:@selector(goToSignIn:) forControlEvents:UIControlEventTouchUpInside];
     [user setFrame:CGRectMake(0, 0, 20, 20)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:user];
 }
@@ -156,19 +162,21 @@ static const float MIN_CELL_HEIGHT = 130.0;
         return MIN_CELL_HEIGHT;
     }
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger section = indexPath.section;
     NSDate* date = [self.orderOfInsertedDates objectForKey:[NSNumber numberWithInt:section]];
     
 
     SessionCell * session_cell = [tableView dequeueReusableCellWithIdentifier:@"session_cell"];
-    session_cell.status.text = [[self.datesArray objectForKey:date ][indexPath.row] status];
+    Session * currentSession = [self.datesArray objectForKey:date ][indexPath.row];
+    session_cell.status.text = [currentSession status];
     NSString* time = [[[self.datesArray objectForKey:date ][indexPath.row] start_time] and @" - " ];
     session_cell.time.text = [time and [[self.datesArray objectForKey:date ][indexPath.row] end_time] ];
-    session_cell.title.text = [[self.datesArray objectForKey:date ][indexPath.row] title];
-    session_cell.note1.text = [[self.datesArray objectForKey:date ][indexPath.row] note1];
-    session_cell.outerContainer.backgroundColor = [[self.datesArray objectForKey:date ][indexPath.row]color];
-    session_cell.innnerContainer.backgroundColor = [[self.datesArray objectForKey:date ][indexPath.row]color];
+    session_cell.title.text = [currentSession title];
+    session_cell.note1.text = [currentSession note1];
+    session_cell.outerContainer.backgroundColor = [currentSession color];
+    session_cell.innnerContainer.backgroundColor = session_cell.outerContainer.backgroundColor;
     
     session_cell.title.lineBreakMode = NSLineBreakByWordWrapping; //used in conjunction with linebreaks = 0
     session_cell.note1.lineBreakMode = NSLineBreakByWordWrapping;
@@ -178,14 +186,23 @@ static const float MIN_CELL_HEIGHT = 130.0;
     [ApplicationViewController setBorder:session_cell.outerContainer width:1.0 radius:6 color:[UIColor whiteColor]];
     [ApplicationViewController setBorder:session_cell.statusContainer width:1.0 radius:3 color:[UIColor blackColor]];
     session_cell.selectionStyle = UITableViewCellSelectionStyleNone;
+ 
     return session_cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SessionDetailViewController *vc = (SessionDetailViewController*)[storyboard instantiateViewControllerWithIdentifier:@"SessionDetail"];
+     NSDate* date = [self.orderOfInsertedDates objectForKey:[NSNumber numberWithInt:indexPath.section]];
+    [vc setSession:[self.datesArray objectForKey:date ][indexPath.row]];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return [[self.datesArray allKeys] count];
 }
 - (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
     NSString* date = [self.orderOfInsertedDates objectForKey:[NSNumber numberWithInt:section]];
-//    NSLog(@"asdasdasd asd >>>>>>>>> %lu", (unsigned long)[[self.datesArray objectForKey:date] count]);
 
     return [[self.datesArray objectForKey:date] count];
 }

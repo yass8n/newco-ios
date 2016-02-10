@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "ApplicationViewController.h"
 
-@interface session : NSObject
+@interface Session : NSObject
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *start_time;
