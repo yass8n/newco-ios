@@ -27,6 +27,7 @@
 		92880C351C6D472A00315DF0 /* SessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92880C341C6D472A00315DF0 /* SessionCell.xib */; };
 		92880C371C6D473C00315DF0 /* PageLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92880C361C6D473C00315DF0 /* PageLoader.xib */; };
 		92880C3A1C6D474C00315DF0 /* PageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 92880C391C6D474C00315DF0 /* PageLoader.m */; };
+		92880C3D1C6D49C900315DF0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92880C3C1C6D49C900315DF0 /* ProfileViewController.m */; };
 		929107211C6C4740004B517C /* UserInitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107201C6C4740004B517C /* UserInitial.m */; };
 		929107231C6C4777004B517C /* UserInitial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107221C6C4777004B517C /* UserInitial.xib */; };
 		929107261C6C4FF4004B517C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107251C6C4FF4004B517C /* User.m */; };
@@ -95,6 +96,8 @@
 		92880C361C6D473C00315DF0 /* PageLoader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageLoader.xib; sourceTree = "<group>"; };
 		92880C381C6D474C00315DF0 /* PageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageLoader.h; sourceTree = "<group>"; };
 		92880C391C6D474C00315DF0 /* PageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageLoader.m; sourceTree = "<group>"; };
+		92880C3B1C6D49C900315DF0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		92880C3C1C6D49C900315DF0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		9291071F1C6C4740004B517C /* UserInitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInitial.h; sourceTree = "<group>"; };
 		929107201C6C4740004B517C /* UserInitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInitial.m; sourceTree = "<group>"; };
 		929107221C6C4777004B517C /* UserInitial.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInitial.xib; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				92880C361C6D473C00315DF0 /* PageLoader.xib */,
 				92880C381C6D474C00315DF0 /* PageLoader.h */,
 				92880C391C6D474C00315DF0 /* PageLoader.m */,
+				92880C3B1C6D49C900315DF0 /* ProfileViewController.h */,
+				92880C3C1C6D49C900315DF0 /* ProfileViewController.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 				92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */,
 				923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */,
 				9291072C1C6C51DC004B517C /* ProfileCell.m in Sources */,
+				92880C3D1C6D49C900315DF0 /* ProfileViewController.m in Sources */,
 				92470D051C389081003E6F7E /* AppDelegate.m in Sources */,
 				929107291C6C50BB004B517C /* ScheduleViewController.m in Sources */,
 				924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */,
