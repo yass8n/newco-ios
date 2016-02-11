@@ -2,28 +2,27 @@
 //  SignInViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss
+//  Created by yassen aniss.
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "SignInViewController.h"
-#import "ViewController.h"
+#import "ScheduleViewController.h"
 
 @interface SignInViewController ()
-@property (strong, nonatomic) IBOutlet UIView *topView;
-@property (strong, nonatomic) IBOutlet UILabel *forgotpasswordField;
-@property (strong, nonatomic) IBOutlet UILabel *wantToAttend;
-- (IBAction)logIn:(id)sender;
-@property (strong, nonatomic) IBOutlet UIView *bottomView;
-@property (strong, nonatomic) IBOutlet UIButton *logIn;
-@property (strong, nonatomic) IBOutlet UITextField *usernameField;
-@property (strong, nonatomic) IBOutlet UITextField *passwordField;
+    @property (weak, nonatomic) IBOutlet UIView *topView;
+    @property (weak, nonatomic) IBOutlet UILabel *forgotpasswordField;
+    @property (weak, nonatomic) IBOutlet UILabel *wantToAttend;
+    - (IBAction)logIn:(id)sender;
+    @property (weak, nonatomic) IBOutlet UIView *bottomView;
+    @property (weak, nonatomic) IBOutlet UIButton *logIn;
+    @property (weak, nonatomic) IBOutlet UITextField *usernameField;
+    @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
-@property (strong, nonatomic) IBOutlet UILabel *registerEventbrite;
+    @property (weak, nonatomic) IBOutlet UILabel *registerEventbrite;
 @end
 
 @implementation SignInViewController
-
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;

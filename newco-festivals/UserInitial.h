@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UserInitial : UIView
-@property (strong, nonatomic) IBOutlet UIView *view;
+@property (weak, nonatomic) IBOutlet UIView *view;
 - (IBAction)initial:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *text;
 @property (weak, nonatomic) NSString *username;
+
 @end

@@ -2,11 +2,12 @@
 //  AppDelegate.m
 //  newco-IOS
 //
-//  Created by yassen aniss
+//  Created by yassen aniss.
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "ApplicationViewController.h"
 
 @interface AppDelegate ()
 
@@ -36,6 +37,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [ApplicationViewController initEventColorsArray];
+    ApplicationViewController.enableSegmentedControl = NO;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
