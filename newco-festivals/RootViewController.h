@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RootViewController.h
 //  newco-IOS
 //
 //  Created by yassen aniss
@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Session.h"
 # import "ApplicationViewController.h"
 
 
-@interface ViewController : ApplicationViewController <UITableViewDataSource>
+@interface RootViewController : ApplicationViewController
 @end
-

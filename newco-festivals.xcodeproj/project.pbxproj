@@ -13,7 +13,6 @@
 		923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 923D14961C6B08AE00629F78 /* SessionDetailViewController.m */; };
 		92470D021C389081003E6F7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D011C389081003E6F7E /* main.m */; };
 		92470D051C389081003E6F7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D041C389081003E6F7E /* AppDelegate.m */; };
-		92470D081C389081003E6F7E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92470D071C389081003E6F7E /* ViewController.m */; };
 		92470D0B1C389081003E6F7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92470D091C389081003E6F7E /* Main.storyboard */; };
 		92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 92470D0C1C389081003E6F7E /* newco_festivals.xcdatamodeld */; };
 		92470D101C389081003E6F7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92470D0F1C389081003E6F7E /* Assets.xcassets */; };
@@ -27,6 +26,10 @@
 		929107231C6C4777004B517C /* UserInitial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107221C6C4777004B517C /* UserInitial.xib */; };
 		929107261C6C4FF4004B517C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107251C6C4FF4004B517C /* User.m */; };
 		929107291C6C50BB004B517C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107281C6C50BB004B517C /* ScheduleViewController.m */; };
+		9291072C1C6C51DC004B517C /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9291072B1C6C51DC004B517C /* ProfileCell.m */; };
+		9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9291072E1C6C5268004B517C /* ProfileTableViewController.m */; };
+		929107321C6C52E3004B517C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107311C6C52E3004B517C /* RootViewController.m */; };
+		929107351C6C532D004B517C /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107341C6C532D004B517C /* DirectoryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +63,6 @@
 		92470D011C389081003E6F7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92470D031C389081003E6F7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		92470D041C389081003E6F7E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		92470D061C389081003E6F7E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		92470D071C389081003E6F7E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		92470D0A1C389081003E6F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92470D0D1C389081003E6F7E /* newco_festivals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = newco_festivals.xcdatamodel; sourceTree = "<group>"; };
 		92470D0F1C389081003E6F7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +87,14 @@
 		929107251C6C4FF4004B517C /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		929107271C6C50BB004B517C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		929107281C6C50BB004B517C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
+		9291072A1C6C51DC004B517C /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
+		9291072B1C6C51DC004B517C /* ProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
+		9291072D1C6C5268004B517C /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
+		9291072E1C6C5268004B517C /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
+		929107301C6C52E3004B517C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		929107311C6C52E3004B517C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		929107331C6C532D004B517C /* DirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
+		929107341C6C532D004B517C /* DirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,8 +147,6 @@
 			children = (
 				92470D031C389081003E6F7E /* AppDelegate.h */,
 				92470D041C389081003E6F7E /* AppDelegate.m */,
-				92470D061C389081003E6F7E /* ViewController.h */,
-				92470D071C389081003E6F7E /* ViewController.m */,
 				92470D091C389081003E6F7E /* Main.storyboard */,
 				92470D0F1C389081003E6F7E /* Assets.xcassets */,
 				92470D111C389081003E6F7E /* LaunchScreen.storyboard */,
@@ -168,6 +175,14 @@
 				929107251C6C4FF4004B517C /* User.m */,
 				929107271C6C50BB004B517C /* ScheduleViewController.h */,
 				929107281C6C50BB004B517C /* ScheduleViewController.m */,
+				9291072A1C6C51DC004B517C /* ProfileCell.h */,
+				9291072B1C6C51DC004B517C /* ProfileCell.m */,
+				9291072D1C6C5268004B517C /* ProfileTableViewController.h */,
+				9291072E1C6C5268004B517C /* ProfileTableViewController.m */,
+				929107301C6C52E3004B517C /* RootViewController.h */,
+				929107311C6C52E3004B517C /* RootViewController.m */,
+				929107331C6C532D004B517C /* DirectoryViewController.h */,
+				929107341C6C532D004B517C /* DirectoryViewController.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -332,17 +347,20 @@
 				929107261C6C4FF4004B517C /* User.m in Sources */,
 				92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */,
 				923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */,
-				92470D081C389081003E6F7E /* ViewController.m in Sources */,
+				9291072C1C6C51DC004B517C /* ProfileCell.m in Sources */,
 				92470D051C389081003E6F7E /* AppDelegate.m in Sources */,
 				929107291C6C50BB004B517C /* ScheduleViewController.m in Sources */,
 				924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */,
+				929107351C6C532D004B517C /* DirectoryViewController.m in Sources */,
 				929107211C6C4740004B517C /* UserInitial.m in Sources */,
 				92470D021C389081003E6F7E /* main.m in Sources */,
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,
+				929107321C6C52E3004B517C /* RootViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
 				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
+				9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
