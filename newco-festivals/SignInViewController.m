@@ -2,7 +2,7 @@
 //  SignInViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
@@ -36,6 +36,11 @@ CGFloat animatedDistance;
     [self adjustUI];
     self.passwordField.secureTextEntry = YES;
     // Do any additional setup after loading the view.
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];
+    self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
 }
 
 - (void)didReceiveMemoryWarning {

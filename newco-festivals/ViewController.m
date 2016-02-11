@@ -2,7 +2,7 @@
 //  ViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
@@ -60,18 +60,18 @@ static const float MIN_CELL_HEIGHT = 130.0;
 -(void) initializeSessionArray:(NSMutableArray*)array withData:(NSArray *) jsonArray{
     for (int i = 0; i < jsonArray.count; i++){
         NSDictionary* session_ = [jsonArray objectAtIndex:i];
-//        NSString* description = [session_ objectForKey:@"description"];
+        NSString* description = [session_ objectForKey:@"description"];
         NSString* event_key = [session_ objectForKey:@"event_key"];
         NSString* name = [session_ objectForKey:@"name"];
-//        NSString* address = [session_ objectForKey:@"address"];
+        NSString* address = [session_ objectForKey:@"address"];
         NSDate* event_start = [ApplicationViewController UTCtoNSDate:[session_ objectForKey:@"event_start"]];
         NSDate* event_end = [ApplicationViewController UTCtoNSDate:[session_ objectForKey:@"event_end"]];
         NSString* location = [session_ objectForKey:@"event_type"];
         NSString* id_ = [session_ objectForKey:@"id"];
-//        NSArray* speakers = [session_ objectForKey:@"speakers"];
-//        NSArray* artists = [session_ objectForKey:@"artists"];
+        NSArray* speakers = [session_ objectForKey:@"speakers"];
+        NSArray* artists = [session_ objectForKey:@"artists"];
         NSString* status = [session_ objectForKey:@"seats-title"];
-//        NSString* audience = [session_ objectForKey:@"audience"];
+        NSString* audience = [session_ objectForKey:@"audience"];
 
         if (![self.locationColorHash objectForKey:location]){
             [self.locationColorHash setObject:[self findFreeColor] forKey:location];
@@ -84,7 +84,12 @@ static const float MIN_CELL_HEIGHT = 130.0;
                                               note1: location
                                               color: [self.locationColorHash objectForKey:location]
                                         event_start: event_start
-                                          event_end:event_end];
+                                          event_end:event_end
+                                            address: address
+                                           audience: audience
+                                           speakers: speakers
+                                          companies: artists
+                                        description: description];
         [array addObject: s];
         if (![self.datesArray objectForKey:s.worded_date]){
             int count =  [[self.datesArray allKeys] count];
@@ -102,7 +107,6 @@ static const float MIN_CELL_HEIGHT = 130.0;
 - (IBAction)goToSignIn:(id)sender  {    
   [self performSegueWithIdentifier:@"goToSignIn" sender:self];
 }
-
 
 - (void) adjustUI{
     [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateSelected];
@@ -128,7 +132,8 @@ static const float MIN_CELL_HEIGHT = 130.0;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    
+    self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];
+    self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
 }
 //native IOS controller functions
 -(void)viewDidLoad {
@@ -138,6 +143,7 @@ static const float MIN_CELL_HEIGHT = 130.0;
     [self addDataToTable];
     sysVer = [[[UIDevice currentDevice] systemVersion] floatValue];
 }
+
 -(void)reloadTableView
 {
     [self->sessionTableView reloadData];
@@ -192,7 +198,7 @@ static const float MIN_CELL_HEIGHT = 130.0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SessionDetailViewController *vc = (SessionDetailViewController*)[storyboard instantiateViewControllerWithIdentifier:@"SessionDetail"];
+    SessionDetailViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SessionDetail"];
      NSDate* date = [self.orderOfInsertedDates objectForKey:[NSNumber numberWithInt:indexPath.section]];
     [vc setSession:[self.datesArray objectForKey:date ][indexPath.row]];
     [self.navigationController pushViewController:vc animated:YES];

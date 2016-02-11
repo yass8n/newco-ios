@@ -23,6 +23,8 @@
 		924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB671C6134AC0093CAA1 /* SignInViewController.m */; };
 		924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB6A1C6136440093CAA1 /* SessionCell.m */; };
 		924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */; };
+		929107211C6C4740004B517C /* UserInitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107201C6C4740004B517C /* UserInitial.m */; };
+		929107231C6C4777004B517C /* UserInitial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107221C6C4777004B517C /* UserInitial.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,9 @@
 		924ECB6A1C6136440093CAA1 /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 		924ECB721C613B0C0093CAA1 /* ApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewController.h; sourceTree = "<group>"; };
 		924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewController.m; sourceTree = "<group>"; };
+		9291071F1C6C4740004B517C /* UserInitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInitial.h; sourceTree = "<group>"; };
+		929107201C6C4740004B517C /* UserInitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInitial.m; sourceTree = "<group>"; };
+		929107221C6C4777004B517C /* UserInitial.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInitial.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +155,9 @@
 				923D14931C6B05A400629F78 /* SessionCellHeader.m */,
 				923D14951C6B08AE00629F78 /* SessionDetailViewController.h */,
 				923D14961C6B08AE00629F78 /* SessionDetailViewController.m */,
+				9291071F1C6C4740004B517C /* UserInitial.h */,
+				929107201C6C4740004B517C /* UserInitial.m */,
+				929107221C6C4777004B517C /* UserInitial.xib */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -284,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92470D131C389081003E6F7E /* LaunchScreen.storyboard in Resources */,
+				929107231C6C4777004B517C /* UserInitial.xib in Resources */,
 				92470D101C389081003E6F7E /* Assets.xcassets in Resources */,
 				92470D0B1C389081003E6F7E /* Main.storyboard in Resources */,
 			);
@@ -315,6 +324,7 @@
 				92470D081C389081003E6F7E /* ViewController.m in Sources */,
 				92470D051C389081003E6F7E /* AppDelegate.m in Sources */,
 				924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */,
+				929107211C6C4740004B517C /* UserInitial.m in Sources */,
 				92470D021C389081003E6F7E /* main.m in Sources */,
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,

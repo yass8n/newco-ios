@@ -2,7 +2,7 @@
 //  ApplicationViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
@@ -51,6 +51,17 @@
     UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
     return [self topViewController:presentedViewController];
 }
+-(void)fadeIn:(UIView*)view duration:(float)duration{
+    
+    [view setAlpha:0.1f];
+    
+    //fade in
+    [UIView animateWithDuration:duration animations:^{
+        
+        [view setAlpha:1.0f];
+        
+    }];
+}
 - (void)setBackButton{
     UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back.jpg"] landscapeImagePhone:[UIImage imageNamed:@"back.jpg"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
     item.tintColor = [UIColor blackColor];
@@ -58,7 +69,9 @@
 }
 -(IBAction)goBack:(id)sender  {
     [self.navigationController popViewControllerAnimated:YES];
-    //[self.navigationController pushViewController:self.navigationController.parentViewController animated:YES];
+}
+-(void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

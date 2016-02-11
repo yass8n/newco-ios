@@ -2,14 +2,14 @@
 //  session.m
 //  newco-IOS
 //
-//  Created by yassen aniss.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "Session.h"
 
 @implementation Session
--(id)initWithTitle:(NSString *)title event_key:(NSString *)event_key event_type:(NSString *)event_type id_:(NSString*)id_ status:(NSString*)status note1:(NSString*)note1 color:(UIColor*)color event_start:(NSDate*)event_start event_end:(NSDate*)event_end{
+-(id)initWithTitle:(NSString *)title event_key:(NSString *)event_key event_type:(NSString *)event_type id_:(NSString*)id_ status:(NSString*)status note1:(NSString*)note1 color:(UIColor*)color event_start:(NSDate*)event_start event_end:(NSDate*)event_end address: (NSString*)address audience: (NSString*)audience speakers: (NSArray*) speakers companies: (NSArray*) companies description: (NSString*) description {
     self = [super init];
     if (self) {
         self.title = title;
@@ -23,6 +23,11 @@
         self.start_time = [ApplicationViewController myDateToFormat:self.event_start withFormat:@"h:mm a"];
         self.worded_date = [ApplicationViewController myDateToFormat:self.event_start withFormat:@"EEE, MMM d"];
         self.end_time = [ApplicationViewController myDateToFormat:self.event_end withFormat:@"h:mm a"];
+        self.desc = description;
+        self.audience = audience;
+        self.address = address;
+        self.companies = companies;
+        self.speakers = speakers;
     }
     return self;
 }

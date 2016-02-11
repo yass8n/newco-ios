@@ -2,11 +2,12 @@
 //  ApplicationViewController.h
 //  newco-IOS
 //
-//  Created by yassen aniss.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "colors.h"
 
 @interface ApplicationViewController : UIViewController
@@ -22,5 +23,7 @@
 + (NSDate*) UTCtoNSDate:(NSString*)utc;
 - (void)setBackButton;
 - (UIViewController *)topViewController;
+-(void)goBack;
+-(void)fadeIn:(UIView*)view duration:(float)duration;
 
 @end
