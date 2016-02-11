@@ -54,14 +54,8 @@
     
     ApplicationViewController.sysVer = 0;
     
-    dispatch_queue_t que = dispatch_queue_create("getSessions", NULL);
+    dispatch_queue_t que = dispatch_queue_create("enableControl", NULL);
     dispatch_async(que, ^{[self enableSegmentedControl];});
-    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    ScheduleViewController *vc  = [storyboard instantiateViewControllerWithIdentifier:@"Schedule"];
-//    [self.navigationController pushViewController:vc animated:YES];
-
-    // Do any additional setup after loading the view.
 }
 - (void)viewDidAppear:(BOOL)animated{
     self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];

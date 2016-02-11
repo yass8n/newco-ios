@@ -8,6 +8,8 @@
 
 #import "ProfileTableViewController.h"
 #import "ProfileCell.h"
+#import "UserInitial.h"
+#import "UserImage.h"
 
 
 @interface ProfileTableViewController ()
@@ -58,6 +60,15 @@ static const float MIN_CELL_HEIGHT = 120.0;
     cell.name.text = [user objectForKey:@"name"];
     cell.position.text = [user objectForKey:@"position"];
     cell.company.text = [user objectForKey:@"company"];
+//    UserInitial *userInitial = [[UserInitial alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
+//    [userInitial.text.titleLabel setFont:[UIFont systemFontOfSize:20]];
+//    userInitial.username = [user objectForKey:@"username"];
+//    [userInitial.text setTitle: [[cell.name.text substringToIndex:1]capitalizedString] forState:UIControlStateNormal]; // To set the title
+    UserImage *userImage = [[UserImage alloc] initWithFrame:CGRectMake(0, 0, cell.image.bounds.size.width, cell.image.bounds.size.height)];
+
+    userImage.bounds = cell.image.bounds; //resizes userImage to be exact size of cell image
+    
+    [cell.image addSubview:userImage];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.container.layer.masksToBounds = YES;

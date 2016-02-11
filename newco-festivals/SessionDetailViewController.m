@@ -74,31 +74,28 @@
     [ApplicationViewController setBorder:self.statusContainer width:1.0 radius:3 color:[UIColor blackColor]];
     
     self.regionColor.layer.cornerRadius = self.regionColor.frame.size.height/2;
-    self.regionColor.clipsToBounds = YES;
     self.regionColor.layer.masksToBounds = YES;
     self.regionColor.backgroundColor = self.session.color;
     
     self.presenterView.layer.cornerRadius = self.presenterView.frame.size.height/2;
-    self.presenterView.clipsToBounds = YES;
     self.presenterView.layer.masksToBounds = YES;
     
     self.companyView.layer.cornerRadius =  self.companyView.frame.size.height/2;
-    self.companyView.clipsToBounds = YES;
     self.companyView.layer.masksToBounds = YES;
     
-    UserInitial * speak_initial = [[UserInitial alloc] initWithFrame:CGRectMake(0, 0, self.presenterView.frame.size.width, self.presenterView.frame.size.height)];
-    [speak_initial.text.titleLabel setFont:[UIFont systemFontOfSize:20]];
+    UserInitial * speakInitial = [[UserInitial alloc] initWithFrame:CGRectMake(0, 0, self.presenterView.frame.size.width, self.presenterView.frame.size.height)];
+    [speakInitial.text.titleLabel setFont:[UIFont systemFontOfSize:20]];
     NSDictionary *speaker = [self.session.speakers objectAtIndex:0];
-    speak_initial.username = [speaker objectForKey:@"username"];
-    [speak_initial.text setTitle: [[[speaker objectForKey:@"name"] substringToIndex:1]capitalizedString] forState:UIControlStateNormal]; // To set the title
-    [self.presenterView addSubview: speak_initial];
+    speakInitial.username = [speaker objectForKey:@"username"];
+    [speakInitial.text setTitle: [[[speaker objectForKey:@"name"] substringToIndex:1]capitalizedString] forState:UIControlStateNormal]; // To set the title
+    [self.presenterView addSubview: speakInitial];
 
-    UserInitial *comp_initial = [[UserInitial alloc] initWithFrame:CGRectMake(0, 0, self.companyView.frame.size.width, self.companyView.frame.size.height)];
-    [comp_initial.text.titleLabel setFont:[UIFont systemFontOfSize:20]];
+    UserInitial *compInitial = [[UserInitial alloc] initWithFrame:CGRectMake(0, 0, self.companyView.bounds.size.width, self.companyView.bounds.size.height)];
+    [compInitial.text.titleLabel setFont:[UIFont systemFontOfSize:20]];
     NSDictionary *company = [self.session.companies objectAtIndex:0];
-    comp_initial.username = [company objectForKey:@"username"];
-    [comp_initial.text setTitle: [[[company objectForKey:@"name"] substringToIndex:1]capitalizedString] forState:UIControlStateNormal]; // To set the title
-    [self.companyView addSubview: comp_initial];
+    compInitial.username = [company objectForKey:@"username"];
+    [compInitial.text setTitle: [[[company objectForKey:@"name"] substringToIndex:1]capitalizedString] forState:UIControlStateNormal]; // To set the title
+    [self.companyView addSubview: compInitial];
     
     //used in conjunction with linebreaks = 0
     self.presenterName.text = [speaker objectForKey:@"name"];

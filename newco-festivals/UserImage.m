@@ -1,14 +1,24 @@
 //
-//  UserInitial.m
+//  UserImage.m
 //  newco-IOS
 //
 //  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
-#import "UserInitial.h"
+#import "UserImage.h"
+#import <QuartzCore/QuartzCore.h>
 
-@implementation UserInitial
+@implementation CALayer (Additions)
+
+- (void)setBorderColorFromUIColor:(UIColor *)color
+{
+    self.borderColor = color.CGColor;
+}
+
+@end
+@implementation UserImage
+
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
@@ -24,12 +34,8 @@
     }
     return self;
 }
-
-- (IBAction)initial:(id)sender {
-    NSLog(@"%@", self.username);
-}
 -(void)setup{
-    [[NSBundle mainBundle] loadNibNamed:@"UserInitial" owner:self options:nil];
+    [[NSBundle mainBundle] loadNibNamed:@"UserImage" owner:self options:nil];
     self.bounds = self.view.bounds;
     [self addSubview:self.view];
     [self stretchToSuperView:self.view];
@@ -46,4 +52,5 @@
     }
     
 }
+
 @end

@@ -8,19 +8,19 @@
 
 #import "DirectoryViewController.h"
 #import "ProfileTableViewController.h"
+#import "HighlightableView.h"
 
 @interface DirectoryViewController ()
-    @property (weak, nonatomic) IBOutlet UIView *presenters;
-    @property (weak, nonatomic) IBOutlet UIView *host_companies;
-    @property (weak, nonatomic) IBOutlet UIView *volunteers;
-    @property (weak, nonatomic) IBOutlet UIView *attendees;
+    @property (weak, nonatomic) IBOutlet HighlightableView *presenters;
+    @property (weak, nonatomic) IBOutlet HighlightableView *hostCompanies;
+    @property (weak, nonatomic) IBOutlet HighlightableView *volunteers;
+    @property (weak, nonatomic) IBOutlet HighlightableView *attendees;
 @end
 
 @implementation DirectoryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self adjustUI];
     [self setClickListeners];
     // Do any additional setup after loading the view.
 }
@@ -29,32 +29,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)adjustUI{
-    [ApplicationViewController setBorder:self.presenters width:1.0 radius:6 color:[UIColor myLightGray]];
-    [ApplicationViewController setBorder:self.host_companies width:1.0 radius:6 color:[UIColor myLightGray]];
-    [ApplicationViewController setBorder:self.volunteers width:1.0 radius:6 color:[UIColor myLightGray]];
-     [ApplicationViewController setBorder:self.attendees width:1.0 radius:6 color:[UIColor myLightGray]];
-}
+
 -(void)setClickListeners{
     //The setup code (in viewDidLoad in your view controller)
     UITapGestureRecognizer *presentersTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(goToPresenters:)];
+    presentersTap.delaysTouchesBegan = NO;
+    presentersTap.delaysTouchesEnded = NO;
     [self.presenters addGestureRecognizer:presentersTap];
     
     UITapGestureRecognizer *attendeesTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(goToAttendees:)];
+    attendeesTap.delaysTouchesBegan = NO;
+    attendeesTap.delaysTouchesEnded = NO;
     [self.attendees addGestureRecognizer:attendeesTap];
     
     UITapGestureRecognizer *companiesTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(goToCompanies:)];
-    [self.host_companies addGestureRecognizer:companiesTap];
+    companiesTap.delaysTouchesBegan = NO;
+    companiesTap.delaysTouchesEnded = NO;
+    [self.hostCompanies addGestureRecognizer:companiesTap];
     
     UITapGestureRecognizer *volunteersTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(goToVolunteers:)];
+    volunteersTap.delaysTouchesBegan = NO;
+    volunteersTap.delaysTouchesEnded = NO;
     [self.volunteers addGestureRecognizer:volunteersTap];
 
 }
@@ -67,6 +70,7 @@
 //an event handling method
 - (void)goToAttendees:(UITapGestureRecognizer *)recognizer {
     [self goToProfileTable: ApplicationViewController.attendeesDict withTitle:@"Attendees"];
+
 }
 
 //an event handling method
@@ -84,36 +88,36 @@
     ProfileTableViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ProfileTable"];
     [vc setUsers:people];
     [vc setPageTitle:title];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];    
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSIndexPath *currentSelectedIndexPath = [tableView indexPathForSelectedRow];
-    if (currentSelectedIndexPath != nil)
-    {
-        [[tableView cellForRowAtIndexPath:currentSelectedIndexPath] setBackgroundColor:[UIColor myLightGray]];
-    }
-    
-    return indexPath;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [[tableView cellForRowAtIndexPath:indexPath] setBackgroundColor:[UIColor myLightGray]];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (cell.isSelected == YES)
-    {
-        [cell setBackgroundColor:[UIColor myLightGray]];
-    }
-    else
-    {
-        [cell setBackgroundColor:[UIColor whiteColor]];
-    }
-}
+//- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSIndexPath *currentSelectedIndexPath = [tableView indexPathForSelectedRow];
+//    if (currentSelectedIndexPath != nil)
+//    {
+//        [[tableView cellForRowAtIndexPath:currentSelectedIndexPath] setBackgroundColor:[UIColor myLightGray]];
+//    }
+//    
+//    return indexPath;
+//}
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [[tableView cellForRowAtIndexPath:indexPath] setBackgroundColor:[UIColor myLightGray]];
+//}
+//
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (cell.isSelected == YES)
+//    {
+//        [cell setBackgroundColor:[UIColor myLightGray]];
+//    }
+//    else
+//    {
+//        [cell setBackgroundColor:[UIColor whiteColor]];
+//    }
+//}
 
 /*
 #pragma mark - Navigation

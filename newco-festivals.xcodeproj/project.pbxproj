@@ -30,6 +30,8 @@
 		9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9291072E1C6C5268004B517C /* ProfileTableViewController.m */; };
 		929107321C6C52E3004B517C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107311C6C52E3004B517C /* RootViewController.m */; };
 		929107351C6C532D004B517C /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107341C6C532D004B517C /* DirectoryViewController.m */; };
+		929107381C6C5A4E004B517C /* UserImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107371C6C5A4E004B517C /* UserImage.m */; };
+		9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107391C6C5A5A004B517C /* UserImage.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,9 @@
 		929107311C6C52E3004B517C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		929107331C6C532D004B517C /* DirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
 		929107341C6C532D004B517C /* DirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
+		929107361C6C5A4E004B517C /* UserImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImage.h; sourceTree = "<group>"; };
+		929107371C6C5A4E004B517C /* UserImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImage.m; sourceTree = "<group>"; };
+		929107391C6C5A5A004B517C /* UserImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImage.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +188,9 @@
 				929107311C6C52E3004B517C /* RootViewController.m */,
 				929107331C6C532D004B517C /* DirectoryViewController.h */,
 				929107341C6C532D004B517C /* DirectoryViewController.m */,
+				929107361C6C5A4E004B517C /* UserImage.h */,
+				929107371C6C5A4E004B517C /* UserImage.m */,
+				929107391C6C5A5A004B517C /* UserImage.xib */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -317,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92470D131C389081003E6F7E /* LaunchScreen.storyboard in Resources */,
+				9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */,
 				929107231C6C4777004B517C /* UserInitial.xib in Resources */,
 				92470D101C389081003E6F7E /* Assets.xcassets in Resources */,
 				92470D0B1C389081003E6F7E /* Main.storyboard in Resources */,
@@ -358,6 +367,7 @@
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,
 				929107321C6C52E3004B517C /* RootViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
+				929107381C6C5A4E004B517C /* UserImage.m in Sources */,
 				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
 				9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */,
