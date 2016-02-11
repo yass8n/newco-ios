@@ -23,6 +23,10 @@
 		924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB671C6134AC0093CAA1 /* SignInViewController.m */; };
 		924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB6A1C6136440093CAA1 /* SessionCell.m */; };
 		924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */; };
+		92880C331C6D472100315DF0 /* SessionCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92880C321C6D472100315DF0 /* SessionCellHeader.xib */; };
+		92880C351C6D472A00315DF0 /* SessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92880C341C6D472A00315DF0 /* SessionCell.xib */; };
+		92880C371C6D473C00315DF0 /* PageLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92880C361C6D473C00315DF0 /* PageLoader.xib */; };
+		92880C3A1C6D474C00315DF0 /* PageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 92880C391C6D474C00315DF0 /* PageLoader.m */; };
 		929107211C6C4740004B517C /* UserInitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107201C6C4740004B517C /* UserInitial.m */; };
 		929107231C6C4777004B517C /* UserInitial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107221C6C4777004B517C /* UserInitial.xib */; };
 		929107261C6C4FF4004B517C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107251C6C4FF4004B517C /* User.m */; };
@@ -86,6 +90,11 @@
 		924ECB6A1C6136440093CAA1 /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 		924ECB721C613B0C0093CAA1 /* ApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewController.h; sourceTree = "<group>"; };
 		924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewController.m; sourceTree = "<group>"; };
+		92880C321C6D472100315DF0 /* SessionCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCellHeader.xib; sourceTree = "<group>"; };
+		92880C341C6D472A00315DF0 /* SessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCell.xib; sourceTree = "<group>"; };
+		92880C361C6D473C00315DF0 /* PageLoader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageLoader.xib; sourceTree = "<group>"; };
+		92880C381C6D474C00315DF0 /* PageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageLoader.h; sourceTree = "<group>"; };
+		92880C391C6D474C00315DF0 /* PageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageLoader.m; sourceTree = "<group>"; };
 		9291071F1C6C4740004B517C /* UserInitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInitial.h; sourceTree = "<group>"; };
 		929107201C6C4740004B517C /* UserInitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInitial.m; sourceTree = "<group>"; };
 		929107221C6C4777004B517C /* UserInitial.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInitial.xib; sourceTree = "<group>"; };
@@ -203,6 +212,11 @@
 				929107391C6C5A5A004B517C /* UserImage.xib */,
 				9291073B1C6C5B49004B517C /* HighlightableView.h */,
 				9291073C1C6C5B49004B517C /* HighlightableView.m */,
+				92880C321C6D472100315DF0 /* SessionCellHeader.xib */,
+				92880C341C6D472A00315DF0 /* SessionCell.xib */,
+				92880C361C6D473C00315DF0 /* PageLoader.xib */,
+				92880C381C6D474C00315DF0 /* PageLoader.h */,
+				92880C391C6D474C00315DF0 /* PageLoader.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -359,8 +373,11 @@
 				92470D131C389081003E6F7E /* LaunchScreen.storyboard in Resources */,
 				9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */,
 				929107231C6C4777004B517C /* UserInitial.xib in Resources */,
+				92880C371C6D473C00315DF0 /* PageLoader.xib in Resources */,
+				92880C351C6D472A00315DF0 /* SessionCell.xib in Resources */,
 				92470D101C389081003E6F7E /* Assets.xcassets in Resources */,
 				92470D0B1C389081003E6F7E /* Main.storyboard in Resources */,
+				92880C331C6D472100315DF0 /* SessionCellHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +465,7 @@
 				9291073D1C6C5B49004B517C /* HighlightableView.m in Sources */,
 				929107321C6C52E3004B517C /* RootViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
+				92880C3A1C6D474C00315DF0 /* PageLoader.m in Sources */,
 				929107381C6C5A4E004B517C /* UserImage.m in Sources */,
 				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
