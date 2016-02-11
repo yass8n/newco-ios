@@ -25,6 +25,8 @@
 		924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */; };
 		929107211C6C4740004B517C /* UserInitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107201C6C4740004B517C /* UserInitial.m */; };
 		929107231C6C4777004B517C /* UserInitial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107221C6C4777004B517C /* UserInitial.xib */; };
+		929107261C6C4FF4004B517C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107251C6C4FF4004B517C /* User.m */; };
+		929107291C6C50BB004B517C /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107281C6C50BB004B517C /* ScheduleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,10 @@
 		9291071F1C6C4740004B517C /* UserInitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInitial.h; sourceTree = "<group>"; };
 		929107201C6C4740004B517C /* UserInitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInitial.m; sourceTree = "<group>"; };
 		929107221C6C4777004B517C /* UserInitial.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInitial.xib; sourceTree = "<group>"; };
+		929107241C6C4FF4004B517C /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		929107251C6C4FF4004B517C /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		929107271C6C50BB004B517C /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
+		929107281C6C50BB004B517C /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,10 @@
 				9291071F1C6C4740004B517C /* UserInitial.h */,
 				929107201C6C4740004B517C /* UserInitial.m */,
 				929107221C6C4777004B517C /* UserInitial.xib */,
+				929107241C6C4FF4004B517C /* User.h */,
+				929107251C6C4FF4004B517C /* User.m */,
+				929107271C6C50BB004B517C /* ScheduleViewController.h */,
+				929107281C6C50BB004B517C /* ScheduleViewController.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -319,10 +329,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				929107261C6C4FF4004B517C /* User.m in Sources */,
 				92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */,
 				923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */,
 				92470D081C389081003E6F7E /* ViewController.m in Sources */,
 				92470D051C389081003E6F7E /* AppDelegate.m in Sources */,
+				929107291C6C50BB004B517C /* ScheduleViewController.m in Sources */,
 				924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */,
 				929107211C6C4740004B517C /* UserInitial.m in Sources */,
 				92470D021C389081003E6F7E /* main.m in Sources */,
