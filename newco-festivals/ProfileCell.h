@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *company;
 @property (weak, nonatomic) IBOutlet UILabel *position;
-@property (weak, nonatomic) IBOutlet UIView *image;
+@property (strong, nonatomic) IBOutlet UIView *image;
 @property (weak, nonatomic) IBOutlet UIView *container;
 
 @end
