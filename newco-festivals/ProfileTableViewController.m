@@ -7,33 +7,53 @@
 //
 
 #import "ProfileTableViewController.h"
+#import "ProfileViewController.h"
 #import "ProfileCell.h"
 #import "UserInitial.h"
 #import "UserImage.h"
 
 
 @interface ProfileTableViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *profileTableView;
+    @property (weak, nonatomic) IBOutlet UITableView *profileTableView;
 @end
 
 @implementation ProfileTableViewController{
-    NSArray * users_array;
+    NSArray * usersArray;
+    NSMutableArray * cellsArray;
+
 }
-static const float MIN_CELL_HEIGHT = 120.0;
+static const float MIN_SESSION_HEIGHT = 155.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setBackButton];
-    self.profileTableView.estimatedRowHeight = 120.0;
-    self.profileTableView.rowHeight = UITableViewAutomaticDimension;
-    self.navigationItem.title = self.pageTitle;
-    users_array = [self.users allValues];
+    [self adjustUI];
+    usersArray = [self.users allValues];
+    cellsArray = [[NSMutableArray alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].
+    networkActivityIndicatorVisible = NO;
+    ApplicationViewController.currentVC = enumProfileTable;
+    if (self.session){
+        self.navigationController.navigationBar.barTintColor = self.session.color;
+        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    }else {
+        self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];
+        self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
+    }
+}
+- (void)adjustUI{
+    [self setBackButton];
+    [self setMultiLineTitle: self.pageTitle fontColor: [UIColor blackColor]];
+    self.profileTableView.estimatedRowHeight = 120.0;
+    self.profileTableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,7 +73,7 @@ static const float MIN_CELL_HEIGHT = 120.0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"profile_cell" forIndexPath:indexPath];
-    NSMutableDictionary * user = [users_array objectAtIndex:indexPath.row];
+    NSMutableDictionary * user = [usersArray objectAtIndex:indexPath.row];
     if (ApplicationViewController.sysVer < 8.00){
         cell.clipsToBounds = YES;
     }
@@ -61,30 +81,24 @@ static const float MIN_CELL_HEIGHT = 120.0;
     cell.position.text = [user objectForKey:@"position"];
     cell.company.text = [user objectForKey:@"company"];
     NSString* avatar = [user objectForKey:@"avatar"];
-    if ([avatar  isEqual: @""]){
-        UserInitial *userInitial = [[UserInitial alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
-        [userInitial.text.titleLabel setFont:[UIFont systemFontOfSize:20]];
-        userInitial.username = [user objectForKey:@"username"];
-        [userInitial.text setTitle: [[cell.name.text substringToIndex:1]capitalizedString] forState:UIControlStateNormal]; // To set the title
-        [cell.image addSubview:userInitial];
+    CGRect rect = CGRectMake(0, 0, cell.image.bounds.size.width, cell.image.bounds.size.height);
+
+    if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""]){
+        [self setUserInitial:rect withFont:20 withUser:user intoView:cell.image withType:self.type];
     }else {
-        UserImage *userImage = [[UserImage alloc] initWithFrame:CGRectMake(0, 0, cell.image.bounds.size.width, cell.image.bounds.size.height)];
-        userImage.bounds = cell.image.bounds; //resizes userImage to be exact size of cell image
-        
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:avatar]];
-        UIImage *profilePic = [UIImage imageWithData:imageData];
-        //        [userImage.image setImageWithURL:[NSURL URLWithString:avatar]
-        //                                            placeholderImage:[UIImage imageNamed:@"user.png"]];
-        [cell.image addSubview:userImage];
+        [self setUserImage:rect withAvatar:avatar withUser:user intoView:cell.image withType:self.type];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.container.layer.masksToBounds = YES; //for speed of scroll
-    [cell.contentView setOpaque:YES]; //for speed of scroll
-    [cell.backgroundView setOpaque:YES]; //for speed of scroll
+    //opacity for speed of scroll
+    [cell.contentView setOpaque:YES];
+    [cell.backgroundView setOpaque:YES];
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
+    //storyboard contains other border properties
     [cell layoutIfNeeded];
-    
+
     return cell;
 }
 
@@ -93,14 +107,14 @@ static const float MIN_CELL_HEIGHT = 120.0;
     if (ApplicationViewController.sysVer > 8.00) {
         return UITableViewAutomaticDimension;
     } else {
-        return MIN_CELL_HEIGHT;
+        return MIN_SESSION_HEIGHT;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (ApplicationViewController.sysVer > 8.00) {
         return UITableViewAutomaticDimension;
     } else {
-        return MIN_CELL_HEIGHT;
+        return MIN_SESSION_HEIGHT;
     }
 }
 
@@ -109,49 +123,10 @@ static const float MIN_CELL_HEIGHT = 120.0;
     [self.profileTableView reloadData];
 }
 
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [UIApplication sharedApplication].
+    networkActivityIndicatorVisible = YES;
+    [self goToProfile:[usersArray objectAtIndex:indexPath.row] withType:self.type];
+}
 @end

@@ -8,13 +8,13 @@
 
 #import "DirectoryViewController.h"
 #import "ProfileTableViewController.h"
-#import "HighlightableView.h"
+#import "CustomUIView.h"
 
 @interface DirectoryViewController ()
-    @property (weak, nonatomic) IBOutlet HighlightableView *presenters;
-    @property (weak, nonatomic) IBOutlet HighlightableView *hostCompanies;
-    @property (weak, nonatomic) IBOutlet HighlightableView *volunteers;
-    @property (weak, nonatomic) IBOutlet HighlightableView *attendees;
+    @property (weak, nonatomic) IBOutlet CustomUIView *presenters;
+    @property (weak, nonatomic) IBOutlet CustomUIView *hostCompanies;
+    @property (weak, nonatomic) IBOutlet CustomUIView *volunteers;
+    @property (weak, nonatomic) IBOutlet CustomUIView *attendees;
 @end
 
 @implementation DirectoryViewController
@@ -23,6 +23,10 @@
     [super viewDidLoad];
     [self setClickListeners];
     // Do any additional setup after loading the view.
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    ApplicationViewController.currentVC = enumDirectory;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,69 +68,22 @@
 
 //an event handling method
 - (void)goToPresenters:(UITapGestureRecognizer *)recognizer {
-    [self goToProfileTable: ApplicationViewController.presentersDict withTitle:@"Presenters"];
+    [self goToProfileTable: ApplicationViewController.presentersDict withTitle:@"Presenters" withSession:nil withType:@"speaker"];
 }
 
 //an event handling method
 - (void)goToAttendees:(UITapGestureRecognizer *)recognizer {
-    [self goToProfileTable: ApplicationViewController.attendeesDict withTitle:@"Attendees"];
+    [self goToProfileTable: ApplicationViewController.attendeesDict withTitle:@"Attendees" withSession:nil withType:@"attendee"];
 
 }
 
 //an event handling method
 - (void)goToCompanies:(UITapGestureRecognizer *)recognizer {
-    [self goToProfileTable: ApplicationViewController.companiesDict withTitle:@"Companies"];
+    [self goToProfileTable: ApplicationViewController.companiesDict withTitle:@"Companies" withSession:nil withType:@"company"];
 }
 
 //an event handling method
 - (void)goToVolunteers:(UITapGestureRecognizer *)recognizer {
-    [self goToProfileTable: ApplicationViewController.volunteersDict withTitle:@"Volunteers"];
+    [self goToProfileTable: ApplicationViewController.volunteersDict withTitle:@"Volunteers" withSession:nil withType:@"volunteer"];
 }
-
-- (void)goToProfileTable: (NSMutableDictionary*) people withTitle: (NSString*) title{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ProfileTableViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ProfileTable"];
-    [vc setUsers:people];
-    [vc setPageTitle:title];
-    [self.navigationController pushViewController:vc animated:YES];    
-}
-
-//- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSIndexPath *currentSelectedIndexPath = [tableView indexPathForSelectedRow];
-//    if (currentSelectedIndexPath != nil)
-//    {
-//        [[tableView cellForRowAtIndexPath:currentSelectedIndexPath] setBackgroundColor:[UIColor myLightGray]];
-//    }
-//    
-//    return indexPath;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [[tableView cellForRowAtIndexPath:indexPath] setBackgroundColor:[UIColor myLightGray]];
-//}
-//
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (cell.isSelected == YES)
-//    {
-//        [cell setBackgroundColor:[UIColor myLightGray]];
-//    }
-//    else
-//    {
-//        [cell setBackgroundColor:[UIColor whiteColor]];
-//    }
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

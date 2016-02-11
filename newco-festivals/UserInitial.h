@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIView *view;
 - (IBAction)initial:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *text;
-@property (weak, nonatomic) NSString *username;
+@property (weak, nonatomic) NSDictionary *user;
+@property (strong, nonatomic) NSString* type;
 
 @end

@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UserImage : UIView
-@property (strong, nonatomic) IBOutlet UIImageView *image;
-@property (strong, nonatomic) IBOutlet UIView *view;
+@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UIView *view;
+@property (weak, nonatomic) NSDictionary* user;
+@property (strong, nonatomic) NSString* type;
 
 @end

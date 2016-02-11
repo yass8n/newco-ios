@@ -8,6 +8,7 @@
 
 #import "SessionCell.h"
 #import <QuartzCore/QuartzCore.h>
+
 @implementation CALayer (Additions)
 
 - (void)setBorderColorFromUIColor:(UIColor *)color

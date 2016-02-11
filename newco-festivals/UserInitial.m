@@ -7,6 +7,29 @@
 //
 
 #import "UserInitial.h"
+#import "ProfileViewController.h"
+@interface UIView (FindUIViewController)
+- (UIViewController *) firstAvailableUIViewController;
+- (id) traverseResponderChainForUIViewController;
+@end
+
+@implementation UIView (FindUIViewController)
+- (UIViewController *) firstAvailableUIViewController {
+    // convenience function for casting and to "mask" the recursive function
+    return (UIViewController *)[self traverseResponderChainForUIViewController];
+}
+
+- (id) traverseResponderChainForUIViewController {
+    id nextResponder = [self nextResponder];
+    if ([nextResponder isKindOfClass:[UIViewController class]]) {
+        return nextResponder;
+    } else if ([nextResponder isKindOfClass:[UIView class]]) {
+        return [nextResponder traverseResponderChainForUIViewController];
+    } else {
+        return nil;
+    }
+}
+@end
 
 @implementation UserInitial
 
@@ -26,7 +49,12 @@
 }
 
 - (IBAction)initial:(id)sender {
-    NSLog(@"%@", self.username);
+    UIViewController * this = [self firstAvailableUIViewController];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ProfileViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"Profile"];
+    [vc setUser:self.user];
+    [vc setType:self.type];
+    [this.navigationController pushViewController:vc animated:YES];
 }
 -(void)setup{
     [[NSBundle mainBundle] loadNibNamed:@"UserInitial" owner:self options:nil];

@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIView *innnerContainer;
 @property (weak, nonatomic) IBOutlet UIView *outerContainer;
 @property (weak, nonatomic) IBOutlet UIView *statusContainer;
+@property (nonatomic, weak) UIViewController *controller;
 
 @end
