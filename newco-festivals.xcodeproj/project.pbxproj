@@ -32,6 +32,7 @@
 		929107351C6C532D004B517C /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107341C6C532D004B517C /* DirectoryViewController.m */; };
 		929107381C6C5A4E004B517C /* UserImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107371C6C5A4E004B517C /* UserImage.m */; };
 		9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107391C6C5A5A004B517C /* UserImage.xib */; };
+		9291073D1C6C5B49004B517C /* HighlightableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9291073C1C6C5B49004B517C /* HighlightableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,8 @@
 		929107361C6C5A4E004B517C /* UserImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImage.h; sourceTree = "<group>"; };
 		929107371C6C5A4E004B517C /* UserImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImage.m; sourceTree = "<group>"; };
 		929107391C6C5A5A004B517C /* UserImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImage.xib; sourceTree = "<group>"; };
+		9291073B1C6C5B49004B517C /* HighlightableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightableView.h; sourceTree = "<group>"; };
+		9291073C1C6C5B49004B517C /* HighlightableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +194,8 @@
 				929107361C6C5A4E004B517C /* UserImage.h */,
 				929107371C6C5A4E004B517C /* UserImage.m */,
 				929107391C6C5A5A004B517C /* UserImage.xib */,
+				9291073B1C6C5B49004B517C /* HighlightableView.h */,
+				9291073C1C6C5B49004B517C /* HighlightableView.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 				92470D021C389081003E6F7E /* main.m in Sources */,
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,
+				9291073D1C6C5B49004B517C /* HighlightableView.m in Sources */,
 				929107321C6C52E3004B517C /* RootViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
 				929107381C6C5A4E004B517C /* UserImage.m in Sources */,
