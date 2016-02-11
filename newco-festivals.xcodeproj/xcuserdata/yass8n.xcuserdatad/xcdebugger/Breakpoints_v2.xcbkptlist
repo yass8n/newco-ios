@@ -17,53 +17,6 @@
             endingLineNumber = "52"
             landmarkName = "-fetchSesions"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[ViewController fetchSesions]_block_invoke"
-                  moduleName = "newco-festivals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yass8n/CSCI/IOS/newco-festivals/newco-festivals/ViewController.m"
-                  timestampString = "476137001.183006"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "1026">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_47"
-                  moduleName = "newco-festivals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yass8n/CSCI/IOS/newco-festivals/newco-festivals/ViewController.m"
-                  timestampString = "476137001.183344"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_48"
-                  moduleName = "newco-festivals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yass8n/CSCI/IOS/newco-festivals/newco-festivals/ViewController.m"
-                  timestampString = "476137001.183621"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "10">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

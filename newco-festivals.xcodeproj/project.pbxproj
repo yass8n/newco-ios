@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DE8288268CF6CEF49B779B7 /* libPods-newco-festivals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */; };
 		9212EB3D1C61499F00D17504 /* colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212EB3C1C61499F00D17504 /* colors.m */; };
 		9216595B1C58CC9E006239D6 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 9216595A1C58CC9E006239D6 /* session.m */; };
 		923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 923D14931C6B05A400629F78 /* SessionCellHeader.m */; };
@@ -53,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newco-festivals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5122098224D3F685DE88C5F7 /* Pods-newco-festivals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.debug.xcconfig"; sourceTree = "<group>"; };
 		9212EB3B1C61499F00D17504 /* colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colors.h; sourceTree = "<group>"; };
 		9212EB3C1C61499F00D17504 /* colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = colors.m; sourceTree = "<group>"; };
 		9212EB3E1C6149A800D17504 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 		929107391C6C5A5A004B517C /* UserImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImage.xib; sourceTree = "<group>"; };
 		9291073B1C6C5B49004B517C /* HighlightableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightableView.h; sourceTree = "<group>"; };
 		9291073C1C6C5B49004B517C /* HighlightableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightableView.m; sourceTree = "<group>"; };
+		EC50D0A9EDEFACDFBDF8086D /* Pods-newco-festivals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.release.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DE8288268CF6CEF49B779B7 /* libPods-newco-festivals.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +142,8 @@
 				92470D1C1C389082003E6F7E /* newco-festivalsTests */,
 				92470D271C389082003E6F7E /* newco-festivalsUITests */,
 				92470CFE1C389081003E6F7E /* Products */,
+				E7CE2F00B86BDF8704A32578 /* Pods */,
+				CFAA25233C1B4C1175BD2FA0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -226,6 +233,23 @@
 			path = "newco-festivalsUITests";
 			sourceTree = "<group>";
 		};
+		CFAA25233C1B4C1175BD2FA0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E7CE2F00B86BDF8704A32578 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5122098224D3F685DE88C5F7 /* Pods-newco-festivals.debug.xcconfig */,
+				EC50D0A9EDEFACDFBDF8086D /* Pods-newco-festivals.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,9 +257,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92470D2D1C389082003E6F7E /* Build configuration list for PBXNativeTarget "newco-festivals" */;
 			buildPhases = (
+				E3E5AF6589E41DEC7C230BE1 /* Check Pods Manifest.lock */,
 				92470CF91C389081003E6F7E /* Sources */,
 				92470CFA1C389081003E6F7E /* Frameworks */,
 				92470CFB1C389081003E6F7E /* Resources */,
+				736B4466B1096EF1AAA9564F /* Embed Pods Frameworks */,
+				281E2A824748FDCDF036FDE1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -352,6 +379,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		281E2A824748FDCDF036FDE1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		736B4466B1096EF1AAA9564F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3E5AF6589E41DEC7C230BE1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92470CF91C389081003E6F7E /* Sources */ = {
@@ -513,6 +588,7 @@
 		};
 		92470D2E1C389082003E6F7E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5122098224D3F685DE88C5F7 /* Pods-newco-festivals.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "newco-festivals/Info.plist";
@@ -524,6 +600,7 @@
 		};
 		92470D2F1C389082003E6F7E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC50D0A9EDEFACDFBDF8086D /* Pods-newco-festivals.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "newco-festivals/Info.plist";
