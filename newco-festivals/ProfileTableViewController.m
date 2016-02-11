@@ -52,7 +52,6 @@ static const float MIN_CELL_HEIGHT = 120.0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"profile_cell" forIndexPath:indexPath];
     NSMutableDictionary * user = [users_array objectAtIndex:indexPath.row];
-    [ApplicationViewController setBorder:cell.container width:1.5 radius:4.0 color:[UIColor myLightGray]];
     if (ApplicationViewController.sysVer < 8.00){
         cell.clipsToBounds = YES;
     }
@@ -60,6 +59,11 @@ static const float MIN_CELL_HEIGHT = 120.0;
     cell.position.text = [user objectForKey:@"position"];
     cell.company.text = [user objectForKey:@"company"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.container.layer.masksToBounds = YES;
+    [cell.contentView setOpaque:YES];
+    [cell.backgroundView setOpaque:YES];
+    
     [cell layoutIfNeeded];
 
     return cell;

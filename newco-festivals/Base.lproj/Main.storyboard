@@ -209,6 +209,17 @@
                                                         <constraint firstItem="tZi-0A-Xec" firstAttribute="leading" secondItem="Iz3-AH-ILj" secondAttribute="leading" constant="8" id="qm1-3t-RKQ"/>
                                                         <constraint firstItem="4Al-rK-u4w" firstAttribute="leading" secondItem="Iz3-AH-ILj" secondAttribute="leading" constant="96" id="z0y-BM-X9G"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                                            <color key="value" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="Thy-pb-OGJ"/>
@@ -705,6 +716,17 @@
                                                                         <constraint firstItem="YpO-zj-Wfr" firstAttribute="top" secondItem="1z9-Va-UPT" secondAttribute="top" constant="3" id="BlW-AU-yJE"/>
                                                                         <constraint firstAttribute="trailing" secondItem="YpO-zj-Wfr" secondAttribute="trailing" constant="3" id="O5g-dH-3im"/>
                                                                     </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <integer key="value" value="1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                            <integer key="value" value="3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.colorFromUIColor">
+                                                                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </view>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.81194196429999999" green="0.81194196429999999" blue="0.81194196429999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -745,6 +767,17 @@
                                                         <constraint firstAttribute="centerX" secondItem="YXQ-Y0-6ZE" secondAttribute="centerX" id="uja-Ce-1hf"/>
                                                         <constraint firstAttribute="centerY" secondItem="YXQ-Y0-6ZE" secondAttribute="centerY" id="w8M-B6-EQK"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>

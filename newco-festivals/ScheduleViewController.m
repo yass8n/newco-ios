@@ -217,20 +217,22 @@ static const float MIN_CELL_HEIGHT = 130.0;
     session_cell.note1.text = [currentSession note1];
     session_cell.outerContainer.backgroundColor = [currentSession color];
     session_cell.innnerContainer.backgroundColor = session_cell.outerContainer.backgroundColor;
+   
+    session_cell.outerContainer.layer.masksToBounds = YES;
+    session_cell.statusContainer.layer.masksToBounds = YES;
+    [session_cell.contentView setOpaque:YES];
+    [session_cell.backgroundView setOpaque:YES];
     
     session_cell.title.lineBreakMode = NSLineBreakByWordWrapping; //used in conjunction with linebreaks = 0
     session_cell.note1.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    [session_cell layoutIfNeeded]; //fixes issue where the first cells that are initially showing are not wrapping content for note1
-    
-    [ApplicationViewController setBorder:session_cell.outerContainer width:1.0 radius:6 color:[UIColor whiteColor]];
-    [ApplicationViewController setBorder:session_cell.statusContainer width:1.0 radius:3 color:[UIColor blackColor]];
     session_cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [session_cell layoutIfNeeded];
+    
     if (ApplicationViewController.sysVer < 8.00){
         session_cell.outerContainer.clipsToBounds = YES;
     }
- 
+    
+    [session_cell layoutIfNeeded]; //fixes issue where the first cells that are initially showing are not wrapping content for note1
+
     return session_cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -7,6 +7,15 @@
 //
 
 #import "ProfileCell.h"
+#import <QuartzCore/QuartzCore.h>
+
+@implementation CALayer (Additions)
+
+- (void)setBorderColorFromUIColor:(UIColor *)color
+{
+    self.borderColor = color.CGColor;
+}
+@end
 
 @implementation ProfileCell
 

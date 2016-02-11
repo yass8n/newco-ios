@@ -87,6 +87,34 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSIndexPath *currentSelectedIndexPath = [tableView indexPathForSelectedRow];
+    if (currentSelectedIndexPath != nil)
+    {
+        [[tableView cellForRowAtIndexPath:currentSelectedIndexPath] setBackgroundColor:[UIColor myLightGray]];
+    }
+    
+    return indexPath;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[tableView cellForRowAtIndexPath:indexPath] setBackgroundColor:[UIColor myLightGray]];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (cell.isSelected == YES)
+    {
+        [cell setBackgroundColor:[UIColor myLightGray]];
+    }
+    else
+    {
+        [cell setBackgroundColor:[UIColor whiteColor]];
+    }
+}
+
 /*
 #pragma mark - Navigation
 

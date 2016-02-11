@@ -8,6 +8,7 @@
 
 #import "SessionCellHeader.h"
 
+
 @implementation SessionCellHeader
 
 - (void)awakeFromNib {
