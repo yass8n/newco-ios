@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 @interface Helper : NSObject
 + (NSString*) myDateToFormat:(NSDate*) date withFormat:(NSString*)format;
 + (NSDate*) UTCtoNSDate:(NSString*)utc;
 + (void)setBorder:(UIView*)obj width:(float)wid radius:(int)rad color:(UIColor*)col;
++ (UIImage *)imageFromColor:(UIColor *)color;
++ (UIColor *)getUIColorObjectFromHexString:(NSString *)hexStr alpha:(CGFloat)alpha;
++ (int)lineCountForLabel:(UILabel *)label;
 @end

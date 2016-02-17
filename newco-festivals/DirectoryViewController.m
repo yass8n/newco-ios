@@ -22,6 +22,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setClickListeners];
+    self.presenters.highlightedColor = [UIColor myLightGray];
+    self.hostCompanies.highlightedColor = [UIColor myLightGray];
+    self.volunteers.highlightedColor = [UIColor myLightGray];
+    self.attendees.highlightedColor = [UIColor myLightGray];
+    
+    self.presenters.unHighlightedColor = [UIColor whiteColor];
+    self.hostCompanies.unHighlightedColor = [UIColor whiteColor];
+    self.volunteers.unHighlightedColor  = [UIColor whiteColor];
+    self.attendees.unHighlightedColor  = [UIColor whiteColor];
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{

@@ -11,16 +11,21 @@
 #import "ScheduleViewController.h"
 #import "PageLoader.h"
 #import "Helper.h"
+#import "CustomUIView.h"
+#import "CustomUILabel.h"
+#import "Credentials.h"
 
 @interface SignInViewController ()
-@property (weak, nonatomic) IBOutlet UIView *topView;
-@property (weak, nonatomic) IBOutlet UILabel *forgotpasswordField;
+@property (weak, nonatomic) IBOutlet UIButton *forgotPassword;
+- (IBAction)forgotPassword:(id)sender;
+@property (weak, nonatomic) IBOutlet CustomUIView *topView;
 @property (weak, nonatomic) IBOutlet UILabel *wantToAttend;
 - (IBAction)logIn:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIButton *logIn;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet CustomUIView *forgotPasswordView;
 @property (weak, nonatomic) IBOutlet UILabel *registerEventbrite;
 @end
 
@@ -38,10 +43,15 @@ CGFloat animatedDistance;
     user = [mutableUser copy];
     [Credentials sharedCredentials].currentUser = user;
     //code executed in background
-    [self fetchCurrentUserSessions: self.view];
+    [ApplicationViewController fetchCurrentUserSessions: self.view];
+    ApplicationViewController.rightNav = nil;
     //code to be executed on main thread when block is finished
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self goBack];
+        if(self.delegate && [self.delegate respondsToSelector: @selector(goBack)]) {
+            [self.delegate goBack];
+        }else{
+            [self goBack];
+        }
     });
 }
 
@@ -49,6 +59,16 @@ CGFloat animatedDistance;
     [super viewDidLoad];
     [self adjustUI];
     self.passwordField.secureTextEntry = YES;
+    self.topView.highlightedColor = [UIColor myLightGray];
+    self.topView.unHighlightedColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(registerViewTapped:)];
+    tap.delaysTouchesBegan = NO;
+    tap.delaysTouchesEnded = NO;
+    [self.topView addGestureRecognizer:tap];
+
+
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -72,7 +92,9 @@ CGFloat animatedDistance;
     [Helper setBorder:self.bottomView width:1.0 radius:8 color:[UIColor myLightGray]];
     [Helper setBorder:self.topView width:1.0 radius:5 color:[UIColor myLightGray]];
     [Helper setBorder:self.logIn width:1.0 radius:5 color:[UIColor blackColor]];
-    [super setBackButton];
+    if (self.setTheBackButton){
+        [super setBackButton];
+    }
 }
 
 /*
@@ -211,6 +233,15 @@ CGFloat animatedDistance;
     [self.view setFrame:viewFrame];
     
     [UIView commitAnimations];
+}
+
+- (IBAction)forgotPassword:(id)sender {
+    [self showWebViewWithUrl:@"https://sched.org/password-reset"];
+}
+//an event handling method
+- (void)registerViewTapped:(UITapGestureRecognizer *)recognizer {
+
+    [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
 }
 
 @end

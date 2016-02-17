@@ -9,11 +9,12 @@
 
 @implementation Credentials
 
-@synthesize currentUser;
+@synthesize currentUser, ApiKey, ApiUrl, festival;
+
+static Credentials *sharedCredentials = nil;
 
 + (Credentials *)sharedCredentials
 {
-    static Credentials *sharedCredentials = nil;
     if (!sharedCredentials) {
         sharedCredentials = [[Credentials alloc] init];
     }
@@ -27,11 +28,12 @@
         currentUser = [[NSDictionary alloc] init];
         ApiUrl = [[NSString alloc] init];
         ApiKey = [[NSString alloc] init];
+        festival = [[NSDictionary alloc] init];
     }
     return self;
 }
 -(NSDictionary*) currentUser{
-    if ([currentUser count] == 0){
+    if (!currentUser || [currentUser count] == 0){
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
         NSDictionary *myUser = [prefs dictionaryForKey:@"user"];
         if (myUser){
@@ -41,37 +43,16 @@
     }
     return currentUser;
 }
--(NSString*) ApiKey{
-    if (![self->ApiKey isEqualToString:@""]){
-        return self->ApiKey;
-    }else{
+-(NSDictionary*) festival{
+    if (!festival || [festival count] == 0){
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
-        NSString * apiKey = [prefs objectForKey:@"apiKey"];
-        self->ApiKey = apiKey;
-        return self->ApiKey;
+        NSDictionary *myFestival = [prefs dictionaryForKey:@"festival"];
+        if (myFestival){
+            festival = [[NSDictionary alloc] init];
+            festival = myFestival;
+        }
     }
-}
--(NSString*) ApiUrl{
-    if (![self->ApiUrl isEqualToString:@""]){
-        return self->ApiUrl;
-    }else{
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
-        NSString * apiUrl = [prefs objectForKey:@"apiUrl"];
-        self->ApiUrl = apiUrl;
-        return self->ApiUrl;
-    }
-}
-
--(void) setApiKey:(NSString *)key{
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
-    [prefs setObject:key forKey:@"apiKey"];
-    self->ApiKey = key;
-}
-
--(void) setApiUrl:(NSString *)url{
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
-    [prefs setObject:url forKey:@"apiUrl"];
-    self->ApiUrl = url;
+    return festival;
 }
 
 - (void)setCurrentUser:(NSDictionary*) user{
@@ -80,12 +61,44 @@
     [prefs setObject:user forKey:@"user"];
 }
 
+- (void)setFestival:(NSDictionary *)theFestival{
+    festival = theFestival;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
+    NSMutableDictionary* f = [theFestival mutableCopy];
+    NSDictionary * keep = @{
+                       @"name": @YES,
+                       @"eventbrite_id": @YES,
+                       @"needs_image_info": @YES,
+                       @"city": @YES,
+                       @"hero_image": @YES,
+                       @"url": @YES,
+                       @"event_type_is_location": @YES,
+                       @"active": @YES,
+                       @"api_key" : @YES};
+    for(id attribute in theFestival) {
+        if(![keep objectForKey:attribute]) {
+            [f removeObjectForKey:attribute];
+        }
+    }
+    NSDictionary * fest = [NSDictionary dictionaryWithDictionary:f];
+    
+    [prefs setObject:fest forKey:@"festival"];
+}
+
 -(void)logOut{
-    currentUser = [[NSDictionary alloc] init];
+    currentUser =  nil;
+    ApplicationViewController.rightNav = nil;
     [FestivalData sharedFestivalData].currentUserSessions = nil;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
     [prefs setObject:nil forKey:@"user"];
     [[FestivalData sharedFestivalData] enableAllSessions];
+}
+-(void)clearFestivalData{
+    festival =  nil;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
+    [prefs setObject:nil forKey:@"festival"];
+    [[FestivalData sharedFestivalData] clearAllData];
+    [self logOut];
 }
 
 

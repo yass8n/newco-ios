@@ -16,10 +16,19 @@
 #import "SessionDetailViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/UIButton+WebCache.h>
+#import "Helper.h"
+#import "WebViewController.h"
+#import "SVProgressHUD.h"
+#import "ModalView.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Twitter/Twitter.h>
+
 
 @interface ApplicationViewController ()
 // Array of view controllers to switch between
 @property (nonatomic, copy) NSArray *allViewControllers;
+@property (nonatomic, assign) sharedByEnum sharedBy;
+@property (nonatomic, strong) Session* sharingSession;
 
 // Currently selected view controller
 @property (nonatomic, strong) UIViewController *currentViewController;
@@ -31,19 +40,35 @@
 @end
 
 @implementation ApplicationViewController
-
+static BOOL menuOpen = NO;
 static GLfloat sysVer;
 static CurrentViewController currentVC;
 static UINavigationItem* navItem;
+static UIView* rightNav;
+static UIView* leftNav;
+static UITapGestureRecognizer *singleFingerTap;
 
++ (UIView*) rightNav { return rightNav; }
++ (UIView*) leftNav { return leftNav; }
 + (UINavigationItem*) navItem {return navItem;};
 + (CurrentViewController) currentVC { return currentVC; }
 + (GLfloat) sysVer { return sysVer; }
++ (BOOL) menuOpen {return menuOpen; }
+
++ (void) setMenuOpen:(BOOL)object{
+    menuOpen = object;
+}
 
 + (void) setNavItem:(UINavigationItem*)object{
     navItem = object;
 }
 
++ (void) setLeftNav:(UIView*) object{
+    leftNav = object;
+}
++ (void) setRightNav:(UIView*) object{
+    rightNav = object;
+}
 + (void) setCurrentVC:(CurrentViewController) object{
     currentVC = object;
 }
@@ -52,8 +77,29 @@ static UINavigationItem* navItem;
     { sysVer = [[[UIDevice currentDevice] systemVersion] floatValue]; }
 }
 
++(void) fakeMenuTap{
+    [(UIButton*)leftNav sendActionsForControlEvents: UIControlEventTouchUpInside];
+}
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleTouchWhenMenuOpen:)];
+    singleFingerTap.delegate = self;
+    [self.view addGestureRecognizer:singleFingerTap];
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (menuOpen) {
+        return YES;
+    }
+    return NO;
+}
+-(void)handleTouchWhenMenuOpen:(UITapGestureRecognizer *)recognizer {
+    [ApplicationViewController fakeMenuTap];
 }
 - (UIViewController *)topViewController{
     return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
@@ -167,13 +213,10 @@ static UINavigationItem* navItem;
         [self cycleFromViewController:self.currentViewController toViewController:incomingViewController];
     }
 }
--(IBAction)openMenu:(id)sender  {
-    NSLog(@"open menu");
-    //[self.navigationController pushViewController:self.navigationController.parentViewController animated:YES];
-}
 - (IBAction)goToSignIn:(id)sender  {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SignInViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SignIn"];
+    vc.setTheBackButton = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)goToProfile:(NSDictionary*)user withType:(NSString *)type{
@@ -202,15 +245,18 @@ static UINavigationItem* navItem;
     [view addSubview: initial];
     return  initial;
 }
-- (UIView*) setUserImage:(CGRect)rect withAvatar:(NSString*)avatar withUser:(NSDictionary*)user intoView:(UIView*)view withType:(NSString*)type{
+- (void) setUserImage:(CGRect)rect withAvatar:(NSString*)avatar withUser:(NSDictionary*)user intoView:(UIView*)view withType:(NSString*)type{
     UserImage *userImage = [[UserImage alloc] initWithFrame:rect];
     userImage.user = user;
     userImage.type = type;
     userImage.bounds = rect; //resizes userImage to be exact size of cell image
     [userImage.image sd_setImageWithURL:[NSURL URLWithString:avatar]
-                       placeholderImage:[UIImage imageNamed:@"user.png"]];
+                       placeholderImage:[Helper imageFromColor:[UIColor myPlaceHolderColor]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                           if (error){
+                               [self setUserInitial:rect withFont:rect.size.width / 2 withUser:user intoView:view withType:type];
+                           }
+                       }];
     [view addSubview: userImage];
-    return userImage;
 }
 - (void)goToProfileTable: (NSMutableDictionary*) people withTitle: (NSString*) title withSession:(Session *)session withType:(NSString*)type{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -219,6 +265,7 @@ static UINavigationItem* navItem;
     [vc setPageTitle:title];
     [vc setSession:session];
     [vc setType:type];
+    vc.setTheBackButton = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)setMultiLineTitle:(NSString*)title fontColor:(UIColor*)color{
@@ -239,7 +286,45 @@ static UINavigationItem* navItem;
     self.navigationItem.rightBarButtonItem = item;
 }
 
-
+-(void)addTextAbove:(NSString *)textAbove
+{
+    for (UIView* subView in self.view.subviews)
+    {
+        if ([subView isKindOfClass:[UITableView class]])
+        {
+            UILabel *tv = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+            
+            [tv setText:textAbove];
+            [tv setBackgroundColor:[UIColor myLightGray]];
+            [self.view addSubview:tv];
+            
+            CGRect frame = subView.frame;
+            frame.origin.y = tv.frame.size.height;
+            [subView setFrame:frame];
+        }
+    }
+}
+-(void) showPageLoader {
+    [SVProgressHUD setForegroundColor:[UIColor clearColor]];
+    [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+    [SVProgressHUD show];
+    [UIApplication sharedApplication].
+    networkActivityIndicatorVisible = YES;
+}
+-(void) hidePageLoader {
+    [SVProgressHUD dismiss];
+    [UIApplication sharedApplication].
+    networkActivityIndicatorVisible = NO;
+}
+-(void)showWebViewWithUrl:(NSString*)url{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WebViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"Web"];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    [navController setViewControllers: @[vc] animated: YES];
+    vc.url = url;
+    [self.navigationController presentViewController:navController animated:YES completion:^{
+    }];
+}
 -(SessionCell*) setupSessionCellforTableVew:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath withDatesDict:(NSMutableDictionary*)datesDict withOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDict{
     // this seems to do the trick because NSInteger is not an object and forKey expects an object
     NSUInteger section = indexPath.section;
@@ -297,7 +382,7 @@ static UINavigationItem* navItem;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section forTableView:(UITableView*)tableView withDatesDict:(NSMutableDictionary*)datesDict withOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDict{
     NSNumber *sectionObject = [NSNumber numberWithInteger:section];
     NSString* date = [orderOfInsertedDatesDict objectForKey:sectionObject];
-
+    
     return [[datesDict objectForKey:date] count];
 }
 -(SessionCellHeader*)viewForHeaderInSection:(NSInteger)section forTableView:(UITableView*)tableView withOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDict{
@@ -324,33 +409,35 @@ static UINavigationItem* navItem;
     [alert show];
 }
 -(void)setUserNavBar:(NSDictionary*)myUser{
-    NSString* navSet = [[Credentials sharedCredentials].currentUser objectForKey:@"navSet"];
-    if ( (!navSet) || [navSet  isEqual: [NSNull null]] || navSet == nil){
-        UIButton *back =  [UIButton buttonWithType:UIButtonTypeCustom];
-        back.layer.borderWidth = 1;
-        back.layer.cornerRadius = 13;
-        back.clipsToBounds = YES;
+    if ( !rightNav ){
+        UIButton *user =  [UIButton buttonWithType:UIButtonTypeCustom];
+        user.layer.borderWidth = 1;
+        user.layer.cornerRadius = 13;
+        user.clipsToBounds = YES;
         NSString * avatar = [myUser objectForKey:@"avatar"];
         NSString * name = [myUser objectForKey:@"name"];
         if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""] || avatar == nil){
-            back.backgroundColor = [UIColor myLightGray];
+            user.backgroundColor = [UIColor myLightGray];
             if (![name isEqual: @""] && name != nil){
-                [back setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-                [back setTitle:[[[myUser objectForKey:@"name"] substringToIndex:1]capitalizedString] forState:UIControlStateNormal];
+                [user setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+                [user setTitle:[[[myUser objectForKey:@"name"] substringToIndex:1]capitalizedString] forState:UIControlStateNormal];
             }
         }else {
-            [back setBackgroundImageWithURL:[myUser objectForKey:@"avatar"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"user.png"]];
+            [user setBackgroundImageWithURL:[myUser objectForKey:@"avatar"] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"user.png"]];
         }
-        [back addTarget:self action:@selector(goToUserProfile:)forControlEvents:UIControlEventTouchUpInside];
-        [back setFrame:CGRectMake(0, 0, 26, 26)];
-        navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
+        [user addTarget:self action:@selector(goToUserProfile:)forControlEvents:UIControlEventTouchUpInside];
+        [user setFrame:CGRectMake(0, 0, 26, 26)];
+        navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:user];
         NSMutableDictionary* mutableUser = [[Credentials sharedCredentials].currentUser mutableCopy];
-        [mutableUser setValue:@"YES" forKey:@"navSet"];
         [Credentials sharedCredentials].currentUser = [mutableUser copy];
+        rightNav = user;
+    }else{
+        [(UIButton*)rightNav removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
+        [(UIButton *)rightNav addTarget:self action:@selector(goToUserProfile:)forControlEvents:UIControlEventTouchUpInside];
     }
-
+    
 }
--(void)fetchCurrentUserSessions:(UIView*)withView{
++ (void)fetchCurrentUserSessions:(UIView*)withView{
     WebService * webService = [[WebService alloc] initWithView:withView];
     [webService fetchCurrentUserSessions:[[Credentials sharedCredentials].currentUser objectForKey:@"username"] withAuthToken:[[Credentials sharedCredentials].currentUser objectForKey:@"auth"] callback:^(NSArray *sessionKeyArray) {
         NSMutableDictionary* userSessions = [[NSMutableDictionary alloc]init];
@@ -371,19 +458,145 @@ static UINavigationItem* navItem;
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];
     self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
-    if ([[Credentials sharedCredentials].currentUser count]){
+    if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count]){
         [self setUserNavBar:[Credentials sharedCredentials].currentUser];
     }else{
         [self setDefaultUserIcon];
     }
 }
 - (void)setDefaultUserIcon{
-    UIButton *user =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [user setImage:[UIImage imageNamed:@"user.png"] forState:UIControlStateNormal];
-    [user addTarget:self action:@selector(goToSignIn:) forControlEvents:UIControlEventTouchUpInside];
-    [user setFrame:CGRectMake(0, 0, 20, 20)];
-    navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:user];
+    if (rightNav){
+        [(UIButton*)rightNav removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
+        [(UIButton*)rightNav addTarget:self action:@selector(goToSignIn:) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        UIButton *user =  [UIButton buttonWithType:UIButtonTypeCustom];
+        [user setImage:[UIImage imageNamed:@"user.png"] forState:UIControlStateNormal];
+        [user addTarget:self action:@selector(goToSignIn:) forControlEvents:UIControlEventTouchUpInside];
+        [user setFrame:CGRectMake(0, 0, 20, 20)];
+        navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:user];
+        rightNav = user;
+    }
+}
+#pragma Mark-Share
+-(void)shareModalGone:(shareEnum)result session:(Session *)session sharedBy:(sharedByEnum)sharedBy{
+    
+    self.sharingSession = session;
+    self.sharedBy = sharedBy;
+    double window_width = self.view.frame.size.width;
+    double window_height = self.view.frame.size.height;
+    if (session){
+        CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
+        if (result == copy){
+//            IMWebservice * webservice = [[IMWebservice alloc]init];
+//            [webservice registerSharedSession:self.sharingSession.sessionId note:@"copied" sharedBy:self.sharedBy];
+            [UIPasteboard generalPasteboard].string = @"HIIIII";
+            ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [modalView showSuccessModal:@"Link Copied!" onWindow:self.view.window];
+            });
+        }else {
+            if (result == facebook){
+                [self postToFaceBook:session];
+            }else if (result == twitter){
+                [self postToTwitter:session];
+            }
+        }
+    }
+}
+#pragma Mark-Facebook Share
+-(void)postToFaceBook:(Session*)session{
+    
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    [content setContentTitle:[session.title capitalizedString]];//title
+    NSString * desc = [[NSString alloc]initWithFormat:@"Join my %@ session", session.title];
+    [content setContentDescription:desc];//description
+//    content.contentURL = [NSURL URLWithString:@"HIIII"];
+    [FBSDKShareDialog showFromViewController:self
+                                 withContent:content
+                                    delegate:self];
+}
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    double window_width = self.view.frame.size.width;
+    double window_height = self.view.frame.size.height;
+    CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
+    ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+    BOOL isInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]];
+//    IMWebservice * webservice = [[IMWebservice alloc]init];
+//    [webservice registerSharedSession:self.sharingSession.sessionId note:@"facebook" sharedBy:self.sharedBy];
+    if (!isInstalled) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [modalView showSuccessModal:@"Posted!" onWindow:self.view.window];
+        });
+    }
 }
 
+- (void) sharerDidCancel:(id<FBSDKSharing>)sharer{
+}
+
+- (void)sharer:	(id<FBSDKSharing>)sharer didFailWithError:
+(NSError *)error{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"FaceBook Post Failed"
+                                                    message:@"Something went wrong."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+#pragma Mark-Twitter share
+-(void)postToTwitter:(Session*)session{
+    
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        
+        SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
+            if (result == SLComposeViewControllerResultCancelled) {
+                
+
+            } else {
+                double window_width = self.view.frame.size.width;
+                double window_height = self.view.frame.size.height;
+                CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
+                ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                    [modalView showSuccessModal:@"Posted!" onWindow:self.view.window];
+                });
+//                IMWebservice * webservice = [[IMWebservice alloc]init];
+//                [webservice registerSharedList:self.sharingList.listId note:@"twitter" sharedBy:self.sharedBy];
+            }
+            
+            [controller dismissViewControllerAnimated:YES completion:Nil];
+        };
+        controller.completionHandler = myBlock;
+        
+        //Adding the Text to the facebook post value from iOS
+        [controller setInitialText:[NSString stringWithFormat:@"Join my %@ list", session.title]];
+        
+        //Adding the URL to the facebook post value from iOS
+        
+//        [controller addURL:[NSURL URLWithString:list.URLSafeLink]];
+        
+        //Adding the Image to the facebook post value from iOS
+        
+        //        [controller addImage:[UIImage imageNamed:@"fb.png"]];
+        
+        [self presentViewController:controller animated:YES completion:Nil];
+        
+    }
+    else{
+        //        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=twitter"]];
+        NSString *stringURL = @"twitter://";
+        NSURL *url = [NSURL URLWithString:stringURL];
+        [[UIApplication sharedApplication] openURL:url];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Twitter Account."
+                                                            message:@"There are no twitter accounts configured. You can add or create a twitter account in Home->Settings->Twitter."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+    
+}
 
 @end

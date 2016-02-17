@@ -3,15 +3,15 @@
 //  newco-IOS
 //
 //  Created by yassen aniss
-//  Copyright © 2016 yassen aniss. All rights reserved.
+//  Copyright Â© 2016 yassen aniss. All rights reserved.
 //
 
 #import "Helper.h"
-#import "FestivalData.h"
+
 @implementation FestivalData
 #import "constants.h"
-#import "session.h"
-@synthesize sessionsArray, sessionsDict, EVENT_COLORS_ARRAY, attendeesDict, sessionsAtDateAndTime, datesDict, orderOfInsertedDatesDict, companiesDict, currentUserSessions, locationColorDict, volunteersDict, presentersDict;
+
+@synthesize sessionsArray, sessionsDict, EVENT_COLORS_ARRAY, attendeesDict, sessionsAtDateAndTime, datesDict, orderOfInsertedDatesDict, companiesDict, currentUserSessions, locationColorDict, volunteersDict, presentersDict, audienceMapToSessions, locationMapToSessions, allFestivals;
 
 + (FestivalData *)sharedFestivalData
 {
@@ -20,6 +20,21 @@
         sharedFestivalData = [[FestivalData alloc] init];
     }
     return sharedFestivalData;
+}
+-(void)clearAllData{
+    datesDict = [[NSMutableDictionary alloc]init];
+    sessionsArray = [[NSMutableArray alloc]init];
+    sessionsDict = [[NSMutableDictionary alloc]init];
+    sessionsAtDateAndTime = [[NSMutableDictionary alloc]init];
+    attendeesDict = [[NSMutableDictionary alloc]init];
+    presentersDict = [[NSMutableDictionary alloc]init];
+    companiesDict = [[NSMutableDictionary alloc]init];
+    volunteersDict = [[NSMutableDictionary alloc]init];
+    orderOfInsertedDatesDict = [[NSMutableDictionary alloc]init];
+    locationColorDict = [[NSMutableDictionary alloc]init];
+    currentUserSessions = [[NSMutableDictionary alloc]init];
+    audienceMapToSessions = [[NSMutableDictionary alloc]init];
+    locationMapToSessions = [[NSMutableDictionary alloc]init];
 }
 - (id)init
 {
@@ -36,6 +51,8 @@
         orderOfInsertedDatesDict = [[NSMutableDictionary alloc]init];
         locationColorDict = [[NSMutableDictionary alloc]init];
         currentUserSessions = [[NSMutableDictionary alloc]init];
+        audienceMapToSessions = [[NSMutableDictionary alloc]init];
+        locationMapToSessions = [[NSMutableDictionary alloc]init];
     }
     return self;
 }
@@ -65,39 +82,112 @@
 -(void) initializeSessionArrayWithData:(NSArray *) jsonArray{
     for (int i = 0; i < jsonArray.count; i++){
         NSDictionary* session_ = [jsonArray objectAtIndex:i];
-        NSString* description = [session_ objectForKey:@"description"];
-        NSString* event_key = [session_ objectForKey:@"event_key"];
-        NSString* name = [session_ objectForKey:@"name"];
-        NSString* address = [session_ objectForKey:@"address"];
-        NSDate* event_start = [Helper UTCtoNSDate:[session_ objectForKey:@"event_start"]];
-        NSDate* event_end = [Helper UTCtoNSDate:[session_ objectForKey:@"event_end"]];
-        NSString* location = [session_ objectForKey:@"event_type"];
-        if ([location isEqual:[NSNull null]] || !location){ location = @""; };
-        NSString* id_ = [session_ objectForKey:@"id"];
-        NSArray* speakers = [session_ objectForKey:@"speakers"];
-        NSArray* artists = [session_ objectForKey:@"artists"];
-        NSString* status = [session_ objectForKey:@"seats-title"];
-        NSString* audience = [session_ objectForKey:@"audience"];
-        
-        if (![locationColorDict objectForKey:location]){
-            [locationColorDict setObject:[self findFreeColor] forKey:location];
+        NSString * active = [session_ objectForKey:@"active"];
+        if ([active isEqualToString:@"Y"]){
+            NSString* description = [session_ objectForKey:@"description"];
+            NSString* event_key = [session_ objectForKey:@"event_key"];
+            NSString* name = [session_ objectForKey:@"name"];
+            NSString* address = [session_ objectForKey:@"address"];
+            NSDate* event_start = [Helper UTCtoNSDate:[session_ objectForKey:@"event_start"]];
+            NSDate* event_end = [Helper UTCtoNSDate:[session_ objectForKey:@"event_end"]];
+            
+            NSString* location = [session_ objectForKey:@"event_type"];
+            if ([location isEqual:[NSNull null]] || !location){ location = @""; };
+            
+            NSString* audience = [session_ objectForKey:@"audience"];
+            if ([audience isEqual:[NSNull null]] || !audience){ audience = @""; };
+            
+            NSString* id_ = [session_ objectForKey:@"id"];
+            NSArray* speakers = [session_ objectForKey:@"speakers"];
+            NSArray* artists = [session_ objectForKey:@"artists"];
+            NSString* status = [session_ objectForKey:@"seats-title"];
+            
+            NSString* firm_location;
+            if (![location  isEqual: @""]){
+                if ([location rangeOfString:@","].location == NSNotFound){
+                    if (![locationColorDict objectForKey:location]){
+                        //location can be a list of locations
+                        [locationColorDict setObject:[self findFreeColor] forKey:location];
+                    }
+                } else {
+                    NSArray *locations = [location componentsSeparatedByString:@","];
+                    for (NSString* loc in locations) {
+                        NSString* trimLoc = [loc stringByTrimmingCharactersInSet:
+                                             [NSCharacterSet whitespaceCharacterSet]];
+                        firm_location = trimLoc;
+                        if (![locationColorDict objectForKey:trimLoc]){
+                            //location can be a list of locations
+                            [locationColorDict setObject:[self findFreeColor] forKey:trimLoc];
+                        }
+                    }
+                }
+            }
+            
+            Session *s = [[Session alloc] initWithTitle: name
+                                              event_key: event_key
+                                             event_type: location
+                                                    id_: id_
+                                                 status: status
+                                                  note1: location
+                                                  color: firm_location ? [locationColorDict objectForKey:firm_location] : [locationColorDict objectForKey:location]
+                                            event_start: event_start
+                                              event_end:event_end
+                                                address: address
+                                               audience: audience
+                                               speakers: speakers
+                                              companies: artists
+                                            description: description];
+            [sessionsArray addObject: s];
+            [sessionsDict setObject:s forKey:s.event_key];
+            
+            if (audience && [audience length] > 0){
+                if ([audience rangeOfString:@","].location == NSNotFound){
+                    if (![audienceMapToSessions objectForKey:audience]){
+                        NSMutableArray * array = [[NSMutableArray alloc]init];
+                        [audienceMapToSessions setObject:array forKey:audience];
+                    }
+                    NSMutableArray * array = [audienceMapToSessions objectForKey:audience];
+                    [array addObject:s];
+                } else {
+                    NSArray *audiences = [audience componentsSeparatedByString:@","];
+                    for (NSString* aud in audiences) {
+                        NSString* trimAud = [aud stringByTrimmingCharactersInSet:
+                                             [NSCharacterSet whitespaceCharacterSet]];
+                        if (![audienceMapToSessions objectForKey:trimAud]){
+                            NSMutableArray * array = [[NSMutableArray alloc]init];
+                            [audienceMapToSessions setObject:array forKey:trimAud];
+                        }
+                        NSMutableArray * array = [audienceMapToSessions objectForKey:trimAud];
+                        [array addObject:s];
+                    }
+                }
+            }
+            
+            
+            if (location && [location length] > 0){
+                if ([location rangeOfString:@","].location == NSNotFound){
+                    if (![locationMapToSessions objectForKey:location]){
+                        NSMutableArray * array = [[NSMutableArray alloc]init];
+                        [locationMapToSessions setObject:array forKey:location];
+                    }
+                    NSMutableArray * array = [locationMapToSessions objectForKey:location];
+                    [array addObject:s];
+                } else {
+                    NSArray *locations = [location componentsSeparatedByString:@","];
+                    for (NSString* loc in locations) {
+                        NSString* trimLoc = [loc stringByTrimmingCharactersInSet:
+                                             [NSCharacterSet whitespaceCharacterSet]];
+                        if (![locationMapToSessions objectForKey:trimLoc]){
+                            NSMutableArray * array = [[NSMutableArray alloc]init];
+                            [locationMapToSessions setObject:array forKey:trimLoc];
+                        }
+                        NSMutableArray * array = [locationMapToSessions objectForKey:trimLoc];
+                        [array addObject:s];
+                    }
+                }
+            }
         }
-        Session *s = [[Session alloc] initWithTitle: name
-                                          event_key: event_key
-                                         event_type: location
-                                                id_: id_
-                                             status: status
-                                              note1: location
-                                              color: [locationColorDict objectForKey:location]
-                                        event_start: event_start
-                                          event_end:event_end
-                                            address: address
-                                           audience: audience
-                                           speakers: speakers
-                                          companies: artists
-                                        description: description];
-        [sessionsArray addObject: s];
-        [sessionsDict setObject:s forKey:s.event_key];
+        
         
     }
     [self setDatesDict:datesDict setOrderOfInsertedDatesDict:orderOfInsertedDatesDict forSessions:sessionsArray initializeEverything:YES];
@@ -111,11 +201,11 @@
         if (initEverything){
             NSString* dateAndTime = [s.worded_date and s.start_time];
             if (![sessionsAtDateAndTime objectForKey:dateAndTime]){
-                NSMutableDictionary * sessions = [[NSMutableDictionary alloc]init];
-                [sessionsAtDateAndTime setObject:sessions forKey:dateAndTime];
+                NSMutableDictionary * sessionsDic = [[NSMutableDictionary alloc]init];
+                [sessionsAtDateAndTime setObject:sessionsDic forKey:dateAndTime];
             }
-            NSMutableDictionary* sessions = [sessionsAtDateAndTime objectForKey:dateAndTime];
-            [sessions setObject:s forKey:s.event_key];
+            NSMutableDictionary* sessionsDic = [sessionsAtDateAndTime objectForKey:dateAndTime];
+            [sessionsDic setObject:s forKey:s.event_key];
         }
         if (![datesDictionary objectForKey:s.worded_date]){
             NSUInteger count =  [[datesDictionary allKeys] count];
@@ -127,64 +217,70 @@
         [sessions_for_date addObject:s];
     }
 }
+-(NSMutableArray *) allFestivals{
+    return  allFestivals;
+}
 
 -(NSMutableArray*) sessionsArray{
-
-//    [self setSessionsArray:sessionsArray];
+    
+    //    [self setSessionsArray:sessionsArray];
     return sessionsArray;
 }
 -(NSMutableDictionary*) sessionsDict {
-
-//    [self setSessionsDict:sessionsDict];
+    
+    //    [self setSessionsDict:sessionsDict];
     return sessionsDict;
 }
 -(NSMutableDictionary*) datesDict {
-
-//    [self setDatesDict:datesDict];
+    
+    //    [self setDatesDict:datesDict];
     return datesDict;
 }
 -(NSMutableDictionary*) sessionsAtDateAndTime {
-  
-//    [self setSessionsAtDateAndTime:sessionsAtDateAndTime];
+    
+    //    [self setSessionsAtDateAndTime:sessionsAtDateAndTime];
     return sessionsAtDateAndTime;
 }
 -(NSMutableDictionary*) attendeesDict {
-
-//    [self setAttendeesDict:attendeesDict];
+    
+    //    [self setAttendeesDict:attendeesDict];
     return attendeesDict;
 }
 
 -(NSMutableDictionary*) presentersDict {
-
-//    [self setPresentersDict:presentersDict];
+    
+    //    [self setPresentersDict:presentersDict];
     return presentersDict;
 }
 
 -(NSMutableDictionary*) companiesDict {
-  
-//    [self setCompaniesDict:companiesDict];
+    
+    //    [self setCompaniesDict:companiesDict];
     return companiesDict;
 }
 
 -(NSMutableDictionary*) volunteersDict {
- 
-//    [self setVolunteersDict:volunteersDict];
+    
+    //    [self setVolunteersDict:volunteersDict];
     return volunteersDict;
 }
 -(NSMutableDictionary*) orderOfInsertedDatesDict {
- 
-//    [self setOrderOfInsertedDatesDict:orderOfInsertedDatesDict];
+    
+    //    [self setOrderOfInsertedDatesDict:orderOfInsertedDatesDict];
     return orderOfInsertedDatesDict;
 }
 -(NSMutableDictionary*) locationColorDict {
-
-//    [self setLocationColorDict:locationColorDict];
+    
+    //    [self setLocationColorDict:locationColorDict];
     return locationColorDict;
 }
 -(NSMutableDictionary*) currentUserSessions {
-
-//    [self setCurrentUserSessions:currentUserSessions];
+    
+    //    [self setCurrentUserSessions:currentUserSessions];
     return currentUserSessions;
+}
+-(void) setAllFestivals:(NSMutableArray *)object{
+    allFestivals = object;
 }
 -(void) setSessionsArray:(NSMutableArray *)object;
 {
@@ -308,6 +404,16 @@
 - (void)initEventColorsArray{
     if (EVENT_COLORS_ARRAY == nil){
         EVENT_COLORS_ARRAY = [[NSMutableArray alloc] initWithObjects:
+                              [UIColor myDarkTeal],
+                              [UIColor myDarkYellow],
+                              [UIColor myPink],
+                              [UIColor myLightGray],
+                              [UIColor myLightOrange],
+                              [UIColor myLightPink],
+                              [UIColor myFadedTurquoise],
+                              [UIColor myBrown],
+                              [UIColor myTurquoise],
+                              [UIColor myPuke],
                               [UIColor myRed],
                               [UIColor myGreen],
                               [UIColor myBlue],
@@ -318,296 +424,24 @@
                               [UIColor myPink],
                               [UIColor myDarkBlue],
                               [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
-                              [UIColor myRed],
-                              [UIColor myGreen],
-                              [UIColor myBlue],
-                              [UIColor myOrange],
-                              [UIColor myPurple],
-                              [UIColor myTeal],
-                              [UIColor myYellow],
-                              [UIColor myPink],
-                              [UIColor myDarkBlue],
-                              [UIColor myDarkRed],
+                              [UIColor myDarkPurple],
+                              [UIColor myDarkOrange],
+                              [UIColor myMiddleBlue],
+                              [UIColor myLimeGreen],
+                              [UIColor brownColor],
+                              [UIColor lightGrayColor],
+                              [UIColor greenColor],
+                              [UIColor purpleColor],
+                              [UIColor brownColor],
+                              [UIColor lightGrayColor],
+                              [UIColor greenColor],
+                              [UIColor purpleColor],
+                              [UIColor brownColor],
+                              [UIColor lightGrayColor],
+                              [UIColor greenColor],
+                              [UIColor purpleColor],
+                              
+                              
                               nil];
     }
     

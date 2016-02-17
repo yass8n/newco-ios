@@ -48,7 +48,9 @@ static const float MIN_SESSION_HEIGHT = 155.0;
     }
 }
 - (void)adjustUI{
-    [self setBackButton];
+    if (self.setTheBackButton){
+        [self setBackButton];
+    }
     [self setMultiLineTitle: self.pageTitle fontColor: [UIColor blackColor]];
     self.profileTableView.estimatedRowHeight = 120.0;
     self.profileTableView.rowHeight = UITableViewAutomaticDimension;
@@ -82,7 +84,7 @@ static const float MIN_SESSION_HEIGHT = 155.0;
     CGRect rect = CGRectMake(0, 0, cell.image.bounds.size.width, cell.image.bounds.size.height);
 
     if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""]){
-        [self setUserInitial:rect withFont:20 withUser:user intoView:cell.image withType:self.type];
+        [self setUserInitial:rect withFont:rect.size.width/2 withUser:user intoView:cell.image withType:self.type];
     }else {
         [self setUserImage:rect withAvatar:avatar withUser:user intoView:cell.image withType:self.type];
     }

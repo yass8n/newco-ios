@@ -11,5 +11,12 @@
 
 
 @interface ScheduleViewController : ApplicationViewController <UITableViewDataSource, UITableViewDelegate>
-@end
 
+//+ (NSMutableArray *) sessionsArray;
+//+ (NSMutableDictionary*) sessionsDict;
+//+ (NSMutableDictionary*) datesDict;
+//+ (NSMutableDictionary*) sessionsAtDateAndTime;
+//+ (NSMutableDictionary*) orderOfInsertedDatesDict;
+//+ (NSMutableDictionary*) locationColorDict;
+
+@end

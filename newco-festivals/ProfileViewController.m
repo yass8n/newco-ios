@@ -9,14 +9,16 @@
 #import "ProfileViewController.h"
 #import "UserImage.h"
 #import "UserInitial.h"
+#import "NSString+NSStringAdditions.h"
+#import "Helper.h"
 
 @interface ProfileViewController ()
-    @property (weak, nonatomic) IBOutlet UIView *superView;
-    @property (weak, nonatomic) IBOutlet UITableView *sessionTableView;
-    @property (strong, nonatomic) NSMutableArray * sessionsArray;
-    @property (strong, nonatomic) NSMutableDictionary* datesDict;
-    @property (strong, nonatomic) NSMutableDictionary* orderOfInsertedDatesDict;
-    #import "constants.h"
+@property (weak, nonatomic) IBOutlet UIView *superView;
+@property (weak, nonatomic) IBOutlet UITableView *sessionTableView;
+@property (strong, nonatomic) NSMutableArray * sessionsArray;
+@property (strong, nonatomic) NSMutableDictionary* datesDict;
+@property (strong, nonatomic) NSMutableDictionary* orderOfInsertedDatesDict;
+#import "constants.h"
 @end
 
 @implementation ProfileViewController
@@ -48,6 +50,11 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self reloadTableView];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+// 
+//    });
+
+
 }
 -(void)sortAndSetSessionObjects{
     [[FestivalData sharedFestivalData] setDatesDict:self.datesDict setOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict forSessions:self.sessionsArray initializeEverything:NO];
@@ -57,12 +64,27 @@
     [self.sessionsArray sortUsingDescriptors:[NSMutableArray arrayWithObjects:sortStart, nil]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self reloadTableView];
+        if ( [[self.datesDict allKeys] count] == 0){
+            UILabel *tv = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 50)];
+            tv.textAlignment = NSTextAlignmentCenter;
+            
+            [tv setText:@"No sessions to show"];
+            [tv setAlpha:0.0];
+            [tv setTextColor:[UIColor darkGrayColor]];
+            [tv setBackgroundColor:[UIColor myLightOrange]];
+            [self.view addSubview:tv];
+            CGRect animateUpFrame = CGRectMake(0, self.view.frame.size.height - 50, self.view.frame.size.width, 50);
+            [UIView animateWithDuration:.5 animations:^{
+                [tv setAlpha:1.0];
+                [tv setFrame:animateUpFrame];
+            }];
+        }
     });
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self adjustUI];
     [self allocateMemory];
+    [self adjustUI];
     [self addDataToTable];
     
     // Do any additional setup after loading the view.
@@ -77,8 +99,8 @@
     
     NSString * username = [self.user objectForKey:@"username"];
     if ([self.type isEqual:@"speaker"] || [self.type isEqual:@"company"] ){
-             dispatch_async(dispatch_queue_create("", NULL), ^{[self getSessionForUser:username forType:self.type];});
-
+        dispatch_async(dispatch_queue_create("", NULL), ^{[self getSessionForUser:username forType:self.type];});
+        
     } else {
         WebService * webService = [[WebService alloc] initWithView:self.view];
         [webService fetchSesionsForUser:^(NSArray *allSessionTransactions) {
@@ -116,21 +138,54 @@
     }
     self.positionAndCompany.text = positionAndCompany;
     self.navigationItem.title = name;
-    if ([[Credentials sharedCredentials].currentUser count] > 0){
+    if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
         self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
     }
     NSString* avatar = [self.user objectForKey:@"avatar"];
     CGRect rect = CGRectMake(0, 0, self.profileImage.bounds.size.width, self.profileImage.bounds.size.height);
-
+    
     if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""]){
-        [self setUserInitial:rect withFont:50 withUser:self.user intoView:self.profileImage withType:self.type];
+        [self setUserInitial:rect withFont:rect.size.width/2 withUser:self.user intoView:self.profileImage withType:self.type];
     }else {
         [self setUserImage:rect withAvatar:avatar withUser:self.user intoView:self.profileImage withType:self.type];
     }
+    self.hideButton.layer.backgroundColor = [UIColor colorWithRed:(247.0f/255.0f) green:(247.0f/255.0f) blue:(247.0f/255.0f) alpha:1].CGColor;
+    self.hideButton.layer.borderColor =[UIColor myNavigationBarColor].CGColor;
+    [self.hideButton setTitleColor:self.topView.backgroundColor forState:UIControlStateNormal];
+    self.hideButton.layer.cornerRadius = 2.5;
+    self.website.backgroundColor = [UIColor myNavigationBarColor];
+    self.positionAndCompany.textColor =[UIColor myNavigationBarColor];
+    self.about.text =  [[self.user objectForKey:@"about"] stringByStrippingHTML];
     if ([[self.user objectForKey:@"url"]  isEqual: @""]){
         [self.website removeFromSuperview];
+        self.website.hidden = YES;
+    }else{
+        self.website.hidden = NO;
     }
+    if ([self.about.text length] > 0){
+        self.about.textColor = [UIColor myNavigationBarColor];
+        self.about.lineBreakMode = NSLineBreakByWordWrapping;
+        self.about.textAlignment = NSTextAlignmentCenter;
+        self.about.translatesAutoresizingMaskIntoConstraints = YES;
+        self.about.numberOfLines = 0;
+        int numlines = [Helper lineCountForLabel:self.about];
+        CGRect labelFrame = self.about.frame;
+        labelFrame.size.height = numlines * 30;
+        if (self.website.isHidden){
+            labelFrame.origin.y -= (self.website.frame.size.height + 20);
+        }
+        double distanceFromSides = (self.about.frame.origin.x);
+        labelFrame.size.width = self.view.frame.size.width - (distanceFromSides * 2);
+        self.about.frame = labelFrame;
+    }else{
+        [self.about removeFromSuperview];
+    }
+
+//    self.scrollVIew.scrollEnabled = YES;
+}
+-(void)viewDidLayoutSubviews{
+//    self.scrollVIew.contentSize = CGSizeMake(self.view.bounds.size.width, self.topView.frame.size.height + 30);
 }
 -(void)reloadTableView
 {
@@ -175,9 +230,13 @@
 }
 
 - (IBAction)goToWebsite:(id)sender {
+//    NSLog(@"GO TO WEBSITE");
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.user objectForKey:@"url"]]];
+    [self showWebViewWithUrl:[self.user objectForKey:@"url"]];
+
 }
 - (IBAction)logUserOut:(id)sender {
-     dispatch_queue_t que = dispatch_queue_create("logOut", NULL);
+    dispatch_queue_t que = dispatch_queue_create("logOut", NULL);
     dispatch_async(que, ^{
         //code executed in background
         [[Credentials sharedCredentials] logOut];
@@ -191,4 +250,18 @@
 }
 
 
+- (IBAction)hideTopView:(id)sender {
+    CGRect oldFrame = self.topView.frame;
+    CGRect old1Frame = self.sessionTableView.frame;
+    CGRect newFrame = CGRectMake(self.topView.frame.origin.x, -self.topView.frame.size.height, self.topView.frame.size.width, self.topView.frame.size.height);
+    CGRect newTableFrame = CGRectMake(self.sessionTableView.frame.origin.x, 0, self.sessionTableView.frame.size.width, self.view.frame.size.height);
+
+    [UIView animateWithDuration:.5 animations:^{
+        self.topView.frame = newFrame;
+        self.topView.alpha = 0;
+        self.sessionTableView.frame = newTableFrame;
+    } completion:^(BOOL finished) {
+        [self.topView removeFromSuperview];
+    }];
+}
 @end

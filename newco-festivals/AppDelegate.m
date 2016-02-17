@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate ()
 
@@ -16,24 +17,27 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     
-    // See if user is currently logged in via userdefaults
-//    NSUserDefaults *currentUserDefaults = [NSUserDefaults standardUserDefaults];
-//    NSData *archivedObject = [currentUserDefaults objectForKey:@"currentUser"];
-//    
-//    Credentials *credentials = [[Credentials alloc] init];
-//    
-//    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
-//    NSDictionary *myUser = [prefs dictionaryForKey:@"user"];
-//    if (myUser){
-//        [Credentials sharedCredentials].currentUser = [[NSDictionary alloc] init];
-//        [Credentials sharedCredentials].currentUser = myUser;
-//        [self setUserNavBar:myUser];
-//    }
-    
+    Credentials *credentials = [Credentials sharedCredentials];
+    NSDictionary * festival = credentials.festival;
+    if (!festival || [festival count] == 0){
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Festivals"];
+        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+        
+        self.window.rootViewController = navigation;
+    }
     
     // Override point for customization after application launch.
     return YES;
+}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation
+            ];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -53,10 +57,31 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [[FestivalData sharedFestivalData] initEventColorsArray];
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+- (void)changeRootViewController:(UIViewController*)viewController animSize:(double)size {
+    
+    if (!self.window.rootViewController) {
+        self.window.rootViewController = viewController;
+        return;
+    }
+    
+    UIView *snapShot = [self.window snapshotViewAfterScreenUpdates:YES];
+    
+    [viewController.view addSubview:snapShot];
+    
+    self.window.rootViewController = viewController;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        snapShot.layer.opacity = 0;
+        snapShot.layer.transform = CATransform3DMakeScale(size, size, size);
+    } completion:^(BOOL finished) {
+        [snapShot removeFromSuperview];
+    }];
 }
 
 @end

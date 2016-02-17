@@ -13,10 +13,12 @@
 #import "CustomUIView.h"
 #import "PageLoader.h"
 #import "Helper.h"
+#import "NSString+NSStringAdditions.h"
 
 
 @interface SessionDetailViewController ()
 #import "constants.h"
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (strong, readwrite, nonatomic) NSLayoutConstraint *statusContainerConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *status;
 @property (weak, nonatomic) IBOutlet UIView *statusContainer;
@@ -30,8 +32,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *companyName;
 @property (weak, nonatomic) IBOutlet UILabel *region;
 @property (weak, nonatomic) IBOutlet UIView *regionColor;
+@property (weak, nonatomic) IBOutlet UIView *addressView;
+@property (weak, nonatomic) IBOutlet UIView *dateView;
 @property (weak, nonatomic) IBOutlet UIButton *allAttendees;
 @property (weak, nonatomic) IBOutlet UIView *bottomContainer;
+@property (weak, nonatomic) IBOutlet UILabel *desc;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableDictionary *users;
 @property (weak, nonatomic) IBOutlet UIButton *addToScheduleButton;
@@ -71,13 +77,16 @@ static NSString* ATTEND = @" Attend ";
     self.navigationController.navigationBar.barTintColor = self.session.color;
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     ApplicationViewController.currentVC = enumSessionDetail;
-    [self.superView removeConstraint:self.statusContainerConstraint];
-    if ([[Credentials sharedCredentials].currentUser count] > 0){
+    //[self.superView removeConstraint:self.statusContainerConstraint];
+    //self.statusContainer.translatesAutoresizingMaskIntoConstraints = YES;
+
+    if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
         [self.loginButton setHidden:YES];
         [self.checkMarkView setHidden:NO];
         [self.addToScheduleButton setHidden:NO];
-        self.statusContainerConstraint = [self alignLeftToCheckMark];
-        [self.superView addConstraint:self.statusContainerConstraint];
+        //self.statusContainer.frame = CGRectMake(self.checkMarkView.frame.origin.x, self.loginButton.frame.origin.y, self.statusContainer.frame.size.width, self.statusContainer.frame.size.height);
+        //self.statusContainerConstraint = [self alignLeftToCheckMark];
+        //[self.superView addConstraint:self.statusContainerConstraint];
         if (self.session.picked){
             [self setSessionPickedUI:YES];
         }
@@ -85,8 +94,8 @@ static NSString* ATTEND = @" Attend ";
         [self.loginButton setHidden:NO];
         [self.checkMarkView setHidden:YES];
         [self.addToScheduleButton setHidden:YES];
-        self.statusContainerConstraint = [self alignCenterToLogin];
-        [self.superView addConstraint:self.statusContainerConstraint];
+        //self.statusContainerConstraint = [self alignCenterToLogin];
+        //[self.superView addConstraint:self.statusContainerConstraint];
     }
     
 }
@@ -124,7 +133,7 @@ static NSString* ATTEND = @" Attend ";
                               toItem:self.checkMarkView
                               attribute:NSLayoutAttributeLeftMargin
                               multiplier:1
-                              constant:24];
+                              constant:0];
     c.priority = 1000;
     return c;
 }
@@ -137,7 +146,7 @@ static NSString* ATTEND = @" Attend ";
     self.time.text = [time and self.session.end_time];
     self.address.text = self.session.address;
     self.address.lineBreakMode = NSLineBreakByWordWrapping;
-    [self.loginButton setTitle:@" Login or Register to Attend " forState:UIControlStateNormal]; // To set the title
+    [self.loginButton setTitle:@" Login to Attend " forState:UIControlStateNormal]; // To set the title
     
     [Helper setBorder:self.loginButton width:1.0 radius:1 color:[UIColor grayColor]];
     [Helper setBorder:self.statusContainer width:1.0 radius:3 color:[UIColor blackColor]];
@@ -154,6 +163,7 @@ static NSString* ATTEND = @" Attend ";
     self.allAttendees.transform = CGAffineTransformMakeRotation(M_PI); //rotate it to point other direction
     
 }
+
 -(void) setupScrollView {
     
     self.attendeesLabel.text = [@"Attendees (" and [NSString stringWithFormat:@"%lu", (unsigned long)[self.users count] ] ];
@@ -174,7 +184,7 @@ static NSString* ATTEND = @" Attend ";
         int i;
         NSArray * users = [self.users allValues];
         NSUInteger count = [users count];
-        if (count > 8) { count = 8; };
+        if (count > 24) { count = 24; };
         for (i = 0; i < count; i++) {
             NSDictionary * user = [users objectAtIndex:i];
             if (user){
@@ -182,7 +192,7 @@ static NSString* ATTEND = @" Attend ";
                 NSString * avatar = [user objectForKey:@"avatar"];
                 CGRect rect = CGRectMake(xOrigin,0,30,30);
                 if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""]){
-                    UIView * initial = [self setUserInitial:rect withFont:20 withUser:user intoView:self.scrollView withType:@"attendee"];
+                    UIView * initial = [self setUserInitial:rect withFont:rect.size.width/2 withUser:user intoView:self.scrollView withType:@"attendee"];
                     initial.layer.borderColor = [UIColor myLightGray].CGColor;
                     initial.layer.borderWidth = 1;
                     initial.layer.cornerRadius = 15;
@@ -194,10 +204,8 @@ static NSString* ATTEND = @" Attend ";
                     if ([[avatar substringToIndex:2]  isEqual: @"//"]){
                         avatar = [@"https:" and avatar];
                     }
-                    NSURL * imageURL = [NSURL URLWithString:avatar];
-                    NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
-                    UIImage * image = [UIImage imageWithData:imageData];
-                    UIImageView * imageContainer = [[UIImageView alloc] initWithImage: image];
+                    UIImageView * imageContainer = [[UIImageView alloc] init];
+                    [self setUserImage:rect withAvatar:avatar withUser:user intoView:imageContainer withType:@"attendee"];
                     imageContainer.layer.borderColor = [UIColor myLightGray].CGColor;
                     imageContainer.layer.borderWidth = 1;
                     imageContainer.layer.cornerRadius = 15;
@@ -223,33 +231,90 @@ static NSString* ATTEND = @" Attend ";
     
     self.companyView.layer.cornerRadius =  self.companyView.frame.size.height/2;
     self.companyView.layer.masksToBounds = YES;
+    self.companyView.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    self.companyView.backgroundColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.companyView];
+
     
     
-    CGRect rect = CGRectMake(0, 0, self.presenterView.frame.size.width, self.presenterView.frame.size.height);
+    CGRect presenterRect = CGRectMake(0, 0, self.presenterView.frame.size.width, self.presenterView.frame.size.height);
+    CGRect companyRect = CGRectMake(0, 0, self.companyView.frame.size.width, self.companyView.frame.size.height);
     NSDictionary *speakerTemp = [self.session.speakers objectAtIndex:0];
     NSDictionary *speaker = [[FestivalData sharedFestivalData].presentersDict objectForKey:[speakerTemp objectForKey:@"username"]];
     NSString * speakerAvatar = [speaker objectForKey:@"avatar"];
-    if ([speakerAvatar isEqual:[NSNull null]] || [speakerAvatar  isEqual: @""]){
+    if ([speakerAvatar isEqual:[NSNull null]] || [speakerAvatar  isEqual: @""] || speakerAvatar == nil){
         
-        [self setUserInitial:rect withFont:20 withUser:speaker intoView:self.presenterView withType:@"speaker"];
+        [self setUserInitial:presenterRect withFont:presenterRect.size.width/2 withUser:speaker intoView:self.presenterView withType:@"speaker"];
     }else {
-        [self setUserImage:rect withAvatar:speakerAvatar withUser:speaker intoView:self.presenterView withType:@"speaker"];
+        [self setUserImage:presenterRect withAvatar:speakerAvatar withUser:speaker intoView:self.presenterView withType:@"speaker"];
     }
     
     NSDictionary *companyTemp = [self.session.companies objectAtIndex:0];
     NSDictionary *company = [[FestivalData sharedFestivalData].companiesDict objectForKey:[companyTemp objectForKey:@"username"]];
     NSString * companyAvatar = [company objectForKey:@"avatar"];
-    if ([companyAvatar isEqual:[NSNull null]] || [companyAvatar  isEqual: @""]){
-        [self setUserInitial:rect withFont:20 withUser:company intoView:self.companyView withType:@"company"];
+    if ([companyAvatar isEqual:[NSNull null]] || [companyAvatar  isEqual: @""] || companyAvatar == nil){
+        if (company == nil){
+            company = @{@"name" : self.session.title};
+        }
+        [self setUserInitial:companyRect withFont:companyRect.size.width/2 withUser:company intoView:self.companyView withType:@"company"];
     }else {
-        [self setUserImage:rect withAvatar:companyAvatar withUser:company intoView:self.companyView withType:@"company"];
+        [self setUserImage:companyRect withAvatar:companyAvatar withUser:company intoView:self.companyView withType:@"company"];
+        self.companyView.layer.borderColor = self.session.color.CGColor;
+        self.companyView.layer.cornerRadius = self.companyView.frame.size.width/2;
+        self.companyView.layer.borderWidth = 1;
     }
     
     //used in conjunction with linebreaks = 0
     self.presenterName.text = [speaker objectForKey:@"name"];
     self.presenterName.lineBreakMode = NSLineBreakByWordWrapping;
-    self.companyName.text = [company objectForKey:@"name"];
-    self.companyName.lineBreakMode = NSLineBreakByWordWrapping;
+//    self.companyName.text = [company objectForKey:@"name"];
+//    self.companyName.lineBreakMode = NSLineBreakByWordWrapping;
+    self.bottomContainer.backgroundColor = [UIColor whiteColor];
+    self.bottomContainer.layer.cornerRadius = 4;
+    self.bottomContainer.layer.borderWidth = 1;
+    self.bottomContainer.layer.borderColor = [UIColor clearColor].CGColor;
+    
+    self.addToScheduleButton.backgroundColor = [UIColor whiteColor];
+    self.addToScheduleButton.layer.cornerRadius = 2.0;
+    self.addToScheduleButton.layer.borderColor = [UIColor darkTextColor].CGColor;
+    
+    self.checkMarkView.layer.cornerRadius = self.checkMarkView.frame.size.width/2;
+    self.addToScheduleButton.layer.borderColor = [UIColor darkTextColor].CGColor;
+    self.addToScheduleButton.layer.borderWidth = 1;
+
+    
+    self.loginButton.backgroundColor = [UIColor whiteColor];
+    self.loginButton.layer.borderColor = [UIColor darkTextColor].CGColor;
+    self.loginButton.layer.cornerRadius = 2.0;
+    
+    self.shareButton.backgroundColor = [UIColor whiteColor];
+    self.shareButton.layer.cornerRadius = 2.0;
+    self.shareButton.layer.borderWidth = 1.0;
+    self.shareButton.layer.borderColor = [UIColor darkTextColor].CGColor;
+    
+    self.dateView.backgroundColor =[UIColor whiteColor];
+    self.addressView.backgroundColor = [UIColor whiteColor];
+    self.superView.backgroundColor = [Helper getUIColorObjectFromHexString:@"ece4e1" alpha:1.0];
+    
+    UIButton *share =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [share setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [share addTarget:self action:@selector(showSocialShareDialog) forControlEvents:UIControlEventTouchUpInside];
+    [share setFrame:CGRectMake(0, 0, 25, 25)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:share];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    
+    self.desc.text = [self.session.desc stringByStrippingHTML];
+    self.desc.lineBreakMode = NSLineBreakByWordWrapping;
+//    self.desc.textAlignment = NSTextAlignmentCenter;
+//    self.desc.translatesAutoresizingMaskIntoConstraints = YES;
+    self.desc.numberOfLines = 0;
+    int numlines = [Helper lineCountForLabel:self.desc];
+    CGRect labelFrame = self.desc.frame;
+    labelFrame.size.height = numlines * 30;
+    double distanceFromSides = (self.desc.frame.origin.x);
+    labelFrame.size.width = self.view.frame.size.width - (distanceFromSides * 2);
+    self.desc.frame = labelFrame;
+
 }
 
 
@@ -268,7 +333,9 @@ static NSString* ATTEND = @" Attend ";
 - (IBAction)allAttendees:(id)sender {
     [self goToProfileTable: self.users withTitle:self.session.title withSession:self.session withType:@"attendee"];
 }
-
+- (IBAction)shareButtonClicked:(id)sender {
+    [self goToProfileTable: self.users withTitle:self.session.title withSession:self.session withType:@"attendee"];
+}
 - (IBAction)addToSchedule:(id)sender {
     UIButton *resultButton = (UIButton *)sender;
     if ([resultButton.currentTitle isEqual:UN_ATTEND]){
@@ -357,5 +424,17 @@ static NSString* ATTEND = @" Attend ";
         }
     }
 }
+#pragma Mark-social sharing
+-(void) showSocialShareDialog{
+    CGRect modalFrame = CGRectMake(10, 100, self.view.frame.size.width - 20, 160);
+    UIImage *modalImage = [UIImage imageNamed:@"tbd_icon"];
+    NSString *modalTitle = @"See who wants to join your invite list";
 
+    ShareModalView *modalView = [[ShareModalView alloc] initWithFrame:modalFrame image:modalImage title:modalTitle oneLineTitle:YES sharedBy:sharedByChoice];
+    [self.view.window addSubview:modalView];
+    modalView.shareModalDelegate = self;
+    modalView.baseModalDelegate = self;
+    modalView.session = self.session;
+    [modalView showModalAtTop:YES];
+}
 @end

@@ -24,5 +24,6 @@
 - (void)loginAPIWithUsername:username andPassword:password callback:(void (^)(NSString *response)) callback;
 - (void)findByUsername:username withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary * user)) callback;
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback;
+- (void)fetchFestivals:(void (^)(NSArray * user)) callback;
 
 @end

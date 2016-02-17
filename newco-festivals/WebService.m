@@ -6,7 +6,6 @@
 //  Copyright © 2016 yassen aniss. All rights reserved.
 //
 #include "SVProgressHUD.h"
-#import "WebService.h"
 @interface WebService()
 -(void) showPageLoader; //forward decleration of private method
 -(void) hidePageLoader; //forward decleration of private method
@@ -41,8 +40,8 @@
     [UIApplication sharedApplication].
     networkActivityIndicatorVisible = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
-            [SVProgressHUD setBackgroundColor:[UIColor blackColor]];
+            [SVProgressHUD setForegroundColor:[UIColor clearColor]];
+            [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
             [SVProgressHUD show];
         });
 }
@@ -58,7 +57,7 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/going/del?api_key=%@&session=%@&sessions=%@&by=id", self.credentials.ApiUrl, self.credentials.ApiKey, [[Credentials sharedCredentials].currentUser objectForKey:@"auth"], id_];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/going/del?api_key=%@&session=%@&sessions=%@&by=id", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], [[Credentials sharedCredentials].currentUser objectForKey:@"auth"], id_];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
@@ -83,7 +82,7 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/going/add?api_key=%@&session=%@&sessions=%@", self.credentials.ApiUrl, self.credentials.ApiKey, [[Credentials sharedCredentials].currentUser objectForKey:@"auth"], id_];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/going/add?&by=id&api_key=%@&session=%@&sessions=%@", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], [[Credentials sharedCredentials].currentUser objectForKey:@"auth"], id_];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
@@ -107,7 +106,7 @@
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/session/seats?api_key=%@&type=all&format=json&id=%@&by=id&fields=username,name,privacy_mode,avatar", self.credentials.ApiUrl, self.credentials.ApiKey, id_];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/session/seats?api_key=%@&type=all&format=json&id=%@&by=id&fields=username,name,privacy_mode,avatar", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], id_];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
@@ -131,7 +130,7 @@
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/session/export?api_key=%@&format=json&fields=description,event_key,name,address,event_start,event_end,event_type,id,speakers,artists,seats,audience", self.credentials.ApiUrl, self.credentials.ApiKey];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/session/export?api_key=%@&custom_data=Y&format=json&fields=Company%@Description,description,event_key,name,address,event_start,event_end,event_type,id,speakers,artists,seats,audience,company,active,custom5,lat,lon", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], @"%20"];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
@@ -154,7 +153,7 @@
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/list?api_key=%@&format=json&fields=username,name,email,twitter_uid,fb_uid,lastactive,position,location,company,sessions,url,about,privacy_mode,role,phone,avatar,id", self.credentials.ApiUrl, self.credentials.ApiKey];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/list?api_key=%@&format=json&fields=username,name,email,twitter_uid,fb_uid,lastactive,position,location,company,sessions,url,about,privacy_mode,role,phone,avatar,id", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"]];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
@@ -178,7 +177,7 @@
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/sessions?api_key=%@&format=json", self.credentials.ApiUrl, self.credentials.ApiKey];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/sessions?api_key=%@&format=json", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"]];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -203,7 +202,7 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/auth/login?api_key=%@&username=%@&password=%@", self.credentials.ApiUrl, self.credentials.ApiKey, username, password];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/auth/login?api_key=%@&username=%@&password=%@", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], username, password];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
@@ -222,12 +221,35 @@
     }];
     [dataTask resume];
 }
+- (void)fetchFestivals:(void (^)(NSArray * festivals)) callback{
+    dispatch_queue_t completion_que = dispatch_get_main_queue();
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSString *urlString = [NSString stringWithFormat:@"http://festivals.newco.co/festivals/all"];
+    NSURL *URL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (!error) {
+            if ([responseObject isKindOfClass:[NSArray class]]) {
+                dispatch_async(completion_que, ^{
+                    callback( (NSArray*) responseObject);
+                });
+            }
+        } else {
+            NSLog(@"Error: %@", error);
+            NSLog(@"ERROR IN fetchSessions...");
+        }
+        [self hidePageLoader];
+    }];
+    [dataTask resume];
+}
 - (void)findByUsername:username withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback{
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/get?api_key=%@&by=username&term=%@&format=json&fields=username,name,email,twitter_uid,fb_uid,position,location,company,sessions,url,about,privacy_mode,role,phone,avatar,id", self.credentials.ApiUrl, self.credentials.ApiKey, username];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/get?api_key=%@&by=username&term=%@&format=json&fields=username,name,email,twitter_uid,fb_uid,position,location,company,sessions,url,about,privacy_mode,role,phone,avatar,id", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], username];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -250,7 +272,7 @@
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/going/list?api_key=%@&session=%@&username=%@", self.credentials.ApiUrl, self.credentials.ApiKey, auth, username];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/going/list?api_key=%@&session=%@&username=%@", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], auth, username];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -273,7 +295,7 @@
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/get?api_key=%@&by=email&term=%@&format=json&fields=username,name,email,twitter_uid,fb_uid,position,location,company,sessions,url,about,privacy_mode,role,phone,avatar,id", self.credentials.ApiUrl, self.credentials.ApiKey, email];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/get?api_key=%@&by=email&term=%@&format=json&fields=username,name,email,twitter_uid,fb_uid,position,location,company,sessions,url,about,privacy_mode,role,phone,avatar,id", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], email];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {

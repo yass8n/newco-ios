@@ -15,4 +15,6 @@
 @property (weak, nonatomic) NSString* pageTitle;
 @property (weak, nonatomic) Session* session;
 @property (strong, nonatomic) NSString* type;
+@property (nonatomic) BOOL setTheBackButton;
+
 @end

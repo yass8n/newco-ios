@@ -9,24 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 
-@interface Credentials : NSObject{
-    NSString* ApiKey;
-    NSString* ApiUrl;
-    NSDictionary* currentUser;
-}
+@interface Credentials : NSObject
+
 @property (nonatomic, retain) NSString * ApiKey;
 @property (nonatomic, retain) NSString * ApiUrl;
 @property (nonatomic, retain) NSDictionary* currentUser;
-
--(NSString*) ApiUrl;
--(NSString*) ApiKey;
--(NSDictionary*) currentUser;
-//- (BOOL)isLoggedIn;
-//- (void)clearSavedCredentials;
-- (void)setCurrentUser:(NSDictionary*) user;
-- (void)setApiKey:(NSString *)key;
-- (void)setApiUrl:(NSString *)url;
+@property (nonatomic, retain) NSDictionary* festival;
 - (void)logOut;
-
 + (Credentials *) sharedCredentials;
+-(void)clearFestivalData;
+
 @end

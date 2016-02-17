@@ -14,6 +14,22 @@
 		08F6F7E91C7478ED005BC870 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7E81C7478ED005BC870 /* SWRevealViewController.m */; };
 		08F6F7EC1C747903005BC870 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7EB1C747903005BC870 /* WebService.m */; };
 		08F6F7EF1C747974005BC870 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7EE1C747974005BC870 /* MenuCell.m */; };
+		08F6F8221C748AC1005BC870 /* BaseMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8211C748AC1005BC870 /* BaseMenuCell.m */; };
+		08F6F8251C748AD0005BC870 /* BaseModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8241C748AD0005BC870 /* BaseModal.m */; };
+		08F6F8281C748AE1005BC870 /* CustomUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8271C748AE1005BC870 /* CustomUILabel.m */; };
+		08F6F82C1C748AF9005BC870 /* FestivalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F82A1C748AF9005BC870 /* FestivalCell.m */; };
+		08F6F82D1C748AF9005BC870 /* FestivalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F6F82B1C748AF9005BC870 /* FestivalCell.xib */; };
+		08F6F8301C748B0F005BC870 /* FestivalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F82F1C748B0F005BC870 /* FestivalsViewController.m */; };
+		08F6F8331C748B1D005BC870 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8321C748B1D005BC870 /* FilterViewController.m */; };
+		08F6F8361C748B3D005BC870 /* HeaderMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8351C748B3D005BC870 /* HeaderMenuCell.m */; };
+		08F6F8391C748B61005BC870 /* ModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8381C748B61005BC870 /* ModalView.m */; };
+		08F6F83C1C748B9E005BC870 /* NSString+NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F83B1C748B9E005BC870 /* NSString+NSStringAdditions.m */; };
+		08F6F83F1C748BBC005BC870 /* RegularMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F83E1C748BBC005BC870 /* RegularMenuCell.m */; };
+		08F6F8421C748BE1005BC870 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8411C748BE1005BC870 /* WebViewController.m */; };
+		08F6F8451C748C18005BC870 /* ShareModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8441C748C18005BC870 /* ShareModalView.m */; };
+		08F6F8491C748F70005BC870 /* CustomUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8481C748F70005BC870 /* CustomUIView.m */; };
+		08F6F84E1C7491CE005BC870 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */; };
+		08F6F8501C7491DB005BC870 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */; };
 		7DE8288268CF6CEF49B779B7 /* libPods-newco-festivals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */; };
 		9212EB3D1C61499F00D17504 /* colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212EB3C1C61499F00D17504 /* colors.m */; };
 		9216595B1C58CC9E006239D6 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 9216595A1C58CC9E006239D6 /* session.m */; };
@@ -80,6 +96,36 @@
 		08F6F7EB1C747903005BC870 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
 		08F6F7ED1C747974005BC870 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		08F6F7EE1C747974005BC870 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		08F6F8201C748AC1005BC870 /* BaseMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMenuCell.h; sourceTree = "<group>"; };
+		08F6F8211C748AC1005BC870 /* BaseMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMenuCell.m; sourceTree = "<group>"; };
+		08F6F8231C748AD0005BC870 /* BaseModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModal.h; sourceTree = "<group>"; };
+		08F6F8241C748AD0005BC870 /* BaseModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModal.m; sourceTree = "<group>"; };
+		08F6F8261C748AE1005BC870 /* CustomUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUILabel.h; sourceTree = "<group>"; };
+		08F6F8271C748AE1005BC870 /* CustomUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUILabel.m; sourceTree = "<group>"; };
+		08F6F8291C748AF9005BC870 /* FestivalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalCell.h; sourceTree = "<group>"; };
+		08F6F82A1C748AF9005BC870 /* FestivalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalCell.m; sourceTree = "<group>"; };
+		08F6F82B1C748AF9005BC870 /* FestivalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalCell.xib; sourceTree = "<group>"; };
+		08F6F82E1C748B0F005BC870 /* FestivalsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalsViewController.h; sourceTree = "<group>"; };
+		08F6F82F1C748B0F005BC870 /* FestivalsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalsViewController.m; sourceTree = "<group>"; };
+		08F6F8311C748B1D005BC870 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		08F6F8321C748B1D005BC870 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		08F6F8341C748B3D005BC870 /* HeaderMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderMenuCell.h; sourceTree = "<group>"; };
+		08F6F8351C748B3D005BC870 /* HeaderMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderMenuCell.m; sourceTree = "<group>"; };
+		08F6F8371C748B61005BC870 /* ModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalView.h; sourceTree = "<group>"; };
+		08F6F8381C748B61005BC870 /* ModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalView.m; sourceTree = "<group>"; };
+		08F6F83A1C748B9E005BC870 /* NSString+NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NSStringAdditions.h"; sourceTree = "<group>"; };
+		08F6F83B1C748B9E005BC870 /* NSString+NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSStringAdditions.m"; sourceTree = "<group>"; };
+		08F6F83D1C748BBC005BC870 /* RegularMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegularMenuCell.h; sourceTree = "<group>"; };
+		08F6F83E1C748BBC005BC870 /* RegularMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegularMenuCell.m; sourceTree = "<group>"; };
+		08F6F8401C748BE1005BC870 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		08F6F8411C748BE1005BC870 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		08F6F8431C748C18005BC870 /* ShareModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareModalView.h; sourceTree = "<group>"; };
+		08F6F8441C748C18005BC870 /* ShareModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareModalView.m; sourceTree = "<group>"; };
+		08F6F8461C748DC6005BC870 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		08F6F8471C748F70005BC870 /* CustomUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUIView.h; sourceTree = "<group>"; };
+		08F6F8481C748F70005BC870 /* CustomUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUIView.m; sourceTree = "<group>"; };
+		08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Pods/FacebookSDKs-iOS-20160210/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "Pods/FacebookSDKs-iOS-20160210/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newco-festivals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5122098224D3F685DE88C5F7 /* Pods-newco-festivals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.debug.xcconfig"; sourceTree = "<group>"; };
 		9212EB3B1C61499F00D17504 /* colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colors.h; sourceTree = "<group>"; };
@@ -147,6 +193,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F6F8501C7491DB005BC870 /* FBSDKShareKit.framework in Frameworks */,
+				08F6F84E1C7491CE005BC870 /* FBSDKCoreKit.framework in Frameworks */,
 				7DE8288268CF6CEF49B779B7 /* libPods-newco-festivals.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +305,34 @@
 				08F6F7EB1C747903005BC870 /* WebService.m */,
 				08F6F7ED1C747974005BC870 /* MenuCell.h */,
 				08F6F7EE1C747974005BC870 /* MenuCell.m */,
+				08F6F8201C748AC1005BC870 /* BaseMenuCell.h */,
+				08F6F8211C748AC1005BC870 /* BaseMenuCell.m */,
+				08F6F8231C748AD0005BC870 /* BaseModal.h */,
+				08F6F8241C748AD0005BC870 /* BaseModal.m */,
+				08F6F8261C748AE1005BC870 /* CustomUILabel.h */,
+				08F6F8271C748AE1005BC870 /* CustomUILabel.m */,
+				08F6F8291C748AF9005BC870 /* FestivalCell.h */,
+				08F6F82A1C748AF9005BC870 /* FestivalCell.m */,
+				08F6F82B1C748AF9005BC870 /* FestivalCell.xib */,
+				08F6F82E1C748B0F005BC870 /* FestivalsViewController.h */,
+				08F6F82F1C748B0F005BC870 /* FestivalsViewController.m */,
+				08F6F8311C748B1D005BC870 /* FilterViewController.h */,
+				08F6F8321C748B1D005BC870 /* FilterViewController.m */,
+				08F6F8341C748B3D005BC870 /* HeaderMenuCell.h */,
+				08F6F8351C748B3D005BC870 /* HeaderMenuCell.m */,
+				08F6F8371C748B61005BC870 /* ModalView.h */,
+				08F6F8381C748B61005BC870 /* ModalView.m */,
+				08F6F83A1C748B9E005BC870 /* NSString+NSStringAdditions.h */,
+				08F6F83B1C748B9E005BC870 /* NSString+NSStringAdditions.m */,
+				08F6F83D1C748BBC005BC870 /* RegularMenuCell.h */,
+				08F6F83E1C748BBC005BC870 /* RegularMenuCell.m */,
+				08F6F8401C748BE1005BC870 /* WebViewController.h */,
+				08F6F8411C748BE1005BC870 /* WebViewController.m */,
+				08F6F8431C748C18005BC870 /* ShareModalView.h */,
+				08F6F8441C748C18005BC870 /* ShareModalView.m */,
+				08F6F8461C748DC6005BC870 /* PrefixHeader.pch */,
+				08F6F8471C748F70005BC870 /* CustomUIView.h */,
+				08F6F8481C748F70005BC870 /* CustomUIView.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -290,6 +366,8 @@
 		CFAA25233C1B4C1175BD2FA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */,
+				08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */,
 				4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */,
 			);
 			name = Frameworks;
@@ -418,6 +496,7 @@
 				92470D101C389081003E6F7E /* Assets.xcassets in Resources */,
 				92470D0B1C389081003E6F7E /* Main.storyboard in Resources */,
 				92880C331C6D472100315DF0 /* SessionCellHeader.xib in Resources */,
+				08F6F82D1C748AF9005BC870 /* FestivalCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,27 +569,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F6F8251C748AD0005BC870 /* BaseModal.m in Sources */,
+				08F6F8221C748AC1005BC870 /* BaseMenuCell.m in Sources */,
 				08F6F7EC1C747903005BC870 /* WebService.m in Sources */,
 				929107261C6C4FF4004B517C /* User.m in Sources */,
 				08F6F7E31C74788F005BC870 /* FestivalData.m in Sources */,
 				92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */,
+				08F6F8301C748B0F005BC870 /* FestivalsViewController.m in Sources */,
 				923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */,
+				08F6F82C1C748AF9005BC870 /* FestivalCell.m in Sources */,
 				9291072C1C6C51DC004B517C /* ProfileCell.m in Sources */,
 				92880C3D1C6D49C900315DF0 /* ProfileViewController.m in Sources */,
 				92470D051C389081003E6F7E /* AppDelegate.m in Sources */,
 				929107291C6C50BB004B517C /* ScheduleViewController.m in Sources */,
+				08F6F8361C748B3D005BC870 /* HeaderMenuCell.m in Sources */,
+				08F6F8281C748AE1005BC870 /* CustomUILabel.m in Sources */,
 				924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */,
 				08F6F7E61C7478A3005BC870 /* Helper.m in Sources */,
 				929107351C6C532D004B517C /* DirectoryViewController.m in Sources */,
 				929107211C6C4740004B517C /* UserInitial.m in Sources */,
+				08F6F8421C748BE1005BC870 /* WebViewController.m in Sources */,
 				92470D021C389081003E6F7E /* main.m in Sources */,
 				08F6F7E91C7478ED005BC870 /* SWRevealViewController.m in Sources */,
+				08F6F83F1C748BBC005BC870 /* RegularMenuCell.m in Sources */,
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
+				08F6F8391C748B61005BC870 /* ModalView.m in Sources */,
+				08F6F8491C748F70005BC870 /* CustomUIView.m in Sources */,
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,
 				9291073D1C6C5B49004B517C /* HighlightableView.m in Sources */,
 				929107321C6C52E3004B517C /* RootViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
+				08F6F83C1C748B9E005BC870 /* NSString+NSStringAdditions.m in Sources */,
+				08F6F8451C748C18005BC870 /* ShareModalView.m in Sources */,
 				92880C3A1C6D474C00315DF0 /* PageLoader.m in Sources */,
+				08F6F8331C748B1D005BC870 /* FilterViewController.m in Sources */,
 				929107381C6C5A4E004B517C /* UserImage.m in Sources */,
 				08F6F7EF1C747974005BC870 /* MenuCell.m in Sources */,
 				08F6F7E01C74787C005BC870 /* Credentials.m in Sources */,
@@ -657,8 +749,14 @@
 			baseConfigurationReference = 5122098224D3F685DE88C5F7 /* Pods-newco-festivals.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Users/yaseen/CSCI/IOS/newco-ios/Pods/FacebookSDKs-iOS-20160210",
+					"$(PROJECT_DIR)/Pods/FacebookSDKs-iOS-20160210",
+				);
+				GCC_PREFIX_HEADER = "/Users/yaseen/CSCI/IOS/newco-ios/newco-festivals/PrefixHeader.pch";
 				INFOPLIST_FILE = "newco-festivals/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "newco.newco-festivals";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -669,8 +767,14 @@
 			baseConfigurationReference = EC50D0A9EDEFACDFBDF8086D /* Pods-newco-festivals.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Users/yaseen/CSCI/IOS/newco-ios/Pods/FacebookSDKs-iOS-20160210",
+					"$(PROJECT_DIR)/Pods/FacebookSDKs-iOS-20160210",
+				);
+				GCC_PREFIX_HEADER = "/Users/yaseen/CSCI/IOS/newco-ios/newco-festivals/PrefixHeader.pch";
 				INFOPLIST_FILE = "newco-festivals/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "newco.newco-festivals";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

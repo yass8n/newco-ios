@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MenuTableViewController : UITableViewController
+#import "SignInViewController.h"
+@interface MenuTableViewController : UITableViewController <SignInDelegate>
 
 @end
