@@ -2,7 +2,7 @@
 //  MenuItem.m
 //  newco-IOS
 //
-//  Created by yassen aniss on 12/22/15.
+//  Created by Yassen Aniss
 //  Copyright © 2015 Newco. All rights reserved.
 //
 

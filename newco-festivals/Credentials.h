@@ -2,7 +2,7 @@
 //  Credentials.h
 //  newco-IOS
 //
-//  Created by yassen aniss
+//  Created by Yassen Aniss
 //  Copyright © 2016 Newco. All rights reserved.
 //
 

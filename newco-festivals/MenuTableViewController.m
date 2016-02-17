@@ -2,7 +2,7 @@
 //  MenuTableViewController.m
 //  newco-IOS
 //
-//  Created by yassen aniss on 8/11/15.
+//  Created by Yassen Aniss
 //  Copyright (c) 2015 Newco. All rights reserved.
 //
 

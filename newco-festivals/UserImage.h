@@ -2,7 +2,7 @@
 //  UserImage.h
 //  newco-IOS
 //
-//  Created by yassen aniss
+//  Created by Yassen Aniss
 //  Copyright (c) 2016 Newco. All rights reserved.
 //
 
