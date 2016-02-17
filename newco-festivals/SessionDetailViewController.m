@@ -11,7 +11,6 @@
 #import "UserInitial.h"
 #import "UserImage.h"
 #import "CustomUIView.h"
-#import "PageLoader.h"
 #import "Helper.h"
 #import "NSString+NSStringAdditions.h"
 

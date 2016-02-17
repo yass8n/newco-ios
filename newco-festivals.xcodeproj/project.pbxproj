@@ -48,8 +48,6 @@
 		924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */; };
 		92880C331C6D472100315DF0 /* SessionCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92880C321C6D472100315DF0 /* SessionCellHeader.xib */; };
 		92880C351C6D472A00315DF0 /* SessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92880C341C6D472A00315DF0 /* SessionCell.xib */; };
-		92880C371C6D473C00315DF0 /* PageLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92880C361C6D473C00315DF0 /* PageLoader.xib */; };
-		92880C3A1C6D474C00315DF0 /* PageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 92880C391C6D474C00315DF0 /* PageLoader.m */; };
 		92880C3D1C6D49C900315DF0 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92880C3C1C6D49C900315DF0 /* ProfileViewController.m */; };
 		929107211C6C4740004B517C /* UserInitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107201C6C4740004B517C /* UserInitial.m */; };
 		929107231C6C4777004B517C /* UserInitial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107221C6C4777004B517C /* UserInitial.xib */; };
@@ -61,7 +59,6 @@
 		929107351C6C532D004B517C /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107341C6C532D004B517C /* DirectoryViewController.m */; };
 		929107381C6C5A4E004B517C /* UserImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107371C6C5A4E004B517C /* UserImage.m */; };
 		9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107391C6C5A5A004B517C /* UserImage.xib */; };
-		9291073D1C6C5B49004B517C /* HighlightableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9291073C1C6C5B49004B517C /* HighlightableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,9 +157,6 @@
 		924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewController.m; sourceTree = "<group>"; };
 		92880C321C6D472100315DF0 /* SessionCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCellHeader.xib; sourceTree = "<group>"; };
 		92880C341C6D472A00315DF0 /* SessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCell.xib; sourceTree = "<group>"; };
-		92880C361C6D473C00315DF0 /* PageLoader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageLoader.xib; sourceTree = "<group>"; };
-		92880C381C6D474C00315DF0 /* PageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageLoader.h; sourceTree = "<group>"; };
-		92880C391C6D474C00315DF0 /* PageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageLoader.m; sourceTree = "<group>"; };
 		92880C3B1C6D49C900315DF0 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		92880C3C1C6D49C900315DF0 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		9291071F1C6C4740004B517C /* UserInitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInitial.h; sourceTree = "<group>"; };
@@ -183,8 +177,6 @@
 		929107361C6C5A4E004B517C /* UserImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImage.h; sourceTree = "<group>"; };
 		929107371C6C5A4E004B517C /* UserImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImage.m; sourceTree = "<group>"; };
 		929107391C6C5A5A004B517C /* UserImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImage.xib; sourceTree = "<group>"; };
-		9291073B1C6C5B49004B517C /* HighlightableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightableView.h; sourceTree = "<group>"; };
-		9291073C1C6C5B49004B517C /* HighlightableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightableView.m; sourceTree = "<group>"; };
 		EC50D0A9EDEFACDFBDF8086D /* Pods-newco-festivals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.release.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,6 +208,198 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08F6F8511C7493F1005BC870 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F8561C74940F005BC870 /* WebService */,
+				08F6F8551C74940B005BC870 /* Data */,
+				08F6F8541C749406005BC870 /* Animation */,
+				08F6F8531C749401005BC870 /* Misc */,
+				08F6F8521C7493F7005BC870 /* Categories */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		08F6F8521C7493F7005BC870 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F83A1C748B9E005BC870 /* NSString+NSStringAdditions.h */,
+				08F6F83B1C748B9E005BC870 /* NSString+NSStringAdditions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		08F6F8531C749401005BC870 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F7E41C7478A3005BC870 /* Helper.h */,
+				08F6F7E51C7478A3005BC870 /* Helper.m */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		08F6F8541C749406005BC870 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F7DB1C747860005BC870 /* Animation.h */,
+				08F6F7DC1C747860005BC870 /* Animation.m */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
+		08F6F8551C74940B005BC870 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F7DE1C74787C005BC870 /* Credentials.h */,
+				08F6F7DF1C74787C005BC870 /* Credentials.m */,
+				08F6F7E11C74788F005BC870 /* FestivalData.h */,
+				08F6F7E21C74788F005BC870 /* FestivalData.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		08F6F8561C74940F005BC870 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F7EA1C747903005BC870 /* WebService.h */,
+				08F6F7EB1C747903005BC870 /* WebService.m */,
+			);
+			name = WebService;
+			sourceTree = "<group>";
+		};
+		08F6F8571C74941B005BC870 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				92470D111C389081003E6F7E /* LaunchScreen.storyboard */,
+				92470D091C389081003E6F7E /* Main.storyboard */,
+			);
+			name = StoryBoards;
+			sourceTree = "<group>";
+		};
+		08F6F8591C74943A005BC870 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F85F1C74958C005BC870 /* Custom */,
+				08F6F85E1C749567005BC870 /* Modals */,
+				929107361C6C5A4E004B517C /* UserImage.h */,
+				929107371C6C5A4E004B517C /* UserImage.m */,
+				929107391C6C5A5A004B517C /* UserImage.xib */,
+				9291071F1C6C4740004B517C /* UserInitial.h */,
+				929107201C6C4740004B517C /* UserInitial.m */,
+				929107221C6C4777004B517C /* UserInitial.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		08F6F85A1C74943E005BC870 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				929107241C6C4FF4004B517C /* User.h */,
+				929107251C6C4FF4004B517C /* User.m */,
+				921659591C58CC9E006239D6 /* session.h */,
+				9216595A1C58CC9E006239D6 /* session.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		08F6F85B1C749446005BC870 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				92470D031C389081003E6F7E /* AppDelegate.h */,
+				92470D041C389081003E6F7E /* AppDelegate.m */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		08F6F85C1C74944B005BC870 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F8401C748BE1005BC870 /* WebViewController.h */,
+				08F6F8411C748BE1005BC870 /* WebViewController.m */,
+				08F6F82E1C748B0F005BC870 /* FestivalsViewController.h */,
+				08F6F82F1C748B0F005BC870 /* FestivalsViewController.m */,
+				08F6F8311C748B1D005BC870 /* FilterViewController.h */,
+				08F6F8321C748B1D005BC870 /* FilterViewController.m */,
+				924ECB721C613B0C0093CAA1 /* ApplicationViewController.h */,
+				924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */,
+				924ECB661C6134AC0093CAA1 /* SignInViewController.h */,
+				924ECB671C6134AC0093CAA1 /* SignInViewController.m */,
+				923D14951C6B08AE00629F78 /* SessionDetailViewController.h */,
+				923D14961C6B08AE00629F78 /* SessionDetailViewController.m */,
+				929107271C6C50BB004B517C /* ScheduleViewController.h */,
+				929107281C6C50BB004B517C /* ScheduleViewController.m */,
+				9291072D1C6C5268004B517C /* ProfileTableViewController.h */,
+				9291072E1C6C5268004B517C /* ProfileTableViewController.m */,
+				929107301C6C52E3004B517C /* RootViewController.h */,
+				929107311C6C52E3004B517C /* RootViewController.m */,
+				929107331C6C532D004B517C /* DirectoryViewController.h */,
+				929107341C6C532D004B517C /* DirectoryViewController.m */,
+				92880C3B1C6D49C900315DF0 /* ProfileViewController.h */,
+				92880C3C1C6D49C900315DF0 /* ProfileViewController.m */,
+				08F6F7E71C7478ED005BC870 /* SWRevealViewController.h */,
+				08F6F7E81C7478ED005BC870 /* SWRevealViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		08F6F85D1C749457005BC870 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F83D1C748BBC005BC870 /* RegularMenuCell.h */,
+				08F6F83E1C748BBC005BC870 /* RegularMenuCell.m */,
+				08F6F8341C748B3D005BC870 /* HeaderMenuCell.h */,
+				08F6F8351C748B3D005BC870 /* HeaderMenuCell.m */,
+				08F6F8291C748AF9005BC870 /* FestivalCell.h */,
+				08F6F82A1C748AF9005BC870 /* FestivalCell.m */,
+				08F6F82B1C748AF9005BC870 /* FestivalCell.xib */,
+				08F6F7ED1C747974005BC870 /* MenuCell.h */,
+				08F6F7EE1C747974005BC870 /* MenuCell.m */,
+				08F6F8201C748AC1005BC870 /* BaseMenuCell.h */,
+				08F6F8211C748AC1005BC870 /* BaseMenuCell.m */,
+				9291072A1C6C51DC004B517C /* ProfileCell.h */,
+				9291072B1C6C51DC004B517C /* ProfileCell.m */,
+				923D14921C6B05A400629F78 /* SessionCellHeader.h */,
+				923D14931C6B05A400629F78 /* SessionCellHeader.m */,
+				924ECB691C6136440093CAA1 /* SessionCell.h */,
+				924ECB6A1C6136440093CAA1 /* SessionCell.m */,
+				92880C321C6D472100315DF0 /* SessionCellHeader.xib */,
+				92880C341C6D472A00315DF0 /* SessionCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		08F6F85E1C749567005BC870 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F8431C748C18005BC870 /* ShareModalView.h */,
+				08F6F8441C748C18005BC870 /* ShareModalView.m */,
+				08F6F8371C748B61005BC870 /* ModalView.h */,
+				08F6F8381C748B61005BC870 /* ModalView.m */,
+				08F6F8231C748AD0005BC870 /* BaseModal.h */,
+				08F6F8241C748AD0005BC870 /* BaseModal.m */,
+			);
+			name = Modals;
+			sourceTree = "<group>";
+		};
+		08F6F85F1C74958C005BC870 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F8471C748F70005BC870 /* CustomUIView.h */,
+				08F6F8481C748F70005BC870 /* CustomUIView.m */,
+				08F6F8261C748AE1005BC870 /* CustomUILabel.h */,
+				08F6F8271C748AE1005BC870 /* CustomUILabel.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		08F6F8601C74961A005BC870 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				92470D0F1C389081003E6F7E /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		92470CF41C389081003E6F7E = {
 			isa = PBXGroup;
 			children = (
@@ -241,98 +425,15 @@
 		92470CFF1C389081003E6F7E /* newco-festivals */ = {
 			isa = PBXGroup;
 			children = (
-				92470D031C389081003E6F7E /* AppDelegate.h */,
-				92470D041C389081003E6F7E /* AppDelegate.m */,
-				92470D091C389081003E6F7E /* Main.storyboard */,
-				92470D0F1C389081003E6F7E /* Assets.xcassets */,
-				92470D111C389081003E6F7E /* LaunchScreen.storyboard */,
-				92470D141C389081003E6F7E /* Info.plist */,
-				92470D0C1C389081003E6F7E /* newco_festivals.xcdatamodeld */,
+				08F6F8601C74961A005BC870 /* Assets */,
+				08F6F85D1C749457005BC870 /* Cells */,
+				08F6F85C1C74944B005BC870 /* Controllers */,
+				08F6F85B1C749446005BC870 /* App */,
+				08F6F85A1C74943E005BC870 /* Models */,
+				08F6F8591C74943A005BC870 /* Views */,
+				08F6F8571C74941B005BC870 /* StoryBoards */,
+				08F6F8511C7493F1005BC870 /* Helpers */,
 				92470D001C389081003E6F7E /* Supporting Files */,
-				921659591C58CC9E006239D6 /* session.h */,
-				9216595A1C58CC9E006239D6 /* session.m */,
-				924ECB661C6134AC0093CAA1 /* SignInViewController.h */,
-				924ECB671C6134AC0093CAA1 /* SignInViewController.m */,
-				924ECB691C6136440093CAA1 /* SessionCell.h */,
-				924ECB6A1C6136440093CAA1 /* SessionCell.m */,
-				924ECB721C613B0C0093CAA1 /* ApplicationViewController.h */,
-				924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */,
-				9212EB3B1C61499F00D17504 /* colors.h */,
-				9212EB3C1C61499F00D17504 /* colors.m */,
-				9212EB3E1C6149A800D17504 /* constants.h */,
-				923D14921C6B05A400629F78 /* SessionCellHeader.h */,
-				923D14931C6B05A400629F78 /* SessionCellHeader.m */,
-				923D14951C6B08AE00629F78 /* SessionDetailViewController.h */,
-				923D14961C6B08AE00629F78 /* SessionDetailViewController.m */,
-				9291071F1C6C4740004B517C /* UserInitial.h */,
-				929107201C6C4740004B517C /* UserInitial.m */,
-				929107221C6C4777004B517C /* UserInitial.xib */,
-				929107241C6C4FF4004B517C /* User.h */,
-				929107251C6C4FF4004B517C /* User.m */,
-				929107271C6C50BB004B517C /* ScheduleViewController.h */,
-				929107281C6C50BB004B517C /* ScheduleViewController.m */,
-				9291072A1C6C51DC004B517C /* ProfileCell.h */,
-				9291072B1C6C51DC004B517C /* ProfileCell.m */,
-				9291072D1C6C5268004B517C /* ProfileTableViewController.h */,
-				9291072E1C6C5268004B517C /* ProfileTableViewController.m */,
-				929107301C6C52E3004B517C /* RootViewController.h */,
-				929107311C6C52E3004B517C /* RootViewController.m */,
-				929107331C6C532D004B517C /* DirectoryViewController.h */,
-				929107341C6C532D004B517C /* DirectoryViewController.m */,
-				929107361C6C5A4E004B517C /* UserImage.h */,
-				929107371C6C5A4E004B517C /* UserImage.m */,
-				929107391C6C5A5A004B517C /* UserImage.xib */,
-				9291073B1C6C5B49004B517C /* HighlightableView.h */,
-				9291073C1C6C5B49004B517C /* HighlightableView.m */,
-				92880C321C6D472100315DF0 /* SessionCellHeader.xib */,
-				92880C341C6D472A00315DF0 /* SessionCell.xib */,
-				92880C361C6D473C00315DF0 /* PageLoader.xib */,
-				92880C381C6D474C00315DF0 /* PageLoader.h */,
-				92880C391C6D474C00315DF0 /* PageLoader.m */,
-				92880C3B1C6D49C900315DF0 /* ProfileViewController.h */,
-				92880C3C1C6D49C900315DF0 /* ProfileViewController.m */,
-				08F6F7DB1C747860005BC870 /* Animation.h */,
-				08F6F7DC1C747860005BC870 /* Animation.m */,
-				08F6F7DE1C74787C005BC870 /* Credentials.h */,
-				08F6F7DF1C74787C005BC870 /* Credentials.m */,
-				08F6F7E11C74788F005BC870 /* FestivalData.h */,
-				08F6F7E21C74788F005BC870 /* FestivalData.m */,
-				08F6F7E41C7478A3005BC870 /* Helper.h */,
-				08F6F7E51C7478A3005BC870 /* Helper.m */,
-				08F6F7E71C7478ED005BC870 /* SWRevealViewController.h */,
-				08F6F7E81C7478ED005BC870 /* SWRevealViewController.m */,
-				08F6F7EA1C747903005BC870 /* WebService.h */,
-				08F6F7EB1C747903005BC870 /* WebService.m */,
-				08F6F7ED1C747974005BC870 /* MenuCell.h */,
-				08F6F7EE1C747974005BC870 /* MenuCell.m */,
-				08F6F8201C748AC1005BC870 /* BaseMenuCell.h */,
-				08F6F8211C748AC1005BC870 /* BaseMenuCell.m */,
-				08F6F8231C748AD0005BC870 /* BaseModal.h */,
-				08F6F8241C748AD0005BC870 /* BaseModal.m */,
-				08F6F8261C748AE1005BC870 /* CustomUILabel.h */,
-				08F6F8271C748AE1005BC870 /* CustomUILabel.m */,
-				08F6F8291C748AF9005BC870 /* FestivalCell.h */,
-				08F6F82A1C748AF9005BC870 /* FestivalCell.m */,
-				08F6F82B1C748AF9005BC870 /* FestivalCell.xib */,
-				08F6F82E1C748B0F005BC870 /* FestivalsViewController.h */,
-				08F6F82F1C748B0F005BC870 /* FestivalsViewController.m */,
-				08F6F8311C748B1D005BC870 /* FilterViewController.h */,
-				08F6F8321C748B1D005BC870 /* FilterViewController.m */,
-				08F6F8341C748B3D005BC870 /* HeaderMenuCell.h */,
-				08F6F8351C748B3D005BC870 /* HeaderMenuCell.m */,
-				08F6F8371C748B61005BC870 /* ModalView.h */,
-				08F6F8381C748B61005BC870 /* ModalView.m */,
-				08F6F83A1C748B9E005BC870 /* NSString+NSStringAdditions.h */,
-				08F6F83B1C748B9E005BC870 /* NSString+NSStringAdditions.m */,
-				08F6F83D1C748BBC005BC870 /* RegularMenuCell.h */,
-				08F6F83E1C748BBC005BC870 /* RegularMenuCell.m */,
-				08F6F8401C748BE1005BC870 /* WebViewController.h */,
-				08F6F8411C748BE1005BC870 /* WebViewController.m */,
-				08F6F8431C748C18005BC870 /* ShareModalView.h */,
-				08F6F8441C748C18005BC870 /* ShareModalView.m */,
-				08F6F8461C748DC6005BC870 /* PrefixHeader.pch */,
-				08F6F8471C748F70005BC870 /* CustomUIView.h */,
-				08F6F8481C748F70005BC870 /* CustomUIView.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -340,6 +441,12 @@
 		92470D001C389081003E6F7E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				92470D141C389081003E6F7E /* Info.plist */,
+				08F6F8461C748DC6005BC870 /* PrefixHeader.pch */,
+				9212EB3C1C61499F00D17504 /* colors.m */,
+				92470D0C1C389081003E6F7E /* newco_festivals.xcdatamodeld */,
+				9212EB3E1C6149A800D17504 /* constants.h */,
+				9212EB3B1C61499F00D17504 /* colors.h */,
 				92470D011C389081003E6F7E /* main.m */,
 			);
 			name = "Supporting Files";
@@ -491,7 +598,6 @@
 				92470D131C389081003E6F7E /* LaunchScreen.storyboard in Resources */,
 				9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */,
 				929107231C6C4777004B517C /* UserInitial.xib in Resources */,
-				92880C371C6D473C00315DF0 /* PageLoader.xib in Resources */,
 				92880C351C6D472A00315DF0 /* SessionCell.xib in Resources */,
 				92470D101C389081003E6F7E /* Assets.xcassets in Resources */,
 				92470D0B1C389081003E6F7E /* Main.storyboard in Resources */,
@@ -596,12 +702,10 @@
 				08F6F8391C748B61005BC870 /* ModalView.m in Sources */,
 				08F6F8491C748F70005BC870 /* CustomUIView.m in Sources */,
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,
-				9291073D1C6C5B49004B517C /* HighlightableView.m in Sources */,
 				929107321C6C52E3004B517C /* RootViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
 				08F6F83C1C748B9E005BC870 /* NSString+NSStringAdditions.m in Sources */,
 				08F6F8451C748C18005BC870 /* ShareModalView.m in Sources */,
-				92880C3A1C6D474C00315DF0 /* PageLoader.m in Sources */,
 				08F6F8331C748B1D005BC870 /* FilterViewController.m in Sources */,
 				929107381C6C5A4E004B517C /* UserImage.m in Sources */,
 				08F6F7EF1C747974005BC870 /* MenuCell.m in Sources */,

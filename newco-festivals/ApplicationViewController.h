@@ -12,7 +12,6 @@
 #import "SessionCell.h"
 #import "SessionCellHeader.h"
 #import "Session.h"
-#import "PageLoader.h"
 #import "ShareModalView.h"
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
