@@ -121,8 +121,8 @@
 		08F6F8461C748DC6005BC870 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		08F6F8471C748F70005BC870 /* CustomUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUIView.h; sourceTree = "<group>"; };
 		08F6F8481C748F70005BC870 /* CustomUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUIView.m; sourceTree = "<group>"; };
-		08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Pods/FacebookSDKs-iOS-20160210/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
-		08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "Pods/FacebookSDKs-iOS-20160210/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../Pods/FacebookSDKs-iOS-20160210/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../Pods/FacebookSDKs-iOS-20160210/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newco-festivals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5122098224D3F685DE88C5F7 /* Pods-newco-festivals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.debug.xcconfig"; sourceTree = "<group>"; };
 		9212EB3B1C61499F00D17504 /* colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colors.h; sourceTree = "<group>"; };
@@ -336,8 +336,6 @@
 				929107341C6C532D004B517C /* DirectoryViewController.m */,
 				92880C3B1C6D49C900315DF0 /* ProfileViewController.h */,
 				92880C3C1C6D49C900315DF0 /* ProfileViewController.m */,
-				08F6F7E71C7478ED005BC870 /* SWRevealViewController.h */,
-				08F6F7E81C7478ED005BC870 /* SWRevealViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -400,6 +398,33 @@
 			name = Assets;
 			sourceTree = "<group>";
 		};
+		08F6F8611C7496CA005BC870 /* SWReveal */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F7E71C7478ED005BC870 /* SWRevealViewController.h */,
+				08F6F7E81C7478ED005BC870 /* SWRevealViewController.m */,
+			);
+			name = SWReveal;
+			sourceTree = "<group>";
+		};
+		08F6F8621C7496DA005BC870 /* ImportedFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F8631C74970F005BC870 /* Facebook */,
+				08F6F8611C7496CA005BC870 /* SWReveal */,
+			);
+			name = ImportedFrameworks;
+			sourceTree = "<group>";
+		};
+		08F6F8631C74970F005BC870 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */,
+				08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
 		92470CF41C389081003E6F7E = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +450,7 @@
 		92470CFF1C389081003E6F7E /* newco-festivals */ = {
 			isa = PBXGroup;
 			children = (
+				08F6F8621C7496DA005BC870 /* ImportedFrameworks */,
 				08F6F8601C74961A005BC870 /* Assets */,
 				08F6F85D1C749457005BC870 /* Cells */,
 				08F6F85C1C74944B005BC870 /* Controllers */,
@@ -473,8 +499,6 @@
 		CFAA25233C1B4C1175BD2FA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */,
-				08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */,
 				4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */,
 			);
 			name = Frameworks;
