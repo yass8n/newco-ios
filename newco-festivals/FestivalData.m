@@ -7,9 +7,10 @@
 //
 
 #import "Helper.h"
-
+#import "FestivalData.h"
 @implementation FestivalData
 #import "constants.h"
+#import "session.h"
 @synthesize sessionsArray, sessionsDict, EVENT_COLORS_ARRAY, attendeesDict, sessionsAtDateAndTime, datesDict, orderOfInsertedDatesDict, companiesDict, currentUserSessions, locationColorDict, volunteersDict, presentersDict;
 
 + (FestivalData *)sharedFestivalData

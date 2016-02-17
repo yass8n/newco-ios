@@ -6,6 +6,7 @@
 //  Copyright © 2016 yassen aniss. All rights reserved.
 //
 #include "SVProgressHUD.h"
+#import "WebService.h"
 @interface WebService()
 -(void) showPageLoader; //forward decleration of private method
 -(void) hidePageLoader; //forward decleration of private method

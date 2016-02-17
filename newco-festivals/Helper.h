@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Helper : NSObject
 + (NSString*) myDateToFormat:(NSDate*) date withFormat:(NSString*)format;
