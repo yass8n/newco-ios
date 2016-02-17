@@ -30,6 +30,8 @@
 		08F6F8491C748F70005BC870 /* CustomUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8481C748F70005BC870 /* CustomUIView.m */; };
 		08F6F84E1C7491CE005BC870 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */; };
 		08F6F8501C7491DB005BC870 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */; };
+		08F6F8751C749BFB005BC870 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8741C749BFB005BC870 /* MenuItem.m */; };
+		08F6F8781C749C43005BC870 /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8771C749C43005BC870 /* MenuTableViewController.m */; };
 		7DE8288268CF6CEF49B779B7 /* libPods-newco-festivals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */; };
 		9212EB3D1C61499F00D17504 /* colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212EB3C1C61499F00D17504 /* colors.m */; };
 		9216595B1C58CC9E006239D6 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 9216595A1C58CC9E006239D6 /* session.m */; };
@@ -123,6 +125,10 @@
 		08F6F8481C748F70005BC870 /* CustomUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUIView.m; sourceTree = "<group>"; };
 		08F6F84D1C7491CE005BC870 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../Pods/FacebookSDKs-iOS-20160210/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../Pods/FacebookSDKs-iOS-20160210/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		08F6F8731C749BFB005BC870 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
+		08F6F8741C749BFB005BC870 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
+		08F6F8761C749C43005BC870 /* MenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController.h; sourceTree = "<group>"; };
+		08F6F8771C749C43005BC870 /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
 		4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newco-festivals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5122098224D3F685DE88C5F7 /* Pods-newco-festivals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.debug.xcconfig"; sourceTree = "<group>"; };
 		9212EB3B1C61499F00D17504 /* colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colors.h; sourceTree = "<group>"; };
@@ -460,6 +466,10 @@
 				08F6F8571C74941B005BC870 /* StoryBoards */,
 				08F6F8511C7493F1005BC870 /* Helpers */,
 				92470D001C389081003E6F7E /* Supporting Files */,
+				08F6F8731C749BFB005BC870 /* MenuItem.h */,
+				08F6F8741C749BFB005BC870 /* MenuItem.m */,
+				08F6F8761C749C43005BC870 /* MenuTableViewController.h */,
+				08F6F8771C749C43005BC870 /* MenuTableViewController.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -708,9 +718,11 @@
 				08F6F8301C748B0F005BC870 /* FestivalsViewController.m in Sources */,
 				923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */,
 				08F6F82C1C748AF9005BC870 /* FestivalCell.m in Sources */,
+				08F6F8751C749BFB005BC870 /* MenuItem.m in Sources */,
 				9291072C1C6C51DC004B517C /* ProfileCell.m in Sources */,
 				92880C3D1C6D49C900315DF0 /* ProfileViewController.m in Sources */,
 				92470D051C389081003E6F7E /* AppDelegate.m in Sources */,
+				08F6F8781C749C43005BC870 /* MenuTableViewController.m in Sources */,
 				929107291C6C50BB004B517C /* ScheduleViewController.m in Sources */,
 				08F6F8361C748B3D005BC870 /* HeaderMenuCell.m in Sources */,
 				08F6F8281C748AE1005BC870 /* CustomUILabel.m in Sources */,
