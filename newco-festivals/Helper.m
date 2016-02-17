@@ -3,7 +3,7 @@
 //  newco-IOS
 //
 //  Created by yassen aniss
-//  Copyright © 2016 yassen aniss. All rights reserved.
+//  Copyright © 2016 Newco. All rights reserved.
 //
 
 #import "Helper.h"

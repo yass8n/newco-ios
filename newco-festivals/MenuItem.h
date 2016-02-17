@@ -3,7 +3,7 @@
 //  newco-IOS
 //
 //  Created by yassen aniss on 12/22/15.
-//  Copyright © 2015 yassen aniss. All rights reserved.
+//  Copyright © 2015 Newco. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

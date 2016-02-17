@@ -3,7 +3,7 @@
 //  newco-IOS
 //
 //  Created by alondra on 2/14/16.
-//  Copyright © 2016 yassen aniss. All rights reserved.
+//  Copyright © 2016 Newco. All rights reserved.
 //
 
 #import "WebViewController.h"

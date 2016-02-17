@@ -3,7 +3,7 @@
 //  newco-IOS
 //
 //  Created by yassen aniss
-//  Copyright (c) 2016 yassen aniss. All rights reserved.
+//  Copyright (c) 2016 Newco. All rights reserved.
 //
 
 #import "DirectoryViewController.h"
