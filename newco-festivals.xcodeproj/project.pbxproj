@@ -300,6 +300,8 @@
 		08F6F85A1C74943E005BC870 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				08F6F8731C749BFB005BC870 /* MenuItem.h */,
+				08F6F8741C749BFB005BC870 /* MenuItem.m */,
 				929107241C6C4FF4004B517C /* User.h */,
 				929107251C6C4FF4004B517C /* User.m */,
 				921659591C58CC9E006239D6 /* session.h */,
@@ -320,6 +322,8 @@
 		08F6F85C1C74944B005BC870 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				08F6F8761C749C43005BC870 /* MenuTableViewController.h */,
+				08F6F8771C749C43005BC870 /* MenuTableViewController.m */,
 				08F6F8401C748BE1005BC870 /* WebViewController.h */,
 				08F6F8411C748BE1005BC870 /* WebViewController.m */,
 				08F6F82E1C748B0F005BC870 /* FestivalsViewController.h */,
@@ -466,10 +470,6 @@
 				08F6F8571C74941B005BC870 /* StoryBoards */,
 				08F6F8511C7493F1005BC870 /* Helpers */,
 				92470D001C389081003E6F7E /* Supporting Files */,
-				08F6F8731C749BFB005BC870 /* MenuItem.h */,
-				08F6F8741C749BFB005BC870 /* MenuItem.m */,
-				08F6F8761C749C43005BC870 /* MenuTableViewController.h */,
-				08F6F8771C749C43005BC870 /* MenuTableViewController.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
