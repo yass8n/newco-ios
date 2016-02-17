@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08F6F7DD1C747860005BC870 /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7DC1C747860005BC870 /* Animation.m */; };
+		08F6F7E01C74787C005BC870 /* Credentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7DF1C74787C005BC870 /* Credentials.m */; };
+		08F6F7E31C74788F005BC870 /* FestivalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7E21C74788F005BC870 /* FestivalData.m */; };
+		08F6F7E61C7478A3005BC870 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7E51C7478A3005BC870 /* Helper.m */; };
+		08F6F7E91C7478ED005BC870 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7E81C7478ED005BC870 /* SWRevealViewController.m */; };
+		08F6F7EC1C747903005BC870 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7EB1C747903005BC870 /* WebService.m */; };
+		08F6F7EF1C747974005BC870 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7EE1C747974005BC870 /* MenuCell.m */; };
 		7DE8288268CF6CEF49B779B7 /* libPods-newco-festivals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */; };
 		9212EB3D1C61499F00D17504 /* colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212EB3C1C61499F00D17504 /* colors.m */; };
 		9216595B1C58CC9E006239D6 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 9216595A1C58CC9E006239D6 /* session.m */; };
@@ -59,6 +66,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08F6F7DB1C747860005BC870 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		08F6F7DC1C747860005BC870 /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
+		08F6F7DE1C74787C005BC870 /* Credentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credentials.h; sourceTree = "<group>"; };
+		08F6F7DF1C74787C005BC870 /* Credentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Credentials.m; sourceTree = "<group>"; };
+		08F6F7E11C74788F005BC870 /* FestivalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalData.h; sourceTree = "<group>"; };
+		08F6F7E21C74788F005BC870 /* FestivalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalData.m; sourceTree = "<group>"; };
+		08F6F7E41C7478A3005BC870 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		08F6F7E51C7478A3005BC870 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		08F6F7E71C7478ED005BC870 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		08F6F7E81C7478ED005BC870 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		08F6F7EA1C747903005BC870 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
+		08F6F7EB1C747903005BC870 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
+		08F6F7ED1C747974005BC870 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
+		08F6F7EE1C747974005BC870 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newco-festivals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5122098224D3F685DE88C5F7 /* Pods-newco-festivals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.debug.xcconfig"; sourceTree = "<group>"; };
 		9212EB3B1C61499F00D17504 /* colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colors.h; sourceTree = "<group>"; };
@@ -222,6 +243,20 @@
 				92880C391C6D474C00315DF0 /* PageLoader.m */,
 				92880C3B1C6D49C900315DF0 /* ProfileViewController.h */,
 				92880C3C1C6D49C900315DF0 /* ProfileViewController.m */,
+				08F6F7DB1C747860005BC870 /* Animation.h */,
+				08F6F7DC1C747860005BC870 /* Animation.m */,
+				08F6F7DE1C74787C005BC870 /* Credentials.h */,
+				08F6F7DF1C74787C005BC870 /* Credentials.m */,
+				08F6F7E11C74788F005BC870 /* FestivalData.h */,
+				08F6F7E21C74788F005BC870 /* FestivalData.m */,
+				08F6F7E41C7478A3005BC870 /* Helper.h */,
+				08F6F7E51C7478A3005BC870 /* Helper.m */,
+				08F6F7E71C7478ED005BC870 /* SWRevealViewController.h */,
+				08F6F7E81C7478ED005BC870 /* SWRevealViewController.m */,
+				08F6F7EA1C747903005BC870 /* WebService.h */,
+				08F6F7EB1C747903005BC870 /* WebService.m */,
+				08F6F7ED1C747974005BC870 /* MenuCell.h */,
+				08F6F7EE1C747974005BC870 /* MenuCell.m */,
 			);
 			path = "newco-festivals";
 			sourceTree = "<group>";
@@ -455,7 +490,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F6F7EC1C747903005BC870 /* WebService.m in Sources */,
 				929107261C6C4FF4004B517C /* User.m in Sources */,
+				08F6F7E31C74788F005BC870 /* FestivalData.m in Sources */,
 				92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */,
 				923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */,
 				9291072C1C6C51DC004B517C /* ProfileCell.m in Sources */,
@@ -463,9 +500,11 @@
 				92470D051C389081003E6F7E /* AppDelegate.m in Sources */,
 				929107291C6C50BB004B517C /* ScheduleViewController.m in Sources */,
 				924ECB741C613B0C0093CAA1 /* ApplicationViewController.m in Sources */,
+				08F6F7E61C7478A3005BC870 /* Helper.m in Sources */,
 				929107351C6C532D004B517C /* DirectoryViewController.m in Sources */,
 				929107211C6C4740004B517C /* UserInitial.m in Sources */,
 				92470D021C389081003E6F7E /* main.m in Sources */,
+				08F6F7E91C7478ED005BC870 /* SWRevealViewController.m in Sources */,
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,
 				9291073D1C6C5B49004B517C /* HighlightableView.m in Sources */,
@@ -473,6 +512,9 @@
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
 				92880C3A1C6D474C00315DF0 /* PageLoader.m in Sources */,
 				929107381C6C5A4E004B517C /* UserImage.m in Sources */,
+				08F6F7EF1C747974005BC870 /* MenuCell.m in Sources */,
+				08F6F7E01C74787C005BC870 /* Credentials.m in Sources */,
+				08F6F7DD1C747860005BC870 /* Animation.m in Sources */,
 				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
 				9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */,

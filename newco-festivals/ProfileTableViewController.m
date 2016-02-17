@@ -38,8 +38,6 @@ static const float MIN_SESSION_HEIGHT = 155.0;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [UIApplication sharedApplication].
-    networkActivityIndicatorVisible = NO;
     ApplicationViewController.currentVC = enumProfileTable;
     if (self.session){
         self.navigationController.navigationBar.barTintColor = self.session.color;
@@ -125,8 +123,6 @@ static const float MIN_SESSION_HEIGHT = 155.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [UIApplication sharedApplication].
-    networkActivityIndicatorVisible = YES;
     [self goToProfile:[usersArray objectAtIndex:indexPath.row] withType:self.type];
 }
 @end

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ApplicationViewController.h"
 @interface ProfileViewController : ApplicationViewController
 @property (weak, nonatomic) IBOutlet UIView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *name;

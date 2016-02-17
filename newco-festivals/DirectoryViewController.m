@@ -27,6 +27,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     ApplicationViewController.currentVC = enumDirectory;
+    [self setRightNavButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,22 +69,22 @@
 
 //an event handling method
 - (void)goToPresenters:(UITapGestureRecognizer *)recognizer {
-    [self goToProfileTable: ApplicationViewController.presentersDict withTitle:@"Presenters" withSession:nil withType:@"speaker"];
+    [self goToProfileTable: [FestivalData sharedFestivalData].presentersDict withTitle:@"Presenters" withSession:nil withType:@"speaker"];
 }
 
 //an event handling method
 - (void)goToAttendees:(UITapGestureRecognizer *)recognizer {
-    [self goToProfileTable: ApplicationViewController.attendeesDict withTitle:@"Attendees" withSession:nil withType:@"attendee"];
+    [self goToProfileTable: [FestivalData sharedFestivalData].attendeesDict withTitle:@"Attendees" withSession:nil withType:@"attendee"];
 
 }
 
 //an event handling method
 - (void)goToCompanies:(UITapGestureRecognizer *)recognizer {
-    [self goToProfileTable: ApplicationViewController.companiesDict withTitle:@"Companies" withSession:nil withType:@"company"];
+    [self goToProfileTable: [FestivalData sharedFestivalData].companiesDict withTitle:@"Companies" withSession:nil withType:@"company"];
 }
 
 //an event handling method
 - (void)goToVolunteers:(UITapGestureRecognizer *)recognizer {
-    [self goToProfileTable: ApplicationViewController.volunteersDict withTitle:@"Volunteers" withSession:nil withType:@"volunteer"];
+    [self goToProfileTable: [FestivalData sharedFestivalData].volunteersDict withTitle:@"Volunteers" withSession:nil withType:@"volunteer"];
 }
 @end

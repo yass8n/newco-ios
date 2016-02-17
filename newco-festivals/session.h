@@ -2,13 +2,12 @@
 //  session.h
 //  newco-IOS
 //
-//  Created by yassen aniss.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ApplicationViewController.h"
 
 @interface Session : NSObject
 
@@ -16,8 +15,9 @@
 @property (nonatomic, strong) NSString *start_time;
 @property (nonatomic, strong) NSString *end_time;
 @property (nonatomic, strong) NSString *worded_date;
-@property (nonatomic, strong) UIColor *color;
 @property (nonatomic, strong) NSString *note1;
+@property BOOL enabled;
+@property BOOL picked;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *event_key;
 @property (nonatomic, strong) NSString *event_type;
@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *audience;
+@property (nonatomic, strong) UIColor *color;
 @property (nonatomic, strong) NSArray *speakers;
 @property (nonatomic, strong) NSArray *companies;
 @property (nonatomic, strong) NSDate *event_start;

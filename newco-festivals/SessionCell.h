@@ -2,7 +2,7 @@
 //  SessionCell.h
 //  newco-IOS
 //
-//  Created by yassen aniss.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIView *outerContainer;
 @property (weak, nonatomic) IBOutlet UIView *statusContainer;
 @property (nonatomic, weak) UIViewController *controller;
+@property (weak, nonatomic) IBOutlet UIImageView *checkMark;
 
 @end

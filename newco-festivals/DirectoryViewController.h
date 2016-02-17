@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ApplicationViewController.h"
 
 
 @interface DirectoryViewController : ApplicationViewController

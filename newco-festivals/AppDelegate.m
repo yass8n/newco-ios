@@ -2,12 +2,11 @@
 //  AppDelegate.m
 //  newco-IOS
 //
-//  Created by yassen aniss.
+//  Created by yassen aniss
 //  Copyright (c) 2016 yassen aniss. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "ApplicationViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +16,22 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // See if user is currently logged in via userdefaults
+//    NSUserDefaults *currentUserDefaults = [NSUserDefaults standardUserDefaults];
+//    NSData *archivedObject = [currentUserDefaults objectForKey:@"currentUser"];
+//    
+//    Credentials *credentials = [[Credentials alloc] init];
+//    
+//    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
+//    NSDictionary *myUser = [prefs dictionaryForKey:@"user"];
+//    if (myUser){
+//        [Credentials sharedCredentials].currentUser = [[NSDictionary alloc] init];
+//        [Credentials sharedCredentials].currentUser = myUser;
+//        [self setUserNavBar:myUser];
+//    }
+    
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -37,8 +52,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [ApplicationViewController initEventColorsArray];
-    ApplicationViewController.enableFullUserInteraction = NO;
+    [[FestivalData sharedFestivalData] initEventColorsArray];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

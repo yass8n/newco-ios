@@ -11,6 +11,7 @@
 #import "UserInitial.h"
 
 @interface ProfileViewController ()
+    @property (weak, nonatomic) IBOutlet UIView *superView;
     @property (weak, nonatomic) IBOutlet UITableView *sessionTableView;
     @property (strong, nonatomic) NSMutableArray * sessionsArray;
     @property (strong, nonatomic) NSMutableDictionary* datesDict;
@@ -19,33 +20,6 @@
 @end
 
 @implementation ProfileViewController
-- (void)fetchSesionsForUser:(NSString*)username {
-    NSString* fullURL = [NSString stringWithFormat:@"%@/api/user/sessions?api_key=%@&format=json", ApplicationViewController.API_URL, ApplicationViewController.API_KEY];
-    NSURL *url = [NSURL URLWithString:fullURL];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response,
-                                               NSData *data, NSError *connectionError)
-     {
-         if (data.length > 0 && connectionError == nil)
-         {
-             NSArray *allSessionTransactions = [NSJSONSerialization JSONObjectWithData:data
-                                                                  options:0
-                                                                    error:NULL];
-        self.sessionsArray = [[NSMutableArray alloc] init];
-             for (int i =0; i < [allSessionTransactions count]; i++){
-                 NSMutableDictionary* sessionTransaction = [allSessionTransactions objectAtIndex:i];
-                 if ([[sessionTransaction objectForKey:@"username"] isEqual:username]){
-                     [self.sessionsArray addObject:[ApplicationViewController.sessionsDict objectForKey:[sessionTransaction objectForKey:@"event_key"]]];
-                 }
-             }
-        [self sortAndSetSessionObjects];
-         }else {
-             [self showBadConnectionAlert];
-         }
-     }];
-}
 - (BOOL)checkIfPersonInArray:(NSArray*)array person:(NSString*)username {
     for (int i = 0; i < [array count]; i ++){
         NSDictionary * user = [array objectAtIndex:i];
@@ -55,10 +29,10 @@
     }
     return NO;
 }
-- (void)fetchSessionForUser:(NSString*)username forType:(NSString*)type{
+- (void)getSessionForUser:(NSString*)username forType:(NSString*)type{
     self.sessionsArray = [[NSMutableArray alloc] init];
-    for (int i =0; i < [ApplicationViewController.sessionsArray count]; i++){
-        Session * session = [ApplicationViewController.sessionsArray objectAtIndex:i];
+    for (int i =0; i < [[FestivalData sharedFestivalData].sessionsArray  count]; i++){
+        Session * session = [[FestivalData sharedFestivalData].sessionsArray  objectAtIndex:i];
         if ([type  isEqual: @"speaker"]){
             if ([self checkIfPersonInArray:session.speakers person:[self.user objectForKey:@"username"]]){
                 [self.sessionsArray addObject:session];
@@ -76,15 +50,13 @@
     [self reloadTableView];
 }
 -(void)sortAndSetSessionObjects{
-    [self setDatesDict:self.datesDict setOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict forSessions:self.sessionsArray];
+    [[FestivalData sharedFestivalData] setDatesDict:self.datesDict setOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict forSessions:self.sessionsArray initializeEverything:NO];
     
     NSSortDescriptor *sortStart = [[NSSortDescriptor alloc] initWithKey:@"event_start" ascending:YES];
     
     [self.sessionsArray sortUsingDescriptors:[NSMutableArray arrayWithObjects:sortStart, nil]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self reloadTableView];
-        [UIApplication sharedApplication].
-        networkActivityIndicatorVisible = NO;
     });
 }
 - (void)viewDidLoad {
@@ -103,11 +75,22 @@
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCell" bundle:nil]forCellReuseIdentifier:@"session_cell"];
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCellHeader" bundle:nil]forCellReuseIdentifier:@"session_cell_header"];
     
-    dispatch_queue_t que = dispatch_queue_create("getSessions", NULL);
+    NSString * username = [self.user objectForKey:@"username"];
     if ([self.type isEqual:@"speaker"] || [self.type isEqual:@"company"] ){
-        dispatch_async(que, ^{[self fetchSessionForUser:[self.user objectForKey:@"username"] forType:self.type];});
+             dispatch_async(dispatch_queue_create("", NULL), ^{[self getSessionForUser:username forType:self.type];});
+
     } else {
-        dispatch_async(que, ^{[self fetchSesionsForUser:[self.user objectForKey:@"username"]];});
+        WebService * webService = [[WebService alloc] initWithView:self.view];
+        [webService fetchSesionsForUser:^(NSArray *allSessionTransactions) {
+            self.sessionsArray = [[NSMutableArray alloc] init];
+            for (int i =0; i < [allSessionTransactions count]; i++){
+                NSMutableDictionary* sessionTransaction = [allSessionTransactions objectAtIndex:i];
+                if ([[sessionTransaction objectForKey:@"username"] isEqual:username]){
+                    [self.sessionsArray addObject:[[FestivalData sharedFestivalData].sessionsDict objectForKey:[sessionTransaction objectForKey:@"event_key"]]];
+                }
+            }
+            [self sortAndSetSessionObjects];
+        }];
     }
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -133,6 +116,10 @@
     }
     self.positionAndCompany.text = positionAndCompany;
     self.navigationItem.title = name;
+    if ([[Credentials sharedCredentials].currentUser count] > 0){
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
+        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    }
     NSString* avatar = [self.user objectForKey:@"avatar"];
     CGRect rect = CGRectMake(0, 0, self.profileImage.bounds.size.width, self.profileImage.bounds.size.height);
 
@@ -189,5 +176,19 @@
 
 - (IBAction)goToWebsite:(id)sender {
 }
+- (IBAction)logUserOut:(id)sender {
+     dispatch_queue_t que = dispatch_queue_create("logOut", NULL);
+    dispatch_async(que, ^{
+        //code executed in background
+        [[Credentials sharedCredentials] logOut];
+        //code to be executed on main thread when block is finished
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setDefaultUserIcon];
+            [self reloadTableView];
+            [self setInvisibleRightButton];
+        });
+    });
+}
+
 
 @end

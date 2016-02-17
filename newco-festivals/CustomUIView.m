@@ -7,7 +7,6 @@
 //
 
 #import "CustomUIView.h"
-#import "ApplicationViewController.h"
 #import <QuartzCore/QuartzCore.h>
 @implementation CALayer (Additions)
 
