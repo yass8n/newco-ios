@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -18,9 +18,16 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="festival_cell" translatesAutoresizingMaskIntoConstraints="NO" id="6FO-f4-DKP">
                         <rect key="frame" x="8" y="8" width="389" height="127"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9c-5l-5GY">
-                        <rect key="frame" x="8" y="8" width="389" height="127"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="kja-cy-knl">
+                        <rect key="frame" x="128" y="23" width="150" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="WHr-VF-NbF"/>
+                            <constraint firstAttribute="width" constant="150" id="r9d-2l-J1M"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9c-5l-5GY">
+                        <rect key="frame" x="203" y="129" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -31,9 +38,21 @@
                     <constraint firstItem="t9c-5l-5GY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="INE-My-9KR"/>
                     <constraint firstItem="6FO-f4-DKP" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Pnm-Dk-sTc"/>
                     <constraint firstItem="t9c-5l-5GY" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="QcJ-9i-cF1"/>
+                    <constraint firstItem="kja-cy-knl" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Tuq-bc-t6v"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6FO-f4-DKP" secondAttribute="trailing" id="nkb-xD-acc"/>
+                    <constraint firstItem="kja-cy-knl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="sgx-YI-DiW"/>
+                    <constraint firstItem="t9c-5l-5GY" firstAttribute="top" secondItem="kja-cy-knl" secondAttribute="bottom" constant="15" id="uSP-EA-mUb"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="INE-My-9KR"/>
+                        <exclude reference="uSP-EA-mUb"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="t9c-5l-5GY" secondAttribute="bottom" constant="15" id="bHl-LR-iB7"/>
+            </constraints>
             <connections>
                 <outlet property="image" destination="6FO-f4-DKP" id="rSU-T9-Kha"/>
                 <outlet property="title" destination="t9c-5l-5GY" id="paC-sA-8Wx"/>
@@ -41,4 +60,7 @@
             <point key="canvasLocation" x="212.5" y="238"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="logo" width="281" height="60"/>
+    </resources>
 </document>
