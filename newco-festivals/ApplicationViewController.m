@@ -489,7 +489,8 @@ static UITapGestureRecognizer *singleFingerTap;
         if (result == copy){
 //            IMWebservice * webservice = [[IMWebservice alloc]init];
 //            [webservice registerSharedSession:self.sharingSession.sessionId note:@"copied" sharedBy:self.sharedBy];
-            [UIPasteboard generalPasteboard].string = @"HIIIII";
+            NSDictionary* festival = [Credentials sharedCredentials].festival;
+            [UIPasteboard generalPasteboard].string = [NSString stringWithFormat:@"%@/event/%@", [festival objectForKey:@"url"], session.id_];
             ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [modalView showSuccessModal:@"Link Copied!" onWindow:self.view.window];
@@ -507,13 +508,29 @@ static UITapGestureRecognizer *singleFingerTap;
 -(void)postToFaceBook:(Session*)session{
     
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    [content setContentTitle:[session.title capitalizedString]];//title
-    NSString * desc = [[NSString alloc]initWithFormat:@"Join my %@ session", session.title];
-    [content setContentDescription:desc];//description
-//    content.contentURL = [NSURL URLWithString:@"HIIII"];
-    [FBSDKShareDialog showFromViewController:self
-                                 withContent:content
-                                    delegate:self];
+    NSDictionary* festival = [Credentials sharedCredentials].festival;
+    content.contentTitle = [session.title capitalizedString];//title
+    NSString * desc = [[NSString alloc]initWithFormat:@"I'm going to %@ at Newco %@", session.title, [[festival objectForKey:@"city"]capitalizedString]];
+    content.contentDescription = desc;//description
+    content.contentURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/event/%@", [festival objectForKey:@"url"], session.id_]];
+    
+    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+    dialog.fromViewController = self;
+    dialog.shareContent = content;
+    dialog.delegate = self;
+    dialog.mode = FBSDKShareDialogModeNative; // if you don't set this before canShow call, canShow would always return YES
+    if (![dialog canShow]) {
+        // fallback presentation when there is no FB app
+        dialog.mode = FBSDKShareDialogModeFeedBrowser;
+    }
+    [dialog show];
+    
+    
+//    [FBSDKShareDialog showFromViewController:self
+//                                 withContent:content
+//                                    delegate:self];
+    
+    
 }
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
 {
@@ -571,11 +588,13 @@ static UITapGestureRecognizer *singleFingerTap;
         controller.completionHandler = myBlock;
         
         //Adding the Text to the facebook post value from iOS
-        [controller setInitialText:[NSString stringWithFormat:@"Join my %@ list", session.title]];
+        NSDictionary* festival = [Credentials sharedCredentials].festival;
+        NSString * desc = [[NSString alloc]initWithFormat:@"I'm going to %@ at Newco %@", session.title, [[festival objectForKey:@"city"]capitalizedString]];
+        [controller setInitialText:desc];
         
         //Adding the URL to the facebook post value from iOS
         
-//        [controller addURL:[NSURL URLWithString:list.URLSafeLink]];
+        [controller addURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/event/%@", [festival objectForKey:@"url"], session.id_]]];
         
         //Adding the Image to the facebook post value from iOS
         

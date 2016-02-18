@@ -41,27 +41,28 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb226752407665179</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>226752407665179</string>
-    <key>FacebookDisplayName</key>
-    <string>Newco-IOS</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fb</string>
-        <string>fbapi</string>
-        <string>fb-messenger-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-        <string>twitter</string>
-    </array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb226752407665179</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>226752407665179</string>
+	<key>FacebookDisplayName</key>
+	<string>Newco-IOS</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi20150629</string>
+		<string>fb</string>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+		<string>twitter</string>
+	</array>
 </dict>
 </plist>
