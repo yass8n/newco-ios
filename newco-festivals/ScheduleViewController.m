@@ -73,19 +73,21 @@
     if ([self.view.subviews containsObject:self.festivalImageTableView]){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             static BOOL keep_flashing = YES;
-            [UIView animateWithDuration:0.12
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveEaseInOut |
-             UIViewAnimationOptionRepeat |
-             UIViewAnimationOptionAutoreverse |
-             UIViewAnimationOptionAllowUserInteraction
-                             animations:^{
-                                 if (keep_flashing){
-                                     self.festivalImageTableView.alpha = 0.0f;
+            if (delay == 0){
+                [UIView animateWithDuration:0.12
+                                      delay:0.0
+                                    options:UIViewAnimationOptionCurveEaseInOut |
+                 UIViewAnimationOptionRepeat |
+                 UIViewAnimationOptionAutoreverse |
+                 UIViewAnimationOptionAllowUserInteraction
+                                 animations:^{
+                                     if (keep_flashing){
+                                         self.festivalImageTableView.alpha = 0.0f;
+                                     }
                                  }
-                             }
-                             completion:^(BOOL finished){
-                             }];
+                                 completion:^(BOOL finished){
+                                 }];
+            }
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 keep_flashing = NO;
                 self.festivalImageTableView.alpha = 1.0f;
@@ -123,7 +125,7 @@
 
 //tableView functions
 - (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
-    [self animateFestivalTableViewAway:.5];
+    [self animateFestivalTableViewAway:1];
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.sessionTableView){
