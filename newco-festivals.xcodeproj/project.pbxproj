@@ -32,6 +32,7 @@
 		08F6F8501C7491DB005BC870 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F6F84F1C7491DB005BC870 /* FBSDKShareKit.framework */; };
 		08F6F8751C749BFB005BC870 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8741C749BFB005BC870 /* MenuItem.m */; };
 		08F6F8781C749C43005BC870 /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8771C749C43005BC870 /* MenuTableViewController.m */; };
+		08F8536D1C7588A000E66966 /* AppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F8536C1C7588A000E66966 /* AppConst.m */; };
 		7DE8288268CF6CEF49B779B7 /* libPods-newco-festivals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */; };
 		9212EB3D1C61499F00D17504 /* colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212EB3C1C61499F00D17504 /* colors.m */; };
 		9216595B1C58CC9E006239D6 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 9216595A1C58CC9E006239D6 /* session.m */; };
@@ -129,6 +130,8 @@
 		08F6F8741C749BFB005BC870 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
 		08F6F8761C749C43005BC870 /* MenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController.h; sourceTree = "<group>"; };
 		08F6F8771C749C43005BC870 /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
+		08F8536C1C7588A000E66966 /* AppConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConst.m; sourceTree = "<group>"; };
+		08F8536E1C7588A700E66966 /* AppConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConst.h; sourceTree = "<group>"; };
 		4997FEDD598FF57D2CDF3495 /* libPods-newco-festivals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newco-festivals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9212EB3B1C61499F00D17504 /* colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colors.h; sourceTree = "<group>"; };
 		9212EB3C1C61499F00D17504 /* colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = colors.m; sourceTree = "<group>"; };
@@ -479,11 +482,13 @@
 			children = (
 				92470D141C389081003E6F7E /* Info.plist */,
 				08F6F8461C748DC6005BC870 /* PrefixHeader.pch */,
+				9212EB3B1C61499F00D17504 /* colors.h */,
 				9212EB3C1C61499F00D17504 /* colors.m */,
 				92470D0C1C389081003E6F7E /* newco_festivals.xcdatamodeld */,
 				9212EB3E1C6149A800D17504 /* constants.h */,
-				9212EB3B1C61499F00D17504 /* colors.h */,
 				92470D011C389081003E6F7E /* main.m */,
+				08F8536C1C7588A000E66966 /* AppConst.m */,
+				08F8536E1C7588A700E66966 /* AppConst.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -736,6 +741,7 @@
 				08F6F83F1C748BBC005BC870 /* RegularMenuCell.m in Sources */,
 				924ECB681C6134AC0093CAA1 /* SignInViewController.m in Sources */,
 				08F6F8391C748B61005BC870 /* ModalView.m in Sources */,
+				08F8536D1C7588A000E66966 /* AppConst.m in Sources */,
 				08F6F8491C748F70005BC870 /* CustomUIView.m in Sources */,
 				9212EB3D1C61499F00D17504 /* colors.m in Sources */,
 				929107321C6C52E3004B517C /* RootViewController.m in Sources */,
