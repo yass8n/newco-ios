@@ -15,7 +15,6 @@
 #import "ShareModalView.h"
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
-
 @interface ApplicationViewController : UIViewController <UIGestureRecognizerDelegate, ShareModalDelegate, FBSDKSharingDelegate, BaseModalDelegate>
 -(void)showWebViewWithUrl:(NSString*)url;
 -(void)showPageLoader;

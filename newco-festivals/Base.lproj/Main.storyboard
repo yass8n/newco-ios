@@ -1440,8 +1440,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dJi-HZ-Wme">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dJi-HZ-Wme">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="9dk-3k-Pe4" id="wjZ-hN-d4X"/>
@@ -1451,7 +1451,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dJi-HZ-Wme" firstAttribute="top" secondItem="aZZ-UF-oXB" secondAttribute="topMargin" constant="20" id="C0P-pV-cKt"/>
+                            <constraint firstItem="dJi-HZ-Wme" firstAttribute="top" secondItem="aZZ-UF-oXB" secondAttribute="topMargin" id="C0P-pV-cKt"/>
                             <constraint firstItem="dJi-HZ-Wme" firstAttribute="leading" secondItem="aZZ-UF-oXB" secondAttribute="leadingMargin" constant="-20" id="IDb-1F-DD5"/>
                             <constraint firstItem="Vm0-Ru-E7o" firstAttribute="top" secondItem="dJi-HZ-Wme" secondAttribute="bottom" id="VMx-Aw-M7z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dJi-HZ-Wme" secondAttribute="trailing" constant="-20" id="gAo-rr-i3s"/>

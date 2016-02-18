@@ -22,8 +22,6 @@
     NSMutableArray * cellsArray;
 
 }
-static const float MIN_SESSION_HEIGHT = 155.0;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];

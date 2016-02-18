@@ -28,7 +28,19 @@
 }
 
 static CGFloat FESTIVAL_HEIGHT = 90;
-
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                            withAnimation:UIStatusBarAnimationFade];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO
+                                            withAnimation:UIStatusBarAnimationFade];
+}
 -(void) registerTableCells{
     [self.festivalsTableView registerNib:[UINib nibWithNibName:@"FestivalCell" bundle:nil]forCellReuseIdentifier:@"festival_cell"];
     [self.festivalsTableView registerNib:[UINib nibWithNibName:@"FestivalCellHeader" bundle:nil]forCellReuseIdentifier:@"festival_cell_header"];
@@ -76,13 +88,13 @@ static CGFloat FESTIVAL_HEIGHT = 90;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    FestivalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"festival_cell" forIndexPath:indexPath];
     NSDictionary * festival;
     if (indexPath.section == 0){
         festival = [activeFestivalsArray objectAtIndex:indexPath.row];
     }else{
         festival = [inactiveFestivalsArray objectAtIndex:indexPath.row];
     }
-    FestivalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"festival_cell" forIndexPath:indexPath];
     [cell.image sd_setImageWithURL:[NSURL URLWithString:[festival objectForKey:@"hero_image"]]
                   placeholderImage:[Helper imageFromColor:[UIColor myPlaceHolderColor]]];
     
@@ -96,7 +108,6 @@ static CGFloat FESTIVAL_HEIGHT = 90;
     }else{
         cell.title.hidden = YES;
         cell.logo.hidden = YES;
-        
     }
 
     return cell;
@@ -140,7 +151,7 @@ static CGFloat FESTIVAL_HEIGHT = 90;
     return headerCell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 15;
+    return 20;
 }
 
 @end

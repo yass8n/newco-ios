@@ -10,5 +10,6 @@
 #define AppConst_h
 
 extern NSString* const firebaseUrl;
-
+extern float const SESSION_HEADER_HEIGHT;
+extern float const MIN_SESSION_HEIGHT;
 #endif /* AppConst_h */
