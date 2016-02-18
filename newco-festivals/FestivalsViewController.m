@@ -27,7 +27,6 @@
     NSArray* inactiveFestivalsArray;
 }
 
-static CGFloat FESTIVAL_HEIGHT = 90;
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -88,32 +87,13 @@ static CGFloat FESTIVAL_HEIGHT = 90;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FestivalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"festival_cell" forIndexPath:indexPath];
     NSDictionary * festival;
     if (indexPath.section == 0){
         festival = [activeFestivalsArray objectAtIndex:indexPath.row];
     }else{
         festival = [inactiveFestivalsArray objectAtIndex:indexPath.row];
     }
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:[festival objectForKey:@"hero_image"]]
-                  placeholderImage:[Helper imageFromColor:[UIColor myPlaceHolderColor]]];
-    
-    BOOL needs_image_info = [[festival objectForKey:@"needs_image_info"] boolValue];
-   
-    if (needs_image_info){
-        cell.title.hidden = NO;
-        cell.logo.hidden = NO;
-        cell.dateView.hidden = NO;
-        cell.date.text = [festival objectForKey:@"date"];
-        cell.title.text = [[festival objectForKey:@"city"] uppercaseString];
-        cell.title.textColor = [UIColor whiteColor];
-    }else{
-        cell.dateView.hidden = YES;
-        cell.title.hidden = YES;
-        cell.logo.hidden = YES;
-    }
-
-    return cell;
+    return [self cellForFestival:festival atIndexPath:indexPath forTableView:tableView backGroundColor:[UIColor blackColor]];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary * festival;

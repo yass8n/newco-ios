@@ -12,3 +12,5 @@
 NSString* const firebaseUrl = @"https://newco-festivals.firebaseio.com/"; //production
 const float SESSION_HEADER_HEIGHT = 45.0;
 const float MIN_SESSION_HEIGHT = 130.0;
+const float FESTIVAL_HEIGHT = 90;
+

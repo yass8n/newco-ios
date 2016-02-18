@@ -22,6 +22,7 @@
 #import "ModalView.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Twitter/Twitter.h>
+#import "FestivalCell.h"
 
 
 @interface ApplicationViewController ()
@@ -153,6 +154,30 @@ static UITapGestureRecognizer *singleFingerTap;
     // Ensure a view controller is loaded
     self.segmentedControl.selectedSegmentIndex = 0;
     [self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.segmentedControl.selectedSegmentIndex]];
+}
+-(UITableViewCell*)cellForFestival:(NSDictionary *)festival atIndexPath:(NSIndexPath*)indexPath forTableView:(UITableView*)tableView backGroundColor:(UIColor*) color{
+    FestivalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"festival_cell" forIndexPath:indexPath];
+    
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:[festival objectForKey:@"hero_image"]]
+                  placeholderImage:[Helper imageFromColor:[UIColor myPlaceHolderColor]]];
+    
+    BOOL needs_image_info = [[festival objectForKey:@"needs_image_info"] boolValue];
+    
+    if (needs_image_info){
+        cell.title.hidden = NO;
+        cell.logo.hidden = NO;
+        cell.dateView.hidden = NO;
+        cell.date.text = [festival objectForKey:@"date"];
+        cell.title.text = [[festival objectForKey:@"city"] uppercaseString];
+        cell.title.textColor = [UIColor whiteColor];
+    }else{
+        cell.dateView.hidden = YES;
+        cell.title.hidden = YES;
+        cell.logo.hidden = YES;
+    }
+    cell.contentView.backgroundColor = color;
+    
+    return cell;
 }
 
 - (void)cycleFromViewController:(UIViewController*)oldVC toViewController:(UIViewController*)newVC {

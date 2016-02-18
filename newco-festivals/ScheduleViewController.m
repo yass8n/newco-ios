@@ -12,8 +12,11 @@
 #import "SessionCellHeader.h"
 #import "SessionDetailViewController.h"
 #import "DirectoryViewController.h"
+#import "FestivalCell.h"
 
 @interface ScheduleViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *festivalImageTableView;
+
 @property (weak, nonatomic) IBOutlet UITableView *sessionTableView;
 #import "constants.h"
 @end
@@ -47,12 +50,15 @@
 //}
 
 - (void) adjustUI{
-    self.sessionTableView.estimatedRowHeight = 120.0;
+    self.sessionTableView.estimatedRowHeight = SESSION_HEADER_HEIGHT;
     self.sessionTableView.rowHeight = UITableViewAutomaticDimension;
+    self.festivalImageTableView.scrollEnabled = NO;
+    self.festivalImageTableView.userInteractionEnabled = NO;
 }
 - (void) registerTableCells{
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCell" bundle:nil]forCellReuseIdentifier:@"session_cell"];
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCellHeader" bundle:nil]forCellReuseIdentifier:@"session_cell_header"];
+    [self.festivalImageTableView registerNib:[UINib nibWithNibName:@"FestivalCell" bundle:nil]forCellReuseIdentifier:@"festival_cell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -83,38 +89,74 @@
 
 //tableView functions
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (ApplicationViewController.sysVer > 8.00) {
-        return UITableViewAutomaticDimension;
-    } else {
-        return MIN_SESSION_HEIGHT;
+    if (tableView == self.sessionTableView){
+        
+        if (ApplicationViewController.sysVer > 8.00) {
+            return UITableViewAutomaticDimension;
+        } else {
+            return MIN_SESSION_HEIGHT;
+        }
+    }else{
+        return FESTIVAL_HEIGHT;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (ApplicationViewController.sysVer > 8.00) {
-        return UITableViewAutomaticDimension;
-    } else {
-        return MIN_SESSION_HEIGHT;
+    if (tableView == self.sessionTableView){
+        
+        if (ApplicationViewController.sysVer > 8.00) {
+            return UITableViewAutomaticDimension;
+        } else {
+            return MIN_SESSION_HEIGHT;
+        }
+    }else{
+        return FESTIVAL_HEIGHT;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    if (tableView == self.sessionTableView){
+        return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    }else{
+        NSDictionary * festival = [Credentials sharedCredentials].festival;
+        return [self cellForFestival:festival atIndexPath:indexPath forTableView:tableView backGroundColor:[UIColor whiteColor]];
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self didSelectSessionInTableView:tableView atIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    if (tableView == self.sessionTableView){
+        
+        [self didSelectSessionInTableView:tableView atIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    }
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return [[[FestivalData sharedFestivalData].datesDict allKeys] count];
+    if (tableView == self.sessionTableView){
+        
+        return [[[FestivalData sharedFestivalData].datesDict allKeys] count];
+    }else{
+        return 1;
+    }
 }
 - (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
-    return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    if (tableView == self.sessionTableView){
+        
+        return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    }else{
+        return 1;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return [self viewForHeaderInSection:section forTableView:tableView withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    if (tableView == self.sessionTableView){
+        return [self viewForHeaderInSection:section forTableView:tableView withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    }else{
+        return [[UIView alloc]init];
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return SESSION_HEADER_HEIGHT;
+    if (tableView == self.sessionTableView){
+        return SESSION_HEADER_HEIGHT;
+    }else{
+        return 0;
+    }
 }
 @end

@@ -868,7 +868,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title=" Attend ">
-                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -924,13 +924,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw1-9Y-RZJ">
                                                 <rect key="frame" x="32" y="380" width="520" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9d-oA-Jb7">
                                                 <rect key="frame" x="32" y="401" width="516" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="RX3-EQ-xqB">
@@ -1144,21 +1144,46 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="256" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qx5-iu-QXG">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="88" width="600" height="512"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="PO9-wM-o7l"/>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="lkE-DQ-hEd"/>
                                 </connections>
                             </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nQp-MZ-b1O">
+                                <rect key="frame" x="-5" y="-1" width="610" height="90"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="Ha3-zZ-Q6y"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="wXp-WC-d60"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="a9T-T2-khl"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="RqG-Lx-SpX"/>
+                            <constraint firstItem="nQp-MZ-b1O" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="-1" id="3ew-PR-6qu"/>
+                            <constraint firstItem="nQp-MZ-b1O" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="6I1-bi-3Xu"/>
+                            <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="nQp-MZ-b1O" secondAttribute="bottom" constant="-1" id="I1h-V1-hfC"/>
+                            <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="90" id="RqG-Lx-SpX"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Qx5-iu-QXG" secondAttribute="bottom" id="X5J-BC-Mtb"/>
+                            <constraint firstItem="nQp-MZ-b1O" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="Y2o-YJ-1wM"/>
+                            <constraint firstItem="nQp-MZ-b1O" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-25" id="aBb-Be-Uw2"/>
                             <constraint firstAttribute="trailing" secondItem="Qx5-iu-QXG" secondAttribute="trailing" id="dq4-Jt-auc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nQp-MZ-b1O" secondAttribute="trailing" constant="-25" id="jhn-l6-lC1"/>
                             <constraint firstItem="Qx5-iu-QXG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="nkt-Na-WgC"/>
+                            <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="68" id="yxW-jG-27m"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Y2o-YJ-1wM"/>
+                                <exclude reference="I1h-V1-hfC"/>
+                                <exclude reference="RqG-Lx-SpX"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="sag-JN-VmH">
                         <nil key="title"/>
@@ -1186,6 +1211,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="festivalImageTableView" destination="nQp-MZ-b1O" id="ind-Fv-0zd"/>
                         <outlet property="segmentedControl" destination="CjL-bB-nas" id="R8b-T6-Tvj"/>
                         <outlet property="sessionTableView" destination="Qx5-iu-QXG" id="I2j-5S-lqO"/>
                     </connections>
