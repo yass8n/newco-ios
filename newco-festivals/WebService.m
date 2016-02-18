@@ -6,6 +6,7 @@
 //  Copyright © 2016 Newco. All rights reserved.
 //
 #include "SVProgressHUD.h"
+#import <Firebase/Firebase.h>
 @interface WebService()
 -(void) showPageLoader; //forward decleration of private method
 -(void) hidePageLoader; //forward decleration of private method
@@ -311,6 +312,26 @@
     }];
     [dataTask resume];
     
+}
+#pragma Mark-Firebase
+-(void)setToFirebase:(NSArray*)festivals{
+    
+    for (int i = 0; i < [festivals count]; i ++){
+        NSDictionary * festival = [festivals objectAtIndex:i];
+        Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@",firebaseUrl, [festival objectForKey:@"name"]]];
+        Firebase *hopperRef = [ref childByAppendingPath: @"data"];
+        NSDictionary * keep = @{
+                                @"name": [festival objectForKey:@"name"],
+                                @"eventbrite_id": [festival objectForKey:@"eventbrite_id"],
+                                @"needs_image_info": [festival objectForKey:@"needs_image_info"],
+                                @"city": [festival objectForKey:@"city"],
+                                @"hero_image": [festival objectForKey:@"hero_image"],
+                                @"url": [festival objectForKey:@"url"],
+                                @"event_type_is_location": [festival objectForKey:@"event_type_is_location"],
+                                @"active": [festival objectForKey: @"active"],
+                                @"api_key" : [festival objectForKey:@"api_key"]};
+        [hopperRef setValue: keep];
+    }
 }
 
 

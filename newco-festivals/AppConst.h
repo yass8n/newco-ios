@@ -8,7 +8,7 @@
 
 #ifndef AppConst_h
 #define AppConst_h
-extern NSString* const firebaseUrl;
 
+extern NSString* const firebaseUrl;
 
 #endif /* AppConst_h */

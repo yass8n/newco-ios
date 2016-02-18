@@ -9,4 +9,4 @@
 #import <Foundation/Foundation.h>
 #import "AppConst.h"
 
-NSString* const kFirebaseUrl = @"https://newco-festivals.firebaseio.com"; //production
+NSString* const firebaseUrl = @"https://newco-festivals.firebaseio.com/"; //production
