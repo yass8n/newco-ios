@@ -102,10 +102,13 @@ static CGFloat FESTIVAL_HEIGHT = 90;
    
     if (needs_image_info){
         cell.title.hidden = NO;
+        cell.logo.hidden = NO;
+        cell.dateView.hidden = NO;
+        cell.date.text = [festival objectForKey:@"date"];
         cell.title.text = [[festival objectForKey:@"city"] uppercaseString];
         cell.title.textColor = [UIColor whiteColor];
-        cell.logo.hidden = NO;
     }else{
+        cell.dateView.hidden = YES;
         cell.title.hidden = YES;
         cell.logo.hidden = YES;
     }
