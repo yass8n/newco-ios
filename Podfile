@@ -8,4 +8,5 @@ target 'newco-festivals' do
     pod 'Mantle', '~>2.0.6'
     pod 'SVProgressHUD', :head
     pod 'AFNetworking', '~> 3.0'
+    pod 'Firebase', '>= 2.5.0'
 end
