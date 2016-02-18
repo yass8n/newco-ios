@@ -76,6 +76,20 @@
     [self adjustUI];
     [self registerTableCells];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRightNavButton) name:@"setRightNavButton" object:nil];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        CGRect newFrame = CGRectMake(self.festivalImageTableView.frame.origin.x, -self.festivalImageTableView.frame.size.height, self.festivalImageTableView.frame.size.width, 0);
+        CGRect newTableFrame = CGRectMake(self.sessionTableView.frame.origin.x, 0, self.sessionTableView.frame.size.width, self.view.frame.size.height);
+        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.festivalImageTableView.frame = newFrame;
+            self.festivalImageTableView.alpha = 0;
+            self.sessionTableView.frame = newTableFrame;
+        } completion:^(BOOL finished) {
+            [self.festivalImageTableView removeFromSuperview];
+        }];
+    });
+
+
 }
 
 -(void)reloadTableView

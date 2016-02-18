@@ -1144,7 +1144,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="256" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qx5-iu-QXG">
-                                <rect key="frame" x="0.0" y="88" width="600" height="512"/>
+                                <rect key="frame" x="0.0" y="89" width="600" height="511"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="PO9-wM-o7l"/>
@@ -1169,13 +1169,14 @@
                             <constraint firstItem="nQp-MZ-b1O" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="6I1-bi-3Xu"/>
                             <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="nQp-MZ-b1O" secondAttribute="bottom" constant="-1" id="I1h-V1-hfC"/>
                             <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="90" id="RqG-Lx-SpX"/>
+                            <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="nQp-MZ-b1O" secondAttribute="bottom" id="V4P-eL-W2Y"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Qx5-iu-QXG" secondAttribute="bottom" id="X5J-BC-Mtb"/>
                             <constraint firstItem="nQp-MZ-b1O" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="Y2o-YJ-1wM"/>
                             <constraint firstItem="nQp-MZ-b1O" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-25" id="aBb-Be-Uw2"/>
                             <constraint firstAttribute="trailing" secondItem="Qx5-iu-QXG" secondAttribute="trailing" id="dq4-Jt-auc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nQp-MZ-b1O" secondAttribute="trailing" constant="-25" id="jhn-l6-lC1"/>
                             <constraint firstItem="Qx5-iu-QXG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="nkt-Na-WgC"/>
-                            <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="68" id="yxW-jG-27m"/>
+                            <constraint firstItem="Qx5-iu-QXG" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" priority="750" id="yxW-jG-27m"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
