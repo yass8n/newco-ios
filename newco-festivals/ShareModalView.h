@@ -22,7 +22,7 @@ typedef enum sharedByEnum{
 @protocol ShareModalDelegate <NSObject>
 
 @optional
--(void)shareModalGone:(shareEnum)result session:(Session *)list sharedBy:(sharedByEnum)sharedBy;
+-(void)shareModalGone:(shareEnum)result session:(Session *)session ;
 @end
 
 @interface ShareModalView : BaseModal <TargetViewDelegate>

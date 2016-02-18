@@ -15,7 +15,8 @@
 @implementation WebService{
     UIView * view;
 };
-
+static double milliSecondsSinceLastAlert = 0;
+static double milliSecondsSinceLastSession = 0;
 - (id)initWithView: (UIView*) superView
 {
     self = [super init];
@@ -32,11 +33,98 @@
     if (self) {
         self.credentials = [Credentials sharedCredentials];
         self-> view = nil;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"checkInternetConnectivity" object:nil];
+        });
     }
     
     return self;
 }
-
+-(void)startMonitoringInternet{
+    [self monitorInternetConnectivity];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"checkInternetConnectivity" object:nil];
+}
+-(void)addInternetMonitor{
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [self performSelector:@selector(startMonitoringInternet)
+               withObject:nil
+               afterDelay:4.0f];
+    
+}
+-(void)monitorInternetConnectivity{
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        NSLog(@"Reachability changed: %@", AFStringFromNetworkReachabilityStatus(status));
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                // -- Reachable -- //
+                NSLog(@"Reachable");
+                
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+            default:
+                // -- Not reachable -- //
+                NSLog(@"Not Reachable");
+                //                [self showLowInternetConnectivity];
+                break;
+        }
+        
+    }];
+}
+-(void)showLowInternetConnectivity{
+    
+//    double secondsSinceLastAlert = [[NSDate date] timeIntervalSince1970] - milliSecondsSinceLastAlert;
+//    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive &&  secondsSinceLastAlert > 2){
+//        if (milliSecondsSinceLastAlert == 0){
+//            milliSecondsSinceLastAlert =[[NSDate date] timeIntervalSince1970];
+//            return;
+//        }
+//        milliSecondsSinceLastAlert =[[NSDate date] timeIntervalSince1970];
+//        [ALAlertBanner hideAllAlertBanners];
+//        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//        ALAlertBanner *banner = [ALAlertBanner alertBannerForView:appDelegate.window
+//                                                            style:ALAlertBannerStyleWarning
+//                                                         position:ALAlertBannerPositionUnderNavBar
+//                                                            title:@"Low Internet Connection"
+//                                                         subtitle:@""];
+//        [banner show];
+//        UIViewController* currentViewCont = [BaseViewController currentViewController];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//            [MBProgressHUD hideAllHUDsForView:currentViewCont.view animated:YES];
+//            [MBProgressHUD hideAllHUDsForView:currentViewCont.navigationController.view animated:YES];
+//            [MBProgressHUD hideAllHUDsForView:currentViewCont.navigationController.view.window animated:YES];
+//            [MBProgressHUD hideAllHUDsForView:appDelegate.window animated:YES];
+//            
+//            NSString * frontControllerName = NSStringFromClass([currentViewCont class]);
+//            if ([frontControllerName isEqualToString:@"StreamViewController"]){
+//                StreamViewController * vc = (StreamViewController*) currentViewCont;
+//                [vc.refreshControl endRefreshing];
+//            }
+//            if (self.delegate && [self.delegate respondsToSelector:@selector(lowInternetDetected)]) {
+//                [self.delegate lowInternetDetected];
+//            }
+//        });
+//        
+//    }
+    
+}
+-(BOOL) isInternetReachable
+{
+    return [AFNetworkReachabilityManager sharedManager].reachable;
+}
+-(void)showLowInternetBannerIfNotReachable{
+    //    BaseViewController * nav = [BaseViewController currentViewController];
+    //    if(nav.navigationController.navigationBarHidden) {
+    //        NSLog(@"NOOOO NAV BAR");
+    //    } else {
+    //        NSLog(@"WE HAVE NAV BAR");
+    //    }
+    BOOL internetReachable = [self isInternetReachable];
+    if (!internetReachable){
+        [self showLowInternetConnectivity];
+    }
+}
 -(void) showPageLoader {
     [UIApplication sharedApplication].
     networkActivityIndicatorVisible = YES;
@@ -321,12 +409,18 @@
         [ref observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             NSArray * firebaseFestivals = [snapshot.value allValues];
             for (int i = 0; i < [firebaseFestivals count]; i++){
-                NSDictionary* fest = [[[firebaseFestivals objectAtIndex:i] allObjects] objectAtIndex:0];
-                if( [[fest objectForKey:@"active"] boolValue]){
-                    [aFestivalArray addObject:fest];
-                }else{
-                    [iFestivalArray addObject:fest];
+                NSDictionary * possibleFest = [firebaseFestivals objectAtIndex:i];
+                if ([possibleFest objectForKey:@"data"]){
+                    NSDictionary* fest = [possibleFest objectForKey:@"data"];
+                    if ([fest objectForKey:@"url"]){
+                        if( [[fest objectForKey:@"active"] boolValue]){
+                            [aFestivalArray addObject:fest];
+                        }else{
+                            [iFestivalArray addObject:fest];
+                        }
+                    }
                 }
+ 
             }
             dispatch_async(completion_que, ^{
                 callback([aFestivalArray copy], [iFestivalArray copy]);
@@ -340,6 +434,35 @@
     });
  
 }
+-(void)registerTimeStamp:(NSString*)userId{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        double secondsSinceLastSession = [[NSDate date] timeIntervalSince1970] - milliSecondsSinceLastSession;
+        if (secondsSinceLastSession < 2){
+            return;
+        }
+        milliSecondsSinceLastSession =[[NSDate date] timeIntervalSince1970];
+        Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@/data-tracking/activity/", firebaseUrl, [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+        Firebase *hopperRef = [ref childByAppendingPath: userId];
+        Firebase *postRef = [hopperRef childByAutoId];
+        NSString * timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+        
+        NSDictionary *timeStampDict = @{
+                                        @"timestamp" : timestamp
+                                        };
+        [postRef setValue: timeStampDict];
+    });
+}
 
+-(void)registerSharedSession:(NSString*)sessionTitle note:(NSString*)note {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+         Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@/data-tracking/shared/", firebaseUrl, [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+        Firebase *hopperRef = [ref childByAppendingPath: sessionTitle];
+        Firebase *postRef = [hopperRef childByAutoId];
+        NSDictionary *dict = @{
+                               @"note" : note
+                               };
+        [postRef setValue: dict];
+    });
+}
 
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 #import "Credentials.h"
+#import "ShareModalView.h"
 @interface WebService : NSObject
 
 @property (nonatomic, strong) Credentials *credentials;
@@ -24,8 +25,15 @@
 - (void)loginAPIWithUsername:username andPassword:password callback:(void (^)(NSString *response)) callback;
 - (void)findByUsername:username withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary * user)) callback;
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback;
+
+#pragma Mark-Connectivity Detection
+-(void)showLowInternetBannerIfNotReachable;
+-(void)addInternetMonitor;
+
 #pragma Mark-Firebase
 - (void)fetchFestivals:(void (^)(NSArray * activeFestivalsArray, NSArray* inactiveFestivalsArray)) callback;
+-(void)registerSharedSession:(NSString*)sessionTitle note:(NSString*)note ;
+-(void)registerTimeStamp:(NSString*)userId;
 //-(void)setToFirebase:(NSArray*)festivals;
 
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+@property (nonatomic, strong) WebService *webservice;
 
 @property (strong, nonatomic) UIWindow *window;
 - (void)changeRootViewController:(UIViewController*)viewController animSize:(double)size;

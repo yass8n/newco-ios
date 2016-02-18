@@ -153,8 +153,8 @@
 -(void)receivedTargetTapDone{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self hideTheModal:.1];
-        if(self.shareModalDelegate && [self.baseModalDelegate respondsToSelector: @selector(shareModalGone:session:sharedBy:)]) {
-            [self.shareModalDelegate shareModalGone:self.share session:self.session sharedBy:self.sharedBy];
+        if(self.shareModalDelegate && [self.baseModalDelegate respondsToSelector: @selector(shareModalGone:session:)]) {
+            [self.shareModalDelegate shareModalGone:self.share session:self.session];
         }
     });
 }

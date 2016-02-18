@@ -503,17 +503,16 @@ static UITapGestureRecognizer *singleFingerTap;
     }
 }
 #pragma Mark-Share
--(void)shareModalGone:(shareEnum)result session:(Session *)session sharedBy:(sharedByEnum)sharedBy{
+-(void)shareModalGone:(shareEnum)result session:(Session *)session {
     
     self.sharingSession = session;
-    self.sharedBy = sharedBy;
     double window_width = self.view.frame.size.width;
     double window_height = self.view.frame.size.height;
     if (session){
         CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
         if (result == copy){
-//            IMWebservice * webservice = [[IMWebservice alloc]init];
-//            [webservice registerSharedSession:self.sharingSession.sessionId note:@"copied" sharedBy:self.sharedBy];
+            WebService * webservice = [[WebService alloc]init];
+            [webservice registerSharedSession:self.sharingSession.title note:@"copied"];
             NSDictionary* festival = [Credentials sharedCredentials].festival;
             [UIPasteboard generalPasteboard].string = [NSString stringWithFormat:@"%@/event/%@", [festival objectForKey:@"url"], session.id_];
             ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
@@ -564,8 +563,8 @@ static UITapGestureRecognizer *singleFingerTap;
     CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
     ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
     BOOL isInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]];
-//    IMWebservice * webservice = [[IMWebservice alloc]init];
-//    [webservice registerSharedSession:self.sharingSession.sessionId note:@"facebook" sharedBy:self.sharedBy];
+    WebService * webservice = [[WebService alloc]init];
+    [webservice registerSharedSession:self.sharingSession.title note:@"facebook"];
     if (!isInstalled) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             [modalView showSuccessModal:@"Posted!" onWindow:self.view.window];
@@ -604,8 +603,8 @@ static UITapGestureRecognizer *singleFingerTap;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                     [modalView showSuccessModal:@"Posted!" onWindow:self.view.window];
                 });
-//                IMWebservice * webservice = [[IMWebservice alloc]init];
-//                [webservice registerSharedList:self.sharingList.listId note:@"twitter" sharedBy:self.sharedBy];
+                WebService * webservice = [[WebService alloc]init];
+                [webservice registerSharedSession:session.title note:@"twitter"];
             }
             
             [controller dismissViewControllerAnimated:YES completion:Nil];

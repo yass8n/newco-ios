@@ -21,7 +21,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
-    
+    self.webservice = [[WebService alloc] init];
+    [self.webservice addInternetMonitor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkInternetConnectivity) name:@"checkInternetConnectivity" object:nil];
     Credentials *credentials = [Credentials sharedCredentials];
     NSDictionary * festival = credentials.festival;
     if (!festival || [festival count] == 0){
@@ -60,8 +62,18 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [[FestivalData sharedFestivalData] initEventColorsArray];
     [FBSDKAppEvents activateApp];
-}
+    if ([Credentials sharedCredentials].festival){
+        if ([[Credentials sharedCredentials].currentUser count] > 0){
+            [self.webservice registerTimeStamp:[[Credentials sharedCredentials].currentUser objectForKey:@"id"]];
+        }else{
+            [self.webservice registerTimeStamp:@"0"];
+        }
+    }
 
+}
+-(void)checkInternetConnectivity{
+    [self.webservice showLowInternetBannerIfNotReachable];
+}
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
