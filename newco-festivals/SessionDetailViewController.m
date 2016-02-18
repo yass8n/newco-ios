@@ -96,6 +96,9 @@ static NSString* ATTEND = @" Attend ";
         //self.statusContainerConstraint = [self alignCenterToLogin];
         //[self.superView addConstraint:self.statusContainerConstraint];
     }
+    WebService * webservice = [[WebService alloc]init];
+    NSString* userId = [[Credentials sharedCredentials].currentUser count] > 0 ? [[Credentials sharedCredentials].currentUser objectForKey:@"id"] : @"0";
+    [webservice registerViewedSession:self.session.title userId:userId];
     
 }
 - (void)setSessionPickedUI:(BOOL) attending{

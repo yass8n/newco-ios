@@ -31,8 +31,9 @@
 -(void)addInternetMonitor;
 
 #pragma Mark-Firebase
+-(void)registerViewedSession:(NSString*)sessionTitle userId:(NSString*)userId;
 - (void)fetchFestivals:(void (^)(NSArray * activeFestivalsArray, NSArray* inactiveFestivalsArray)) callback;
--(void)registerSharedSession:(NSString*)sessionTitle note:(NSString*)note ;
+-(void)registerSharedSession:(NSString*)sessionTitle note:(NSString*)note userId:(NSString*)userId;
 -(void)registerTimeStamp:(NSString*)userId;
 //-(void)setToFirebase:(NSArray*)festivals;
 

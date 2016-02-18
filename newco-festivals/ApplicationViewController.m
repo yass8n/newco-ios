@@ -511,8 +511,9 @@ static UITapGestureRecognizer *singleFingerTap;
     if (session){
         CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
         if (result == copy){
+             NSString* userId = [[Credentials sharedCredentials].currentUser count] > 0 ? [[Credentials sharedCredentials].currentUser objectForKey:@"id"] : @"0";
             WebService * webservice = [[WebService alloc]init];
-            [webservice registerSharedSession:self.sharingSession.title note:@"copied"];
+            [webservice registerSharedSession:self.sharingSession.title note:@"copied" userId:userId];
             NSDictionary* festival = [Credentials sharedCredentials].festival;
             [UIPasteboard generalPasteboard].string = [NSString stringWithFormat:@"%@/event/%@", [festival objectForKey:@"url"], session.id_];
             ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
@@ -534,25 +535,29 @@ static UITapGestureRecognizer *singleFingerTap;
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
     NSDictionary* festival = [Credentials sharedCredentials].festival;
     content.contentTitle = [session.title capitalizedString];//title
-    NSString * desc = [[NSString alloc]initWithFormat:@"I'm going to %@ at Newco %@", session.title, [[festival objectForKey:@"city"]capitalizedString]];
+    NSString *subDesc = @"Check out";
+    if (session.picked){
+        subDesc = @"I'm going to";
+    }
+    NSString * desc = [[NSString alloc]initWithFormat:@"%@ %@ at Newco %@", subDesc, session.title, [[festival objectForKey:@"city"]capitalizedString]];
     content.contentDescription = desc;//description
     content.contentURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/event/%@", [festival objectForKey:@"url"], session.id_]];
     
-    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
-    dialog.fromViewController = self;
-    dialog.shareContent = content;
-    dialog.delegate = self;
-    dialog.mode = FBSDKShareDialogModeNative; // if you don't set this before canShow call, canShow would always return YES
-    if (![dialog canShow]) {
-        // fallback presentation when there is no FB app
-        dialog.mode = FBSDKShareDialogModeFeedBrowser;
-    }
-    [dialog show];
+//    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+//    dialog.fromViewController = self;
+//    dialog.shareContent = content;
+//    dialog.delegate = self;
+//    dialog.mode = FBSDKShareDialogModeNative; // if you don't set this before canShow call, canShow would always return YES
+//    if (![dialog canShow]) {
+//        // fallback presentation when there is no FB app
+//        dialog.mode = FBSDKShareDialogModeFeedBrowser;
+//    }
+//    [dialog show];
     
     
-//    [FBSDKShareDialog showFromViewController:self
-//                                 withContent:content
-//                                    delegate:self];
+    [FBSDKShareDialog showFromViewController:self
+                                 withContent:content
+                                    delegate:self];
     
     
 }
@@ -563,8 +568,9 @@ static UITapGestureRecognizer *singleFingerTap;
     CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
     ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
     BOOL isInstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]];
+     NSString* userId = [[Credentials sharedCredentials].currentUser count] > 0 ? [[Credentials sharedCredentials].currentUser objectForKey:@"id"] : @"0";
     WebService * webservice = [[WebService alloc]init];
-    [webservice registerSharedSession:self.sharingSession.title note:@"facebook"];
+    [webservice registerSharedSession:self.sharingSession.title note:@"facebook" userId:userId];
     if (!isInstalled) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             [modalView showSuccessModal:@"Posted!" onWindow:self.view.window];
@@ -603,8 +609,9 @@ static UITapGestureRecognizer *singleFingerTap;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                     [modalView showSuccessModal:@"Posted!" onWindow:self.view.window];
                 });
+                 NSString* userId = [[Credentials sharedCredentials].currentUser count] > 0 ? [[Credentials sharedCredentials].currentUser objectForKey:@"id"] : @"0";
                 WebService * webservice = [[WebService alloc]init];
-                [webservice registerSharedSession:session.title note:@"twitter"];
+                [webservice registerSharedSession:session.title note:@"twitter" userId:userId];
             }
             
             [controller dismissViewControllerAnimated:YES completion:Nil];
@@ -613,7 +620,11 @@ static UITapGestureRecognizer *singleFingerTap;
         
         //Adding the Text to the facebook post value from iOS
         NSDictionary* festival = [Credentials sharedCredentials].festival;
-        NSString * desc = [[NSString alloc]initWithFormat:@"I'm going to %@ at Newco %@", session.title, [[festival objectForKey:@"city"]capitalizedString]];
+        NSString *subDesc = @"Check out";
+        if (session.picked){
+            subDesc = @"I'm going to";
+        }
+        NSString * desc = [[NSString alloc]initWithFormat:@"%@ %@ at Newco %@", subDesc, session.title, [[festival objectForKey:@"city"]capitalizedString]];
         [controller setInitialText:desc];
         
         //Adding the URL to the facebook post value from iOS

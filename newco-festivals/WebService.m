@@ -453,13 +453,25 @@ static double milliSecondsSinceLastSession = 0;
     });
 }
 
--(void)registerSharedSession:(NSString*)sessionTitle note:(NSString*)note {
+-(void)registerSharedSession:(NSString*)sessionTitle note:(NSString*)note userId:(NSString*)userId{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-         Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@/data-tracking/shared/", firebaseUrl, [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
-        Firebase *hopperRef = [ref childByAppendingPath: sessionTitle];
+         Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@/data-tracking/%@/", firebaseUrl, [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle]];
+        Firebase *hopperRef = [ref childByAppendingPath: @"shared"];
         Firebase *postRef = [hopperRef childByAutoId];
         NSDictionary *dict = @{
-                               @"note" : note
+                               @"note" : note,
+                               @"userId" : userId
+                               };
+        [postRef setValue: dict];
+    });
+}
+-(void)registerViewedSession:(NSString*)sessionTitle userId:(NSString*)userId {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@/data-tracking/%@/", firebaseUrl, [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle]];
+        Firebase *hopperRef = [ref childByAppendingPath: @"viewed"];
+        Firebase *postRef = [hopperRef childByAutoId];
+        NSDictionary *dict = @{
+                               @"userId" : userId
                                };
         [postRef setValue: dict];
     });
