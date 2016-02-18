@@ -222,29 +222,7 @@
     }];
     [dataTask resume];
 }
-- (void)fetchFestivals:(void (^)(NSArray * festivals)) callback{
-    dispatch_queue_t completion_que = dispatch_get_main_queue();
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *urlString = [NSString stringWithFormat:@"http://festivals.newco.co/festivals/all"];
-    NSURL *URL = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (!error) {
-            if ([responseObject isKindOfClass:[NSArray class]]) {
-                dispatch_async(completion_que, ^{
-                    callback( (NSArray*) responseObject);
-                });
-            }
-        } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN fetchSessions...");
-        }
-        [self hidePageLoader];
-    }];
-    [dataTask resume];
-}
+
 - (void)findByUsername:username withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback{
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -332,6 +310,30 @@
                                 @"api_key" : [festival objectForKey:@"api_key"]};
         [hopperRef setValue: keep];
     }
+}
+- (void)fetchFestivals:(void (^)(NSArray * festivals)) callback{
+    dispatch_queue_t completion_que = dispatch_get_main_queue();
+    dispatch_queue_t background_que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    NSMutableArray * festivalArray = [[NSMutableArray alloc]init];
+   Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/",firebaseUrl]];
+    dispatch_async(background_que, ^{
+        [ref observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            NSArray * firebaseFestivals = [snapshot.value allValues];
+            for (int i = 0; i < [firebaseFestivals count]; i++){
+                NSDictionary* fest = [[[firebaseFestivals objectAtIndex:i] allObjects] objectAtIndex:0];
+                [festivalArray addObject:fest];
+            }
+            dispatch_async(completion_que, ^{
+                callback([festivalArray copy]);
+            });
+        } withCancelBlock:^(NSError *error) {
+            NSLog(@"%@", error.description);
+            dispatch_async(completion_que, ^{
+                callback([festivalArray copy]);
+            });
+        }];
+    });
+ 
 }
 
 

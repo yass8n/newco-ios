@@ -25,7 +25,7 @@
 - (void)findByUsername:username withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary * user)) callback;
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback;
 - (void)fetchFestivals:(void (^)(NSArray * user)) callback;
-//-(void)setToFirebase:(NSArray*)festivals;
 #pragma Mark-Firebase
+//-(void)setToFirebase:(NSArray*)festivals;
 
 @end
