@@ -549,6 +549,7 @@
 				92470CFB1C389081003E6F7E /* Resources */,
 				736B4466B1096EF1AAA9564F /* Embed Pods Frameworks */,
 				281E2A824748FDCDF036FDE1 /* Copy Pods Resources */,
+				08F2400D1C75EC1800D54B10 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -671,6 +672,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		08F2400D1C75EC1800D54B10 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e9d8ea4fe5b759511264c7e84968059e51d28dd1 ef57fc537ff182d0552fa2b19ad939211e5de5c70f270bec87b65d2062e53182";
+		};
 		281E2A824748FDCDF036FDE1 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -908,6 +922,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Users/yaseen/CSCI/IOS/newco-ios/Pods/FacebookSDKs-iOS-20160210",
 					"$(PROJECT_DIR)/Pods/FacebookSDKs-iOS-20160210",
+					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "/Users/yaseen/CSCI/IOS/newco-ios/newco-festivals/PrefixHeader.pch";
 				INFOPLIST_FILE = "newco-festivals/Info.plist";
@@ -929,6 +944,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Users/yaseen/CSCI/IOS/newco-ios/Pods/FacebookSDKs-iOS-20160210",
 					"$(PROJECT_DIR)/Pods/FacebookSDKs-iOS-20160210",
+					"$(inherited)",
 				);
 				GCC_PREFIX_HEADER = "/Users/yaseen/CSCI/IOS/newco-ios/newco-festivals/PrefixHeader.pch";
 				INFOPLIST_FILE = "newco-festivals/Info.plist";

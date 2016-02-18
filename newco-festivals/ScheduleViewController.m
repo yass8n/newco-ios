@@ -71,6 +71,8 @@
 }
 -(void)animateFestivalTableViewAway:(float)delay{
     if ([self.view.subviews containsObject:self.festivalImageTableView]){
+        int * x = NULL;
+        *x = 42;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             static BOOL keep_flashing = YES;
             [UIView animateWithDuration:0.12

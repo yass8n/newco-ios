@@ -9,4 +9,6 @@ target 'newco-festivals' do
     pod 'SVProgressHUD', :head
     pod 'AFNetworking', '~> 3.0'
     pod 'Firebase', '>= 2.5.0'
+    pod 'Fabric'
+    pod 'Crashlytics'
 end

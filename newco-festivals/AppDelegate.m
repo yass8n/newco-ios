@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -28,7 +30,7 @@
         
         self.window.rootViewController = navigation;
     }
-    
+    [Fabric with:@[[Crashlytics class]]];
     // Override point for customization after application launch.
     return YES;
 }
