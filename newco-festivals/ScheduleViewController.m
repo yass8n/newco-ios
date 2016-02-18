@@ -53,7 +53,6 @@
     self.sessionTableView.estimatedRowHeight = SESSION_HEADER_HEIGHT;
     self.sessionTableView.rowHeight = UITableViewAutomaticDimension;
     self.festivalImageTableView.scrollEnabled = NO;
-    self.festivalImageTableView.userInteractionEnabled = NO;
 }
 - (void) registerTableCells{
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCell" bundle:nil]forCellReuseIdentifier:@"session_cell"];
@@ -70,26 +69,47 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 }
-//native IOS controller functions
+-(void)animateFestivalTableViewAway:(float)delay{
+    if ([self.view.subviews containsObject:self.festivalImageTableView]){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            static BOOL keep_flashing = YES;
+            [UIView animateWithDuration:0.12
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveEaseInOut |
+             UIViewAnimationOptionRepeat |
+             UIViewAnimationOptionAutoreverse |
+             UIViewAnimationOptionAllowUserInteraction
+                             animations:^{
+                                 if (keep_flashing){
+                                     self.festivalImageTableView.alpha = 0.0f;
+                                 }
+                             }
+                             completion:^(BOOL finished){
+                             }];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                keep_flashing = NO;
+                self.festivalImageTableView.alpha = 1.0f;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                    CGRect newFrame = CGRectMake(self.festivalImageTableView.frame.origin.x, -self.festivalImageTableView.frame.size.height, self.festivalImageTableView.frame.size.width, 0);
+                    CGRect newTableFrame = CGRectMake(self.sessionTableView.frame.origin.x, 0, self.sessionTableView.frame.size.width, self.view.frame.size.height);
+                    [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                        self.festivalImageTableView.frame = newFrame;
+                        self.festivalImageTableView.alpha = 0;
+                        self.sessionTableView.frame = newTableFrame;
+                    } completion:^(BOOL finished) {
+                        [self.festivalImageTableView removeFromSuperview];
+                        keep_flashing = YES;
+                    }];
+                });
+            });
+        });
+    }
+}
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
     [self registerTableCells];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRightNavButton) name:@"setRightNavButton" object:nil];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        CGRect newFrame = CGRectMake(self.festivalImageTableView.frame.origin.x, -self.festivalImageTableView.frame.size.height, self.festivalImageTableView.frame.size.width, 0);
-        CGRect newTableFrame = CGRectMake(self.sessionTableView.frame.origin.x, 0, self.sessionTableView.frame.size.width, self.view.frame.size.height);
-        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.festivalImageTableView.frame = newFrame;
-            self.festivalImageTableView.alpha = 0;
-            self.sessionTableView.frame = newTableFrame;
-        } completion:^(BOOL finished) {
-            [self.festivalImageTableView removeFromSuperview];
-        }];
-    });
-
-
 }
 
 -(void)reloadTableView
@@ -102,6 +122,9 @@
 }
 
 //tableView functions
+- (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
+    [self animateFestivalTableViewAway:.5];
+}
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.sessionTableView){
         
@@ -140,6 +163,8 @@
     if (tableView == self.sessionTableView){
         
         [self didSelectSessionInTableView:tableView atIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+    }else{
+        [self animateFestivalTableViewAway:0];
     }
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{

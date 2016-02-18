@@ -10,7 +10,7 @@
 #import "Session.h"
 
 
-@interface ScheduleViewController : ApplicationViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ScheduleViewController : ApplicationViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 //+ (NSMutableArray *) sessionsArray;
 //+ (NSMutableDictionary*) sessionsDict;
