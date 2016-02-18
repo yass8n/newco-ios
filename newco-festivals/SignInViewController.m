@@ -235,7 +235,8 @@ CGFloat animatedDistance;
 }
 
 - (IBAction)forgotPassword:(id)sender {
-    [self showWebViewWithUrl:@"https://sched.org/password-reset"];
+    NSString* url = [NSString stringWithFormat:@"%@mobile/#page:page-forgot", [[Credentials sharedCredentials].festival objectForKey:@"url"]];
+    [self showWebViewWithUrl:url];
 }
 //an event handling method
 - (void)registerViewTapped:(UITapGestureRecognizer *)recognizer {
