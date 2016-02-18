@@ -7,6 +7,8 @@
 //
 #include "SVProgressHUD.h"
 #import <Firebase/Firebase.h>
+#import "ALAlertBanner.h"
+#import "AppDelegate.h"
 @interface WebService()
 -(void) showPageLoader; //forward decleration of private method
 -(void) hidePageLoader; //forward decleration of private method
@@ -23,6 +25,9 @@ static double milliSecondsSinceLastSession = 0;
     if (self) {
         self.credentials = [Credentials sharedCredentials];
         self->view = superView;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"checkInternetConnectivity" object:nil];
+        });
     }
     [self showPageLoader];
     return self;
@@ -74,39 +79,26 @@ static double milliSecondsSinceLastSession = 0;
 }
 -(void)showLowInternetConnectivity{
     
-//    double secondsSinceLastAlert = [[NSDate date] timeIntervalSince1970] - milliSecondsSinceLastAlert;
-//    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive &&  secondsSinceLastAlert > 2){
-//        if (milliSecondsSinceLastAlert == 0){
-//            milliSecondsSinceLastAlert =[[NSDate date] timeIntervalSince1970];
-//            return;
-//        }
-//        milliSecondsSinceLastAlert =[[NSDate date] timeIntervalSince1970];
-//        [ALAlertBanner hideAllAlertBanners];
-//        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//        ALAlertBanner *banner = [ALAlertBanner alertBannerForView:appDelegate.window
-//                                                            style:ALAlertBannerStyleWarning
-//                                                         position:ALAlertBannerPositionUnderNavBar
-//                                                            title:@"Low Internet Connection"
-//                                                         subtitle:@""];
-//        [banner show];
-//        UIViewController* currentViewCont = [BaseViewController currentViewController];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//            [MBProgressHUD hideAllHUDsForView:currentViewCont.view animated:YES];
-//            [MBProgressHUD hideAllHUDsForView:currentViewCont.navigationController.view animated:YES];
-//            [MBProgressHUD hideAllHUDsForView:currentViewCont.navigationController.view.window animated:YES];
-//            [MBProgressHUD hideAllHUDsForView:appDelegate.window animated:YES];
-//            
-//            NSString * frontControllerName = NSStringFromClass([currentViewCont class]);
-//            if ([frontControllerName isEqualToString:@"StreamViewController"]){
-//                StreamViewController * vc = (StreamViewController*) currentViewCont;
-//                [vc.refreshControl endRefreshing];
-//            }
-//            if (self.delegate && [self.delegate respondsToSelector:@selector(lowInternetDetected)]) {
-//                [self.delegate lowInternetDetected];
-//            }
-//        });
-//        
-//    }
+    double secondsSinceLastAlert = [[NSDate date] timeIntervalSince1970] - milliSecondsSinceLastAlert;
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive &&  secondsSinceLastAlert > 2){
+        if (milliSecondsSinceLastAlert == 0){
+            milliSecondsSinceLastAlert =[[NSDate date] timeIntervalSince1970];
+            return;
+        }
+        milliSecondsSinceLastAlert =[[NSDate date] timeIntervalSince1970];
+        [ALAlertBanner hideAllAlertBanners];
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        ALAlertBanner *banner = [ALAlertBanner alertBannerForView:appDelegate.window
+                                                            style:ALAlertBannerStyleWarning
+                                                         position:ALAlertBannerPositionUnderNavBar
+                                                            title:@"Low Internet Connection"
+                                                         subtitle:@""];
+        [banner show];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self hidePageLoader];
+        });
+        
+    }
     
 }
 -(BOOL) isInternetReachable

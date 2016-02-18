@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		08C48E3C1C75AEE100A53712 /* FestivalCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */; };
 		08C48E3E1C75AEF200A53712 /* FestivalCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */; };
+		08F240171C75FFD900D54B10 /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F240121C75FFD900D54B10 /* ALAlertBanner.m */; };
+		08F240181C75FFD900D54B10 /* ALAlertBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F240151C75FFD900D54B10 /* ALAlertBannerManager.m */; };
+		08F240191C75FFD900D54B10 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 08F240161C75FFD900D54B10 /* Images */; };
 		08F6F7DD1C747860005BC870 /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7DC1C747860005BC870 /* Animation.m */; };
 		08F6F7E01C74787C005BC870 /* Credentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7DF1C74787C005BC870 /* Credentials.m */; };
 		08F6F7E31C74788F005BC870 /* FestivalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7E21C74788F005BC870 /* FestivalData.m */; };
@@ -87,6 +90,12 @@
 		08C48E3A1C75AEE100A53712 /* FestivalCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalCellHeader.h; sourceTree = "<group>"; };
 		08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalCellHeader.m; sourceTree = "<group>"; };
 		08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalCellHeader.xib; sourceTree = "<group>"; };
+		08F240111C75FFD900D54B10 /* ALAlertBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALAlertBanner.h; path = ../../ALAlertBanner/ALAlertBanner.h; sourceTree = "<group>"; };
+		08F240121C75FFD900D54B10 /* ALAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALAlertBanner.m; path = ../../ALAlertBanner/ALAlertBanner.m; sourceTree = "<group>"; };
+		08F240131C75FFD900D54B10 /* ALAlertBanner+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ALAlertBanner+Private.h"; path = "../../ALAlertBanner/ALAlertBanner+Private.h"; sourceTree = "<group>"; };
+		08F240141C75FFD900D54B10 /* ALAlertBannerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALAlertBannerManager.h; path = ../../ALAlertBanner/ALAlertBannerManager.h; sourceTree = "<group>"; };
+		08F240151C75FFD900D54B10 /* ALAlertBannerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALAlertBannerManager.m; path = ../../ALAlertBanner/ALAlertBannerManager.m; sourceTree = "<group>"; };
+		08F240161C75FFD900D54B10 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images; path = ../../ALAlertBanner/Images; sourceTree = "<group>"; };
 		08F6F7DB1C747860005BC870 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		08F6F7DC1C747860005BC870 /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
 		08F6F7DE1C74787C005BC870 /* Credentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credentials.h; sourceTree = "<group>"; };
@@ -222,6 +231,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08F2400E1C75FFAC00D54B10 /* ALAlertBAnner */ = {
+			isa = PBXGroup;
+			children = (
+				08F240111C75FFD900D54B10 /* ALAlertBanner.h */,
+				08F240121C75FFD900D54B10 /* ALAlertBanner.m */,
+				08F240131C75FFD900D54B10 /* ALAlertBanner+Private.h */,
+				08F240141C75FFD900D54B10 /* ALAlertBannerManager.h */,
+				08F240151C75FFD900D54B10 /* ALAlertBannerManager.m */,
+				08F240161C75FFD900D54B10 /* Images */,
+			);
+			name = ALAlertBAnner;
+			sourceTree = "<group>";
+		};
 		08F6F8511C7493F1005BC870 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +453,7 @@
 		08F6F8621C7496DA005BC870 /* ImportedFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08F2400E1C75FFAC00D54B10 /* ALAlertBAnner */,
 				08F6F8631C74970F005BC870 /* Facebook */,
 				08F6F8611C7496CA005BC870 /* SWReveal */,
 			);
@@ -643,6 +666,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F240191C75FFD900D54B10 /* Images in Resources */,
 				92470D131C389081003E6F7E /* LaunchScreen.storyboard in Resources */,
 				9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */,
 				929107231C6C4777004B517C /* UserInitial.xib in Resources */,
@@ -738,10 +762,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				08F6F8251C748AD0005BC870 /* BaseModal.m in Sources */,
+				08F240171C75FFD900D54B10 /* ALAlertBanner.m in Sources */,
 				08F6F8221C748AC1005BC870 /* BaseMenuCell.m in Sources */,
 				08F6F7EC1C747903005BC870 /* WebService.m in Sources */,
 				929107261C6C4FF4004B517C /* User.m in Sources */,
 				08F6F7E31C74788F005BC870 /* FestivalData.m in Sources */,
+				08F240181C75FFD900D54B10 /* ALAlertBannerManager.m in Sources */,
 				92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */,
 				08F6F8301C748B0F005BC870 /* FestivalsViewController.m in Sources */,
 				923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */,
