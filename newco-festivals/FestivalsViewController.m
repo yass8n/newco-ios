@@ -14,6 +14,7 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import "Helper.h"
 #include "SVProgressHUD.h"
+#import "FestivalCellHeader.h"
 
 
 @interface FestivalsViewController ()
@@ -30,6 +31,7 @@ static CGFloat FESTIVAL_HEIGHT = 90;
 
 -(void) registerTableCells{
     [self.festivalsTableView registerNib:[UINib nibWithNibName:@"FestivalCell" bundle:nil]forCellReuseIdentifier:@"festival_cell"];
+    [self.festivalsTableView registerNib:[UINib nibWithNibName:@"FestivalCellHeader" bundle:nil]forCellReuseIdentifier:@"festival_cell_header"];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,7 +76,12 @@ static CGFloat FESTIVAL_HEIGHT = 90;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary * festival = [festivalsArray objectAtIndex:indexPath.row];
+    NSDictionary * festival;
+    if (indexPath.section == 0){
+        festival = [activeFestivalsArray objectAtIndex:indexPath.row];
+    }else{
+        festival = [inactiveFestivalsArray objectAtIndex:indexPath.row];
+    }
     FestivalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"festival_cell" forIndexPath:indexPath];
     [cell.image sd_setImageWithURL:[NSURL URLWithString:[festival objectForKey:@"hero_image"]]
                   placeholderImage:[Helper imageFromColor:[UIColor myPlaceHolderColor]]];
@@ -95,7 +102,12 @@ static CGFloat FESTIVAL_HEIGHT = 90;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary * festival = [festivalsArray objectAtIndex:indexPath.row];
+    NSDictionary * festival;
+    if (indexPath.section == 0){
+       festival = [activeFestivalsArray objectAtIndex:indexPath.row];
+    }else{
+        festival = [inactiveFestivalsArray objectAtIndex:indexPath.row];
+    }
      AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
     
     [[Credentials sharedCredentials] setFestival:festival];
@@ -104,11 +116,31 @@ static CGFloat FESTIVAL_HEIGHT = 90;
     
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    if ([activeFestivalsArray count] > 0 && [inactiveFestivalsArray count] > 0){
+        return 2;
+    }else{
+        return 1;
+    }
 }
 - (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
-    return [festivalsArray count];
+    if (section == 0){
+        return [activeFestivalsArray count];
+    }else{
+        return [inactiveFestivalsArray count];
+    }
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+       FestivalCellHeader* headerCell = [tableView dequeueReusableCellWithIdentifier:@"festival_cell_header"];
+    if (section == 0){
+        headerCell.title.text = @"CURRENT EVENTS";
+    }else{
+        headerCell.title.text = @"PAST EVENTS";
+    }
+    return headerCell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 15;
+}
 
 @end

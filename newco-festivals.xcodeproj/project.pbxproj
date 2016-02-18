@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08C48E3C1C75AEE100A53712 /* FestivalCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */; };
+		08C48E3E1C75AEF200A53712 /* FestivalCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */; };
 		08F6F7DD1C747860005BC870 /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7DC1C747860005BC870 /* Animation.m */; };
 		08F6F7E01C74787C005BC870 /* Credentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7DF1C74787C005BC870 /* Credentials.m */; };
 		08F6F7E31C74788F005BC870 /* FestivalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F7E21C74788F005BC870 /* FestivalData.m */; };
@@ -82,6 +84,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08C48E3A1C75AEE100A53712 /* FestivalCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalCellHeader.h; sourceTree = "<group>"; };
+		08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalCellHeader.m; sourceTree = "<group>"; };
+		08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalCellHeader.xib; sourceTree = "<group>"; };
 		08F6F7DB1C747860005BC870 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		08F6F7DC1C747860005BC870 /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
 		08F6F7DE1C74787C005BC870 /* Credentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credentials.h; sourceTree = "<group>"; };
@@ -375,6 +380,9 @@
 				924ECB6A1C6136440093CAA1 /* SessionCell.m */,
 				92880C321C6D472100315DF0 /* SessionCellHeader.xib */,
 				92880C341C6D472A00315DF0 /* SessionCell.xib */,
+				08C48E3A1C75AEE100A53712 /* FestivalCellHeader.h */,
+				08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */,
+				08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -638,6 +646,7 @@
 				9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */,
 				929107231C6C4777004B517C /* UserInitial.xib in Resources */,
 				92880C351C6D472A00315DF0 /* SessionCell.xib in Resources */,
+				08C48E3E1C75AEF200A53712 /* FestivalCellHeader.xib in Resources */,
 				92470D101C389081003E6F7E /* Assets.xcassets in Resources */,
 				92470D0B1C389081003E6F7E /* Main.storyboard in Resources */,
 				92880C331C6D472100315DF0 /* SessionCellHeader.xib in Resources */,
@@ -747,6 +756,7 @@
 				929107321C6C52E3004B517C /* RootViewController.m in Sources */,
 				9216595B1C58CC9E006239D6 /* session.m in Sources */,
 				08F6F83C1C748B9E005BC870 /* NSString+NSStringAdditions.m in Sources */,
+				08C48E3C1C75AEE100A53712 /* FestivalCellHeader.m in Sources */,
 				08F6F8451C748C18005BC870 /* ShareModalView.m in Sources */,
 				08F6F8331C748B1D005BC870 /* FilterViewController.m in Sources */,
 				929107381C6C5A4E004B517C /* UserImage.m in Sources */,
