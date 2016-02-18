@@ -235,7 +235,7 @@ CGFloat animatedDistance;
 }
 
 - (IBAction)forgotPassword:(id)sender {
-    NSString* url = [NSString stringWithFormat:@"%@mobile/#page:page-forgot", [[Credentials sharedCredentials].festival objectForKey:@"url"]];
+    NSString* url = [NSString stringWithFormat:@"%@/mobile/#page:page-forgot", [[Credentials sharedCredentials].festival objectForKey:@"url"]];
     [self showWebViewWithUrl:url];
 }
 //an event handling method
