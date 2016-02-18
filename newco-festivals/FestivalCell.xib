@@ -55,6 +55,7 @@
             </constraints>
             <connections>
                 <outlet property="image" destination="6FO-f4-DKP" id="rSU-T9-Kha"/>
+                <outlet property="logo" destination="kja-cy-knl" id="yLY-1M-GA5"/>
                 <outlet property="title" destination="t9c-5l-5GY" id="paC-sA-8Wx"/>
             </connections>
             <point key="canvasLocation" x="212.5" y="238"/>

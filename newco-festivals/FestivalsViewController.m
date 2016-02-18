@@ -82,8 +82,10 @@ static CGFloat FESTIVAL_HEIGHT = 90;
         cell.title.hidden = NO;
         cell.title.text = [[festival objectForKey:@"city"] uppercaseString];
         cell.title.textColor = [UIColor whiteColor];
+        cell.logo.hidden = NO;
     }else{
         cell.title.hidden = YES;
+        cell.logo.hidden = YES;
         
     }
 
