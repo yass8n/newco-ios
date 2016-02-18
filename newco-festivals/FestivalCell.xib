@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="144" id="KGk-i7-Jjw" customClass="FestivalCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="festival_cell" rowHeight="144" id="KGk-i7-Jjw" customClass="FestivalCell">
             <rect key="frame" x="0.0" y="0.0" width="405" height="144"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="festival_cell" translatesAutoresizingMaskIntoConstraints="NO" id="6FO-f4-DKP">
-                        <rect key="frame" x="8" y="8" width="389" height="127"/>
+                        <rect key="frame" x="4" y="1" width="397" height="141"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="kja-cy-knl">
                         <rect key="frame" x="128" y="23" width="150" height="30"/>
@@ -32,14 +32,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="6FO-f4-DKP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="2cw-QR-SZu"/>
-                    <constraint firstItem="6FO-f4-DKP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="BP8-no-uw6"/>
+                    <constraint firstItem="6FO-f4-DKP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="2cw-QR-SZu"/>
+                    <constraint firstItem="6FO-f4-DKP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-7" id="BP8-no-uw6"/>
                     <constraint firstItem="t9c-5l-5GY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="INE-My-9KR"/>
-                    <constraint firstItem="6FO-f4-DKP" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Pnm-Dk-sTc"/>
+                    <constraint firstItem="6FO-f4-DKP" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" constant="7" id="Pnm-Dk-sTc"/>
                     <constraint firstItem="t9c-5l-5GY" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="QcJ-9i-cF1"/>
                     <constraint firstItem="kja-cy-knl" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Tuq-bc-t6v"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="6FO-f4-DKP" secondAttribute="trailing" id="nkb-xD-acc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="6FO-f4-DKP" secondAttribute="trailing" constant="-4" id="nkb-xD-acc"/>
                     <constraint firstItem="kja-cy-knl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="sgx-YI-DiW"/>
                     <constraint firstItem="t9c-5l-5GY" firstAttribute="top" secondItem="kja-cy-knl" secondAttribute="bottom" constant="15" id="uSP-EA-mUb"/>
                 </constraints>
