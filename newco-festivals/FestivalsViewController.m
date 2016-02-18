@@ -22,7 +22,8 @@
 
 
 @implementation FestivalsViewController{
-    NSArray* festivalsArray;
+    NSArray* activeFestivalsArray;
+    NSArray* inactiveFestivalsArray;
 }
 
 static CGFloat FESTIVAL_HEIGHT = 90;
@@ -38,10 +39,12 @@ static CGFloat FESTIVAL_HEIGHT = 90;
     [UIApplication sharedApplication].
     networkActivityIndicatorVisible = YES;
     self.navigationController.navigationBarHidden = YES;
-    festivalsArray = [[NSMutableArray alloc] init];
+    activeFestivalsArray = [[NSMutableArray alloc] init];
+    inactiveFestivalsArray = [[NSMutableArray alloc] init];
     WebService * webService = [[WebService alloc] init];
-    [webService fetchFestivals:^(NSArray *festivals) {
-        festivalsArray = festivals;
+    [webService fetchFestivals:^(NSArray *activeFestivals, NSArray*inactiveFestivals) {
+        activeFestivalsArray = activeFestivals;
+        inactiveFestivalsArray = inactiveFestivals;
         [self.festivalsTableView reloadData];
         [SVProgressHUD dismiss];
         [UIApplication sharedApplication].

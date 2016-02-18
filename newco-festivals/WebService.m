@@ -311,25 +311,30 @@
         [hopperRef setValue: keep];
     }
 }
-- (void)fetchFestivals:(void (^)(NSArray * festivals)) callback{
+- (void)fetchFestivals:(void (^)(NSArray * activeFestivalsArray, NSArray* inactiveFestivalsArray)) callback{
     dispatch_queue_t completion_que = dispatch_get_main_queue();
     dispatch_queue_t background_que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-    NSMutableArray * festivalArray = [[NSMutableArray alloc]init];
+    NSMutableArray * aFestivalArray = [[NSMutableArray alloc]init];
+    NSMutableArray * iFestivalArray = [[NSMutableArray alloc]init];
    Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/",firebaseUrl]];
     dispatch_async(background_que, ^{
         [ref observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             NSArray * firebaseFestivals = [snapshot.value allValues];
             for (int i = 0; i < [firebaseFestivals count]; i++){
                 NSDictionary* fest = [[[firebaseFestivals objectAtIndex:i] allObjects] objectAtIndex:0];
-                [festivalArray addObject:fest];
+                if( [[fest objectForKey:@"active"] boolValue]){
+                    [aFestivalArray addObject:fest];
+                }else{
+                    [iFestivalArray addObject:fest];
+                }
             }
             dispatch_async(completion_que, ^{
-                callback([festivalArray copy]);
+                callback([aFestivalArray copy], [iFestivalArray copy]);
             });
         } withCancelBlock:^(NSError *error) {
             NSLog(@"%@", error.description);
             dispatch_async(completion_que, ^{
-                callback([festivalArray copy]);
+                callback([aFestivalArray copy], [iFestivalArray copy]);
             });
         }];
     });
