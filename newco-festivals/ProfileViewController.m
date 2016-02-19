@@ -11,6 +11,7 @@
 #import "UserInitial.h"
 #import "NSString+NSStringAdditions.h"
 #import "Helper.h"
+#import "ProfileDetailCell.h"
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIView *superView;
@@ -96,6 +97,7 @@
 - (void) addDataToTable{
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCell" bundle:nil]forCellReuseIdentifier:@"session_cell"];
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCellHeader" bundle:nil]forCellReuseIdentifier:@"session_cell_header"];
+    [self.sessionTableView registerNib:[UINib nibWithNibName:@"ProfileDetailCell" bundle:nil]forCellReuseIdentifier:@"profile_detail_cell"];
     
     NSString * username = [self.user objectForKey:@"username"];
     if ([self.type isEqual:@"speaker"] || [self.type isEqual:@"company"] ){
@@ -129,63 +131,11 @@
 - (void)adjustUI{
     [self setBackButton];
     NSString * name = [self.user objectForKey:@"name"];
-    self.name.text = name;
-    NSMutableString* positionAndCompany = [@"" mutableCopy];
-    positionAndCompany = [self.user objectForKey:@"position"];
-    if (![[self.user objectForKey:@"company"]  isEqual: @""]){
-        positionAndCompany = [[positionAndCompany and @" @ "] mutableCopy];
-        positionAndCompany = [[positionAndCompany and [self.user objectForKey:@"company"]] mutableCopy];
-    }
-    self.positionAndCompany.text = positionAndCompany;
     self.navigationItem.title = name;
     if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
         self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
     }
-    NSString* avatar = [self.user objectForKey:@"avatar"];
-    CGRect rect = CGRectMake(0, 0, self.profileImage.bounds.size.width, self.profileImage.bounds.size.height);
-    
-    if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""]){
-        [self setUserInitial:rect withFont:rect.size.width/2 withUser:self.user intoView:self.profileImage withType:self.type];
-    }else {
-        [self setUserImage:rect withAvatar:avatar withUser:self.user intoView:self.profileImage withType:self.type];
-    }
-    self.hideButton.layer.backgroundColor = [UIColor colorWithRed:(247.0f/255.0f) green:(247.0f/255.0f) blue:(247.0f/255.0f) alpha:1].CGColor;
-    self.hideButton.layer.borderColor =[UIColor myNavigationBarColor].CGColor;
-    [self.hideButton setTitleColor:self.topView.backgroundColor forState:UIControlStateNormal];
-    self.hideButton.layer.cornerRadius = 2.5;
-    self.website.backgroundColor = [UIColor myNavigationBarColor];
-    self.positionAndCompany.textColor =[UIColor myNavigationBarColor];
-    self.about.text =  [[self.user objectForKey:@"about"] stringByStrippingHTML];
-    if ([[self.user objectForKey:@"url"]  isEqual: @""]){
-        [self.website removeFromSuperview];
-        self.website.hidden = YES;
-    }else{
-        self.website.hidden = NO;
-    }
-    if ([self.about.text length] > 0){
-        self.about.textColor = [UIColor myNavigationBarColor];
-        self.about.lineBreakMode = NSLineBreakByWordWrapping;
-        self.about.textAlignment = NSTextAlignmentCenter;
-        self.about.translatesAutoresizingMaskIntoConstraints = YES;
-        self.about.numberOfLines = 0;
-        int numlines = [Helper lineCountForLabel:self.about];
-        CGRect labelFrame = self.about.frame;
-        labelFrame.size.height = numlines * 30;
-        if (self.website.isHidden){
-            labelFrame.origin.y -= (self.website.frame.size.height + 20);
-        }
-        double distanceFromSides = (self.about.frame.origin.x);
-        labelFrame.size.width = self.view.frame.size.width - (distanceFromSides * 2);
-        self.about.frame = labelFrame;
-    }else{
-        [self.about removeFromSuperview];
-    }
-
-//    self.scrollVIew.scrollEnabled = YES;
-}
--(void)viewDidLayoutSubviews{
-//    self.scrollVIew.contentSize = CGSizeMake(self.view.bounds.size.width, self.topView.frame.size.height + 30);
 }
 -(void)reloadTableView
 {
@@ -209,23 +159,86 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
+    if (indexPath.section == 0 && indexPath.row == 0){
+        ProfileDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:@"profile_detail_cell"];
+        NSMutableString* positionAndCompany = [@"" mutableCopy];
+        positionAndCompany = [self.user objectForKey:@"position"];
+        if (![[self.user objectForKey:@"company"]  isEqual: @""]){
+            positionAndCompany = [[positionAndCompany and @" @ "] mutableCopy];
+            positionAndCompany = [[positionAndCompany and [self.user objectForKey:@"company"]] mutableCopy];
+        }
+        cell.positionAndCompany.text = positionAndCompany;
+ 
+        NSString* avatar = [self.user objectForKey:@"avatar"];
+        CGRect rect = CGRectMake(0, 0, cell.profileImage.bounds.size.width, cell.profileImage.bounds.size.height);
+        
+        if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""]){
+            [self setUserInitial:rect withFont:rect.size.width/2 withUser:self.user intoView:cell.profileImage withType:self.type];
+        }else {
+            [self setUserImage:rect withAvatar:avatar withUser:self.user intoView:cell.profileImage withType:self.type];
+        }
+        cell.website.backgroundColor = [UIColor myNavigationBarColor];
+        cell.positionAndCompany.textColor =[UIColor myNavigationBarColor];
+        cell.about.text =  [[self.user objectForKey:@"about"] stringByStrippingHTML];
+        if ([[self.user objectForKey:@"url"]  isEqual: @""]){
+            [cell.website removeFromSuperview];
+            cell.website.hidden = YES;
+        }else{
+            cell.website.hidden = NO;
+        }
+        if ([cell.about.text length] > 0){
+            cell.about.textColor = [UIColor myNavigationBarColor];
+            cell.about.lineBreakMode = NSLineBreakByWordWrapping;
+            cell.about.textAlignment = NSTextAlignmentCenter;
+            cell.about.translatesAutoresizingMaskIntoConstraints = YES;
+            cell.about.numberOfLines = 0;
+            int numlines = [Helper lineCountForLabel:cell.about];
+            CGRect labelFrame = cell.about.frame;
+            labelFrame.size.height = numlines * 30;
+            if (cell.website.isHidden){
+                labelFrame.origin.y -= (cell.website.frame.size.height + 20);
+            }
+            double distanceFromSides = (cell.about.frame.origin.x);
+            labelFrame.size.width = self.view.frame.size.width - (distanceFromSides * 2);
+            cell.about.frame = labelFrame;
+        }else{
+            [cell.about removeFromSuperview];
+        }
+        return cell;
+    }else{
+           return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
+    }
+
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0 && indexPath.row == 0){
+        return;
+    }
     [self didSelectSessionInTableView:tableView atIndexPath:indexPath withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return [[self.datesDict allKeys] count];
 }
 - (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
-    return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
+    if (section == 0){
+        return 1;
+    }
+        return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
+    
+
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 0){
+        return [[UIView alloc]init];
+    }
     return [self viewForHeaderInSection:section forTableView:tableView withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0){
+        return 0;
+    }
     return SESSION_HEADER_HEIGHT;
 }
 

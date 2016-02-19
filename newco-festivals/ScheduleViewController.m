@@ -151,14 +151,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0){
-        
         NSDictionary * festival = [Credentials sharedCredentials].festival;
         UITableViewCell * cell = [self cellForFestival:festival atIndexPath:indexPath forTableView:tableView backGroundColor:[UIColor whiteColor] fullWidth:YES];
         cell.userInteractionEnabled = NO;
         return cell;
-    }else{
-        return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
     }
+    return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -169,15 +167,14 @@
 
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return [[[FestivalData sharedFestivalData].datesDict allKeys] count] + 1;
+    return [[[FestivalData sharedFestivalData].datesDict allKeys] count];
 
 }
 - (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
         return 1;
-    }else{
-        return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
     }
+        return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
     
 }
 

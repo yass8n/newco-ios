@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		08C48E3C1C75AEE100A53712 /* FestivalCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */; };
 		08C48E3E1C75AEF200A53712 /* FestivalCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */; };
+		08EBAFFD1C771DD60099979A /* ProfileDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */; };
+		08EBB0001C771E0B0099979A /* ProfileDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08EBAFFF1C771E0B0099979A /* ProfileDetailCell.m */; };
 		08F240171C75FFD900D54B10 /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F240121C75FFD900D54B10 /* ALAlertBanner.m */; };
 		08F240181C75FFD900D54B10 /* ALAlertBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F240151C75FFD900D54B10 /* ALAlertBannerManager.m */; };
 		08F240191C75FFD900D54B10 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 08F240161C75FFD900D54B10 /* Images */; };
@@ -90,6 +92,9 @@
 		08C48E3A1C75AEE100A53712 /* FestivalCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalCellHeader.h; sourceTree = "<group>"; };
 		08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalCellHeader.m; sourceTree = "<group>"; };
 		08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalCellHeader.xib; sourceTree = "<group>"; };
+		08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDetailCell.xib; sourceTree = "<group>"; };
+		08EBAFFE1C771E0B0099979A /* ProfileDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileDetailCell.h; sourceTree = "<group>"; };
+		08EBAFFF1C771E0B0099979A /* ProfileDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileDetailCell.m; sourceTree = "<group>"; };
 		08F240111C75FFD900D54B10 /* ALAlertBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALAlertBanner.h; path = ../../ALAlertBanner/ALAlertBanner.h; sourceTree = "<group>"; };
 		08F240121C75FFD900D54B10 /* ALAlertBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALAlertBanner.m; path = ../../ALAlertBanner/ALAlertBanner.m; sourceTree = "<group>"; };
 		08F240131C75FFD900D54B10 /* ALAlertBanner+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ALAlertBanner+Private.h"; path = "../../ALAlertBanner/ALAlertBanner+Private.h"; sourceTree = "<group>"; };
@@ -405,6 +410,9 @@
 				08C48E3A1C75AEE100A53712 /* FestivalCellHeader.h */,
 				08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */,
 				08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */,
+				08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */,
+				08EBAFFE1C771E0B0099979A /* ProfileDetailCell.h */,
+				08EBAFFF1C771E0B0099979A /* ProfileDetailCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -675,6 +683,7 @@
 				92470D101C389081003E6F7E /* Assets.xcassets in Resources */,
 				92470D0B1C389081003E6F7E /* Main.storyboard in Resources */,
 				92880C331C6D472100315DF0 /* SessionCellHeader.xib in Resources */,
+				08EBAFFD1C771DD60099979A /* ProfileDetailCell.xib in Resources */,
 				08F6F82D1C748AF9005BC870 /* FestivalCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,6 +774,7 @@
 				08F240171C75FFD900D54B10 /* ALAlertBanner.m in Sources */,
 				08F6F8221C748AC1005BC870 /* BaseMenuCell.m in Sources */,
 				08F6F7EC1C747903005BC870 /* WebService.m in Sources */,
+				08EBB0001C771E0B0099979A /* ProfileDetailCell.m in Sources */,
 				929107261C6C4FF4004B517C /* User.m in Sources */,
 				08F6F7E31C74788F005BC870 /* FestivalData.m in Sources */,
 				08F240181C75FFD900D54B10 /* ALAlertBannerManager.m in Sources */,
