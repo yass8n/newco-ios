@@ -307,15 +307,7 @@ static NSString* ATTEND = @" Attend ";
     
     self.desc.text = [self.session.desc stringByStrippingHTML];
     self.desc.lineBreakMode = NSLineBreakByWordWrapping;
-//    self.desc.textAlignment = NSTextAlignmentCenter;
-//    self.desc.translatesAutoresizingMaskIntoConstraints = YES;
     self.desc.numberOfLines = 0;
-    int numlines = [Helper lineCountForLabel:self.desc];
-    CGRect labelFrame = self.desc.frame;
-    labelFrame.size.height = numlines * 30;
-    double distanceFromSides = (self.desc.frame.origin.x);
-    labelFrame.size.width = self.view.frame.size.width - (distanceFromSides * 2);
-    self.desc.frame = labelFrame;
 
 }
 

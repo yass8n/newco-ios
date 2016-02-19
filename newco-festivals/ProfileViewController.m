@@ -189,18 +189,8 @@
         if ([cell.about.text length] > 0){
             cell.about.textColor = [UIColor myNavigationBarColor];
             cell.about.lineBreakMode = NSLineBreakByWordWrapping;
-            cell.about.textAlignment = NSTextAlignmentCenter;
-            cell.about.translatesAutoresizingMaskIntoConstraints = YES;
             cell.about.numberOfLines = 0;
-            int numlines = [Helper lineCountForLabel:cell.about];
-            CGRect labelFrame = cell.about.frame;
-            labelFrame.size.height = numlines * 30;
-            if (cell.website.isHidden){
-                labelFrame.origin.y -= (cell.website.frame.size.height + 20);
-            }
-            double distanceFromSides = (cell.about.frame.origin.x);
-            labelFrame.size.width = self.view.frame.size.width - (distanceFromSides * 2);
-            cell.about.frame = labelFrame;
+
         }else{
             [cell.about removeFromSuperview];
         }
