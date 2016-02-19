@@ -24,6 +24,7 @@
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];
     self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
+    [self reloadTableView];
 }
 
 - (void)didReceiveMemoryWarning {

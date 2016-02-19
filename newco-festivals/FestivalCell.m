@@ -20,4 +20,12 @@
     // Configure the view for the selected state
 }
 
+- (void)setFrame:(CGRect)frame {
+    if (self.setToFullWidthOfScreen){
+        frame.origin.x -= 4;
+        frame.size.width += 8;
+    }
+    [super setFrame:frame];
+}
+
 @end

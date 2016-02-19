@@ -52,12 +52,11 @@
 - (void) adjustUI{
     self.sessionTableView.estimatedRowHeight = SESSION_HEADER_HEIGHT;
     self.sessionTableView.rowHeight = UITableViewAutomaticDimension;
-    self.festivalImageTableView.scrollEnabled = NO;
 }
 - (void) registerTableCells{
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCell" bundle:nil]forCellReuseIdentifier:@"session_cell"];
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCellHeader" bundle:nil]forCellReuseIdentifier:@"session_cell_header"];
-    [self.festivalImageTableView registerNib:[UINib nibWithNibName:@"FestivalCell" bundle:nil]forCellReuseIdentifier:@"festival_cell"];
+    [self.sessionTableView registerNib:[UINib nibWithNibName:@"FestivalCell" bundle:nil]forCellReuseIdentifier:@"festival_cell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -68,6 +67,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self reloadTableView];
 }
 -(void)animateFestivalTableViewAway:(float)delay{
     if ([self.view.subviews containsObject:self.festivalImageTableView]){
@@ -110,6 +110,7 @@
     [self adjustUI];
     [self registerTableCells];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRightNavButton) name:@"setRightNavButton" object:nil];
+    self.sessionTableView.contentInset = UIEdgeInsetsMake(-1.0f, 0.0f, 0.0f, 0.0); //to get rid of extra space for the 1pt header for the festival cell
 }
 
 -(void)reloadTableView
@@ -122,80 +123,75 @@
 }
 
 //tableView functions
-- (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
-    [self animateFestivalTableViewAway:1];
-}
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
+//    [self animateFestivalTableViewAway:1];
+//}
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == self.sessionTableView){
-        
+    if (indexPath.section == 0 && indexPath.row == 0){
+        return FESTIVAL_HEIGHT;
+    }else{
         if (ApplicationViewController.sysVer > 8.00) {
             return UITableViewAutomaticDimension;
         } else {
             return MIN_SESSION_HEIGHT;
         }
-    }else{
-        return FESTIVAL_HEIGHT;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView == self.sessionTableView){
-        
+    if (indexPath.section == 0 && indexPath.row == 0){
+        return FESTIVAL_HEIGHT;
+    }else{
         if (ApplicationViewController.sysVer > 8.00) {
             return UITableViewAutomaticDimension;
         } else {
             return MIN_SESSION_HEIGHT;
         }
-    }else{
-        return FESTIVAL_HEIGHT;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == self.sessionTableView){
-        return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
-    }else{
+    if (indexPath.section == 0 && indexPath.row == 0){
+        
         NSDictionary * festival = [Credentials sharedCredentials].festival;
-        return [self cellForFestival:festival atIndexPath:indexPath forTableView:tableView backGroundColor:[UIColor whiteColor]];
+        UITableViewCell * cell = [self cellForFestival:festival atIndexPath:indexPath forTableView:tableView backGroundColor:[UIColor whiteColor] fullWidth:YES];
+        cell.userInteractionEnabled = NO;
+        return cell;
+    }else{
+        return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.sessionTableView){
-        
-        [self didSelectSessionInTableView:tableView atIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
-    }else{
-        [self animateFestivalTableViewAway:0];
+    if (indexPath.section == 0 && indexPath.row == 0){
+        return;
     }
+    [self didSelectSessionInTableView:tableView atIndexPath:indexPath withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
+
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    if (tableView == self.sessionTableView){
-        
-        return [[[FestivalData sharedFestivalData].datesDict allKeys] count];
-    }else{
-        return 1;
-    }
+    return [[[FestivalData sharedFestivalData].datesDict allKeys] count] + 1;
+
 }
 - (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
-    if (tableView == self.sessionTableView){
-        
-        return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
-    }else{
+    if (section == 0){
         return 1;
+    }else{
+        return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:[FestivalData sharedFestivalData].datesDict withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
     }
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (tableView == self.sessionTableView){
-        return [self viewForHeaderInSection:section forTableView:tableView withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
-    }else{
+    if (section == 0){
         return [[UIView alloc]init];
     }
+    return [self viewForHeaderInSection:section forTableView:tableView withOrderOfInsertedDatesDict:[FestivalData sharedFestivalData].orderOfInsertedDatesDict];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (tableView == self.sessionTableView){
-        return SESSION_HEADER_HEIGHT;
-    }else{
+    if (section == 0){
         return 0;
     }
+    return SESSION_HEADER_HEIGHT;
+
 }
 @end

@@ -155,9 +155,9 @@ static UITapGestureRecognizer *singleFingerTap;
     self.segmentedControl.selectedSegmentIndex = 0;
     [self cycleFromViewController:self.currentViewController toViewController:[self.allViewControllers objectAtIndex:self.segmentedControl.selectedSegmentIndex]];
 }
--(UITableViewCell*)cellForFestival:(NSDictionary *)festival atIndexPath:(NSIndexPath*)indexPath forTableView:(UITableView*)tableView backGroundColor:(UIColor*) color{
+-(UITableViewCell*)cellForFestival:(NSDictionary *)festival atIndexPath:(NSIndexPath*)indexPath forTableView:(UITableView*)tableView backGroundColor:(UIColor*) color fullWidth:(BOOL)isFullWidth{
     FestivalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"festival_cell" forIndexPath:indexPath];
-    
+    cell.setToFullWidthOfScreen = isFullWidth;
     [cell.image sd_setImageWithURL:[NSURL URLWithString:[festival objectForKey:@"hero_image"]]
                   placeholderImage:[Helper imageFromColor:[UIColor myPlaceHolderColor]]];
     

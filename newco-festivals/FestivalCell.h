@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *logo;
 @property (weak, nonatomic) IBOutlet UIView *dateView;
 @property (weak, nonatomic) IBOutlet UILabel *title;
+@property (nonatomic) BOOL setToFullWidthOfScreen;
 @end

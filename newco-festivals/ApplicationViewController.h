@@ -33,7 +33,7 @@
 - (void)setMultiLineTitle:(NSString*)title fontColor:(UIColor*)color;
 - (SessionCell*) setupSessionCellforTableVew:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath withDatesDict:(NSMutableDictionary*)datesDict withOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDict;
 - (void) didSelectSessionInTableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath withDatesDict:(NSMutableDictionary*)datesDict withOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDict;
--(UITableViewCell*)cellForFestival:(NSDictionary *)festival atIndexPath:(NSIndexPath*)indexPath forTableView:(UITableView*)tableView backGroundColor:(UIColor*) color;
+-(UITableViewCell*)cellForFestival:(NSDictionary *)festival atIndexPath:(NSIndexPath*)indexPath forTableView:(UITableView*)tableView backGroundColor:(UIColor*) color fullWidth:(BOOL)isFullWidth;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section forTableView:(UITableView*)tableView withDatesDict:(NSMutableDictionary*)datesDict withOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDict;
 - (SessionCellHeader*)viewForHeaderInSection:(NSInteger)section forTableView:(UITableView*)tableView withOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDict;
 

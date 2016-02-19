@@ -93,7 +93,7 @@
     }else{
         festival = [inactiveFestivalsArray objectAtIndex:indexPath.row];
     }
-    return [self cellForFestival:festival atIndexPath:indexPath forTableView:tableView backGroundColor:[UIColor blackColor]];
+    return [self cellForFestival:festival atIndexPath:indexPath forTableView:tableView backGroundColor:[UIColor blackColor] fullWidth:NO];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary * festival;
