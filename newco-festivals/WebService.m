@@ -433,7 +433,8 @@ static double milliSecondsSinceLastSession = 0;
             return;
         }
         milliSecondsSinceLastSession =[[NSDate date] timeIntervalSince1970];
-        Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@/data-tracking/activity/", firebaseUrl, [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/activity/",  [[Credentials sharedCredentials].festival objectForKey:@"name"]];
+        Firebase *ref = [[Firebase alloc] initWithUrl:[Helper firebaseSafeUrl:subUrl]];
         Firebase *hopperRef = [ref childByAppendingPath: userId];
         Firebase *postRef = [hopperRef childByAutoId];
         NSString * timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
@@ -447,7 +448,8 @@ static double milliSecondsSinceLastSession = 0;
 
 -(void)registerSharedSession:(NSString*)sessionTitle note:(NSString*)note userId:(NSString*)userId{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-         Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@/data-tracking/%@/", firebaseUrl, [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle]];
+        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/%@/", [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle];
+        Firebase *ref = [[Firebase alloc] initWithUrl:[Helper firebaseSafeUrl:subUrl]];
         Firebase *hopperRef = [ref childByAppendingPath: @"shared"];
         Firebase *postRef = [hopperRef childByAutoId];
         NSDictionary *dict = @{
@@ -459,13 +461,15 @@ static double milliSecondsSinceLastSession = 0;
 }
 -(void)registerViewedSession:(NSString*)sessionTitle userId:(NSString*)userId {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        Firebase *ref = [[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"%@/festivals/%@/data-tracking/%@/", firebaseUrl, [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle]];
+        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/%@/", [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle];
+        Firebase *ref = [[Firebase alloc] initWithUrl:[Helper firebaseSafeUrl:subUrl]];
         Firebase *hopperRef = [ref childByAppendingPath: @"viewed"];
         Firebase *postRef = [hopperRef childByAutoId];
         NSDictionary *dict = @{
                                @"userId" : userId
                                };
         [postRef setValue: dict];
+        
     });
 }
 

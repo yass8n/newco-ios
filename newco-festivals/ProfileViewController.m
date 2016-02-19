@@ -201,7 +201,6 @@
             [cell.infoIcon setTintColor:[UIColor whiteColor]];
 
         }else{
-            [cell.about removeFromSuperview];
             [cell.infoIcon removeFromSuperview];
         }
         return cell;

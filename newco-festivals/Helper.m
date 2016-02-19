@@ -70,5 +70,13 @@
     
     return ceil(size.height / label.font.lineHeight);
 }
++(NSString*)firebaseSafeUrl:(NSString *)url{
+    url = [url stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+    url = [url stringByReplacingOccurrencesOfString:@"#" withString:@"-"];
+    url = [url stringByReplacingOccurrencesOfString:@"$" withString:@"-"];
+    url = [url stringByReplacingOccurrencesOfString:@"[" withString:@"-"];
+    url = [url stringByReplacingOccurrencesOfString:@"]" withString:@"-"];
+    return [NSString stringWithFormat:@"%@/%@", firebaseUrl, url];
+}
 
 @end
