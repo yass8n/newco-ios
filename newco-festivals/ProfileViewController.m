@@ -180,6 +180,7 @@
         }else {
             [self setUserImage:rect withAvatar:avatar withUser:self.user intoView:cell.profileImage withType:self.type];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.website.backgroundColor = [UIColor myNavigationBarColor];
         cell.positionAndCompany.textColor =[UIColor myNavigationBarColor];
         cell.about.text =  [[self.user objectForKey:@"about"] stringByStrippingHTML];
@@ -188,6 +189,9 @@
             cell.website.hidden = YES;
         }else{
             cell.website.hidden = NO;
+               self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
+            [cell.website addTarget:self action:@selector(goToWebsite:) forControlEvents:UIControlEventTouchUpInside];
+            cell.contentView.userInteractionEnabled = NO;
         }
         if ([cell.about.text length] > 0){
             cell.about.textColor = [UIColor myNavigationBarColor];

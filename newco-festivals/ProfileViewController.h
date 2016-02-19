@@ -10,6 +10,4 @@
 @interface ProfileViewController : ApplicationViewController
 @property (strong, nonatomic) NSDictionary *user;
 @property (strong, nonatomic) NSString *type;
-- (IBAction)goToWebsite:(id)sender;
-
 @end
