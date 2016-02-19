@@ -17,6 +17,10 @@
     }
     s = [s stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     s = [s stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    s = [s stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"-"];
+    s = [s stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"\""];
+    s = [s stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"\""];
+    s = [s stringByReplacingOccurrencesOfString:@"&rsquo;" withString:@"'"];
     return s;
 }
 @end
