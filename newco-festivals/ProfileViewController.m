@@ -23,6 +23,7 @@
 @end
 
 @implementation ProfileViewController
+static const int numberOfNonSessionSections = 1;
 - (BOOL)checkIfPersonInArray:(NSArray*)array person:(NSString*)username {
     for (int i = 0; i < [array count]; i ++){
         NSDictionary * user = [array objectAtIndex:i];
@@ -196,7 +197,8 @@
         }
         return cell;
     }else{
-           return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
+        NSIndexPath* iPath = [NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section-numberOfNonSessionSections];
+           return [self setupSessionCellforTableVew:tableView withIndexPath:iPath withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
     }
 
 }
@@ -208,22 +210,20 @@
     [self didSelectSessionInTableView:tableView atIndexPath:indexPath withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return [[self.datesDict allKeys] count];
+    return [[self.datesDict allKeys] count] + numberOfNonSessionSections;
 }
 - (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
-        return 1;
+        return numberOfNonSessionSections;
     }
-        return [self numberOfRowsInSection:section forTableView:tableView withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
-    
-
+    return [self numberOfRowsInSection:(section-numberOfNonSessionSections) forTableView:tableView withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0){
         return [[UIView alloc]init];
     }
-    return [self viewForHeaderInSection:section forTableView:tableView withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
+    return [self viewForHeaderInSection:(section-numberOfNonSessionSections) forTableView:tableView withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0){
