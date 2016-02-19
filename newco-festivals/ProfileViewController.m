@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray * sessionsArray;
 @property (strong, nonatomic) NSMutableDictionary* datesDict;
 @property (strong, nonatomic) NSMutableDictionary* orderOfInsertedDatesDict;
+@property (nonatomic) BOOL dataLoaded;
 #import "constants.h"
 @end
 
@@ -50,6 +51,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    self.dataLoaded = YES;
     [self reloadTableView];
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 // 
@@ -84,6 +86,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.dataLoaded = NO;
     [self allocateMemory];
     [self adjustUI];
     [self addDataToTable];
@@ -190,9 +193,12 @@
             cell.about.textColor = [UIColor myNavigationBarColor];
             cell.about.lineBreakMode = NSLineBreakByWordWrapping;
             cell.about.numberOfLines = 0;
+            cell.infoIcon.image = [cell.infoIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [cell.infoIcon setTintColor:[UIColor whiteColor]];
 
         }else{
             [cell.about removeFromSuperview];
+            [cell.infoIcon removeFromSuperview];
         }
         return cell;
     }else{
@@ -251,18 +257,18 @@
 }
 
 
-- (IBAction)hideTopView:(id)sender {
-    CGRect oldFrame = self.topView.frame;
-    CGRect old1Frame = self.sessionTableView.frame;
-    CGRect newFrame = CGRectMake(self.topView.frame.origin.x, -self.topView.frame.size.height, self.topView.frame.size.width, self.topView.frame.size.height);
-    CGRect newTableFrame = CGRectMake(self.sessionTableView.frame.origin.x, 0, self.sessionTableView.frame.size.width, self.view.frame.size.height);
-
-    [UIView animateWithDuration:.5 animations:^{
-        self.topView.frame = newFrame;
-        self.topView.alpha = 0;
-        self.sessionTableView.frame = newTableFrame;
-    } completion:^(BOOL finished) {
-        [self.topView removeFromSuperview];
-    }];
-}
+//- (IBAction)hideTopView:(id)sender {
+//    CGRect oldFrame = self.topView.frame;
+//    CGRect old1Frame = self.sessionTableView.frame;
+//    CGRect newFrame = CGRectMake(self.topView.frame.origin.x, -self.topView.frame.size.height, self.topView.frame.size.width, self.topView.frame.size.height);
+//    CGRect newTableFrame = CGRectMake(self.sessionTableView.frame.origin.x, 0, self.sessionTableView.frame.size.width, self.view.frame.size.height);
+//
+//    [UIView animateWithDuration:.5 animations:^{
+//        self.topView.frame = newFrame;
+//        self.topView.alpha = 0;
+//        self.sessionTableView.frame = newTableFrame;
+//    } completion:^(BOOL finished) {
+//        [self.topView removeFromSuperview];
+//    }];
+//}
 @end
