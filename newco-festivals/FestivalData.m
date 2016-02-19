@@ -190,9 +190,9 @@
         
         
     }
-    [self setDatesDict:datesDict setOrderOfInsertedDatesDict:orderOfInsertedDatesDict forSessions:sessionsArray initializeEverything:YES];
+    [self setDatesDict:datesDict setOrderOfInsertedDatesDict:orderOfInsertedDatesDict forSessions:sessionsArray initializeEverything:YES modifyOrderOfInsertedDictKeysByAddingNumber:1];
 }
-- (void)setDatesDict:(NSMutableDictionary*)datesDictionary setOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDictionary forSessions:(NSMutableArray*)sessions initializeEverything:(BOOL)initEverything{
+- (void)setDatesDict:(NSMutableDictionary*)datesDictionary setOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDictionary forSessions:(NSMutableArray*)sessions initializeEverything:(BOOL)initEverything modifyOrderOfInsertedDictKeysByAddingNumber:(NSUInteger)addingNumber{
     if (initEverything){
         sessionsAtDateAndTime = [[NSMutableDictionary alloc] init];
     }
@@ -209,7 +209,7 @@
         }
         if (![datesDictionary objectForKey:s.worded_date]){
             NSUInteger count =  [[datesDictionary allKeys] count];
-            NSNumber *count_object = [NSNumber numberWithInteger:count];
+            NSNumber *count_object = [NSNumber numberWithInteger:count + addingNumber];
             [orderOfInsertedDatesDictionary setObject:s.worded_date forKey:count_object];
             [datesDictionary setObject:[[NSMutableArray alloc] init] forKey:s.worded_date];
         }

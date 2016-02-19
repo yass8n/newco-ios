@@ -167,7 +167,7 @@
 
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return [[[FestivalData sharedFestivalData].datesDict allKeys] count];
+    return [[[FestivalData sharedFestivalData].datesDict allKeys] count] + 1;
 
 }
 - (NSInteger)tableView:tableView numberOfRowsInSection:(NSInteger)section{

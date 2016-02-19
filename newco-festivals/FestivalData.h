@@ -28,7 +28,7 @@
 - (void)initEventColorsArray;
 -(void)updateSessionsValidity:(NSArray*)eventKeys invalidateSessions:(BOOL)invalidate;
 -(void) enableAllSessions;
-- (void)setDatesDict:(NSMutableDictionary*)datesDictionary setOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDictionary forSessions:(NSMutableArray*)sessions initializeEverything:(BOOL)initEverything;
+- (void)setDatesDict:(NSMutableDictionary*)datesDictionary setOrderOfInsertedDatesDict:(NSMutableDictionary*)orderOfInsertedDatesDictionary forSessions:(NSMutableArray*)sessions initializeEverything:(BOOL)initEverything modifyOrderOfInsertedDictKeysByAddingNumber:(NSUInteger)addingNumber;
 -(void) initializeSessionArrayWithData:(NSArray *) jsonArray;
 -(void) setSessionsArray:(NSMutableArray *)object;
 -(void) setSessionsDict:(NSMutableDictionary *)object;

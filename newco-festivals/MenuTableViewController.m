@@ -312,7 +312,7 @@
     vc.datesDict = [[NSMutableDictionary alloc] init];
     vc.orderOfInsertedDatesDict = [[NSMutableDictionary alloc] init];
     vc.sessionsArray = sessionsArray;
-    [sharedFestivalData setDatesDict:vc.datesDict setOrderOfInsertedDatesDict:vc.orderOfInsertedDatesDict forSessions:vc.sessionsArray initializeEverything:NO];
+    [sharedFestivalData setDatesDict:vc.datesDict setOrderOfInsertedDatesDict:vc.orderOfInsertedDatesDict forSessions:vc.sessionsArray initializeEverything:NO modifyOrderOfInsertedDictKeysByAddingNumber:1];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
     [navController setViewControllers: @[vc] animated: YES];
