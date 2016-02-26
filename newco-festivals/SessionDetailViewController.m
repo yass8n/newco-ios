@@ -58,11 +58,17 @@ static NSString* ATTEND = @" Attend ";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
-    [self getAttendees];
+    [self getAttendees:self.view];
     // Do any additional setup after loading the view.
 }
--(void)getAttendees{
-    WebService * webService = [[WebService alloc] initWithView:self.view];
+-(void)getAttendees:(UIView*)loaderInView{
+    
+    WebService * webService;
+    if (loaderInView != nil){
+       webService = [[WebService alloc] initWithView:loaderInView];
+    }else{
+        webService = [[WebService alloc] init];
+    }
     [webService setAttendeesForSession:self.session.id_ callback:^(NSArray *jsonArray) {
         self.users = [[NSMutableDictionary alloc] init];
         for (int i = 0; i < [jsonArray count]; i++){
@@ -353,7 +359,7 @@ static NSString* ATTEND = @" Attend ";
             }else if ([response rangeOfString:@"Removed event"].location != NSNotFound){
                 [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:self.session.event_key, nil] invalidateSessions:NO];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self getAttendees];
+                    [self getAttendees:nil];
                     [self setSessionPickedUI:NO];
                 });
                 
@@ -432,7 +438,7 @@ static NSString* ATTEND = @" Attend ";
                     [[FestivalData sharedFestivalData].currentUserSessions setObject:@"YES" forKey:self.session.event_key];
                     [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:self.session.event_key, nil] invalidateSessions:YES];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self getAttendees];
+                        [self getAttendees:nil];
                         [self setSessionPickedUI:YES];
                     });
                 } else {
@@ -532,7 +538,7 @@ static NSString* ATTEND = @" Attend ";
                         [modal.modalImageContainer addSubview:v];
                          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                              [modal hideModal];
-                             [self getAttendees];
+                             [self getAttendees:nil];
                             [self setSessionPickedUI:YES];
                         });
                     } else {
