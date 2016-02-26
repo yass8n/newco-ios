@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08A590461C805CAC00890E30 /* ConfirmationModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A590451C805CAC00890E30 /* ConfirmationModalView.m */; };
+		08A590561C80697200890E30 /* proximanova-black-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590511C80697200890E30 /* proximanova-black-webfont.ttf */; };
+		08A590571C80697200890E30 /* proximanova-bold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590521C80697200890E30 /* proximanova-bold-webfont.ttf */; };
+		08A590581C80697200890E30 /* proximanova-light-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590531C80697200890E30 /* proximanova-light-webfont.ttf */; };
+		08A590591C80697200890E30 /* proximanova-reg-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590541C80697200890E30 /* proximanova-reg-webfont.ttf */; };
+		08A5905A1C80697200890E30 /* proximanova-sbold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590551C80697200890E30 /* proximanova-sbold-webfont.ttf */; };
 		08C48E3C1C75AEE100A53712 /* FestivalCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */; };
 		08C48E3E1C75AEF200A53712 /* FestivalCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */; };
 		08EBAFFD1C771DD60099979A /* ProfileDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */; };
@@ -89,6 +95,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08A590441C805CAC00890E30 /* ConfirmationModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationModalView.h; sourceTree = "<group>"; };
+		08A590451C805CAC00890E30 /* ConfirmationModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationModalView.m; sourceTree = "<group>"; };
+		08A590511C80697200890E30 /* proximanova-black-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "proximanova-black-webfont.ttf"; path = "../proximanova-black-webfont.ttf"; sourceTree = "<group>"; };
+		08A590521C80697200890E30 /* proximanova-bold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "proximanova-bold-webfont.ttf"; path = "../proximanova-bold-webfont.ttf"; sourceTree = "<group>"; };
+		08A590531C80697200890E30 /* proximanova-light-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "proximanova-light-webfont.ttf"; path = "../proximanova-light-webfont.ttf"; sourceTree = "<group>"; };
+		08A590541C80697200890E30 /* proximanova-reg-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "proximanova-reg-webfont.ttf"; path = "../proximanova-reg-webfont.ttf"; sourceTree = "<group>"; };
+		08A590551C80697200890E30 /* proximanova-sbold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "proximanova-sbold-webfont.ttf"; path = "../proximanova-sbold-webfont.ttf"; sourceTree = "<group>"; };
 		08C48E3A1C75AEE100A53712 /* FestivalCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalCellHeader.h; sourceTree = "<group>"; };
 		08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalCellHeader.m; sourceTree = "<group>"; };
 		08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalCellHeader.xib; sourceTree = "<group>"; };
@@ -426,6 +439,8 @@
 				08F6F8381C748B61005BC870 /* ModalView.m */,
 				08F6F8231C748AD0005BC870 /* BaseModal.h */,
 				08F6F8241C748AD0005BC870 /* BaseModal.m */,
+				08A590441C805CAC00890E30 /* ConfirmationModalView.h */,
+				08A590451C805CAC00890E30 /* ConfirmationModalView.m */,
 			);
 			name = Modals;
 			sourceTree = "<group>";
@@ -444,6 +459,11 @@
 		08F6F8601C74961A005BC870 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				08A590511C80697200890E30 /* proximanova-black-webfont.ttf */,
+				08A590521C80697200890E30 /* proximanova-bold-webfont.ttf */,
+				08A590531C80697200890E30 /* proximanova-light-webfont.ttf */,
+				08A590541C80697200890E30 /* proximanova-reg-webfont.ttf */,
+				08A590551C80697200890E30 /* proximanova-sbold-webfont.ttf */,
 				92470D0F1C389081003E6F7E /* Assets.xcassets */,
 			);
 			name = Assets;
@@ -674,6 +694,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08A590561C80697200890E30 /* proximanova-black-webfont.ttf in Resources */,
+				08A590571C80697200890E30 /* proximanova-bold-webfont.ttf in Resources */,
+				08A590581C80697200890E30 /* proximanova-light-webfont.ttf in Resources */,
+				08A590591C80697200890E30 /* proximanova-reg-webfont.ttf in Resources */,
+				08A5905A1C80697200890E30 /* proximanova-sbold-webfont.ttf in Resources */,
 				08F240191C75FFD900D54B10 /* Images in Resources */,
 				92470D131C389081003E6F7E /* LaunchScreen.storyboard in Resources */,
 				9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */,
@@ -779,6 +804,7 @@
 				08F6F7E31C74788F005BC870 /* FestivalData.m in Sources */,
 				08F240181C75FFD900D54B10 /* ALAlertBannerManager.m in Sources */,
 				92470D0E1C389081003E6F7E /* newco_festivals.xcdatamodeld in Sources */,
+				08A590461C805CAC00890E30 /* ConfirmationModalView.m in Sources */,
 				08F6F8301C748B0F005BC870 /* FestivalsViewController.m in Sources */,
 				923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */,
 				08F6F82C1C748AF9005BC870 /* FestivalCell.m in Sources */,

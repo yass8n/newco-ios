@@ -11,4 +11,5 @@ target 'newco-festivals' do
     pod 'Firebase', '>= 2.5.0'
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'TTTAttributedLabel'
 end

@@ -462,6 +462,7 @@ static UITapGestureRecognizer *singleFingerTap;
     }
     
 }
+
 + (void)fetchCurrentUserSessions:(UIView*)withView{
     WebService * webService = [[WebService alloc] initWithView:withView];
     [webService fetchCurrentUserSessions:[[Credentials sharedCredentials].currentUser objectForKey:@"username"] withAuthToken:[[Credentials sharedCredentials].currentUser objectForKey:@"auth"] callback:^(NSArray *sessionKeyArray) {
@@ -475,6 +476,7 @@ static UITapGestureRecognizer *singleFingerTap;
         }
         [FestivalData sharedFestivalData].currentUserSessions = userSessions;
         [[FestivalData sharedFestivalData] updateSessionsValidity:[[FestivalData sharedFestivalData].currentUserSessions allKeys] invalidateSessions:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSessionsUpdated" object:nil];
     }];
 }
 

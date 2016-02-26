@@ -13,6 +13,8 @@
 #import "CustomUIView.h"
 #import "Helper.h"
 #import "NSString+NSStringAdditions.h"
+#import "ConfirmationModalView.h"
+#import "TTTAttributedLabel.h"
 
 
 @interface SessionDetailViewController ()
@@ -363,12 +365,38 @@ static NSString* ATTEND = @" Attend ";
         }];
             }else{
         if (!self.session.enabled){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:@"You are already attending a session at this time."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
+            
+            CGRect modalFrame = CGRectMake(10, 150, self.view.frame.size.width - 20, 160);
+            HandlingBlock yesBlock = ^{
+                NSLog(@"YES");
+            };
+            HandlingBlock noBlock = ^{
+                NSLog(@"NO");
+            };
+            UIImage *modalImage = [UIImage imageNamed:@"swap"];
+            
+            NSString *modalTitle = @"You have a time conflict with ";
+            UIColor *modalTitleColor = [UIColor redColor];
+            UIFont *proximaBold = [UIFont fontWithName: @"ProximaNova-Bold" size: 18];
+            NSDictionary *boldDict = [NSDictionary dictionaryWithObject:proximaBold forKey:NSFontAttributeName];
+            UIFont *proximaSemi = [UIFont fontWithName: @"ProximaNova-Semibold" size: 18];
+            NSDictionary *regular = [NSDictionary dictionaryWithObject: proximaSemi forKey:NSFontAttributeName];
+            NSMutableAttributedString *regularString = [[NSMutableAttributedString alloc] initWithString:modalTitle attributes: regular];
+            NSString * sessionName = self.session.title;
+            
+            NSMutableAttributedString *boldString = [[NSMutableAttributedString alloc]initWithString: [NSString stringWithFormat:@"%@", [sessionName capitalizedString]] attributes:boldDict];
+            [boldString addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [boldString length]))];
+            
+            [regularString appendAttributedString:boldString];
+            
+            NSMutableAttributedString *addition = [[NSMutableAttributedString alloc] initWithString:@"... would you like to swap?" attributes: regular];
+            [regularString appendAttributedString:addition];
+            
+            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame image:modalImage title:regularString yesBlock:yesBlock noBlock:noBlock];
+            UIView * topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+            [topView.window addSubview:modalView];
+            modalView.baseModalDelegate = self;
+            [modalView showModalAtTop:YES];
         } else {
             WebService * webService = [[WebService alloc] initWithView:self.view];
             [webService addSessionToSchedule:self.session.id_ callback:^(NSString *response) {

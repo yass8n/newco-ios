@@ -90,7 +90,6 @@ static NSRecursiveLock *calls_lock;
                 self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
         } else {
             [ApplicationViewController fetchCurrentUserSessions:self.view];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 int value = [self.numberCompletedCalls intValue];
                 self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "colors.h"
 #import "Helper.h"
+
 static NSString *const modalGray = @"#C0C0C0";
 @protocol BaseModalDelegate; //forward declaration
 @interface BaseModal : UIView

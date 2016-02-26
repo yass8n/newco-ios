@@ -90,6 +90,7 @@
     [self allocateMemory];
     [self adjustUI];
     [self addDataToTable];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"UserSessionsUpdated" object:nil];
     
     // Do any additional setup after loading the view.
 }
