@@ -61,12 +61,13 @@
 
     self.modalTitleLabel.attributedText = modalTitle;
     
-    int numlines = [Helper lineCountForLabel:self.modalTitleLabel];
+    CGSize size = [Helper sizeForLabel:self.modalTitleLabel];
+    int numLines = [Helper lineCountForLabel:self.modalTitleLabel];
     CGRect labelFrame = self.modalTitleLabel.frame;
-    labelFrame.size.height = numlines * 25;
+    labelFrame.size.height = size.height + 30;
     self.modalTitleLabel.frame = labelFrame;
     CGRect modalFrame = self.modalContent.frame;
-    modalFrame.size.height = modalFrame.size.height + (numlines - 2) * 20;
+    modalFrame.size.height = modalFrame.size.height + 25;
     self.modalContent.frame = modalFrame;
     [self.modalContent addSubview:self.modalTitleLabel];
     
@@ -97,11 +98,17 @@ return self;
 
 }
 - (void)noButtonClicked:(ConfirmationModalView*)modal{
+    [self.noButton removeTarget:nil
+                                      action:NULL
+                            forControlEvents:UIControlEventAllEvents];
     if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(noButtonClicked:)]) {
         [self.confirmationModalDelegate noButtonClicked:self];
     }
 }
 - (void)yesButtonClicked:(ConfirmationModalView*)modal{
+    [self.yesButton removeTarget:nil
+                         action:NULL
+               forControlEvents:UIControlEventAllEvents];
     if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(yesButtonClicked:)]) {
         [self.confirmationModalDelegate yesButtonClicked:self];
     }

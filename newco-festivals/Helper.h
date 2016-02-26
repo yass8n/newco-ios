@@ -15,5 +15,6 @@
 + (UIImage *)imageFromColor:(UIColor *)color;
 + (UIColor *)getUIColorObjectFromHexString:(NSString *)hexStr alpha:(CGFloat)alpha;
 + (int)lineCountForLabel:(UILabel *)label;
++ (CGSize)sizeForLabel:(UILabel *)label ;
 + (NSString*)firebaseSafeUrl:(NSString*)url;
 @end

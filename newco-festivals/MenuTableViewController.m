@@ -52,13 +52,13 @@
     changeCity.icon = [[UIImage imageNamed:@"tool"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [menuItems addObject:changeCity];
     
-    NSString *location_string = @"Industry";
+    NSString *location_string = @"Audience";
     NSString *audience_string = @"Location";
     FestivalData *sharedFestivalData = [FestivalData sharedFestivalData];
     BOOL event_type_is_location = [[[Credentials sharedCredentials].festival objectForKey:@"event_type_is_location"]boolValue];
     if (event_type_is_location){
         location_string = @"Location";
-        audience_string = @"Industry";
+        audience_string = @"Audience";
     }
     
     

@@ -70,6 +70,12 @@
     
     return ceil(size.height / label.font.lineHeight);
 }
++ (CGSize)sizeForLabel:(UILabel *)label {
+    CGSize constrain = CGSizeMake(label.bounds.size.width, FLT_MAX);
+    CGSize size = [label.text sizeWithFont:label.font constrainedToSize:constrain lineBreakMode:UILineBreakModeWordWrap];
+    
+    return size;
+}
 +(NSString*)firebaseSafeUrl:(NSString *)url{
     url = [url stringByReplacingOccurrencesOfString:@"." withString:@"-"];
     url = [url stringByReplacingOccurrencesOfString:@"#" withString:@"-"];
