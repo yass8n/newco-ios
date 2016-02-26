@@ -11,13 +11,13 @@
 @interface ConfirmationModalView()
 @property (strong, nonatomic) TTTAttributedLabel* modalTitleLabel;
 @property (strong, nonatomic) UIView* modalContent;
-@property (strong, nonatomic) UIButton* closeModalButton;
+@property (strong, nonatomic) UIButton* noButton;
+@property (strong, nonatomic) UIButton* yesButton;
+
 @end
 @implementation ConfirmationModalView
 
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSMutableAttributedString *)modalTitle yesBlock:(HandlingBlock)yesBlock noBlock:(HandlingBlock)noBlock{
-    noBlock();
-    yesBlock();
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor{
     self = [super initWithFrame:frame];
     UIView *modalContainer = [[UIView alloc] initWithFrame:self.bounds];
     
@@ -35,7 +35,7 @@
     [modalContainer addSubview:self.modalContent];
     
     
-    //adding "list create" image at top center
+    //adding image at top center
     UIView *modalImageContainer = [[UIView alloc] initWithFrame:CGRectMake((modalContainer.frame.size.width - 44)/2, -22, 44, 44)];
     modalImageContainer.layer.cornerRadius = modalImageContainer.frame.size.width / 2;
     modalImageContainer.layer.masksToBounds = YES;
@@ -43,7 +43,8 @@
     [modalContainer addSubview:modalImageContainer];
     
     UIImageView *modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 40, 40)];
-    modalImageView.image = modalImage;
+    modalImageView.image = [modalImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [modalImageView setTintColor:imageColor];
     modalImageView.layer.cornerRadius = modalImageView.frame.size.width/2;
     modalImageView.layer.masksToBounds = YES;
     [modalImageContainer addSubview:modalImageView];
@@ -53,7 +54,6 @@
     self.modalTitleLabel.numberOfLines = 0;
     self.modalTitleLabel.minimumFontSize = 0;
     self.modalTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.modalTitleLabel.font = [UIFont fontWithName: @"ProximaNova-Semibold" size: 18];
     self.modalTitleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
     self.modalTitleLabel.textAlignment = NSTextAlignmentCenter;
     self.modalTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -71,21 +71,44 @@
     [self.modalContent addSubview:self.modalTitleLabel];
     
     
-    self.closeModalButton = [[UIButton alloc] initWithFrame:CGRectMake(1, self.modalContent.frame.size.height - 41, self.modalContent.frame.size.width - 2, 40)];
-    self.closeModalButton.backgroundColor = [UIColor orangeColor];
-    self.closeModalButton.titleLabel.font = [UIFont fontWithName: @"ProximaNova-Semibold" size: 16.0f];
-    [self.closeModalButton setTitle:@"AWESOME!" forState:UIControlStateNormal];
-    [self.closeModalButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.closeModalButton.layer.cornerRadius = 2.5f;
-    self.closeModalButton.layer.masksToBounds = YES;
-    [self.closeModalButton addTarget:self.baseModalDelegate action:@selector(hideModal:) forControlEvents:UIControlEventTouchUpInside];
-    [self.modalContent addSubview:self.closeModalButton];
+    self.noButton = [[UIButton alloc] initWithFrame:CGRectMake(1, self.modalContent.frame.size.height - 41, (self.modalContent.frame.size.width/2) - 1, 40)];
+    self.noButton.backgroundColor = [UIColor lightGrayColor];
+    self.noButton.titleLabel.font = [UIFont fontWithName: @"ProximaNova-Semibold" size: 16.0f];
+    [self.noButton setTitle:noText forState:UIControlStateNormal];
+    [self.noButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.noButton.layer.cornerRadius = 2.5f;
+    self.noButton.layer.masksToBounds = YES;
+    [self.noButton addTarget:self.baseModalDelegate action:@selector(noButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.modalContent addSubview:self.noButton];
+    
+    self.yesButton = [[UIButton alloc] initWithFrame:CGRectMake(2 + self.noButton.frame.size.width, self.modalContent.frame.size.height - 41, (self.modalContent.frame.size.width/2) - 2, 40)];
+    self.yesButton.backgroundColor = [Helper getUIColorObjectFromHexString:@"#34495e" alpha:1.0];
+    self.yesButton.titleLabel.font = [UIFont fontWithName: @"ProximaNova-Semibold" size: 16.0f];
+    [self.yesButton setTitle:yesText forState:UIControlStateNormal];
+    [self.yesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.yesButton.layer.cornerRadius = 2.5f;
+    self.yesButton.layer.masksToBounds = YES;
+    [self.yesButton addTarget:self.baseModalDelegate action:@selector(noButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.modalContent addSubview:self.yesButton];
     
     [self addSubview:modalContainer];
     
 return self;
 
 }
+- (void)noButtonClicked:(UITapGestureRecognizer *)recognizer{
+    [self hideModal];
+    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(noButtonClicked)]) {
+        [self.confirmationModalDelegate noButtonClicked];
+    }
+}
+- (void)yesButtonClicked:(UITapGestureRecognizer *)recognizer{
+    [self hideModal];
+    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(yesButtonClicked)]) {
+        [self.confirmationModalDelegate yesButtonClicked];
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

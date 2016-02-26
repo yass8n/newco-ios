@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Session.h"
-@interface SessionDetailViewController : ApplicationViewController
+#import "ConfirmationModalView.h"
+@interface SessionDetailViewController : ApplicationViewController <ConfirmationModalDelegate>
     @property (weak, nonatomic) IBOutlet Session* session;
 @end

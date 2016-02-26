@@ -366,22 +366,18 @@ static NSString* ATTEND = @" Attend ";
             }else{
         if (!self.session.enabled){
             
-            CGRect modalFrame = CGRectMake(10, 150, self.view.frame.size.width - 20, 160);
-            HandlingBlock yesBlock = ^{
-                NSLog(@"YES");
-            };
-            HandlingBlock noBlock = ^{
-                NSLog(@"NO");
-            };
+            CGRect modalFrame = CGRectMake(30, 150, self.view.frame.size.width - 60, 160);
             UIImage *modalImage = [UIImage imageNamed:@"swap"];
             
             NSString *modalTitle = @"You have a time conflict with ";
-            UIColor *modalTitleColor = [UIColor redColor];
+            
+            UIColor *modalTitleColor =  [Helper getUIColorObjectFromHexString:@"#34495e" alpha:1.0];
             UIFont *proximaBold = [UIFont fontWithName: @"ProximaNova-Bold" size: 18];
             NSDictionary *boldDict = [NSDictionary dictionaryWithObject:proximaBold forKey:NSFontAttributeName];
             UIFont *proximaSemi = [UIFont fontWithName: @"ProximaNova-Semibold" size: 18];
             NSDictionary *regular = [NSDictionary dictionaryWithObject: proximaSemi forKey:NSFontAttributeName];
             NSMutableAttributedString *regularString = [[NSMutableAttributedString alloc] initWithString:modalTitle attributes: regular];
+            [regularString addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [regularString length]))];
             NSString * sessionName = self.session.title;
             
             NSMutableAttributedString *boldString = [[NSMutableAttributedString alloc]initWithString: [NSString stringWithFormat:@"%@", [sessionName capitalizedString]] attributes:boldDict];
@@ -390,9 +386,11 @@ static NSString* ATTEND = @" Attend ";
             [regularString appendAttributedString:boldString];
             
             NSMutableAttributedString *addition = [[NSMutableAttributedString alloc] initWithString:@"... would you like to swap?" attributes: regular];
+             [addition addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [addition length]))];
             [regularString appendAttributedString:addition];
             
-            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame image:modalImage title:regularString yesBlock:yesBlock noBlock:noBlock];
+            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame image:modalImage title:regularString yesText:@"Swap" noText:@"Cancel" imageColor:self.session.color];
+            modalView.confirmationModalDelegate = self;
             UIView * topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
             [topView.window addSubview:modalView];
             modalView.baseModalDelegate = self;
@@ -445,6 +443,12 @@ static NSString* ATTEND = @" Attend ";
             }];
         }
     }
+}
+-(void)yesButtonClicked{
+    NSLog(@"YES CLICKED");
+}
+-(void)noButtonClicked{
+    NSLog(@"NO CLICKED");
 }
 #pragma Mark-social sharing
 -(void) showSocialShareDialog{

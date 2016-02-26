@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/ConfirmationModalView.m"
-            timestampString = "478176733.773173"
+            timestampString = "478180965.465785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "74"
             endingLineNumber = "74"
-            landmarkName = "-initWithFrame:image:title:yesBlock:noBlock:"
+            landmarkName = "-initWithFrame:image:title:yesText:noText:imageColor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/ConfirmationModalView.m"
-            timestampString = "478176751.071049"
+            timestampString = "478180965.465785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
             endingLineNumber = "22"
-            landmarkName = "-initWithFrame:image:title:yesBlock:noBlock:"
+            landmarkName = "-initWithFrame:image:title:yesText:noText:imageColor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/SessionDetailViewController.m"
-            timestampString = "478176897.823673"
+            timestampString = "478179364.812405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
             landmarkName = "-addToSchedule:"
             landmarkType = "5">
          </BreakpointContent>
@@ -182,15 +182,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/SessionDetailViewController.m"
-            timestampString = "478177051.124673"
+            timestampString = "478179364.812405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "-addToSchedule:"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,12 +202,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/ConfirmationModalView.m"
-            timestampString = "478177154.375418"
+            timestampString = "478180965.465785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
             endingLineNumber = "23"
-            landmarkName = "-initWithFrame:image:title:yesBlock:noBlock:"
+            landmarkName = "-initWithFrame:image:title:yesText:noText:imageColor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
