@@ -74,6 +74,18 @@
         
     }
 }
+-(Session*)getConflictingSession:(Session*) session{
+    NSString* dateAndTime = [session.worded_date and session.start_time];
+    NSMutableDictionary* sessionsForThisDateAndTime = [sessionsAtDateAndTime objectForKey:dateAndTime];
+    NSArray * sessions = [sessionsForThisDateAndTime allValues];
+    for (int j = 0; j < [sessions count]; j++){
+        Session * temp = [sessions objectAtIndex:j];
+        if (temp.enabled){
+            return temp;
+        }
+    }
+    return nil;
+}
 - (UIColor *) findFreeColor{
     NSUInteger count = [[locationColorDict allKeys] count];
     return [EVENT_COLORS_ARRAY objectAtIndex:count];
@@ -101,6 +113,8 @@
             NSArray* speakers = [session_ objectForKey:@"speakers"];
             NSArray* artists = [session_ objectForKey:@"artists"];
             NSString* status = [session_ objectForKey:@"seats-title"];
+            NSInteger goers = [[session_ objectForKey:@"goers"] integerValue];
+            NSInteger seats = [[session_ objectForKey:@"seats"] integerValue];
             
             NSString* firm_location;
             if (![location  isEqual: @""]){
@@ -136,7 +150,9 @@
                                                audience: audience
                                                speakers: speakers
                                               companies: artists
-                                            description: description];
+                                            description: description
+                                                  goers:goers
+                                                  seats:seats];
             [sessionsArray addObject: s];
             [sessionsDict setObject:s forKey:s.event_key];
             

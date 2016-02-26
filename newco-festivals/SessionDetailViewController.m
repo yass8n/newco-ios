@@ -365,7 +365,7 @@ static NSString* ATTEND = @" Attend ";
         }];
             }else{
         if (!self.session.enabled){
-            
+            Session * conflictingSession = [[FestivalData sharedFestivalData] getConflictingSession:self.session];
             CGRect modalFrame = CGRectMake(30, 150, self.view.frame.size.width - 60, 160);
             UIImage *modalImage = [UIImage imageNamed:@"swap"];
             
@@ -378,14 +378,14 @@ static NSString* ATTEND = @" Attend ";
             NSDictionary *regular = [NSDictionary dictionaryWithObject: proximaSemi forKey:NSFontAttributeName];
             NSMutableAttributedString *regularString = [[NSMutableAttributedString alloc] initWithString:modalTitle attributes: regular];
             [regularString addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [regularString length]))];
-            NSString * sessionName = self.session.title;
+            NSString * sessionName = conflictingSession.title;
             
             NSMutableAttributedString *boldString = [[NSMutableAttributedString alloc]initWithString: [NSString stringWithFormat:@"%@", [sessionName capitalizedString]] attributes:boldDict];
             [boldString addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [boldString length]))];
             
             [regularString appendAttributedString:boldString];
             
-            NSMutableAttributedString *addition = [[NSMutableAttributedString alloc] initWithString:@"... would you like to swap?" attributes: regular];
+            NSMutableAttributedString *addition = [[NSMutableAttributedString alloc] initWithString:@". Would you like to swap?" attributes: regular];
              [addition addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [addition length]))];
             [regularString appendAttributedString:addition];
             
@@ -444,10 +444,114 @@ static NSString* ATTEND = @" Attend ";
         }
     }
 }
--(void)yesButtonClicked{
-    NSLog(@"YES CLICKED");
+- (void)yesButtonClicked:(ConfirmationModalView*)modal{
+    Session * conflictingSession = [[FestivalData sharedFestivalData] getConflictingSession:self.session];
+    
+    [[modal.modalImageContainer subviews]
+     makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIView * v = [[UIView alloc]initWithFrame:modal.modalImageContainer.bounds];
+    v.backgroundColor = [UIColor whiteColor];
+    [v addSubview:activityView];
+    activityView.center=v.center;
+    [activityView startAnimating];
+    [modal.modalImageContainer addSubview:v];
+    if (conflictingSession.goers >= conflictingSession.seats){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [modal hideModal];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Swap failed"
+                                                                message:@"Sorry, the session you tried to add is already full."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            });
+        });
+        return;
+    }
+        WebService * webService = [[WebService alloc] init];
+        [webService removeSessionFromSchedule:conflictingSession.id_ callback:^(NSString *response) {
+            UIAlertView *alert;
+            if ([response rangeOfString:@"ERR"].location != NSNotFound){
+                alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                   message:@"Failed to swap because event doesn't exist."
+                                                  delegate:nil
+                                         cancelButtonTitle:@"OK"
+                                         otherButtonTitles:nil];
+                
+            }else if ([response rangeOfString:@"Removed event"].location != NSNotFound){
+                [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:conflictingSession.event_key, nil] invalidateSessions:NO];
+                [webService addSessionToSchedule:self.session.id_ callback:^(NSString *response) {
+                    UIAlertView *alert;
+                    if ([response rangeOfString:@"expired"].location != NSNotFound){
+                        alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                           message:@"Sorry, this event is already expired."
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+                    } else if ([response rangeOfString:@"noticket"].location != NSNotFound){
+                        alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                           message:@"You need to purchase a ticket before attending a session."
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+                        
+                        
+                    } else if ([response rangeOfString:@"ERR"].location != NSNotFound){
+                        alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                           message:@"Event doesn't exist."
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+                        
+                        
+                        
+                    }else if ([response rangeOfString:@"Adding event"].location != NSNotFound){
+                        [[FestivalData sharedFestivalData].currentUserSessions setObject:@"YES" forKey:self.session.event_key];
+                        [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:self.session.event_key, nil] invalidateSessions:YES];
+                        UIView * v = [[UIView alloc]initWithFrame:modal.modalImageContainer.bounds];
+                        v.backgroundColor = [UIColor whiteColor];
+                        
+                       UIImageView *modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 30, 30)];
+                        modalImageView.center = v.center;
+                        modalImageView.image = [[UIImage imageNamed:@"check_plain"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                        [modalImageView setTintColor:self.session.color];
+                        modalImageView.layer.cornerRadius = modalImageView.frame.size.width/2;
+                        modalImageView.layer.masksToBounds = YES;
+                        
+                        [v addSubview:modalImageView];
+                        [modal.modalImageContainer addSubview:v];
+                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                             [modal hideModal];
+                            [self setSessionPickedUI:YES];
+                        });
+                    } else {
+                        alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                           message:@"Something went wrong."
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+                        
+                    }
+                }];
+                
+            } else {
+                alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                   message:@"Something went wrong."
+                                                  delegate:nil
+                                         cancelButtonTitle:@"OK"
+                                         otherButtonTitles:nil];
+            }
+            if (alert){
+                [alert show];
+            }
+            
+        }];
 }
--(void)noButtonClicked{
+- (void)noButtonClicked:(ConfirmationModalView*)modal{
+    [modal hideModal];
     NSLog(@"NO CLICKED");
 }
 #pragma Mark-social sharing

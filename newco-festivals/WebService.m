@@ -211,7 +211,7 @@ static double milliSecondsSinceLastSession = 0;
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/session/export?api_key=%@&custom_data=Y&format=json&fields=Company%@Description,description,event_key,name,address,event_start,event_end,event_type,id,speakers,artists,seats,audience,company,active,custom5,lat,lon", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], @"%20"];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/session/export?api_key=%@&custom_data=Y&format=json&fields=Company%@Description,description,event_key,name,address,event_start,event_end,event_type,id,speakers,artists,seats,audience,company,active,custom5,lat,lon,goers", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], @"%20"];
     NSURL *URL = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     

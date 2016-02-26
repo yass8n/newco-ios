@@ -7,14 +7,17 @@
 //
 
 #import "BaseModal.h"
-@protocol ConfirmationModalDelegate <NSObject>;
-
-@optional
--(void)yesButtonClicked;
--(void)noButtonClicked;
-@end
+@protocol ConfirmationModalDelegate;
 
 @interface ConfirmationModalView : BaseModal
 - (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor;
 @property (nonatomic, weak) id<ConfirmationModalDelegate> confirmationModalDelegate;
+@property (nonatomic, strong) UIView *modalImageContainer;
+@end
+
+@protocol ConfirmationModalDelegate <NSObject>;
+
+@optional
+-(void)yesButtonClicked:(ConfirmationModalView*)modal;
+-(void)noButtonClicked:(ConfirmationModalView*)modal;;
 @end

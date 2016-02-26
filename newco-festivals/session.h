@@ -19,6 +19,8 @@
 @property BOOL enabled;
 @property BOOL picked;
 @property (nonatomic, strong) NSString *status;
+@property (nonatomic) NSInteger goers;
+@property (nonatomic) NSInteger seats;
 @property (nonatomic, strong) NSString *event_key;
 @property (nonatomic, strong) NSString *event_type;
 @property (nonatomic, strong) NSString *id_;
@@ -31,6 +33,6 @@
 @property (nonatomic, strong) NSDate *event_start;
 @property (nonatomic, strong) NSDate *event_end;
 
--(id)initWithTitle:(NSString *)title event_key:(NSString *)event_key event_type:(NSString *)event_type id_:(NSString*)id_ status:(NSString*)status note1:(NSString*)note1 color:(NSString*)color event_start:(NSDate*)event_start event_end:(NSDate*)event_end address: (NSString*)address audience: (NSString*)audience speakers: (NSArray*) speakers companies: (NSArray*) companies description: (NSString*) description;
+-(id)initWithTitle:(NSString *)title event_key:(NSString *)event_key event_type:(NSString *)event_type id_:(NSString*)id_ status:(NSString*)status note1:(NSString*)note1 color:(UIColor*)color event_start:(NSDate*)event_start event_end:(NSDate*)event_end address: (NSString*)address audience: (NSString*)audience speakers: (NSArray*) speakers companies: (NSArray*) companies description: (NSString*) description goers:(NSInteger) goers seats:(NSInteger)seats;
 
 @end

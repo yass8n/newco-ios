@@ -36,18 +36,18 @@
     
     
     //adding image at top center
-    UIView *modalImageContainer = [[UIView alloc] initWithFrame:CGRectMake((modalContainer.frame.size.width - 44)/2, -22, 44, 44)];
-    modalImageContainer.layer.cornerRadius = modalImageContainer.frame.size.width / 2;
-    modalImageContainer.layer.masksToBounds = YES;
-    modalImageContainer.backgroundColor = [UIColor whiteColor];
-    [modalContainer addSubview:modalImageContainer];
+    self.modalImageContainer = [[UIView alloc] initWithFrame:CGRectMake((modalContainer.frame.size.width - 44)/2, -22, 44, 44)];
+    self.modalImageContainer.layer.cornerRadius = self.modalImageContainer.frame.size.width / 2;
+    self.modalImageContainer.layer.masksToBounds = YES;
+    self.modalImageContainer.backgroundColor = [UIColor whiteColor];
+    [modalContainer addSubview:self.modalImageContainer];
     
     UIImageView *modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 40, 40)];
     modalImageView.image = [modalImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [modalImageView setTintColor:imageColor];
     modalImageView.layer.cornerRadius = modalImageView.frame.size.width/2;
     modalImageView.layer.masksToBounds = YES;
-    [modalImageContainer addSubview:modalImageView];
+    [self.modalImageContainer addSubview:modalImageView];
 
     //adding title
     self.modalTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 25, self.modalContent.frame.size.width, 0)];
@@ -88,7 +88,7 @@
     [self.yesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.yesButton.layer.cornerRadius = 2.5f;
     self.yesButton.layer.masksToBounds = YES;
-    [self.yesButton addTarget:self.baseModalDelegate action:@selector(noButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.yesButton addTarget:self.baseModalDelegate action:@selector(yesButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.modalContent addSubview:self.yesButton];
     
     [self addSubview:modalContainer];
@@ -96,16 +96,14 @@
 return self;
 
 }
-- (void)noButtonClicked:(UITapGestureRecognizer *)recognizer{
-    [self hideModal];
-    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(noButtonClicked)]) {
-        [self.confirmationModalDelegate noButtonClicked];
+- (void)noButtonClicked:(ConfirmationModalView*)modal{
+    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(noButtonClicked:)]) {
+        [self.confirmationModalDelegate noButtonClicked:self];
     }
 }
-- (void)yesButtonClicked:(UITapGestureRecognizer *)recognizer{
-    [self hideModal];
-    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(yesButtonClicked)]) {
-        [self.confirmationModalDelegate yesButtonClicked];
+- (void)yesButtonClicked:(ConfirmationModalView*)modal{
+    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(yesButtonClicked:)]) {
+        [self.confirmationModalDelegate yesButtonClicked:self];
     }
 }
 
