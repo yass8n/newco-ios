@@ -58,6 +58,10 @@ static NSString* ATTEND = @" Attend ";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
+    [self getAttendees];
+    // Do any additional setup after loading the view.
+}
+-(void)getAttendees{
     WebService * webService = [[WebService alloc] initWithView:self.view];
     [webService setAttendeesForSession:self.session.id_ callback:^(NSArray *jsonArray) {
         self.users = [[NSMutableDictionary alloc] init];
@@ -71,7 +75,6 @@ static NSString* ATTEND = @" Attend ";
             [self setupScrollView];
         });
     }];
-    // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -187,6 +190,8 @@ static NSString* ATTEND = @" Attend ";
         [self.scrollView setIndicatorStyle:UIScrollViewIndicatorStyleDefault];
         int i;
         NSArray * users = [self.users allValues];
+        [[self.scrollView subviews]
+         makeObjectsPerformSelector:@selector(removeFromSuperview)];
         NSUInteger count = [users count];
         if (count > 24) { count = 24; };
         for (i = 0; i < count; i++) {
@@ -348,6 +353,7 @@ static NSString* ATTEND = @" Attend ";
             }else if ([response rangeOfString:@"Removed event"].location != NSNotFound){
                 [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:self.session.event_key, nil] invalidateSessions:NO];
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self getAttendees];
                     [self setSessionPickedUI:NO];
                 });
                 
@@ -426,6 +432,7 @@ static NSString* ATTEND = @" Attend ";
                     [[FestivalData sharedFestivalData].currentUserSessions setObject:@"YES" forKey:self.session.event_key];
                     [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:self.session.event_key, nil] invalidateSessions:YES];
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        [self getAttendees];
                         [self setSessionPickedUI:YES];
                     });
                 } else {
@@ -525,6 +532,7 @@ static NSString* ATTEND = @" Attend ";
                         [modal.modalImageContainer addSubview:v];
                          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                              [modal hideModal];
+                             [self getAttendees];
                             [self setSessionPickedUI:YES];
                         });
                     } else {
@@ -552,13 +560,12 @@ static NSString* ATTEND = @" Attend ";
 }
 - (void)noButtonClicked:(ConfirmationModalView*)modal{
     [modal hideModal];
-    NSLog(@"NO CLICKED");
 }
 #pragma Mark-social sharing
 -(void) showSocialShareDialog{
     CGRect modalFrame = CGRectMake(10, 100, self.view.frame.size.width - 20, 160);
     UIImage *modalImage = [UIImage imageNamed:@"tbd_icon"];
-    NSString *modalTitle = @"See who wants to join your invite list";
+    NSString *modalTitle = @"Let others know about this session";
 
     ShareModalView *modalView = [[ShareModalView alloc] initWithFrame:modalFrame image:modalImage title:modalTitle oneLineTitle:YES sharedBy:sharedByChoice];
     [self.view.window addSubview:modalView];
