@@ -53,9 +53,6 @@
     [super viewDidAppear:animated];
     self.dataLoaded = YES;
     [self reloadTableView];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-// 
-//    });
 
 
 }
@@ -77,10 +74,20 @@
             [tv setBackgroundColor:[UIColor myLightOrange]];
             [self.view addSubview:tv];
             CGRect animateUpFrame = CGRectMake(0, self.view.frame.size.height - 50, self.view.frame.size.width, 50);
+             CGRect animateDownFrame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 50);
             [UIView animateWithDuration:.5 animations:^{
                 [tv setAlpha:1.0];
                 [tv setFrame:animateUpFrame];
+            } completion:^(BOOL finished) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                    [UIView animateWithDuration:.5 animations:^{
+                        [tv setAlpha:1.0];
+                        [tv setFrame:animateDownFrame];
+                    }];
+                });
+                
             }];
+            
         }
     });
 }
