@@ -49,7 +49,7 @@
     changeCity.function = [NSValue valueWithPointer:@selector(changeCity)];
     changeCity.type = selectableType;
     changeCity.cellIdentifier = REGULAR;
-    changeCity.icon = [[UIImage imageNamed:@"tool"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    changeCity.icon = [[UIImage imageNamed:@"swap"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [menuItems addObject:changeCity];
     
     NSString *location_string = @"Audience";

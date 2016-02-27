@@ -58,7 +58,6 @@ static NSString* ATTEND = @" Attend ";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
-    [self getAttendees:self.view];
     // Do any additional setup after loading the view.
 }
 -(void)getAttendees:(UIView*)loaderInView{
@@ -99,6 +98,8 @@ static NSString* ATTEND = @" Attend ";
         //[self.superView addConstraint:self.statusContainerConstraint];
         if (self.session.picked){
             [self setSessionPickedUI:YES];
+        }else{
+            [self setSessionPickedUI:NO];
         }
     } else {
         [self.loginButton setHidden:NO];
@@ -110,6 +111,7 @@ static NSString* ATTEND = @" Attend ";
     WebService * webservice = [[WebService alloc]init];
     NSString* userId = [[Credentials sharedCredentials].currentUser count] > 0 ? [[Credentials sharedCredentials].currentUser objectForKey:@"id"] : @"0";
     [webservice registerViewedSession:self.session.title userId:userId];
+    [self getAttendees:self.view];
     
 }
 - (void)setSessionPickedUI:(BOOL) attending{
@@ -358,9 +360,12 @@ static NSString* ATTEND = @" Attend ";
                 
             }else if ([response rangeOfString:@"Removed event"].location != NSNotFound){
                 [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:self.session.event_key, nil] invalidateSessions:NO];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self getAttendees:nil];
                     [self setSessionPickedUI:NO];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .75 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                        [self getAttendees:nil];
+                    });
                 });
                 
             } else {
@@ -438,8 +443,10 @@ static NSString* ATTEND = @" Attend ";
                     [[FestivalData sharedFestivalData].currentUserSessions setObject:@"YES" forKey:self.session.event_key];
                     [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:self.session.event_key, nil] invalidateSessions:YES];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self getAttendees:nil];
                         [self setSessionPickedUI:YES];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .75 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                            [self getAttendees:nil];
+                        });
                     });
                 } else {
                     alert = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -536,11 +543,12 @@ static NSString* ATTEND = @" Attend ";
                         
                         [v addSubview:modalImageView];
                         [modal.modalImageContainer addSubview:v];
-                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                             [modal hideModal];
-                             [self getAttendees:nil];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                            [modal hideModal];
                             [self setSessionPickedUI:YES];
+                            [self getAttendees:nil];
                         });
+                 
                     } else {
                         alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                            message:@"Something went wrong."
