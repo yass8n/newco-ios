@@ -45,15 +45,22 @@
     // Do any additional setup after loading the view.
 }
 - (void)viewDidLayoutSubviews{
+    self.scrollView.userInteractionEnabled = YES;
     self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    UITextField* v = [[UITextField alloc]initWithFrame:CGRectMake(30, 30, 30, 30)];
+    [v setBackgroundColor:[UIColor blackColor]];
+    [self.scrollView addSubview:v];
     self.scrollView.backgroundColor = [UIColor orangeColor];
     int X = 8;
-    int currentY = 8;
-    self.nameLabel.frame = CGRectMake(X, 8, self.view.frame.size.width-16, 24);
-    self.nameField.frame = CGRectMake(8, 18, self.view.frame.size.width-16, 24);
-    self.emailLabel.frame = CGRectMake(8, 38, self.view.frame.size.width-16, 24);
+    int currentY = 78;
+    self.usernameField.userInteractionEnabled = YES;
+    [self.scrollView bringSubviewToFront:self.usernameField];
+    self.nameLabel.frame = CGRectMake(X, currentY+=8, self.view.frame.size.width-16, 24);
+    self.nameField.frame = CGRectMake(8, currentY+=16, self.view.frame.size.width-16, 24);
+    self.emailLabel.frame = CGRectMake(8, currentY, self.view.frame.size.width-16, 24);
 
 }
+
 - (void)adjustUI{
     [self setBackButton];
 }
