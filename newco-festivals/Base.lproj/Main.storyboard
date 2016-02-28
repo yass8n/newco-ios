@@ -1419,6 +1419,8 @@
                         <constraints>
                             <constraint firstItem="Mbq-b8-5fS" firstAttribute="centerY" secondItem="Cny-dc-axv" secondAttribute="centerY" id="BwV-dg-2cd"/>
                             <constraint firstItem="Mbq-b8-5fS" firstAttribute="height" secondItem="Cny-dc-axv" secondAttribute="height" id="Cwg-a8-AaB"/>
+                            <constraint firstItem="Mbq-b8-5fS" firstAttribute="width" secondItem="Cny-dc-axv" secondAttribute="width" id="NQ8-CW-b5R"/>
+                            <constraint firstItem="Mbq-b8-5fS" firstAttribute="height" secondItem="Cny-dc-axv" secondAttribute="height" id="WNG-kj-iEr"/>
                             <constraint firstItem="Mbq-b8-5fS" firstAttribute="width" secondItem="Cny-dc-axv" secondAttribute="width" id="cai-ma-KBP"/>
                             <constraint firstItem="Mbq-b8-5fS" firstAttribute="centerX" secondItem="Cny-dc-axv" secondAttribute="centerX" id="xWC-sH-6nw"/>
                         </constraints>
@@ -1426,6 +1428,8 @@
                             <mask key="constraints">
                                 <exclude reference="BwV-dg-2cd"/>
                                 <exclude reference="Cwg-a8-AaB"/>
+                                <exclude reference="NQ8-CW-b5R"/>
+                                <exclude reference="WNG-kj-iEr"/>
                                 <exclude reference="cai-ma-KBP"/>
                                 <exclude reference="xWC-sH-6nw"/>
                             </mask>
@@ -1449,7 +1453,9 @@
                         <outlet property="profileView" destination="VvT-VP-2YJ" id="XtC-Cc-lO6"/>
                         <outlet property="removePhotoLabel" destination="nrV-EY-gRe" id="vxy-kG-AmP"/>
                         <outlet property="saveButton" destination="8rd-X3-XGf" id="swP-kD-GMM"/>
+                        <outlet property="scrollView" destination="Mbq-b8-5fS" id="wSf-Ta-fZR"/>
                         <outlet property="showMoreOrLess" destination="DjE-4O-fFw" id="t6R-IP-Nq6"/>
+                        <outlet property="togglableView" destination="Mqu-n7-r7F" id="dpA-my-lea"/>
                         <outlet property="usernameField" destination="Efc-1v-pHA" id="VGt-Z8-PCI"/>
                         <outlet property="usernameLabel" destination="or7-X8-Asw" id="7B6-fo-Sri"/>
                         <outlet property="websiteField" destination="px1-lZ-d7R" id="rb3-mT-jMx"/>

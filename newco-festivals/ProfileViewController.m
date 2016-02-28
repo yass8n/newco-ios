@@ -56,8 +56,6 @@
     [super viewDidAppear:animated];
     self.dataLoaded = YES;
     [self reloadTableView];
-
-
 }
 -(void)sortAndSetSessionObjects{
     [[FestivalData sharedFestivalData] setDatesDict:self.datesDict setOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict forSessions:self.sessionsArray initializeEverything:NO modifyOrderOfInsertedDictKeysByAddingNumber:1];

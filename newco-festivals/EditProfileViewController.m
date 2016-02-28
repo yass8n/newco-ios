@@ -9,7 +9,7 @@
 #import "EditProfileViewController.h"
 #import "CustomUILabel.h"
 @interface EditProfileViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -32,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *aboutMeField;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 - (IBAction)saveProfile:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *togglableView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -39,9 +41,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self adjustUI];
     // Do any additional setup after loading the view.
 }
+- (void)viewDidLayoutSubviews{
+    self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.scrollView.backgroundColor = [UIColor orangeColor];
+    int X = 8;
+    int currentY = 8;
+    self.nameLabel.frame = CGRectMake(X, 8, self.view.frame.size.width-16, 24);
+    self.nameField.frame = CGRectMake(8, 18, self.view.frame.size.width-16, 24);
+    self.emailLabel.frame = CGRectMake(8, 38, self.view.frame.size.width-16, 24);
 
+}
+- (void)adjustUI{
+    [self setBackButton];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
