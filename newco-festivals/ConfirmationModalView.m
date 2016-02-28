@@ -98,6 +98,7 @@ return self;
 
 }
 - (void)noButtonClicked:(ConfirmationModalView*)modal{
+    [Helper buttonTappedAnimation:self.noButton];
     [self.noButton removeTarget:nil
                                       action:NULL
                             forControlEvents:UIControlEventAllEvents];
@@ -106,6 +107,7 @@ return self;
     }
 }
 - (void)yesButtonClicked:(ConfirmationModalView*)modal{
+    [Helper buttonTappedAnimation:self.yesButton];
     [self.yesButton removeTarget:nil
                          action:NULL
                forControlEvents:UIControlEventAllEvents];

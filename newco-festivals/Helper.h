@@ -17,4 +17,5 @@
 + (int)lineCountForLabel:(UILabel *)label;
 + (CGSize)sizeForLabel:(UILabel *)label ;
 + (NSString*)firebaseSafeUrl:(NSString*)url;
++(void)buttonTappedAnimation:(UIView*)view;
 @end

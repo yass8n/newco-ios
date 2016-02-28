@@ -265,6 +265,7 @@
 - (IBAction)goToWebsite:(id)sender {
 //    NSLog(@"GO TO WEBSITE");
 //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.user objectForKey:@"url"]]];
+    [Helper buttonTappedAnimation:(UIView*)sender];
     [self showWebViewWithUrl:[self.user objectForKey:@"url"]];
 
 }

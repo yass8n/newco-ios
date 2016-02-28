@@ -49,6 +49,15 @@
     [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     return [dateFormat dateFromString:utc];
 }
++(void)buttonTappedAnimation:(UIView *)view{
+    [UIView animateWithDuration:.1 animations:^{
+        view.transform = CGAffineTransformMakeScale(.97,.97);
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:.1 animations:^{
+            view.transform = CGAffineTransformMakeScale(1,1);
+        }];
+    }];
+}
 + (void)setBorder:(UIView*)obj width:(float)wid radius:(int)rad color:(UIColor*)col{
     obj.layer.borderColor = col.CGColor;
     obj.layer.borderWidth = wid;

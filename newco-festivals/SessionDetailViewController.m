@@ -358,6 +358,7 @@ static NSString* ATTEND = @" Attend ";
 }
 - (IBAction)addToSchedule:(id)sender {
     UIButton *resultButton = (UIButton *)sender;
+    [Helper buttonTappedAnimation:resultButton];
     if ([resultButton.currentTitle isEqual:UN_ATTEND]){
         WebService * webService = [[WebService alloc] initWithView:self.view];
         [webService removeSessionFromSchedule:self.session.id_ callback:^(NSString *response) {
