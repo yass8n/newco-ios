@@ -48,6 +48,7 @@ static UINavigationItem* navItem;
 static UIView* rightNav;
 static UIView* leftNav;
 static UITapGestureRecognizer *singleFingerTap;
+static UIViewController *theTopViewController;
 
 + (UIView*) rightNav { return rightNav; }
 + (UIView*) leftNav { return leftNav; }
@@ -55,7 +56,11 @@ static UITapGestureRecognizer *singleFingerTap;
 + (CurrentViewController) currentVC { return currentVC; }
 + (GLfloat) sysVer { return sysVer; }
 + (BOOL) menuOpen {return menuOpen; }
++ (UIViewController *)topViewController{return theTopViewController;}
 
++ (void) setTopViewController:(UIViewController*)object{
+    theTopViewController = object;
+}
 + (void) setMenuOpen:(BOOL)object{
     menuOpen = object;
 }
@@ -84,7 +89,10 @@ static UITapGestureRecognizer *singleFingerTap;
 - (BOOL)prefersStatusBarHidden {
     return NO;
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    theTopViewController = self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     singleFingerTap =
@@ -101,25 +109,6 @@ static UITapGestureRecognizer *singleFingerTap;
 }
 -(void)handleTouchWhenMenuOpen:(UITapGestureRecognizer *)recognizer {
     [ApplicationViewController fakeMenuTap];
-}
-- (UIViewController *)topViewController{
-    return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-}
-
-- (UIViewController *)topViewController:(UIViewController *)rootViewController
-{
-    if (rootViewController.presentedViewController == nil) {
-        return rootViewController;
-    }
-    
-    if ([rootViewController.presentedViewController isMemberOfClass:[UINavigationController class]]) {
-        UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
-        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
-        return [self topViewController:lastViewController];
-    }
-    
-    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
-    return [self topViewController:presentedViewController];
 }
 
 - (void)setBackButton{

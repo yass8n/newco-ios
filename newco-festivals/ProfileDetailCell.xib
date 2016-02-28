@@ -96,6 +96,28 @@
                                 <constraint firstAttribute="width" constant="15" id="KrU-6A-9K5"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbB-wr-xVV">
+                            <rect key="frame" x="527" y="8" width="50" height="30"/>
+                            <color key="backgroundColor" red="0.81194196429999999" green="0.81194196429999999" blue="0.81194196429999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="mBb-hD-kef"/>
+                            </constraints>
+                            <state key="normal" title="Edit">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="editProfile:" destination="iN0-l3-epB" eventType="touchUpInside" id="DhL-zu-D1u"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -109,6 +131,7 @@
                         <constraint firstItem="ppG-gy-EL2" firstAttribute="top" secondItem="EoT-ZF-Nkb" secondAttribute="bottom" priority="250" constant="15" id="PFj-K2-F5G"/>
                         <constraint firstItem="Zrs-3C-ms9" firstAttribute="leading" secondItem="9Os-tO-bvw" secondAttribute="leading" constant="15" id="PnL-R7-lXo"/>
                         <constraint firstAttribute="bottom" secondItem="ppG-gy-EL2" secondAttribute="bottom" priority="250" constant="15" id="SL6-Aq-ik0"/>
+                        <constraint firstItem="AbB-wr-xVV" firstAttribute="top" secondItem="9Os-tO-bvw" secondAttribute="top" constant="8" id="Tkj-fQ-Jh5"/>
                         <constraint firstAttribute="bottom" secondItem="Zrs-3C-ms9" secondAttribute="bottom" constant="15" id="UKf-9I-sWh"/>
                         <constraint firstAttribute="centerX" secondItem="ppG-gy-EL2" secondAttribute="centerX" id="Uw5-i1-aux"/>
                         <constraint firstAttribute="bottom" secondItem="Zrs-3C-ms9" secondAttribute="bottom" constant="15" id="VDw-Vw-CqS"/>
@@ -120,6 +143,7 @@
                         <constraint firstItem="ERW-OO-RSY" firstAttribute="top" secondItem="Zrs-3C-ms9" secondAttribute="top" id="g4L-iq-WbE"/>
                         <constraint firstItem="ppG-gy-EL2" firstAttribute="top" secondItem="EoT-ZF-Nkb" secondAttribute="bottom" constant="15" id="gfk-kH-oZQ"/>
                         <constraint firstItem="21j-c1-v0m" firstAttribute="leading" secondItem="9Os-tO-bvw" secondAttribute="leading" constant="30" id="isN-5S-4C7"/>
+                        <constraint firstAttribute="trailing" secondItem="AbB-wr-xVV" secondAttribute="trailing" constant="8" id="jdf-Ut-SQM"/>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="21j-c1-v0m" secondAttribute="bottom" priority="750" constant="36" id="jtP-AL-KfB"/>
                         <constraint firstItem="ppG-gy-EL2" firstAttribute="leading" secondItem="9Os-tO-bvw" secondAttribute="leading" constant="8" id="law-WZ-TbM"/>
                         <constraint firstItem="Zrs-3C-ms9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ppG-gy-EL2" secondAttribute="bottom" constant="15" id="ldf-IV-fLe"/>
@@ -162,6 +186,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="about" destination="Zrs-3C-ms9" id="uQG-ba-Dra"/>
+                <outlet property="editProfileButton" destination="AbB-wr-xVV" id="Vbq-d6-0pH"/>
                 <outlet property="infoIcon" destination="ERW-OO-RSY" id="aft-gv-CJO"/>
                 <outlet property="positionAndCompany" destination="ppG-gy-EL2" id="nyF-wJ-CjX"/>
                 <outlet property="profileImage" destination="EoT-ZF-Nkb" id="aZB-dO-0kY"/>

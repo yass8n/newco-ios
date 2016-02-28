@@ -12,6 +12,8 @@
 #import "NSString+NSStringAdditions.h"
 #import "Helper.h"
 #import "ProfileDetailCell.h"
+#import "EditProfileViewController.h"
+#import "AppDelegate.h"
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIView *superView;
@@ -20,6 +22,7 @@
 @property (strong, nonatomic) NSMutableDictionary* datesDict;
 @property (strong, nonatomic) NSMutableDictionary* orderOfInsertedDatesDict;
 @property (nonatomic) BOOL dataLoaded;
+@property (nonatomic) BOOL hideEditButton;
 #import "constants.h"
 @end
 
@@ -146,6 +149,11 @@
     if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
         self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+        if ([[self.user objectForKey:@"username"] isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
+            self.hideEditButton = NO;
+        }else{
+            self.hideEditButton = YES;
+        }
     }
 }
 -(void)reloadTableView
@@ -199,8 +207,8 @@
             cell.website.hidden = NO;
                self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
             [cell.website addTarget:self action:@selector(goToWebsite:) forControlEvents:UIControlEventTouchUpInside];
-            cell.contentView.userInteractionEnabled = NO;
         }
+        cell.contentView.userInteractionEnabled = NO;
         if ([cell.about.text length] > 0){
             cell.about.textColor = [UIColor myNavigationBarColor];
             cell.about.lineBreakMode = NSLineBreakByWordWrapping;
@@ -210,6 +218,13 @@
 
         }else{
             [cell.infoIcon removeFromSuperview];
+        }
+        if (self.hideEditButton){
+            cell.editProfileButton.hidden = YES;
+            cell.editProfileButton.userInteractionEnabled = NO;
+        }else{
+            cell.editProfileButton.hidden = NO;
+            cell.editProfileButton.userInteractionEnabled = YES;
         }
         return cell;
     }else{
@@ -254,6 +269,7 @@
 
 }
 - (IBAction)logUserOut:(id)sender {
+    self.hideEditButton = YES;
     dispatch_queue_t que = dispatch_queue_create("logOut", NULL);
     dispatch_async(que, ^{
         //code executed in background
@@ -266,7 +282,6 @@
         });
     });
 }
-
 
 //- (IBAction)hideTopView:(id)sender {
 //    CGRect oldFrame = self.topView.frame;

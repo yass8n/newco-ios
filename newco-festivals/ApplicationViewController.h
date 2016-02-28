@@ -20,7 +20,6 @@
 -(void)showPageLoader;
 -(void)hidePageLoader;
 - (void)setBackButton;
-- (UIViewController *)topViewController;
 - (void)goBack;
 - (void)setViewControllerWithSegmentedControl:(UISegmentedControl*)segmentedControl;
 - (void)changeViewController:(NSUInteger)index;
@@ -63,6 +62,8 @@ typedef NS_ENUM(NSInteger, CurrentViewController)
 + (void) setMenuOpen:(BOOL) object;
 + (void) fakeMenuTap;
 + (void) fetchCurrentUserSessions:(UIView*)withView;
++ (void) setTopViewController:(UIViewController*)object;
+
 
 + (UIView*) leftNav;
 + (UIView*) rightNav;
@@ -70,6 +71,7 @@ typedef NS_ENUM(NSInteger, CurrentViewController)
 + (CurrentViewController) currentVC;
 + (UINavigationItem*) navItem;
 + (BOOL) menuOpen;
++ (UIViewController *)topViewController;
 
 
 @end

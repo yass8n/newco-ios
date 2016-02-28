@@ -1442,7 +1442,7 @@
                         <outlet property="emailField" destination="7Md-1h-aOI" id="4Xp-IK-QMm"/>
                         <outlet property="emailLabel" destination="YQp-kt-ZpV" id="jrs-di-VPw"/>
                         <outlet property="nameField" destination="vPy-g9-jp1" id="Fhi-93-NS1"/>
-                        <outlet property="nameLabel" destination="e7t-PJ-spQ" id="Bpa-Ls-7Kr"/>
+                        <outlet property="nameLabel" destination="xDj-8h-fdj" id="s1T-h4-oFq"/>
                         <outlet property="privacyExplanation" destination="yyK-Vz-jc2" id="w5a-9c-OYX"/>
                         <outlet property="privacyLabel" destination="FGT-H4-VRD" id="Jgi-8B-rr9"/>
                         <outlet property="privacySwitch" destination="NrS-W1-Qvg" id="IdR-Eh-pSp"/>

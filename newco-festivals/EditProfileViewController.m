@@ -9,7 +9,7 @@
 #import "EditProfileViewController.h"
 #import "CustomUILabel.h"
 @interface EditProfileViewController ()
-@property (strong, nonatomic) IBOutlet NSObject *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
