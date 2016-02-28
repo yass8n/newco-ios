@@ -330,7 +330,13 @@ static NSString* ATTEND = @" Attend ";
 -(void)hideNavBar{
     self.navigationController.navigationBar.hidden = YES;
 }
-
+/*
+ NSString* address = @"123 Main St., New York, NY, 10001";
+ NSString* url = [NSString stringWithFormat: @"http://maps.google.com/maps?saddr=%f,%f&daddr=%@",
+ currentLocation.latitude, currentLocation.longitude,
+ [address stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+ [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+ */
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
