@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083505D21C830C9B00826D63 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 083505D11C830C9B00826D63 /* EditProfileViewController.m */; };
 		08A590461C805CAC00890E30 /* ConfirmationModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A590451C805CAC00890E30 /* ConfirmationModalView.m */; };
 		08A590561C80697200890E30 /* proximanova-black-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590511C80697200890E30 /* proximanova-black-webfont.ttf */; };
 		08A590571C80697200890E30 /* proximanova-bold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590521C80697200890E30 /* proximanova-bold-webfont.ttf */; };
@@ -95,6 +96,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		083505D01C830C9B00826D63 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		083505D11C830C9B00826D63 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		08A590441C805CAC00890E30 /* ConfirmationModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationModalView.h; sourceTree = "<group>"; };
 		08A590451C805CAC00890E30 /* ConfirmationModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationModalView.m; sourceTree = "<group>"; };
 		08A590511C80697200890E30 /* proximanova-black-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "proximanova-black-webfont.ttf"; path = "../proximanova-black-webfont.ttf"; sourceTree = "<group>"; };
@@ -249,6 +252,123 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		083505C31C830C2500826D63 /* MenuTable */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F8761C749C43005BC870 /* MenuTableViewController.h */,
+				08F6F8771C749C43005BC870 /* MenuTableViewController.m */,
+			);
+			name = MenuTable;
+			sourceTree = "<group>";
+		};
+		083505C41C830C3100826D63 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F8401C748BE1005BC870 /* WebViewController.h */,
+				08F6F8411C748BE1005BC870 /* WebViewController.m */,
+			);
+			name = WebView;
+			sourceTree = "<group>";
+		};
+		083505C51C830C3900826D63 /* Festivals */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F82E1C748B0F005BC870 /* FestivalsViewController.h */,
+				08F6F82F1C748B0F005BC870 /* FestivalsViewController.m */,
+			);
+			name = Festivals;
+			sourceTree = "<group>";
+		};
+		083505C61C830C4400826D63 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				08F6F8311C748B1D005BC870 /* FilterViewController.h */,
+				08F6F8321C748B1D005BC870 /* FilterViewController.m */,
+			);
+			name = Filter;
+			sourceTree = "<group>";
+		};
+		083505C71C830C4B00826D63 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				924ECB721C613B0C0093CAA1 /* ApplicationViewController.h */,
+				924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		083505C81C830C5200826D63 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				924ECB661C6134AC0093CAA1 /* SignInViewController.h */,
+				924ECB671C6134AC0093CAA1 /* SignInViewController.m */,
+			);
+			name = SignIn;
+			sourceTree = "<group>";
+		};
+		083505C91C830C5900826D63 /* SessionDetail */ = {
+			isa = PBXGroup;
+			children = (
+				923D14951C6B08AE00629F78 /* SessionDetailViewController.h */,
+				923D14961C6B08AE00629F78 /* SessionDetailViewController.m */,
+			);
+			name = SessionDetail;
+			sourceTree = "<group>";
+		};
+		083505CA1C830C6500826D63 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				929107271C6C50BB004B517C /* ScheduleViewController.h */,
+				929107281C6C50BB004B517C /* ScheduleViewController.m */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
+		083505CB1C830C6F00826D63 /* ProfileTable */ = {
+			isa = PBXGroup;
+			children = (
+				9291072D1C6C5268004B517C /* ProfileTableViewController.h */,
+				9291072E1C6C5268004B517C /* ProfileTableViewController.m */,
+			);
+			name = ProfileTable;
+			sourceTree = "<group>";
+		};
+		083505CC1C830C7600826D63 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				929107301C6C52E3004B517C /* RootViewController.h */,
+				929107311C6C52E3004B517C /* RootViewController.m */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		083505CD1C830C7B00826D63 /* Directory */ = {
+			isa = PBXGroup;
+			children = (
+				929107331C6C532D004B517C /* DirectoryViewController.h */,
+				929107341C6C532D004B517C /* DirectoryViewController.m */,
+			);
+			name = Directory;
+			sourceTree = "<group>";
+		};
+		083505CE1C830C8100826D63 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				92880C3B1C6D49C900315DF0 /* ProfileViewController.h */,
+				92880C3C1C6D49C900315DF0 /* ProfileViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		083505CF1C830C8600826D63 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				083505D01C830C9B00826D63 /* EditProfileViewController.h */,
+				083505D11C830C9B00826D63 /* EditProfileViewController.m */,
+			);
+			name = EditProfile;
+			sourceTree = "<group>";
+		};
 		08F2400E1C75FFAC00D54B10 /* ALAlertBAnner */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,30 +490,19 @@
 		08F6F85C1C74944B005BC870 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				08F6F8761C749C43005BC870 /* MenuTableViewController.h */,
-				08F6F8771C749C43005BC870 /* MenuTableViewController.m */,
-				08F6F8401C748BE1005BC870 /* WebViewController.h */,
-				08F6F8411C748BE1005BC870 /* WebViewController.m */,
-				08F6F82E1C748B0F005BC870 /* FestivalsViewController.h */,
-				08F6F82F1C748B0F005BC870 /* FestivalsViewController.m */,
-				08F6F8311C748B1D005BC870 /* FilterViewController.h */,
-				08F6F8321C748B1D005BC870 /* FilterViewController.m */,
-				924ECB721C613B0C0093CAA1 /* ApplicationViewController.h */,
-				924ECB731C613B0C0093CAA1 /* ApplicationViewController.m */,
-				924ECB661C6134AC0093CAA1 /* SignInViewController.h */,
-				924ECB671C6134AC0093CAA1 /* SignInViewController.m */,
-				923D14951C6B08AE00629F78 /* SessionDetailViewController.h */,
-				923D14961C6B08AE00629F78 /* SessionDetailViewController.m */,
-				929107271C6C50BB004B517C /* ScheduleViewController.h */,
-				929107281C6C50BB004B517C /* ScheduleViewController.m */,
-				9291072D1C6C5268004B517C /* ProfileTableViewController.h */,
-				9291072E1C6C5268004B517C /* ProfileTableViewController.m */,
-				929107301C6C52E3004B517C /* RootViewController.h */,
-				929107311C6C52E3004B517C /* RootViewController.m */,
-				929107331C6C532D004B517C /* DirectoryViewController.h */,
-				929107341C6C532D004B517C /* DirectoryViewController.m */,
-				92880C3B1C6D49C900315DF0 /* ProfileViewController.h */,
-				92880C3C1C6D49C900315DF0 /* ProfileViewController.m */,
+				083505CF1C830C8600826D63 /* EditProfile */,
+				083505C31C830C2500826D63 /* MenuTable */,
+				083505C41C830C3100826D63 /* WebView */,
+				083505C51C830C3900826D63 /* Festivals */,
+				083505C61C830C4400826D63 /* Filter */,
+				083505C71C830C4B00826D63 /* Application */,
+				083505C81C830C5200826D63 /* SignIn */,
+				083505C91C830C5900826D63 /* SessionDetail */,
+				083505CA1C830C6500826D63 /* Schedule */,
+				083505CB1C830C6F00826D63 /* ProfileTable */,
+				083505CC1C830C7600826D63 /* Root */,
+				083505CD1C830C7B00826D63 /* Directory */,
+				083505CE1C830C8100826D63 /* Profile */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -839,6 +948,7 @@
 				08F6F7EF1C747974005BC870 /* MenuCell.m in Sources */,
 				08F6F7E01C74787C005BC870 /* Credentials.m in Sources */,
 				08F6F7DD1C747860005BC870 /* Animation.m in Sources */,
+				083505D21C830C9B00826D63 /* EditProfileViewController.m in Sources */,
 				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
 				9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */,

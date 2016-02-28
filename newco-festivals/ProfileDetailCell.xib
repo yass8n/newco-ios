@@ -135,6 +135,8 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="ezt-of-2X1"/>
+                            <exclude reference="g0b-2C-pGI"/>
                             <exclude reference="JTT-wx-B0e"/>
                             <exclude reference="PFj-K2-F5G"/>
                             <exclude reference="SL6-Aq-ik0"/>
@@ -145,8 +147,6 @@
                             <exclude reference="PnL-R7-lXo"/>
                             <exclude reference="VDw-Vw-CqS"/>
                             <exclude reference="ldf-IV-fLe"/>
-                            <exclude reference="ezt-of-2X1"/>
-                            <exclude reference="g0b-2C-pGI"/>
                         </mask>
                     </variation>
                 </view>
