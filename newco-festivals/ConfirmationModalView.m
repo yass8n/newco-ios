@@ -50,7 +50,7 @@
     [self.modalImageContainer addSubview:modalImageView];
 
     //adding title
-    self.modalTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 25, self.modalContent.frame.size.width, 0)];
+    self.modalTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 20, self.modalContent.frame.size.width, 0)];
     self.modalTitleLabel.numberOfLines = 0;
     self.modalTitleLabel.minimumFontSize = 0;
     self.modalTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;

@@ -15,6 +15,8 @@
 #import "NSString+NSStringAdditions.h"
 #import "ConfirmationModalView.h"
 #import "TTTAttributedLabel.h"
+#import "CustomUILabel.h"
+#import "ModalView.h"
 
 
 @interface SessionDetailViewController ()
@@ -26,14 +28,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *time;
-@property (weak, nonatomic) IBOutlet UILabel *address;
+@property (weak, nonatomic) IBOutlet CustomUILabel *address;
 @property (weak, nonatomic) IBOutlet UILabel *presenterName;
 @property (weak, nonatomic) IBOutlet UIView *presenterView;
 @property (weak, nonatomic) IBOutlet UIView *companyView;
 @property (weak, nonatomic) IBOutlet UILabel *companyName;
 @property (weak, nonatomic) IBOutlet UILabel *region;
 @property (weak, nonatomic) IBOutlet UIView *regionColor;
-@property (weak, nonatomic) IBOutlet UIView *addressView;
+@property (weak, nonatomic) IBOutlet CustomUIView *addressView;
 @property (weak, nonatomic) IBOutlet UIView *dateView;
 @property (weak, nonatomic) IBOutlet UIButton *allAttendees;
 @property (weak, nonatomic) IBOutlet UIView *bottomContainer;
@@ -177,6 +179,16 @@ static NSString* ATTEND = @" Attend ";
     
     self.allAttendees.transform = CGAffineTransformMakeRotation(M_PI); //rotate it to point other direction
     
+    self.address.userInteractionEnabled = YES;
+    UIColor* currentAddressColor = self.address.textColor;
+    self.address.highlightTextColor = [UIColor lightGrayColor];
+    self.address.unHighlightTextColor = currentAddressColor;
+    UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleAddressTap:)];
+    singleTapGestureRecognizer.numberOfTapsRequired = 1;
+    singleTapGestureRecognizer.enabled = YES;
+    singleTapGestureRecognizer.cancelsTouchesInView = YES;
+    [self.address addGestureRecognizer:singleTapGestureRecognizer];
+    
 }
 
 -(void) setupScrollView {
@@ -194,7 +206,6 @@ static NSString* ATTEND = @" Attend ";
         singleTapGestureRecognizer.enabled = YES;
         singleTapGestureRecognizer.cancelsTouchesInView = YES;
         [self.scrollView addGestureRecognizer:singleTapGestureRecognizer];
-        
         [self.scrollView setIndicatorStyle:UIScrollViewIndicatorStyleDefault];
         int i;
         NSArray * users = [self.users allValues];
@@ -311,6 +322,7 @@ static NSString* ATTEND = @" Attend ";
     
     self.dateView.backgroundColor =[UIColor whiteColor];
     self.addressView.backgroundColor = [UIColor whiteColor];
+    self.addressView.passTouchesToSubViews = YES;
     self.superView.backgroundColor = [Helper getUIColorObjectFromHexString:@"ece4e1" alpha:1.0];
     
     UIButton *share =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -330,13 +342,6 @@ static NSString* ATTEND = @" Attend ";
 -(void)hideNavBar{
     self.navigationController.navigationBar.hidden = YES;
 }
-/*
- NSString* address = @"123 Main St., New York, NY, 10001";
- NSString* url = [NSString stringWithFormat: @"http://maps.google.com/maps?saddr=%f,%f&daddr=%@",
- currentLocation.latitude, currentLocation.longitude,
- [address stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
- [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
- */
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -584,14 +589,92 @@ static NSString* ATTEND = @" Attend ";
 #pragma Mark-social sharing
 -(void) showSocialShareDialog{
     CGRect modalFrame = CGRectMake(10, 100, self.view.frame.size.width - 20, 160);
-    UIImage *modalImage = [UIImage imageNamed:@"tbd_icon"];
     NSString *modalTitle = @"Let others know about this session";
 
-    ShareModalView *modalView = [[ShareModalView alloc] initWithFrame:modalFrame image:modalImage title:modalTitle oneLineTitle:YES sharedBy:sharedByChoice];
+    ShareModalView *modalView = [[ShareModalView alloc] initWithFrame:modalFrame title:modalTitle oneLineTitle:YES sharedBy:sharedByChoice];
     [self.view.window addSubview:modalView];
     modalView.shareModalDelegate = self;
     modalView.baseModalDelegate = self;
     modalView.session = self.session;
     [modalView showModalAtTop:YES];
+}
+#pragma Mark-gesture recognizer delegate
+- (IBAction)handleAddressTap:(id)sender {
+    CGRect modalFrame = CGRectMake(10, 100, self.view.frame.size.width - 20, 140);
+    ShareModalView *modalView = [[ShareModalView alloc]initMapShareWithFrame:modalFrame];
+    [self.view.window addSubview:modalView];
+    modalView.shareModalDelegate = self;
+    modalView.baseModalDelegate = self;
+    modalView.session = self.session;
+    [modalView showModalAtTop:YES];
+}
+
+#pragma Mark-Map Share
+-(void)mapModalGone:(shareEnum)result session:(Session *)session {
+    double window_width = self.view.frame.size.width;
+    double window_height = self.view.frame.size.height;
+    if (session){
+        CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
+        if (result == copy){
+            [UIPasteboard generalPasteboard].string = [NSString stringWithFormat:@"%@", session.address];
+            ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [modalView showSuccessModal:@"Address Copied!" onWindow:self.view.window];
+            });
+        }else {
+            if (result == map){
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                    NSString* address = session.address;
+                    NSString* url = [NSString stringWithFormat: @"http://maps.apple.com/?q=%@",
+                                     [address stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                    [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+                });
+            }else if (result == mail){
+                NSString *emailTitle = @"";
+                // Email Content
+                NSString *messageBody = session.address;
+                // To address
+                NSArray *toRecipents = [[NSArray alloc]init];
+                
+                MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+                mc.mailComposeDelegate = self;
+                [mc setSubject:emailTitle];
+                [mc setMessageBody:messageBody isHTML:NO];
+                [mc setToRecipients:toRecipents];
+                
+                // Present mail view controller on screen
+                [self presentViewController:mc animated:YES completion:NULL];
+            }
+        }
+    }
+}
+#pragma Mark-Mail composer delegate
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    double window_width = self.view.frame.size.width;
+    double window_height = self.view.frame.size.height;
+    
+    if (result == MFMailComposeResultCancelled){
+        
+    }else if (result == MFMailComposeResultFailed){
+        NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+        UIAlertView * alert =  [[UIAlertView alloc] initWithTitle:@"Failure"
+                                                                    message:@"Something went wrong."
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+        [alert show];
+    }else if (result == MFMailComposeResultSaved){
+        
+    }else if (result == MFMailComposeResultSent){
+        CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
+        ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [modalView showSuccessModal:@"Mail sent!" onWindow:self.view.window];
+        });
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 @end

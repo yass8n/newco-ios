@@ -15,8 +15,9 @@
 @end
 
 @interface CustomUIView : UIView
-    @property (strong, nonatomic) UIColor* highlightedColor;
-    @property (strong, nonatomic) UIColor* unHighlightedColor;
-    @property (nonatomic) BOOL animating;
-    @property (nonatomic, weak) id<TargetViewDelegate> delegate;
+@property (strong, nonatomic) UIColor* highlightedColor;
+@property (strong, nonatomic) UIColor* unHighlightedColor;
+@property (nonatomic) BOOL animating;
+@property (nonatomic) BOOL passTouchesToSubViews;
+@property (nonatomic, weak) id<TargetViewDelegate> delegate;
 @end

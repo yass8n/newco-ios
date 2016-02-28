@@ -567,10 +567,10 @@
                                                     <constraint firstAttribute="height" constant="20" id="hYx-BO-syl"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYv-dg-iEU">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYv-dg-iEU" customClass="CustomUIView">
                                                 <rect key="frame" x="0.0" y="129" width="560" height="32"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhJ-Su-u1E">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhJ-Su-u1E" customClass="CustomUILabel">
                                                         <rect key="frame" x="32" y="0.0" width="520" height="32"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" red="0.052817456069999998" green="0.63351910109999998" blue="0.85379464289999996" alpha="1" colorSpace="calibratedRGB"/>

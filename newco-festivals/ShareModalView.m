@@ -14,7 +14,7 @@
 @implementation ShareModalView
 
 
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSString *)modalTitle oneLineTitle:(BOOL)oneLineTitle sharedBy:(sharedByEnum)note{
+- (id)initWithFrame:(CGRect)frame title:(NSString *)modalTitle oneLineTitle:(BOOL)oneLineTitle sharedBy:(sharedByEnum)note{
     self = [super initWithFrame:frame];
     if (self) {
         self.sharedBy = note;
@@ -137,7 +137,85 @@
     }
     return self;
 }
-
+-(id)initMapShareWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenHeight = screenRect.size.height;
+        self.YTapThreshhold = screenHeight; //if they tap anywhere out of the modal it will disappear
+        UIView *modalContainer = [[UIView alloc] initWithFrame:self.bounds];
+        UIView *modalContent = [[UIView alloc] initWithFrame:CGRectMake(0,22,modalContainer.frame.size.width,
+                                                                        modalContainer.frame.size.height)];
+        modalContent.backgroundColor = [UIColor whiteColor];
+        modalContent.layer.cornerRadius = 3.0f;
+        modalContent.layer.masksToBounds = YES;
+        [modalContainer addSubview:modalContent];
+        
+        UIImage *image = [UIImage imageNamed:@"ex"];
+        UIImageView* cancel = [[UIImageView alloc] initWithFrame:CGRectMake(modalContent.frame.size.width-15, 0, 15, 15)];
+        cancel.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [cancel setTintColor:[Helper getUIColorObjectFromHexString:modalGray alpha:1.0]];
+        cancel.userInteractionEnabled = YES;
+        UITapGestureRecognizer *singleFingerTap =
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(hideModal:)];
+        [cancel addGestureRecognizer:singleFingerTap];
+        [modalContainer addSubview:cancel];
+        
+        double containerSize = modalContainer.frame.size.width / 5;
+        double array_x_shift[3] = {
+            (modalContent.frame.size.width/2) - (modalContent.frame.size.width/3)+12,
+            (modalContent.frame.size.width/2),
+            (modalContent.frame.size.width/2) + (modalContent.frame.size.width/3)-12
+            
+        };
+        NSArray *imageNames = [NSArray arrayWithObjects:@"mail", @"map", @"link", nil];
+        NSArray *names = [NSArray arrayWithObjects:@"Email", @"Open in Maps", @"Copy", nil];
+        
+        for (int i = 0; i < 3; i ++){
+            CustomUIView *container = [[CustomUIView alloc]initWithFrame:CGRectMake(0.f, 0.f, containerSize, containerSize)];
+            container.animating = YES;
+            container.highlightedColor = [Helper getUIColorObjectFromHexString:GREEN alpha:1.0];
+            container.delegate = self;
+            [container setCenter:CGPointMake(array_x_shift[i] , (modalContent.frame.size.height/2))];
+            container.layer.cornerRadius = 5;
+            container.layer.borderWidth = 1.0;
+            container.frame = CGRectInset(container.frame, -12, -12);
+            [container.layer setBorderColor:[[Helper getUIColorObjectFromHexString:LIGHT_GRAY alpha:1.0] CGColor]];
+            [modalContent addSubview:container];
+            UIButton *_button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [_button setTitleColor:[Helper getUIColorObjectFromHexString:GRAY alpha:1.0] forState:UIControlStateNormal];
+            [_button setFrame:CGRectMake(0, 0, containerSize/2, containerSize/2)];
+            [_button setCenter:CGPointMake( (container.frame.size.width/2), (container.frame.size.height/2)-5)];
+            [_button setClipsToBounds:false];
+            
+            
+            UIImage *image = [[UIImage imageNamed:[imageNames objectAtIndex:i]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [_button setImage:image forState:UIControlStateNormal];
+            _button.tintColor = [Helper getUIColorObjectFromHexString:modalGray alpha:1.0];
+            
+            
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (_button.frame.size.height * 1.75), container.frame.size.width, _button.frame.size.height)];
+            titleLabel.font = [UIFont fontWithName:@"ProximaNova-Regular" size:14.f];
+            titleLabel.textColor = [Helper getUIColorObjectFromHexString:MEDIUM_GRAY alpha:1.0];
+            titleLabel.text = [names objectAtIndex:i];
+            titleLabel.lineBreakMode = UILineBreakModeClip; //prevent "..."
+            titleLabel.textAlignment = UITextAlignmentCenter;
+            titleLabel.adjustsFontSizeToFitWidth = YES;
+            [container addSubview:titleLabel];
+            _button.userInteractionEnabled = NO;
+            [container addSubview:_button];
+            container.tag = i;
+            UITapGestureRecognizer *singleFingerTap =
+            [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(clickedMap:)];
+            [container addGestureRecognizer:singleFingerTap];
+        }
+        [self addSubview:modalContainer];
+        
+    }
+    return self;
+}
 -(void)clickedShare:(UITapGestureRecognizer *)recognizer{
     UIView* clickedView = recognizer.view;
     int tag = (int)clickedView.tag;
@@ -149,12 +227,26 @@
         self.share = copy;
     }
 }
-
+-(void)clickedMap:(UITapGestureRecognizer *)recognizer{
+    UIView* clickedView = recognizer.view;
+    int tag = (int)clickedView.tag;
+    if (tag == 0){
+        self.share = mail;
+    }else if(tag == 1){
+        self.share = map;
+    }else if(tag ==2){
+        self.share = copy;
+    }
+}
 -(void)receivedTargetTapDone{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self hideTheModal:.1];
-        if(self.shareModalDelegate && [self.baseModalDelegate respondsToSelector: @selector(shareModalGone:session:)]) {
-            [self.shareModalDelegate shareModalGone:self.share session:self.session];
+        if(self.shareModalDelegate){
+          if ([self.shareModalDelegate respondsToSelector: @selector(mapModalGone:session:)]) {
+                 [self.shareModalDelegate mapModalGone:self.share session:self.session];
+          }else if ([self.shareModalDelegate respondsToSelector: @selector(socialModalGone:session:)]) {
+              [self.shareModalDelegate socialModalGone:self.share session:self.session];
+          }
         }
     });
 }

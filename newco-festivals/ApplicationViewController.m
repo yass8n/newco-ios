@@ -505,7 +505,7 @@ static UITapGestureRecognizer *singleFingerTap;
     }
 }
 #pragma Mark-Share
--(void)shareModalGone:(shareEnum)result session:(Session *)session {
+-(void)socialModalGone:(shareEnum)result session:(Session *)session {
     
     self.sharingSession = session;
     double window_width = self.view.frame.size.width;

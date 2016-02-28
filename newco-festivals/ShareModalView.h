@@ -12,7 +12,7 @@
 #import "Session.h"
 
 typedef enum shareEnum{
-    facebook = 0, twitter = 1, copy = 2
+    facebook = 0, twitter = 1, copy = 2, mail = 3, map = 4
 }shareEnum;
 
 typedef enum sharedByEnum{
@@ -22,11 +22,14 @@ typedef enum sharedByEnum{
 @protocol ShareModalDelegate <NSObject>
 
 @optional
--(void)shareModalGone:(shareEnum)result session:(Session *)session ;
+-(void)socialModalGone:(shareEnum)result session:(Session *)session ;
+-(void)mapModalGone:(shareEnum)result session:(Session *)session ;
+
 @end
 
 @interface ShareModalView : BaseModal <TargetViewDelegate>
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSString *)modalTitle oneLineTitle:(BOOL)oneLineTitle sharedBy:(sharedByEnum)note;
+- (id)initWithFrame:(CGRect)frame title:(NSString *)modalTitle oneLineTitle:(BOOL)oneLineTitle sharedBy:(sharedByEnum)note;
+-(id)initMapShareWithFrame:(CGRect)frame;
 @property (nonatomic, weak) id<ShareModalDelegate> shareModalDelegate;
 @property (nonatomic, strong) Session *session;
 @end

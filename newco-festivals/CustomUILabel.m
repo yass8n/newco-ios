@@ -33,14 +33,12 @@
         self.backgroundColor = self.unHighlightedColor;
     if (self.unHighlightTextColor)
         self.textColor = self.unHighlightTextColor;
-
-    
 }
--(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesCancelled:touches withEvent:event];
+-(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     if (self.unHighlightedColor)
         self.backgroundColor = self.unHighlightedColor;
-    
+    if (self.unHighlightTextColor)
+        self.textColor = self.unHighlightTextColor;
 }
 
 @end
