@@ -396,7 +396,6 @@ static NSString* ATTEND = @" Attend ";
         if (!self.session.enabled){
             Session * conflictingSession = [[FestivalData sharedFestivalData] getConflictingSession:self.session];
             CGRect modalFrame = CGRectMake(30, 150, self.view.frame.size.width - 60, 160);
-            UIImage *modalImage = [UIImage imageNamed:@"swap"];
             
             NSString *modalTitle = @"You have a time conflict with ";
             
@@ -417,8 +416,10 @@ static NSString* ATTEND = @" Attend ";
             NSMutableAttributedString *addition = [[NSMutableAttributedString alloc] initWithString:@". Would you like to swap?" attributes: regular];
              [addition addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [addition length]))];
             [regularString appendAttributedString:addition];
-            
-            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame image:modalImage title:regularString yesText:@"Swap" noText:@"Cancel" imageColor:self.session.color];
+            NSDictionary *companyTemp = [conflictingSession.companies objectAtIndex:0];
+            NSDictionary *company = [[FestivalData sharedFestivalData].companiesDict objectForKey:[companyTemp objectForKey:@"username"]];
+            NSString * companyAvatar = [company objectForKey:@"avatar"];
+            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame imageUrl:companyAvatar title:regularString yesText:@"Swap" noText:@"Cancel" imageColor:self.session.color];
             modalView.confirmationModalDelegate = self;
             UIView * topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
             [topView.window addSubview:modalView];
@@ -546,7 +547,7 @@ static NSString* ATTEND = @" Attend ";
                         UIView * v = [[UIView alloc]initWithFrame:modal.modalImageContainer.bounds];
                         v.backgroundColor = [UIColor whiteColor];
                         
-                       UIImageView *modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 30, 30)];
+                       UIImageView *modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 40, 40)];
                         modalImageView.center = v.center;
                         modalImageView.image = [[UIImage imageNamed:@"check_plain"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                         [modalImageView setTintColor:self.session.color];

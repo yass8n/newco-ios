@@ -17,7 +17,7 @@
 @end
 @implementation ConfirmationModalView
 
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor{
+- (id)initWithFrame:(CGRect)frame imageUrl:(NSString *)modalImageUrl title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor{
     self = [super initWithFrame:frame];
     UIView *modalContainer = [[UIView alloc] initWithFrame:self.bounds];
     
@@ -36,15 +36,33 @@
     
     
     //adding image at top center
-    self.modalImageContainer = [[UIView alloc] initWithFrame:CGRectMake((modalContainer.frame.size.width - 44)/2, -22, 44, 44)];
+    self.modalImageContainer = [[UIView alloc] initWithFrame:CGRectMake((modalContainer.frame.size.width - 66)/2, -33, 66, 66)];
     self.modalImageContainer.layer.cornerRadius = self.modalImageContainer.frame.size.width / 2;
     self.modalImageContainer.layer.masksToBounds = YES;
     self.modalImageContainer.backgroundColor = [UIColor whiteColor];
     [modalContainer addSubview:self.modalImageContainer];
     
-    UIImageView *modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 40, 40)];
-    modalImageView.image = [modalImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [modalImageView setTintColor:imageColor];
+    UIImageView *modalImageView;
+    NSURL *imageURL = [NSURL URLWithString:modalImageUrl];
+    if (imageURL == nil){
+        modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 62, 62)];
+        modalImageView.image = [[UIImage imageNamed:@"swap"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [modalImageView setTintColor:imageColor];
+    }else{
+        modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 66, 66)];
+        modalImageView.layer.borderColor = imageColor.CGColor;
+        modalImageView.layer.borderWidth = 2;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Update the UI
+                modalImageView.image = [UIImage imageWithData:imageData];
+            });
+        });
+    }
+
     modalImageView.layer.cornerRadius = modalImageView.frame.size.width/2;
     modalImageView.layer.masksToBounds = YES;
     [self.modalImageContainer addSubview:modalImageView];

@@ -10,7 +10,7 @@
 @protocol ConfirmationModalDelegate;
 
 @interface ConfirmationModalView : BaseModal
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor;
+- (id)initWithFrame:(CGRect)frame imageUrl:(NSString *)modalImageUrl title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor;
 @property (nonatomic, weak) id<ConfirmationModalDelegate> confirmationModalDelegate;
 @property (nonatomic, strong) UIView *modalImageContainer;
 @end
