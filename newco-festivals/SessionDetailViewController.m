@@ -419,7 +419,7 @@ static NSString* ATTEND = @" Attend ";
             NSDictionary *companyTemp = [conflictingSession.companies objectAtIndex:0];
             NSDictionary *company = [[FestivalData sharedFestivalData].companiesDict objectForKey:[companyTemp objectForKey:@"username"]];
             NSString * companyAvatar = [company objectForKey:@"avatar"];
-            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame imageUrl:companyAvatar title:regularString yesText:@"Swap" noText:@"Cancel" imageColor:self.session.color];
+            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame imageUrl:companyAvatar title:regularString yesText:@"Swap" noText:@"Cancel" imageColor:self.session.color swapCompanyColor:conflictingSession.color];
             modalView.confirmationModalDelegate = self;
             UIView * topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
             [topView.window addSubview:modalView];

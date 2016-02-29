@@ -17,7 +17,7 @@
 @end
 @implementation ConfirmationModalView
 
-- (id)initWithFrame:(CGRect)frame imageUrl:(NSString *)modalImageUrl title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor{
+- (id)initWithFrame:(CGRect)frame imageUrl:(NSString *)modalImageUrl title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor swapCompanyColor:(UIColor*)conflictingColor{
     self = [super initWithFrame:frame];
     UIView *modalContainer = [[UIView alloc] initWithFrame:self.bounds];
     
@@ -45,13 +45,13 @@
     UIImageView *modalImageView;
     NSURL *imageURL = [NSURL URLWithString:modalImageUrl];
     if (imageURL == nil){
-        modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 62, 62)];
+        modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(1, 1, 64, 64)];
         modalImageView.image = [[UIImage imageNamed:@"swap"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [modalImageView setTintColor:imageColor];
     }else{
         modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 66, 66)];
-        modalImageView.layer.borderColor = imageColor.CGColor;
-        modalImageView.layer.borderWidth = 2;
+        modalImageView.layer.borderColor = conflictingColor.CGColor;
+        modalImageView.layer.borderWidth = 1;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
             NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
@@ -68,7 +68,7 @@
     [self.modalImageContainer addSubview:modalImageView];
 
     //adding title
-    self.modalTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 20, self.modalContent.frame.size.width, 0)];
+    self.modalTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 35, self.modalContent.frame.size.width, 0)];
     self.modalTitleLabel.numberOfLines = 0;
     self.modalTitleLabel.minimumFontSize = 0;
     self.modalTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
