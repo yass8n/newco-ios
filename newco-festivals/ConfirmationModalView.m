@@ -7,7 +7,6 @@
 //
 
 #import "ConfirmationModalView.h"
-#import "TTTAttributedLabel.h"
 @interface ConfirmationModalView()
 @property (strong, nonatomic) TTTAttributedLabel* modalTitleLabel;
 @property (strong, nonatomic) UIView* modalContent;
@@ -17,7 +16,7 @@
 @end
 @implementation ConfirmationModalView
 
-- (id)initWithFrame:(CGRect)frame imageUrl:(NSString *)modalImageUrl title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor swapCompanyColor:(UIColor*)conflictingColor{
+- (id)initWithFrame:(CGRect)frame title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor conflictingSession:(Session*)conflictingSession{
     self = [super initWithFrame:frame];
     UIView *modalContainer = [[UIView alloc] initWithFrame:self.bounds];
     
@@ -43,14 +42,17 @@
     [modalContainer addSubview:self.modalImageContainer];
     
     UIImageView *modalImageView;
-    NSURL *imageURL = [NSURL URLWithString:modalImageUrl];
+    NSDictionary *companyTemp = [conflictingSession.companies objectAtIndex:0];
+    NSDictionary *company = [[FestivalData sharedFestivalData].companiesDict objectForKey:[companyTemp objectForKey:@"username"]];
+    NSString * companyAvatar = [company objectForKey:@"avatar"];
+    NSURL *imageURL = [NSURL URLWithString:companyAvatar];
     if (imageURL == nil){
         modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(1, 1, 64, 64)];
         modalImageView.image = [[UIImage imageNamed:@"swap"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [modalImageView setTintColor:imageColor];
     }else{
         modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 66, 66)];
-        modalImageView.layer.borderColor = conflictingColor.CGColor;
+        modalImageView.layer.borderColor = conflictingSession.color.CGColor;
         modalImageView.layer.borderWidth = 1;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
@@ -68,7 +70,7 @@
     [self.modalImageContainer addSubview:modalImageView];
 
     //adding title
-    self.modalTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 35, self.modalContent.frame.size.width, 0)];
+    self.modalTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 30, self.modalContent.frame.size.width, 0)];
     self.modalTitleLabel.numberOfLines = 0;
     self.modalTitleLabel.minimumFontSize = 0;
     self.modalTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -87,6 +89,9 @@
     CGRect modalFrame = self.modalContent.frame;
     modalFrame.size.height = modalFrame.size.height + 25;
     self.modalContent.frame = modalFrame;
+    NSRange range = [self.modalTitleLabel.text rangeOfString:[NSString stringWithFormat:@"%@", [conflictingSession.title capitalizedString]]];
+    [self.modalTitleLabel addLinkToURL:[NSURL URLWithString:@""] withRange:range];
+    self.modalTitleLabel.delegate = self; //for detecting click of link
     [self.modalContent addSubview:self.modalTitleLabel];
     
     
@@ -120,7 +125,7 @@ return self;
     [self.noButton removeTarget:nil
                                       action:NULL
                             forControlEvents:UIControlEventAllEvents];
-    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(noButtonClicked:)]) {
+    if (self.confirmationModalDelegate) {
         [self.confirmationModalDelegate noButtonClicked:self];
     }
 }
@@ -129,11 +134,15 @@ return self;
     [self.yesButton removeTarget:nil
                          action:NULL
                forControlEvents:UIControlEventAllEvents];
-    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(yesButtonClicked:)]) {
+    if (self.confirmationModalDelegate) {
         [self.confirmationModalDelegate yesButtonClicked:self];
     }
 }
-
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url{
+    if (self.confirmationModalDelegate && [self.confirmationModalDelegate respondsToSelector: @selector(linkTapped:modal:)]) {
+        [self.confirmationModalDelegate linkTapped:label modal:self];
+    }
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

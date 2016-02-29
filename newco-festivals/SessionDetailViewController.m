@@ -410,16 +410,15 @@ static NSString* ATTEND = @" Attend ";
             
             NSMutableAttributedString *boldString = [[NSMutableAttributedString alloc]initWithString: [NSString stringWithFormat:@"%@", [sessionName capitalizedString]] attributes:boldDict];
             [boldString addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [boldString length]))];
-            
+
             [regularString appendAttributedString:boldString];
+
             
             NSMutableAttributedString *addition = [[NSMutableAttributedString alloc] initWithString:@". Would you like to swap?" attributes: regular];
              [addition addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [addition length]))];
             [regularString appendAttributedString:addition];
-            NSDictionary *companyTemp = [conflictingSession.companies objectAtIndex:0];
-            NSDictionary *company = [[FestivalData sharedFestivalData].companiesDict objectForKey:[companyTemp objectForKey:@"username"]];
-            NSString * companyAvatar = [company objectForKey:@"avatar"];
-            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame imageUrl:companyAvatar title:regularString yesText:@"Swap" noText:@"Cancel" imageColor:self.session.color swapCompanyColor:conflictingSession.color];
+
+            ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame title:regularString yesText:@"Swap" noText:@"Cancel" imageColor:self.session.color conflictingSession:conflictingSession];
             modalView.confirmationModalDelegate = self;
             UIView * topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
             [topView.window addSubview:modalView];
@@ -476,6 +475,14 @@ static NSString* ATTEND = @" Attend ";
             }];
         }
     }
+}
+-(void)linkTapped:(TTTAttributedLabel*)label modal:(ConfirmationModalView*)modal{
+    [modal hideModal];
+    Session * conflictingSession = [[FestivalData sharedFestivalData] getConflictingSession:self.session];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SessionDetailViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SessionDetail"];
+    [vc setSession:conflictingSession];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)yesButtonClicked:(ConfirmationModalView*)modal{
     Session * conflictingSession = [[FestivalData sharedFestivalData] getConflictingSession:self.session];
