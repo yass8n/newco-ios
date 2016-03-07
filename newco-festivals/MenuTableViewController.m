@@ -52,159 +52,72 @@
     changeCity.icon = [[UIImage imageNamed:@"swap"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [menuItems addObject:changeCity];
     
-    FestivalData *sharedFestivalData = [FestivalData sharedFestivalData];
-    NSArray * keys = sharedFestivalData.datesDict.allKeys;
-    NSMutableArray * fakeDatesToGetThemSorted = [[NSMutableArray alloc]init];
-    NSDictionary * order = @{
-                            @"Mon": @"1'",
-                            @"Tue": @"2",
-                            @"Wed": @"3",
-                            @"Thu": @"4",
-                            @"Fri": @"5",
-                            @"Sat": @"6",
-                            @"Sun": @"7",};
-    for (int i = 0; i < [keys count]; i ++){
-        NSString * num = [order objectForKey:[[keys objectAtIndex:i]substringWithRange:NSMakeRange(0, 3)]];
-        [fakeDatesToGetThemSorted addObject:[NSString stringWithFormat:@"%@%@", num, [keys objectAtIndex:i]]];
-    }
-    NSArray * datesDict = [fakeDatesToGetThemSorted sortedArrayUsingSelector:@selector(compare:)];
-    if ([datesDict count] >0){
-        MenuItem * header = [[MenuItem alloc]init];
-        header.title = @"Dates";
-        header.type = headerType;
-        header.cellIdentifier = HEADER;
-        [menuItems addObject:header];
-        for (int i = 0; i < datesDict.count; i++){
-            NSString * date = [datesDict objectAtIndex:i];
-            MenuItem * dateItem = [[MenuItem alloc]init];
-            dateItem.title = [date substringFromIndex:1];
-            dateItem.type = selectableType;
-            dateItem.cellIdentifier = REGULAR;
-            dateItem.stringType = @"date";
-            dateItem.icon = [UIImage imageNamed:@"calendar"];
-            [menuItems addObject:dateItem];
-        }
-    }
-    
-    NSString *location_string = @"Audience";
-    NSString *audience_string = @"Location";
-    BOOL event_type_is_location = [[[Credentials sharedCredentials].festival objectForKey:@"event_type_is_location"]boolValue];
-    if (event_type_is_location){
-        location_string = @"Location";
-        audience_string = @"Audience";
-    }
-    
-    
-    NSArray * colorDict = sharedFestivalData.locationColorDict.allKeys;
-    if ([colorDict count] >0){
-        MenuItem * header = [[MenuItem alloc]init];
-        header.title = location_string;
-        header.type = headerType;
-        header.cellIdentifier = HEADER;
-        [menuItems addObject:header];
-        for (int i = 0; i < colorDict.count; i++){
-            NSString * location = [colorDict objectAtIndex:i];
-            MenuItem * locationItem = [[MenuItem alloc]init];
-            locationItem.title = location;
-            locationItem.type = selectableType;
-            locationItem.cellIdentifier = REGULAR;
-            locationItem.stringType = @"location";
-            locationItem.color = [sharedFestivalData.locationColorDict objectForKey:location];
-            //            if ([location_string isEqualToString:@"Location"]){
-            //                locationItem.icon = [UIImage imageNamed:@"location"];
-            //            }else{
-            //                locationItem.icon = [UIImage imageNamed:@"industry"];
-            //            }
-            [menuItems addObject:locationItem];
-        }
-    }
-    
-    
-    NSArray * audienceDict = sharedFestivalData.audienceMapToSessions.allKeys;
-    if ([audienceDict count] > 0){
-        MenuItem * header1 = [[MenuItem alloc]init];
-        header1.title = audience_string;
-        header1.type = headerType;
-        header1.cellIdentifier = HEADER;
-        [menuItems addObject:header1];
-        for (int i = 0; i < audienceDict.count; i++){
-            NSString * aud = [audienceDict objectAtIndex:i];
-            MenuItem * audItem = [[MenuItem alloc]init];
-            audItem.title = aud;
-            audItem.type = selectableType;
-            audItem.cellIdentifier = REGULAR;
-            if ([audience_string isEqualToString:@"Location"]){
-                audItem.icon = [UIImage imageNamed:@"location"];
-            }else{
-                audItem.icon = [UIImage imageNamed:@"industry"];
-            }
-            audItem.stringType = @"audience";
-            [menuItems addObject:audItem];
-        }
-        
-    }
-    
-    MenuItem * header2 = [[MenuItem alloc]init];
-    header2.title = @"Directory";
-    header2.type = headerType;
-    header2.cellIdentifier = HEADER;
-    [menuItems addObject:header2];
-    
-    MenuItem * presenters = [[MenuItem alloc]init];
-    presenters.title = @"Presenters";
-    presenters.function = [NSValue valueWithPointer:@selector(showPresenters)];
-    presenters.type = selectableType;
-    presenters.cellIdentifier = REGULAR;
-    presenters.icon = [UIImage imageNamed:@"group"];
-    [menuItems addObject:presenters];
-    
-    MenuItem * companies = [[MenuItem alloc]init];
-    companies.title = @"Host Companies";
-    companies.function = [NSValue valueWithPointer:@selector(showCompanies)];
-    companies.type = selectableType;
-    companies.cellIdentifier = REGULAR;
-    companies.icon = [UIImage imageNamed:@"group"];
-    [menuItems addObject:companies];
-    
-    MenuItem * volunteers = [[MenuItem alloc]init];
-    volunteers.title = @"Volunteers";
-    volunteers.function = [NSValue valueWithPointer:@selector(showVolunteers)];
-    volunteers.type = selectableType;
-    volunteers.cellIdentifier = REGULAR;
-    volunteers.icon = [UIImage imageNamed:@"group"];
-    [menuItems addObject:volunteers];
-    
-    MenuItem * attendees = [[MenuItem alloc]init];
-    attendees.title = @"Attendees";
-    attendees.function = [NSValue valueWithPointer:@selector(showAttendees)];
-    attendees.type = selectableType;
-    attendees.cellIdentifier = REGULAR;
-    attendees.icon = [UIImage imageNamed:@"group"];
-    [menuItems addObject:attendees];
-    
-    MenuItem * header3 = [[MenuItem alloc]init];
-    header3.title = @"Account";
-    header3.type = headerType;
-    header3.cellIdentifier = HEADER;
-    [menuItems addObject:header3];
-    
-    if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
-        MenuItem * logout = [[MenuItem alloc]init];
-        logout.title = @"Log Out";
-        logout.function = [NSValue valueWithPointer:@selector(logout)];
-        logout.type = selectableType;
-        logout.cellIdentifier = REGULAR;
-        logout.icon = [UIImage imageNamed:@"logout"];
-        [menuItems addObject:logout];
-    }else{
-        MenuItem * login = [[MenuItem alloc]init];
-        login.title = @"Login";
-        login.function = [NSValue valueWithPointer:@selector(login)];
-        login.type = selectableType;
-        login.cellIdentifier = REGULAR;
-        login.icon = [UIImage imageNamed:@"user"];
-        [menuItems addObject:login];
-    }
+//    FestivalData *sharedFestivalData = [FestivalData sharedFestivalData];
+//    NSArray * keys = sharedFestivalData.datesDict.allKeys;
+//    NSMutableArray * fakeDatesToGetThemSorted = [[NSMutableArray alloc]init];
+//    NSDictionary * order = @{
+//                            @"Mon": @"1'",
+//                            @"Tue": @"2",
+//                            @"Wed": @"3",
+//                            @"Thu": @"4",
+//                            @"Fri": @"5",
+//                            @"Sat": @"6",
+//                            @"Sun": @"7",};
+//    for (int i = 0; i < [keys count]; i ++){
+//        NSString * num = [order objectForKey:[[keys objectAtIndex:i]substringWithRange:NSMakeRange(0, 3)]];
+//        [fakeDatesToGetThemSorted addObject:[NSString stringWithFormat:@"%@%@", num, [keys objectAtIndex:i]]];
+//    }
+//    NSArray * datesDict = [fakeDatesToGetThemSorted sortedArrayUsingSelector:@selector(compare:)];
+//    if ([datesDict count] >0){
+//        MenuItem * header = [[MenuItem alloc]init];
+//        header.title = @"Dates";
+//        header.type = headerType;
+//        header.cellIdentifier = HEADER;
+//        [menuItems addObject:header];
+//        for (int i = 0; i < datesDict.count; i++){
+//            NSString * date = [datesDict objectAtIndex:i];
+//            MenuItem * dateItem = [[MenuItem alloc]init];
+//            dateItem.title = [date substringFromIndex:1];
+//            dateItem.type = selectableType;
+//            dateItem.cellIdentifier = REGULAR;
+//            dateItem.stringType = @"date";
+//            dateItem.icon = [UIImage imageNamed:@"calendar"];
+//            [menuItems addObject:dateItem];
+//        }
+//    }
+//    
+//    NSString *location_string = @"Audience";
+//    NSString *audience_string = @"Location";
+//    BOOL event_type_is_location = [[[Credentials sharedCredentials].festival objectForKey:@"event_type_is_location"]boolValue];
+//    if (event_type_is_location){
+//        location_string = @"Location";
+//        audience_string = @"Audience";
+//    }
+//    
+//    
+//    NSArray * colorDict = sharedFestivalData.locationColorDict.allKeys;
+//    if ([colorDict count] >0){
+//        MenuItem * header = [[MenuItem alloc]init];
+//        header.title = location_string;
+//        header.type = headerType;
+//        header.cellIdentifier = HEADER;
+//        [menuItems addObject:header];
+//        for (int i = 0; i < colorDict.count; i++){
+//            NSString * location = [colorDict objectAtIndex:i];
+//            MenuItem * locationItem = [[MenuItem alloc]init];
+//            locationItem.title = location;
+//            locationItem.type = selectableType;
+//            locationItem.cellIdentifier = REGULAR;
+//            locationItem.stringType = @"location";
+//            locationItem.color = [sharedFestivalData.locationColorDict objectForKey:location];
+//            //            if ([location_string isEqualToString:@"Location"]){
+//            //                locationItem.icon = [UIImage imageNamed:@"location"];
+//            //            }else{
+//            //                locationItem.icon = [UIImage imageNamed:@"industry"];
+//            //            }
+//            [menuItems addObject:locationItem];
+//        }
+
     
     [self.tableView reloadData];
     [ApplicationViewController setMenuOpen:YES];

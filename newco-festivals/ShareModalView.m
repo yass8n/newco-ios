@@ -12,7 +12,7 @@
 @property (nonatomic, assign) sharedByEnum sharedBy;
 @end
 @implementation ShareModalView
-
+BOOL clickedSocial = NO;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)modalTitle oneLineTitle:(BOOL)oneLineTitle sharedBy:(sharedByEnum)note{
     self = [super initWithFrame:frame];
@@ -217,6 +217,7 @@
     return self;
 }
 -(void)clickedShare:(UITapGestureRecognizer *)recognizer{
+    clickedSocial = YES;
     UIView* clickedView = recognizer.view;
     int tag = (int)clickedView.tag;
     if (tag == 0){
@@ -228,6 +229,7 @@
     }
 }
 -(void)clickedMap:(UITapGestureRecognizer *)recognizer{
+    clickedSocial = NO;
     UIView* clickedView = recognizer.view;
     int tag = (int)clickedView.tag;
     if (tag == 0){
@@ -242,11 +244,15 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self hideTheModal:.1];
         if(self.shareModalDelegate){
-          if ([self.shareModalDelegate respondsToSelector: @selector(mapModalGone:session:)]) {
-                 [self.shareModalDelegate mapModalGone:self.share session:self.session];
-          }else if ([self.shareModalDelegate respondsToSelector: @selector(socialModalGone:session:)]) {
-              [self.shareModalDelegate socialModalGone:self.share session:self.session];
-          }
+            if (clickedSocial){
+                if ([self.shareModalDelegate respondsToSelector: @selector(socialModalGone:session:)]) {
+                    [self.shareModalDelegate socialModalGone:self.share session:self.session];
+                }
+            }else{
+                if ([self.shareModalDelegate respondsToSelector: @selector(mapModalGone:session:)]) {
+                    [self.shareModalDelegate mapModalGone:self.share session:self.session];
+                }
+            }
         }
     });
 }
