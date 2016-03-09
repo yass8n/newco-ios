@@ -36,6 +36,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 - (IBAction)saveProfile:(id)sender;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic) UIImagePickerController *imagePickerController;
+@property (nonatomic) UIImage *selectedImage;
 @property (nonatomic) BOOL showingMoreSettings;
 @property (nonatomic) CGRect usernameLabelFrame;
 @property (nonatomic) CGRect usernameFieldFrame;
@@ -85,6 +87,7 @@
     paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
     self.nameField.leftView = paddingView;
     self.nameField.leftViewMode = UITextFieldViewModeAlways;
+    self.nameField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"name"];
     self.nameField.delegate = self;
     [self.scrollView addSubview:self.nameField];
     
@@ -103,6 +106,7 @@
     paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
     self.emailField.leftView = paddingView;
     self.emailField.leftViewMode = UITextFieldViewModeAlways;
+    self.emailField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"email"];
     self.emailField.delegate = self;
     [self.scrollView addSubview:self.emailField];
     
@@ -239,6 +243,8 @@
         self.profileView.layer.borderWidth = 1;
     }
     [self.scrollView addSubview:self.profileView];
+    UITapGestureRecognizer *profileTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhotoTapped:)];
+    [self.profileView addGestureRecognizer:profileTap];
     [self.scrollView bringSubviewToFront:self.showMoreOrLess];
     [self.view addSubview:self.scrollView];
 }
@@ -254,6 +260,16 @@
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
 {
     [self.view endEditing:YES];
+}
+-(void)addPhotoTapped:(UITapGestureRecognizer *) sender
+{
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePickerController.delegate = self;
+        
+        self.imagePickerController = imagePickerController;
+        [self presentViewController:self.imagePickerController animated:YES completion:nil];
 }
 -(void)showOrHide:(UITapGestureRecognizer *) sender{
     int heightToAnimate = self.usernameFieldFrame.size.height + self.changePasswordFrame.size.height + self.privacySwitchFrame.size.height + 16 + 16 + 16 + 16;
@@ -386,6 +402,68 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
+{
+    double ratio;
+    double delta;
+    CGPoint offset;
+    
+    //make a new square size, that is the resized imaged width
+    CGSize sz = CGSizeMake(newSize.width, newSize.width);
+    
+    //figure out if the picture is landscape or portrait, then
+    //calculate scale factor and offset
+    if (image.size.width > image.size.height) {
+        ratio = newSize.width / image.size.width;
+        delta = (ratio*image.size.width - ratio*image.size.height);
+        offset = CGPointMake(delta/2, 0);
+    } else {
+        ratio = newSize.width / image.size.height;
+        delta = (ratio*image.size.height - ratio*image.size.width);
+        offset = CGPointMake(0, delta/2);
+    }
+    
+    //make the final clipping rect based on the calculated values
+    CGRect clipRect = CGRectMake(-offset.x, -offset.y,
+                                 (ratio * image.size.width) + delta,
+                                 (ratio * image.size.height) + delta);
+    
+    
+    //start a new context, with scale factor 0.0 so retina displays get
+    //high quality image
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        UIGraphicsBeginImageContextWithOptions(sz, YES, 0.0);
+    } else {
+        UIGraphicsBeginImageContext(sz);
+    }
+    UIRectClip(clipRect);
+    [image drawInRect:clipRect];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+#pragma mark - UIImagePickerControllerDelegate
+
+// This method is called when an image has been chosen from the library or taken from the camera.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    
+    self.selectedImage = [self squareImageWithImage:image scaledToSize:CGSizeMake(self.profileView.frame.size.width, self.profileView.frame.size.height)];
+    [self.profileView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    UIImageView * imageView = [[UIImageView alloc]initWithFrame:self.profileView.bounds];
+    [imageView setImage:self.selectedImage];
+    [self.profileView addSubview:imageView];
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 - (IBAction)saveProfile:(id)sender {
 }

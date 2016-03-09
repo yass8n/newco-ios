@@ -52,78 +52,79 @@
     changeCity.icon = [[UIImage imageNamed:@"swap"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [menuItems addObject:changeCity];
     
-//    FestivalData *sharedFestivalData = [FestivalData sharedFestivalData];
-//    NSArray * keys = sharedFestivalData.datesDict.allKeys;
-//    NSMutableArray * fakeDatesToGetThemSorted = [[NSMutableArray alloc]init];
-//    NSDictionary * order = @{
-//                            @"Mon": @"1'",
-//                            @"Tue": @"2",
-//                            @"Wed": @"3",
-//                            @"Thu": @"4",
-//                            @"Fri": @"5",
-//                            @"Sat": @"6",
-//                            @"Sun": @"7",};
-//    for (int i = 0; i < [keys count]; i ++){
-//        NSString * num = [order objectForKey:[[keys objectAtIndex:i]substringWithRange:NSMakeRange(0, 3)]];
-//        [fakeDatesToGetThemSorted addObject:[NSString stringWithFormat:@"%@%@", num, [keys objectAtIndex:i]]];
-//    }
-//    NSArray * datesDict = [fakeDatesToGetThemSorted sortedArrayUsingSelector:@selector(compare:)];
-//    if ([datesDict count] >0){
-//        MenuItem * header = [[MenuItem alloc]init];
-//        header.title = @"Dates";
-//        header.type = headerType;
-//        header.cellIdentifier = HEADER;
-//        [menuItems addObject:header];
-//        for (int i = 0; i < datesDict.count; i++){
-//            NSString * date = [datesDict objectAtIndex:i];
-//            MenuItem * dateItem = [[MenuItem alloc]init];
-//            dateItem.title = [date substringFromIndex:1];
-//            dateItem.type = selectableType;
-//            dateItem.cellIdentifier = REGULAR;
-//            dateItem.stringType = @"date";
-//            dateItem.icon = [UIImage imageNamed:@"calendar"];
-//            [menuItems addObject:dateItem];
-//        }
-//    }
-//    
-//    NSString *location_string = @"Audience";
-//    NSString *audience_string = @"Location";
-//    BOOL event_type_is_location = [[[Credentials sharedCredentials].festival objectForKey:@"event_type_is_location"]boolValue];
-//    if (event_type_is_location){
-//        location_string = @"Location";
-//        audience_string = @"Audience";
-//    }
-//    
-//    
-//    NSArray * colorDict = sharedFestivalData.locationColorDict.allKeys;
-//    if ([colorDict count] >0){
-//        MenuItem * header = [[MenuItem alloc]init];
-//        header.title = location_string;
-//        header.type = headerType;
-//        header.cellIdentifier = HEADER;
-//        [menuItems addObject:header];
-//        for (int i = 0; i < colorDict.count; i++){
-//            NSString * location = [colorDict objectAtIndex:i];
-//            MenuItem * locationItem = [[MenuItem alloc]init];
-//            locationItem.title = location;
-//            locationItem.type = selectableType;
-//            locationItem.cellIdentifier = REGULAR;
-//            locationItem.stringType = @"location";
-//            locationItem.color = [sharedFestivalData.locationColorDict objectForKey:location];
-//            //            if ([location_string isEqualToString:@"Location"]){
-//            //                locationItem.icon = [UIImage imageNamed:@"location"];
-//            //            }else{
-//            //                locationItem.icon = [UIImage imageNamed:@"industry"];
-//            //            }
-//            [menuItems addObject:locationItem];
-//        }
+    FestivalData *sharedFestivalData = [FestivalData sharedFestivalData];
+    NSArray * keys = sharedFestivalData.datesDict.allKeys;
+    NSMutableArray * fakeDatesToGetThemSorted = [[NSMutableArray alloc]init];
+    NSDictionary * order = @{
+                            @"Mon": @"1'",
+                            @"Tue": @"2",
+                            @"Wed": @"3",
+                            @"Thu": @"4",
+                            @"Fri": @"5",
+                            @"Sat": @"6",
+                            @"Sun": @"7",};
+    for (int i = 0; i < [keys count]; i ++){
+        NSString * num = [order objectForKey:[[keys objectAtIndex:i]substringWithRange:NSMakeRange(0, 3)]];
+        [fakeDatesToGetThemSorted addObject:[NSString stringWithFormat:@"%@%@", num, [keys objectAtIndex:i]]];
+    }
+    NSArray * datesDict = [fakeDatesToGetThemSorted sortedArrayUsingSelector:@selector(compare:)];
+    if ([datesDict count] >0){
+        MenuItem * header = [[MenuItem alloc]init];
+        header.title = @"Dates";
+        header.type = headerType;
+        header.cellIdentifier = HEADER;
+        [menuItems addObject:header];
+        for (int i = 0; i < datesDict.count; i++){
+            NSString * date = [datesDict objectAtIndex:i];
+            MenuItem * dateItem = [[MenuItem alloc]init];
+            dateItem.title = [date substringFromIndex:1];
+            dateItem.type = selectableType;
+            dateItem.cellIdentifier = REGULAR;
+            dateItem.stringType = @"date";
+            dateItem.icon = [UIImage imageNamed:@"calendar"];
+            [menuItems addObject:dateItem];
+        }
+    }
+    
+    NSString *location_string = @"Audience";
+    NSString *audience_string = @"Location";
+    BOOL event_type_is_location = [[[Credentials sharedCredentials].festival objectForKey:@"event_type_is_location"]boolValue];
+    if (event_type_is_location){
+        location_string = @"Location";
+        audience_string = @"Audience";
+    }
+    
+    
+    NSArray * colorDict = sharedFestivalData.locationColorDict.allKeys;
+    if ([colorDict count] >0){
+        MenuItem * header = [[MenuItem alloc]init];
+        header.title = location_string;
+        header.type = headerType;
+        header.cellIdentifier = HEADER;
+        [menuItems addObject:header];
+        for (int i = 0; i < colorDict.count; i++){
+            NSString * location = [colorDict objectAtIndex:i];
+            MenuItem * locationItem = [[MenuItem alloc]init];
+            locationItem.title = location;
+            locationItem.type = selectableType;
+            locationItem.cellIdentifier = REGULAR;
+            locationItem.stringType = @"location";
+            locationItem.color = [sharedFestivalData.locationColorDict objectForKey:location];
+            //            if ([location_string isEqualToString:@"Location"]){
+            //                locationItem.icon = [UIImage imageNamed:@"location"];
+            //            }else{
+            //                locationItem.icon = [UIImage imageNamed:@"industry"];
+            //            }
+            [menuItems addObject:locationItem];
+        }
 
     
     [self.tableView reloadData];
     [ApplicationViewController setMenuOpen:YES];
     CGRect frame = self.view.bounds;
     frame.origin.y = frame.origin.y + 20;
-};
+    }
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [ApplicationViewController setMenuOpen:NO];
