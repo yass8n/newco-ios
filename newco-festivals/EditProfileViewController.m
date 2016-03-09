@@ -297,11 +297,6 @@
     self.companyPositionField.delegate = self;
     [self.scrollView addSubview:self.companyPositionField];
     
-    
-    
-    
-    
-    
     Y += self.companyPositionField.frame.size.height + 8 + 8;
     self.websiteLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
     self.websiteLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
@@ -321,6 +316,9 @@
     self.websiteField.delegate = self;
     [self.scrollView addSubview:self.websiteField];
     [self.view addSubview:self.scrollView];
+    [self.scrollView setScrollEnabled:YES];
+    Y += self.websiteField.frame.size.height + 8;
+    [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width,Y)];
 }
 -(void)setAvatar{
     [self.profileView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
