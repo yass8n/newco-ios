@@ -37,21 +37,33 @@
 - (IBAction)saveProfile:(id)sender;
 @property (strong, nonatomic) IBOutlet UIView *togglableView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic) BOOL showingMoreSettings;
+@property (nonatomic) CGRect usernameLabelFrame;
+@property (nonatomic) CGRect usernameFieldFrame;
+@property (nonatomic) CGRect passwordLabelFrame;
+@property (nonatomic) CGRect passwordFieldFrame;
+@property (nonatomic) CGRect privacyLabelFrame;
+@property (nonatomic) CGRect changePasswordFrame;
+@property (nonatomic) CGRect privacySwitchFrame;
+@property (nonatomic) CGRect privacyExplanationFrame;
+@property (nonatomic) CGRect changePasswordButtonFrame;
 
 @end
 
 @implementation EditProfileViewController
-UIGestureRecognizer *tapper;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
     // Do any additional setup after loading the view.
 }
+-(void)viewDidAppear:(BOOL)animated{
+    self.showingMoreSettings = NO;
+}
 - (void)viewDidLayoutSubviews{
-    tapper = [[UITapGestureRecognizer alloc]
+    UIGestureRecognizer *dismiss = [[UITapGestureRecognizer alloc]
               initWithTarget:self action:@selector(handleSingleTap:)];
-    tapper.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapper];
+    dismiss.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:dismiss];
     UIView *paddingView;
     int textFieldHeight = 30;
     self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.frame];
@@ -96,6 +108,7 @@ UIGestureRecognizer *tapper;
     
     Y+=self.emailField.frame.size.height + 8 + 8;
     self.showMoreOrLess = [[CustomUILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 20)];
+    self.showMoreOrLess.userInteractionEnabled = YES;
     self.showMoreOrLess.textColor = [Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
     self.showMoreOrLess.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 20];
     self.showMoreOrLess.text = @"Change your username, password and privacy setting?";
@@ -105,21 +118,35 @@ UIGestureRecognizer *tapper;
     CGRect labelFrame = self.showMoreOrLess.frame;
     labelFrame.size.height = size.height;
     self.showMoreOrLess.frame = labelFrame;
+    UIColor* currentColor = self.showMoreOrLess.textColor;
+    self.showMoreOrLess.highlightTextColor = [UIColor lightGrayColor];
+    self.showMoreOrLess.unHighlightTextColor = currentColor;
+    UIGestureRecognizer *showOrHide = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(showOrHide:)];
+    showOrHide.enabled = YES;
+    showOrHide.cancelsTouchesInView = YES;
+    [self.showMoreOrLess addGestureRecognizer:showOrHide];
     [self.scrollView addSubview:self.showMoreOrLess];
 
     Y+=self.showMoreOrLess.frame.size.height + 8 + 8;
-    self.usernameLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, 12)];
+    self.usernameLabelFrame = CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, 12);
+    self.usernameLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.usernameLabel.alpha = 0.0;
     self.usernameLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.usernameLabel.text = @"Username";
     [self.scrollView addSubview:self.usernameLabel];
     
-    self.passwordLabel = [[UILabel alloc]initWithFrame:CGRectMake(X + (self.usernameLabel.frame.size.width) + X, Y, self.scrollView.frame.size.width-16, 12)];
+    self.passwordLabelFrame = CGRectMake(X + (self.usernameLabelFrame.size.width) + X, Y, self.scrollView.frame.size.width-16, 12);
+    self.passwordLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.passwordLabel.alpha = 0.0;
     self.passwordLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.passwordLabel.text = @"Password";
     [self.scrollView addSubview:self.passwordLabel];
     
-    Y += self.usernameLabel.frame.size.height + 8;
-    self.usernameField = [[UITextField alloc]initWithFrame:CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, textFieldHeight)];
+    Y += self.usernameLabelFrame.size.height + 8;
+    self.usernameFieldFrame = CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, textFieldHeight);
+    self.usernameField = [[UITextField alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.usernameField.alpha = 0.0;
     self.usernameField.layer.borderColor = [UIColor grayColor].CGColor;
     self.usernameField.textColor = [UIColor darkTextColor];
     self.usernameField.layer.borderWidth = 1;
@@ -130,7 +157,9 @@ UIGestureRecognizer *tapper;
     self.usernameField.delegate = self;
     [self.scrollView addSubview:self.usernameField];
     
-    self.passwordField = [[UITextField alloc]initWithFrame:CGRectMake(X + self.usernameField.frame.size.width + X, Y, (self.scrollView.frame.size.width/2)-16, textFieldHeight)];
+    self.passwordFieldFrame = CGRectMake(X + self.usernameFieldFrame.size.width + X, Y, (self.scrollView.frame.size.width/2)-16, textFieldHeight);
+    self.passwordField = [[UITextField alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.passwordField.alpha = 0.0;
     self.passwordField.layer.borderColor = [UIColor grayColor].CGColor;
     self.passwordField.secureTextEntry = YES;
     self.passwordField.textColor = [UIColor darkTextColor];
@@ -142,41 +171,65 @@ UIGestureRecognizer *tapper;
     self.passwordField.delegate = self;
     [self.scrollView addSubview:self.passwordField];
     
-    Y+=self.passwordField.frame.size.height + 8 + 8;
-    self.changePassword =[[CustomUILabel alloc]initWithFrame:CGRectMake(X, Y, 140, 16)];
+    Y+=self.passwordFieldFrame.size.height + 8 + 8;
+    self.changePasswordFrame = CGRectMake(X, Y, 140, 16);
+    self.changePassword =[[CustomUILabel alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.changePassword.alpha = 0.0;
+    self.changePassword.userInteractionEnabled = YES;
     self.changePassword.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 16.0];
     self.changePassword.text = @"Change password";
     self.changePassword.textColor = [Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
+    currentColor = self.changePassword.textColor;
+    self.changePassword.highlightTextColor = [UIColor lightGrayColor];
+    self.changePassword.unHighlightTextColor = currentColor;
+    UIGestureRecognizer *changePasswordTap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(changePassword:)];
+    changePasswordTap.enabled = YES;
+    changePasswordTap.cancelsTouchesInView = YES;
+    [self.changePassword addGestureRecognizer:changePasswordTap];
     [self.scrollView addSubview:self.changePassword];
-
-    self.changePasswordButton = [[UIButton alloc]initWithFrame:CGRectMake(self.changePassword.frame.size.width, Y+2, 12, 12)];
+    self.changePasswordButtonFrame = CGRectMake(self.changePasswordFrame.size.width, Y+2, 12, 12);
+    self.changePasswordButton = [[UIButton alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.changePasswordButton.alpha = 0.0;
     UIImage *btnImage = [[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.changePasswordButton setImage:btnImage forState:UIControlStateNormal];
     self.changePasswordButton.tintColor =[Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
     self.changePasswordButton.transform = CGAffineTransformMakeRotation(M_PI); //rotate it to point other direction
     [self.scrollView addSubview:self.changePasswordButton];
     
-    Y+=self.changePassword.frame.size.height + 8 + 8;
-    self.privacyLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width/2, 12)];
+    Y+=self.changePasswordFrame.size.height + 8;
+    self.privacyLabelFrame = CGRectMake(X, Y, self.scrollView.frame.size.width/2, 12);
+    self.privacyLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.privacyLabel.alpha = 0.0;
     self.privacyLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.privacyLabel.text = @"Privacy";
     [self.scrollView addSubview:self.privacyLabel];
     
-    Y+=self.privacyLabel.frame.size.height + 8;
-    self.privacySwitch = [[UISwitch alloc]initWithFrame:CGRectMake(X, Y, 30, 40)];
+    Y+=self.privacyLabelFrame.size.height + 8;
+    self.privacySwitchFrame = CGRectMake(X, Y, 30, 40);
+    self.privacySwitch = [[UISwitch alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.privacySwitch.alpha = 0.0;
     [self.scrollView addSubview:self.privacySwitch];
     
-    self.privacyExplanation = [[UILabel alloc]initWithFrame:CGRectMake(self.privacySwitch.frame.size.width + X  + 8, Y, self.scrollView.frame.size.width - self.privacySwitch.frame.size.width - 32, 16)];
+    self.privacyExplanationFrame = CGRectMake(self.privacySwitchFrame.size.width + X  + 24, Y + (self.privacySwitchFrame.size.height/6), self.scrollView.frame.size.width - self.privacySwitchFrame.size.width - 32, 16);
+    self.privacyExplanation = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
+    self.privacyExplanation.alpha = 0.0;
     self.privacyExplanation.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 16.0];
-    self.privacyExplanation.text = @"Hide my profile and schedule from others at this event";
+    self.privacyExplanation.text = @"Hide my profile and schedule";
     self.privacyExplanation.numberOfLines = 0;
     self.privacyExplanation.lineBreakMode = NSLineBreakByWordWrapping;
     self.privacyExplanation.textColor = [UIColor grayColor];
     size = [Helper sizeForLabel:self.privacyExplanation];
-    labelFrame = self.privacyExplanation.frame;
+    labelFrame = self.privacyLabelFrame;
     labelFrame.size.height = size.height;
-    self.privacyExplanation.frame = labelFrame;
+    self.privacyLabelFrame = labelFrame;
     [self.scrollView addSubview:self.privacyExplanation];
+    
+    Y = self.showMoreOrLess.frame.origin.y + self.showMoreOrLess.frame.size.height + 16;
+    self.companyNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width, 16)];
+    self.companyNameLabel.text = @"ASSAD";
+    [self.scrollView addSubview:self.companyNameLabel];
+    [self.scrollView bringSubviewToFront:self.showMoreOrLess];
     [self.view addSubview:self.scrollView];
 
 }
@@ -191,6 +244,61 @@ UIGestureRecognizer *tapper;
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
 {
     [self.view endEditing:YES];
+}
+-(void)showOrHide:(UITapGestureRecognizer *) sender{
+    int heightToAnimate = self.usernameFieldFrame.size.height + self.changePasswordFrame.size.height + self.privacySwitchFrame.size.height + 16 + 16 + 16 + 16;
+    self.showingMoreSettings = !self.showingMoreSettings;
+    if (self.showingMoreSettings){
+        [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.usernameLabel.frame = self.usernameLabelFrame;
+            self.usernameField.frame = self.usernameFieldFrame;
+            self.changePassword.frame = self.changePasswordFrame;
+            self.passwordLabel.frame = self.passwordLabelFrame;
+            self.privacyLabel.frame = self.privacyLabelFrame;
+            self.passwordField.frame = self.passwordFieldFrame;
+            self.privacySwitch.frame = self.privacySwitchFrame;
+            self.privacyExplanation.frame = self.privacyExplanationFrame;
+            self.changePasswordButton.frame = self.changePasswordButtonFrame;
+            
+            self.usernameLabel.alpha = 1.0;
+            self.usernameField.alpha = 1.0;
+            self.changePassword.alpha = 1.0;
+            self.passwordLabel.alpha = 1.0;
+            self.privacyLabel.alpha = 1.0;
+            self.passwordField.alpha = 1.0;
+            self.privacySwitch.alpha = 1.0;
+            self.privacyExplanation.alpha = 1.0;
+            self.changePasswordButton.alpha = 1.0;
+            CGRect newFrame = self.companyNameLabel.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.companyNameLabel.frame = newFrame;
+        } completion:nil];
+    }else{
+        [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.usernameLabel.frame = self.showMoreOrLess.frame;
+            self.usernameField.frame = self.showMoreOrLess.frame;
+            self.changePassword.frame = self.showMoreOrLess.frame;
+            self.passwordLabel.frame = self.showMoreOrLess.frame;            self.privacyLabel.frame = self.showMoreOrLess.frame;
+            self.passwordField.frame = self.showMoreOrLess.frame;
+            self.privacySwitch.frame = self.showMoreOrLess.frame;
+            self.privacyExplanation.frame = self.showMoreOrLess.frame;
+            self.changePasswordButton.frame = self.showMoreOrLess.frame;
+            
+            self.usernameLabel.alpha = 0;
+            self.usernameField.alpha = 0;
+            self.changePassword.alpha = 0;
+            self.passwordLabel.alpha = 0;
+            self.privacyLabel.alpha = 0;
+            self.passwordField.alpha = 0;
+            self.privacySwitch.alpha = 0;
+            self.privacyExplanation.alpha = 0;
+            self.changePasswordButton.alpha = 0;
+        } completion:nil];
+    }
+    
+}
+-(void)changePassword:(UITapGestureRecognizer *) sender{
+    NSLog(@"HERER");
 }
 #pragma Mark textfield delegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
