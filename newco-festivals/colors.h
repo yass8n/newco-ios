@@ -26,6 +26,7 @@ FOUNDATION_EXPORT NSString *const RED;
 FOUNDATION_EXPORT NSString *const DARK_GRAY;
 FOUNDATION_EXPORT NSString *const LIGHT_GRAY;
 FOUNDATION_EXPORT NSString *const MEDIUM_GRAY;
+FOUNDATION_EXPORT NSString *const LINK_COLOR;
 +(UIColor *)myLightGray;
 +(UIColor *) myRed;
 +(UIColor *) myGreen;

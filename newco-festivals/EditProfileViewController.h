@@ -8,6 +8,6 @@
 
 #import "ApplicationViewController.h"
 
-@interface EditProfileViewController : ApplicationViewController
+@interface EditProfileViewController : ApplicationViewController <UITextFieldDelegate>
 
 @end

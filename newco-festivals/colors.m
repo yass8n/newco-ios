@@ -123,4 +123,5 @@ NSString *const RED = @"#c0392b";
 NSString *const DARK_GRAY = @"#484848";
 NSString *const LIGHT_GRAY = @"#E8E8E8";
 NSString *const MEDIUM_GRAY = @"#606060";
+NSString *const LINK_COLOR = @"#0DA2DA";
 @end

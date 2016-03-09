@@ -1188,7 +1188,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Forgot Password?">
-                                    <color key="titleColor" red="0.052817456069999998" green="0.63351910109999998" blue="0.85379464289999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.050980392156862744" green="0.63529411764705879" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="forgotPassword:" destination="LYZ-Sn-tCO" eventType="touchUpInside" id="5Ls-9g-p8i"/>
@@ -1257,7 +1257,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDj-8h-fdj">
                                                 <rect key="frame" x="8" y="8" width="584" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPy-g9-jp1">
@@ -1273,7 +1273,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQp-kt-ZpV">
                                                 <rect key="frame" x="8" y="69" width="41" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mqu-n7-r7F">
@@ -1282,7 +1282,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="or7-X8-Asw">
                                                         <rect key="frame" x="16" y="9" width="79" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Efc-1v-pHA">
@@ -1302,13 +1302,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGT-H4-VRD">
                                                         <rect key="frame" x="16" y="117" width="56" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hide my profile &amp; schedule from others at this event." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyK-Vz-jc2">
                                                         <rect key="frame" x="73" y="151" width="473" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -1327,7 +1327,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Company name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8N-fD-LC8">
                                                 <rect key="frame" x="14" y="332" width="120" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="09u-NE-4kz">
@@ -1348,13 +1348,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ow-aO-K7T">
                                                 <rect key="frame" x="14" y="383" width="104" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Company Position" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4V-Yp-QJZ">
                                                 <rect key="frame" x="406" y="322" width="139" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5zi-TH-G43">
@@ -1373,14 +1373,11 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rd-X3-XGf">
                                                 <rect key="frame" x="24" y="550" width="34" height="30"/>
                                                 <state key="normal" title="Save"/>
-                                                <connections>
-                                                    <action selector="saveProfile:" destination="ObE-HD-vhp" eventType="touchUpInside" id="bCS-ct-KNW"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tell us about yourself" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdN-6c-7z7">
                                                 <rect key="frame" x="196" y="410" width="163" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -1435,32 +1432,6 @@
                             </mask>
                         </variation>
                     </view>
-                    <connections>
-                        <outlet property="aboutMeField" destination="5zi-TH-G43" id="7uN-3a-bOw"/>
-                        <outlet property="aboutMeLabel" destination="EdN-6c-7z7" id="OaX-lc-nqM"/>
-                        <outlet property="changePassword" destination="9Gc-2X-c1d" id="6Ql-AH-wx9"/>
-                        <outlet property="companyNameField" destination="09u-NE-4kz" id="ibR-nL-tJp"/>
-                        <outlet property="companyNameLabel" destination="V8N-fD-LC8" id="aQP-yj-mmM"/>
-                        <outlet property="companyPositionField" destination="nxa-SY-BoO" id="hjz-kg-6RJ"/>
-                        <outlet property="companyPositionLabel" destination="b4V-Yp-QJZ" id="9MD-GZ-n4E"/>
-                        <outlet property="emailField" destination="7Md-1h-aOI" id="4Xp-IK-QMm"/>
-                        <outlet property="emailLabel" destination="YQp-kt-ZpV" id="jrs-di-VPw"/>
-                        <outlet property="nameField" destination="vPy-g9-jp1" id="Fhi-93-NS1"/>
-                        <outlet property="nameLabel" destination="xDj-8h-fdj" id="s1T-h4-oFq"/>
-                        <outlet property="privacyExplanation" destination="yyK-Vz-jc2" id="w5a-9c-OYX"/>
-                        <outlet property="privacyLabel" destination="FGT-H4-VRD" id="Jgi-8B-rr9"/>
-                        <outlet property="privacySwitch" destination="NrS-W1-Qvg" id="IdR-Eh-pSp"/>
-                        <outlet property="profileView" destination="VvT-VP-2YJ" id="XtC-Cc-lO6"/>
-                        <outlet property="removePhotoLabel" destination="nrV-EY-gRe" id="vxy-kG-AmP"/>
-                        <outlet property="saveButton" destination="8rd-X3-XGf" id="swP-kD-GMM"/>
-                        <outlet property="scrollView" destination="Mbq-b8-5fS" id="wSf-Ta-fZR"/>
-                        <outlet property="showMoreOrLess" destination="DjE-4O-fFw" id="t6R-IP-Nq6"/>
-                        <outlet property="togglableView" destination="Mqu-n7-r7F" id="dpA-my-lea"/>
-                        <outlet property="usernameField" destination="Efc-1v-pHA" id="VGt-Z8-PCI"/>
-                        <outlet property="usernameLabel" destination="or7-X8-Asw" id="7B6-fo-Sri"/>
-                        <outlet property="websiteField" destination="px1-lZ-d7R" id="rb3-mT-jMx"/>
-                        <outlet property="websiteLabel" destination="7Ow-aO-K7T" id="6yQ-rn-2Mi"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y64-D8-ZkG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
