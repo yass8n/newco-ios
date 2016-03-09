@@ -35,7 +35,6 @@
 @property (strong, nonatomic) IBOutlet UITextView *aboutMeField;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 - (IBAction)saveProfile:(id)sender;
-@property (strong, nonatomic) IBOutlet UIView *togglableView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic) BOOL showingMoreSettings;
 @property (nonatomic) CGRect usernameLabelFrame;
@@ -54,14 +53,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
+    [self setBackButton];
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
     self.showingMoreSettings = NO;
 }
-- (void)viewDidLayoutSubviews{
+-(void)adjustUI{
     UIGestureRecognizer *dismiss = [[UITapGestureRecognizer alloc]
-              initWithTarget:self action:@selector(handleSingleTap:)];
+                                    initWithTarget:self action:@selector(handleSingleTap:)];
     dismiss.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:dismiss];
     UIView *paddingView;
@@ -127,7 +127,7 @@
     showOrHide.cancelsTouchesInView = YES;
     [self.showMoreOrLess addGestureRecognizer:showOrHide];
     [self.scrollView addSubview:self.showMoreOrLess];
-
+    
     Y+=self.showMoreOrLess.frame.size.height + 8 + 8;
     self.usernameLabelFrame = CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, 12);
     self.usernameLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
@@ -183,7 +183,7 @@
     self.changePassword.highlightTextColor = [UIColor lightGrayColor];
     self.changePassword.unHighlightTextColor = currentColor;
     UIGestureRecognizer *changePasswordTap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(changePassword:)];
+                                              initWithTarget:self action:@selector(changePassword:)];
     changePasswordTap.enabled = YES;
     changePasswordTap.cancelsTouchesInView = YES;
     [self.changePassword addGestureRecognizer:changePasswordTap];
@@ -226,17 +226,27 @@
     [self.scrollView addSubview:self.privacyExplanation];
     
     Y = self.showMoreOrLess.frame.origin.y + self.showMoreOrLess.frame.size.height + 16;
-    self.companyNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width, 16)];
-    self.companyNameLabel.text = @"ASSAD";
-    [self.scrollView addSubview:self.companyNameLabel];
+    self.profileView = [[CustomUIView alloc]initWithFrame:CGRectMake( (self.scrollView.frame.size.width/2)-(self.scrollView.frame.size.width/4), Y, (self.scrollView.frame.size.width/2), (self.scrollView.frame.size.width/2))];
+    self.profileView.layer.cornerRadius =  self.profileView.frame.size.height/2;
+    self.profileView.layer.masksToBounds = YES;
+    NSString* avatar = [[Credentials sharedCredentials].currentUser objectForKey:@"avatar"] ;
+    if ([ avatar isEqual:[NSNull null]] || [avatar  isEqual: @""] || avatar == nil){
+        [self setUserInitial:self.profileView.frame withFont:self.profileView.frame.size.width/2 withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
+    }else {
+        [self setUserImage:self.profileView.frame withAvatar:avatar withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
+        self.profileView.layer.borderColor = [UIColor myLightGray].CGColor;
+        self.profileView.layer.cornerRadius = self.profileView.frame.size.width/2;
+        self.profileView.layer.borderWidth = 1;
+    }
+    [self.scrollView addSubview:self.profileView];
     [self.scrollView bringSubviewToFront:self.showMoreOrLess];
     [self.view addSubview:self.scrollView];
-
 }
+//- (void)viewDidLayoutSubviews{
+// 
+//
+//}
 
-- (void)adjustUI{
-    [self setBackButton];
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -259,6 +269,9 @@
             self.privacySwitch.frame = self.privacySwitchFrame;
             self.privacyExplanation.frame = self.privacyExplanationFrame;
             self.changePasswordButton.frame = self.changePasswordButtonFrame;
+            CGRect newFrame = self.companyNameLabel.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.companyNameLabel.frame = newFrame;
             
             self.usernameLabel.alpha = 1.0;
             self.usernameField.alpha = 1.0;
@@ -269,9 +282,6 @@
             self.privacySwitch.alpha = 1.0;
             self.privacyExplanation.alpha = 1.0;
             self.changePasswordButton.alpha = 1.0;
-//            CGRect newFrame = self.nameLabel.frame;
-//            newFrame.origin.y += heightToAnimate;
-//            self.nameLabel.frame = newFrame;
         } completion:nil];
     }else{
         [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -283,6 +293,9 @@
             self.privacySwitch.frame = self.showMoreOrLess.frame;
             self.privacyExplanation.frame = self.showMoreOrLess.frame;
             self.changePasswordButton.frame = self.showMoreOrLess.frame;
+            CGRect newFrame = self.companyNameLabel.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.companyNameLabel.frame = newFrame;
             
             self.usernameLabel.alpha = 0;
             self.usernameField.alpha = 0;
@@ -363,6 +376,7 @@
     
     [UIView commitAnimations];
 }
+
 /*
 #pragma mark - Navigation
 
