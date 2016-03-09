@@ -269,9 +269,9 @@
             self.privacySwitch.alpha = 1.0;
             self.privacyExplanation.alpha = 1.0;
             self.changePasswordButton.alpha = 1.0;
-            CGRect newFrame = self.companyNameLabel.frame;
-            newFrame.origin.y += heightToAnimate;
-            self.companyNameLabel.frame = newFrame;
+//            CGRect newFrame = self.nameLabel.frame;
+//            newFrame.origin.y += heightToAnimate;
+//            self.nameLabel.frame = newFrame;
         } completion:nil];
     }else{
         [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
