@@ -152,6 +152,8 @@
         }else{
             self.hideEditButton = YES;
         }
+    }else{
+        self.hideEditButton = YES;
     }
 }
 -(void)reloadTableView
