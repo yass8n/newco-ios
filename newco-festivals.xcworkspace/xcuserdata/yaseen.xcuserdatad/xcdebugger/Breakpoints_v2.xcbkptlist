@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479242873.195999"
+            timestampString = "479245780.444575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "-showOrHide:"
             landmarkType = "5">
          </BreakpointContent>

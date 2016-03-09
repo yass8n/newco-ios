@@ -30,7 +30,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *companyPositionLabel;
 @property (strong, nonatomic) IBOutlet UITextField *companyPositionField;
 @property (strong, nonatomic) IBOutlet CustomUIView *profileView;
-@property (strong, nonatomic) IBOutlet CustomUILabel *removePhotoLabel;
+@property (strong, nonatomic) IBOutlet CustomUILabel *photoTextLabel;
 @property (strong, nonatomic) IBOutlet UILabel *aboutMeLabel;
 @property (strong, nonatomic) IBOutlet UITextView *aboutMeField;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
@@ -39,6 +39,7 @@
 @property (nonatomic) UIImagePickerController *imagePickerController;
 @property (nonatomic) UIImage *selectedImage;
 @property (nonatomic) BOOL showingMoreSettings;
+@property (nonatomic) BOOL avatarSet;
 @property (nonatomic) CGRect usernameLabelFrame;
 @property (nonatomic) CGRect usernameFieldFrame;
 @property (nonatomic) CGRect passwordLabelFrame;
@@ -63,7 +64,7 @@
 }
 -(void)adjustUI{
     UIGestureRecognizer *dismiss = [[UITapGestureRecognizer alloc]
-                                    initWithTarget:self action:@selector(handleSingleTap:)];
+                                    initWithTarget:self action:@selector(dismissKeyboard:)];
     dismiss.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:dismiss];
     UIView *paddingView;
@@ -81,7 +82,7 @@
     Y += self.nameLabel.frame.size.height + 8 + textFieldHeight;
     self.nameField = [[UITextField alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, textFieldHeight)];
     self.nameField.textColor = [UIColor darkTextColor];
-    self.nameField.layer.borderColor = [UIColor grayColor].CGColor;
+    self.nameField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.nameField.layer.borderWidth = 1;
     self.nameField.layer.cornerRadius = 3;
     paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
@@ -99,7 +100,7 @@
     
     Y += self.emailLabel.frame.size.height + 8;
     self.emailField = [[UITextField alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, textFieldHeight)];
-    self.emailField.layer.borderColor = [UIColor grayColor].CGColor;
+    self.emailField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.emailField.textColor = [UIColor darkTextColor];
     self.emailField.layer.borderWidth = 1;
     self.emailField.layer.cornerRadius = 3;
@@ -151,7 +152,7 @@
     self.usernameFieldFrame = CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, textFieldHeight);
     self.usernameField = [[UITextField alloc]initWithFrame:self.showMoreOrLess.frame];
     self.usernameField.alpha = 0.0;
-    self.usernameField.layer.borderColor = [UIColor grayColor].CGColor;
+    self.usernameField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.usernameField.textColor = [UIColor darkTextColor];
     self.usernameField.layer.borderWidth = 1;
     self.usernameField.layer.cornerRadius = 3;
@@ -164,7 +165,7 @@
     self.passwordFieldFrame = CGRectMake(X + self.usernameFieldFrame.size.width + X, Y, (self.scrollView.frame.size.width/2)-16, textFieldHeight);
     self.passwordField = [[UITextField alloc]initWithFrame:self.showMoreOrLess.frame];
     self.passwordField.alpha = 0.0;
-    self.passwordField.layer.borderColor = [UIColor grayColor].CGColor;
+    self.passwordField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.passwordField.secureTextEntry = YES;
     self.passwordField.textColor = [UIColor darkTextColor];
     self.passwordField.layer.borderWidth = 1;
@@ -222,7 +223,7 @@
     self.privacyExplanation.text = @"Hide my profile and schedule";
     self.privacyExplanation.numberOfLines = 0;
     self.privacyExplanation.lineBreakMode = NSLineBreakByWordWrapping;
-    self.privacyExplanation.textColor = [UIColor grayColor];
+    self.privacyExplanation.textColor = [UIColor lightGrayColor];
     size = [Helper sizeForLabel:self.privacyExplanation];
     labelFrame = self.privacyLabelFrame;
     labelFrame.size.height = size.height;
@@ -233,43 +234,140 @@
     self.profileView = [[CustomUIView alloc]initWithFrame:CGRectMake( (self.scrollView.frame.size.width/2)-(self.scrollView.frame.size.width/4), Y, (self.scrollView.frame.size.width/2), (self.scrollView.frame.size.width/2))];
     self.profileView.layer.cornerRadius =  self.profileView.frame.size.height/2;
     self.profileView.layer.masksToBounds = YES;
+    [self setAvatar];
+    [self.scrollView addSubview:self.profileView];
+    UITapGestureRecognizer *profileTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhotoTapped:)];
+    [self.profileView addGestureRecognizer:profileTap];
+    
+    Y+= self.profileView.frame.size.height + 10;
+    self.photoTextLabel = [[CustomUILabel alloc]initWithFrame:CGRectMake(0, Y, self.scrollView.frame.size.width, 18)];
+    self.photoTextLabel.textAlignment = NSTextAlignmentCenter;
+    self.photoTextLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
+    if (self.avatarSet){
+        self.photoTextLabel.text = @"Remove Photo";
+    }else{
+        self.photoTextLabel.text = @"Add Photo";
+    }
+    self.photoTextLabel.userInteractionEnabled = YES;
+    self.photoTextLabel.textColor = [Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
+    currentColor = self.showMoreOrLess.textColor;
+    self.photoTextLabel.highlightTextColor = [UIColor lightGrayColor];
+    self.photoTextLabel.unHighlightTextColor = currentColor;
+    UIGestureRecognizer *photoTextTapped = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self action:@selector(photoTextTapped:)];
+    [self.photoTextLabel addGestureRecognizer:photoTextTapped];
+    [self.scrollView addSubview:self.photoTextLabel];
+    [self.scrollView bringSubviewToFront:self.showMoreOrLess];
+    
+    Y+=self.photoTextLabel.frame.size.height + 16;
+    self.companyNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
+    self.companyNameLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
+    self.companyNameLabel.text = @"Company Name";
+    [self.scrollView addSubview:self.companyNameLabel];
+    
+    Y += self.companyNameLabel.frame.size.height + 8;
+    self.companyNameField = [[UITextField alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, textFieldHeight)];
+    self.companyNameField.textColor = [UIColor darkTextColor];
+    self.companyNameField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.companyNameField.layer.borderWidth = 1;
+    self.companyNameField.layer.cornerRadius = 3;
+    paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
+    self.companyNameField.leftView = paddingView;
+    self.companyNameField.leftViewMode = UITextFieldViewModeAlways;
+    self.companyNameField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"company"];
+    self.companyNameField.delegate = self;
+    [self.scrollView addSubview:self.companyNameField];
+    
+    Y += self.companyNameField.frame.size.height + 8 + 8;
+    self.companyPositionLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
+    self.companyPositionLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
+    self.companyPositionLabel.text = @"Position";
+    [self.scrollView addSubview:self.companyPositionLabel];
+    
+    Y += self.companyPositionLabel.frame.size.height + 8;
+    self.companyPositionField = [[UITextField alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, textFieldHeight)];
+    self.companyPositionField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.companyPositionField.textColor = [UIColor darkTextColor];
+    self.companyPositionField.layer.borderWidth = 1;
+    self.companyPositionField.layer.cornerRadius = 3;
+    paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
+    self.companyPositionField.leftView = paddingView;
+    self.companyPositionField.leftViewMode = UITextFieldViewModeAlways;
+    self.companyPositionField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"position"];
+    self.companyPositionField.delegate = self;
+    [self.scrollView addSubview:self.companyPositionField];
+    
+    
+    
+    
+    
+    
+    Y += self.companyPositionField.frame.size.height + 8 + 8;
+    self.websiteLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
+    self.websiteLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
+    self.websiteLabel.text = @"Website";
+    [self.scrollView addSubview:self.websiteLabel];
+    
+    Y += self.websiteLabel.frame.size.height + 8;
+    self.websiteField = [[UITextField alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, textFieldHeight)];
+    self.websiteField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.websiteField.textColor = [UIColor darkTextColor];
+    self.websiteField.layer.borderWidth = 1;
+    self.websiteField.layer.cornerRadius = 3;
+    paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
+    self.websiteField.leftView = paddingView;
+    self.websiteField.leftViewMode = UITextFieldViewModeAlways;
+    self.websiteField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"position"];
+    self.websiteField.delegate = self;
+    [self.scrollView addSubview:self.websiteField];
+    [self.view addSubview:self.scrollView];
+}
+-(void)setAvatar{
+    [self.profileView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     NSString* avatar = [[Credentials sharedCredentials].currentUser objectForKey:@"avatar"] ;
     if ([ avatar isEqual:[NSNull null]] || [avatar  isEqual: @""] || avatar == nil){
+        self.avatarSet = NO;
         [self setUserInitial:self.profileView.frame withFont:self.profileView.frame.size.width/2 withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
     }else {
+        self.avatarSet = YES;
         [self setUserImage:self.profileView.frame withAvatar:avatar withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
         self.profileView.layer.borderColor = [UIColor myLightGray].CGColor;
         self.profileView.layer.cornerRadius = self.profileView.frame.size.width/2;
         self.profileView.layer.borderWidth = 1;
     }
-    [self.scrollView addSubview:self.profileView];
-    UITapGestureRecognizer *profileTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhotoTapped:)];
-    [self.profileView addGestureRecognizer:profileTap];
-    [self.scrollView bringSubviewToFront:self.showMoreOrLess];
-    [self.view addSubview:self.scrollView];
 }
-//- (void)viewDidLayoutSubviews{
-// 
-//
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+
+-(void)changePassword:(UITapGestureRecognizer *) sender{
+    NSLog(@"changePassword");
+}
+-(void)photoTextTapped:(UITapGestureRecognizer *) sender
+{
+    if (self.avatarSet){
+        [self setAvatar];
+        NSLog(@"REMOVING PHOTO");
+
+    }else{
+        NSLog(@"UPLOADING PHOTO");
+    }
+}
+- (void)dismissKeyboard:(UITapGestureRecognizer *) sender
 {
     [self.view endEditing:YES];
 }
 -(void)addPhotoTapped:(UITapGestureRecognizer *) sender
 {
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePickerController.delegate = self;
-        
-        self.imagePickerController = imagePickerController;
-        [self presentViewController:self.imagePickerController animated:YES completion:nil];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.delegate = self;
+    
+    self.imagePickerController = imagePickerController;
+    [self presentViewController:self.imagePickerController animated:YES completion:nil];
 }
 -(void)showOrHide:(UITapGestureRecognizer *) sender{
     int heightToAnimate = self.usernameFieldFrame.size.height + self.changePasswordFrame.size.height + self.privacySwitchFrame.size.height + 16 + 16 + 16 + 16;
@@ -325,9 +423,6 @@
         } completion:nil];
     }
     
-}
--(void)changePassword:(UITapGestureRecognizer *) sender{
-    NSLog(@"HERER");
 }
 #pragma Mark textfield delegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -449,7 +544,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    
+    self.avatarSet = YES;
+    self.photoTextLabel.text = @"Remove Photo";
     self.selectedImage = [self squareImageWithImage:image scaledToSize:CGSizeMake(self.profileView.frame.size.width, self.profileView.frame.size.height)];
     [self.profileView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     UIImageView * imageView = [[UIImageView alloc]initWithFrame:self.profileView.bounds];
