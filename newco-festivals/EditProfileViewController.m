@@ -225,6 +225,11 @@
     self.privacySwitchFrame = CGRectMake(X, Y, 30, 40);
     self.privacySwitch = [[UISwitch alloc]initWithFrame:self.showMoreOrLess.frame];
     self.privacySwitch.alpha = 0.0;
+    if ([[[Credentials sharedCredentials].currentUser objectForKey:@"privacy_mode"] isEqualToString:@"N"]){
+        self.privacySwitch.selected = NO;
+    }else{
+        self.privacySwitch.selected = YES;
+    }
     [self.scrollView addSubview:self.privacySwitch];
     
     self.privacyExplanationFrame = CGRectMake(self.privacySwitchFrame.size.width + X  + 24, Y + (self.privacySwitchFrame.size.height/6), self.scrollView.frame.size.width - self.privacySwitchFrame.size.width - 32, 16);
