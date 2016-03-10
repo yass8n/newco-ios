@@ -227,11 +227,11 @@
     self.privacySwitchFrame = CGRectMake(X, Y, 30, 40);
     self.privacySwitch = [[UISwitch alloc]initWithFrame:self.showMoreOrLess.frame];
     self.privacySwitch.alpha = 0.0;
-    if ([[[Credentials sharedCredentials].currentUser objectForKey:@"privacy_mode"] isEqualToString:@"N"]
-        || [[[Credentials sharedCredentials].currentUser objectForKey:@"privacy_mode"] isEqualToString:@"0"]){
-        self.privacySwitch.selected = NO;
+    if ([[[Credentials sharedCredentials].currentUser objectForKey:@"privacy_mode"] isEqualToString:@"Y"]
+        || [[[Credentials sharedCredentials].currentUser objectForKey:@"privacy_mode"] isEqualToString:@"1"]){
+        [self.privacySwitch setOn:YES];
     }else{
-        self.privacySwitch.selected = YES;
+        [self.privacySwitch setOn:NO];
     }
     [self.scrollView addSubview:self.privacySwitch];
     
@@ -414,6 +414,9 @@
 -(void)photoTextTapped:(UITapGestureRecognizer *) sender
 {
     if (self.avatarSet){
+        NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
+             [mutable setValue:@"" forKey:@"avatar"];
+        [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
         [self setAvatar];
         NSLog(@"REMOVING PHOTO");
     }else{
@@ -846,12 +849,16 @@
             [mutable setValue:[user objectForKey:@"name"] forKey:@"name"];
             [mutable setValue:[user objectForKey:@"url"] forKey:@"url"];
             [mutable setValue:[user objectForKey:@"company"] forKey:@"company"];
-              [mutable setValue:[user objectForKey:@"avatar"] forKey:@"avatar"];
+            if ([user objectForKey:@"avatar"] != nil){
+                [mutable setValue:[user objectForKey:@"avatar"] forKey:@"avatar"];
+            }
+
             [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
             double window_width = self.view.frame.size.width;
             double window_height = self.view.frame.size.height;
             CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
              ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+            ApplicationViewController.rightNav = nil; //allows us to redraw the right nav button
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
             });

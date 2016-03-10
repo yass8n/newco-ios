@@ -133,6 +133,18 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];
     self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
+    if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
+        //        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
+        //        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+        if ([[self.user objectForKey:@"username"] isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
+            self.user = [Credentials sharedCredentials].currentUser;
+            self.hideEditButton = NO;
+        }else{
+            self.hideEditButton = YES;
+        }
+    }else{
+        self.hideEditButton = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,17 +156,6 @@
     [self setBackButton];
     NSString * name = [self.user objectForKey:@"name"];
     self.navigationItem.title = name;
-    if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
-//        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
-        if ([[self.user objectForKey:@"username"] isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
-            self.hideEditButton = NO;
-        }else{
-            self.hideEditButton = YES;
-        }
-    }else{
-        self.hideEditButton = YES;
-    }
 }
 -(void)reloadTableView
 {

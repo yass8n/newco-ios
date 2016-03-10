@@ -95,6 +95,24 @@ static NSRecursiveLock *calls_lock;
                 self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
         }
     }];
+// if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
+//     [webService fetchSessions:^(NSArray* jsonArray){
+//        [[FestivalData sharedFestivalData] initializeSessionArrayWithData: jsonArray];
+//        NSSortDescriptor *sortStart = [[NSSortDescriptor alloc] initWithKey:@"event_start" ascending:YES];
+//        
+//        [[FestivalData sharedFestivalData].sessionsArray  sortUsingDescriptors:[NSMutableArray arrayWithObjects:sortStart, nil]];
+//        if ([Credentials sharedCredentials].currentUser == nil ||[[Credentials sharedCredentials].currentUser count] == 0){
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                int value = [self.numberCompletedCalls intValue];
+//                self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
+//        } else {
+//            [ApplicationViewController fetchCurrentUserSessions:self.view];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                int value = [self.numberCompletedCalls intValue];
+//                self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
+//        }
+//    }];
+
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
