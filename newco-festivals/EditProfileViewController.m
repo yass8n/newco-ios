@@ -347,8 +347,18 @@
     [self.scrollView addSubview:self.aboutMeField];
     [self.view addSubview:self.scrollView];
     [self.scrollView setScrollEnabled:YES];
-    Y += self.websiteField.frame.size.height + 8 + 8;
-    [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width,Y + 200)];
+    
+    
+    Y += self.aboutMeField.frame.size.height + 8 + 8;
+    self.saveButton = [[UIButton alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 40)];
+    [self.saveButton addTarget:self action:@selector(saveProfile:) forControlEvents:UIControlEventTouchUpInside];
+    [self.saveButton setTitle:@"Save Profile" forState:UIControlStateNormal];
+    self.saveButton.backgroundColor = [Helper getUIColorObjectFromHexString:@"#0AC92B" alpha:1.0];
+    self.saveButton.layer.borderWidth = 1.0;
+    self.saveButton.layer.borderColor = [UIColor darkTextColor].CGColor;
+    self.saveButton.layer.cornerRadius = 5.0;
+    [self.scrollView addSubview:self.saveButton];
+    [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width,Y + 100)];
 }
 -(void)setAvatar{
     [self.profileView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
@@ -371,10 +381,12 @@
 }
 
 -(void)changePassword:(UITapGestureRecognizer *) sender{
-    NSLog(@"changePassword");
+    NSString* url = [NSString stringWithFormat:@"%@/mobile/#page:page-forgot", [[Credentials sharedCredentials].festival objectForKey:@"url"]];
+    [self showWebViewWithUrl:url];
 }
 -(void)photoTextTapped:(UITapGestureRecognizer *) sender
 {
+    [Helper buttonTappedAnimation:(UIView*)sender];
     if (self.avatarSet){
         [self setAvatar];
         NSLog(@"REMOVING PHOTO");
@@ -729,5 +741,7 @@
 }
 
 - (IBAction)saveProfile:(id)sender {
+    [Helper buttonTappedAnimation:(UIView*)sender];
+    NSLog(@"SAVED");
 }
 @end
