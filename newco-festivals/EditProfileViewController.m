@@ -8,6 +8,7 @@
 
 #import "EditProfileViewController.h"
 #import "CustomUILabel.h"
+#import "ModalView.h"
 @interface EditProfileViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
@@ -57,6 +58,7 @@
     [super viewDidLoad];
     [self adjustUI];
     [self setBackButton];
+//    [self hidePageLoader];
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -225,7 +227,8 @@
     self.privacySwitchFrame = CGRectMake(X, Y, 30, 40);
     self.privacySwitch = [[UISwitch alloc]initWithFrame:self.showMoreOrLess.frame];
     self.privacySwitch.alpha = 0.0;
-    if ([[[Credentials sharedCredentials].currentUser objectForKey:@"privacy_mode"] isEqualToString:@"N"]){
+    if ([[[Credentials sharedCredentials].currentUser objectForKey:@"privacy_mode"] isEqualToString:@"N"]
+        || [[[Credentials sharedCredentials].currentUser objectForKey:@"privacy_mode"] isEqualToString:@"0"]){
         self.privacySwitch.selected = NO;
     }else{
         self.privacySwitch.selected = YES;
@@ -802,16 +805,46 @@
     [Helper buttonTappedAnimation:(UIView*)sender];
     NSLog(@"SAVED");
     WebService * webservice = [[WebService alloc]initWithView:self.view];
-    NSDictionary* params = @{@"name" : @"name",
-                             @"username" : @"@yaseenaniss",
-                             @"email" : @"yaseenaniss@gmail.com",
-                             @"url" : @"instaapp.io",
-                             @"about" : @"about me",
-                             @"position" : @"mike",
-                             @"company" : @"mik lik",
-                             @"privacy_mode" :@"true"};
-    [webservice editProfile:params callback:^(NSString *response) {
-        NSLog(@"%@", response);
+    NSDictionary* params = @{@"name" : self.nameField.text,
+                             @"username" : self.usernameField.text,
+                             @"email" : self.emailField.text,
+                             @"url" : self.websiteField.text,
+                             @"about" : self.aboutMeField.text,
+                             @"position" : self.companyPositionField.text,
+                             @"company" : self.companyNameField.text,
+                             @"confirm_password" : self.passwordField.text,
+                             @"privacy_mode" :self.privacySwitch.selected ? @"true" : @"false"};
+    [webservice editProfile:params callback:^(NSDictionary *response) {
+        NSString * status = [response objectForKey:@"status"];
+        if ([status isEqualToString:@"success"]){
+            NSDictionary* user = [response objectForKey:@"user"];
+            NSLog(@"HI");
+            NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
+            [mutable setValue:[user objectForKey:@"position"] forKey:@"position"];
+            [mutable setValue:[user objectForKey:@"privacy_mode"] forKey:@"privacy_mode"];
+            [mutable setValue:[user objectForKey:@"username"] forKey:@"username"];
+            [mutable setValue:[user objectForKey:@"email"] forKey:@"email"];
+            [mutable setValue:[user objectForKey:@"about"] forKey:@"about"];
+            [mutable setValue:[user objectForKey:@"name"] forKey:@"name"];
+            [mutable setValue:[user objectForKey:@"url"] forKey:@"website"];
+            [mutable setValue:[user objectForKey:@"company"] forKey:@"company"];
+            [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
+            double window_width = self.view.frame.size.width;
+            double window_height = self.view.frame.size.height;
+            CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
+             ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
+            });
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:[NSString stringWithFormat:status]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+
+        }
     }];
 }
 @end

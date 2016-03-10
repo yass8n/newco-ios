@@ -350,7 +350,7 @@ static double milliSecondsSinceLastSession = 0;
     [dataTask resume];
     
 }
-- (void)editProfile:(NSDictionary *)params callback:(void (^)(NSString * status)) callback{
+- (void)editProfile:(NSDictionary *)params callback:(void (^)(NSDictionary * status)) callback{
 
     {
         dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
@@ -361,11 +361,13 @@ static double milliSecondsSinceLastSession = 0;
         
         [manager POST:urlString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             dispatch_async(completion_que, ^{
-                callback( (NSString*) responseObject);
+                [self hidePageLoader];
+                callback( (NSDictionary*) responseObject);
             });
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             dispatch_async(completion_que, ^{
-                callback( (NSString*) error);
+                [self hidePageLoader];
+                callback( (NSDictionary*) error);
             });
         }];
     }
