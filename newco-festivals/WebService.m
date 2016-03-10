@@ -350,7 +350,7 @@ static double milliSecondsSinceLastSession = 0;
     
 }
 - (void)editProfile:(NSDictionary *)params callback:(void (^)(NSDictionary * status)) callback{
-    dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
+    dispatch_queue_t completion_que = dispatch_get_main_queue();
     NSString *urlString = [NSString stringWithFormat:@"http://festivals.newco.co/%@/user/edit_profile", [self.credentials.festival objectForKey:@"name"]];
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if ([params objectForKey:@"avatar"] != nil){

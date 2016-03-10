@@ -16,10 +16,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *emailLabel;
 @property (strong, nonatomic) IBOutlet UITextField *emailField;
 @property (strong, nonatomic) IBOutlet CustomUILabel *showMoreOrLess;
-@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (strong, nonatomic) IBOutlet UITextField *usernameField;
-@property (strong, nonatomic) IBOutlet UILabel *passwordLabel;
-@property (strong, nonatomic) IBOutlet UITextField *passwordField;
+//@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
+//@property (strong, nonatomic) IBOutlet UITextField *usernameField;
+//@property (strong, nonatomic) IBOutlet UILabel *passwordLabel;
+//@property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) IBOutlet CustomUILabel *changePassword;
 @property (strong, nonatomic) IBOutlet UIButton * changePasswordButton;
 @property (strong, nonatomic) IBOutlet UILabel *privacyLabel;
@@ -42,10 +42,6 @@
 @property (nonatomic) UIImage *selectedImage;
 @property (nonatomic) BOOL showingMoreSettings;
 @property (nonatomic) BOOL avatarSet;
-@property (nonatomic) CGRect usernameLabelFrame;
-@property (nonatomic) CGRect usernameFieldFrame;
-@property (nonatomic) CGRect passwordLabelFrame;
-@property (nonatomic) CGRect passwordFieldFrame;
 @property (nonatomic) CGRect privacyLabelFrame;
 @property (nonatomic) CGRect changePasswordFrame;
 @property (nonatomic) CGRect privacySwitchFrame;
@@ -59,11 +55,11 @@
     [super viewDidLoad];
     [self adjustUI];
     [self setBackButton];
-//    [self hidePageLoader];
+    self.showingMoreSettings = NO;
+    //    [self hidePageLoader];
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
-    self.showingMoreSettings = NO;
 }
 -(void)adjustUI{
     UIGestureRecognizer *dismiss = [[UITapGestureRecognizer alloc]
@@ -79,7 +75,7 @@
     int Y = self.navigationController.navigationBar.frame.size.height;
     self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y+textFieldHeight, self.scrollView.frame.size.width-16, 12)];
     self.nameLabel.textColor = [UIColor grayColor];
-
+    
     self.nameLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.nameLabel.text = @"Full Name";
     [self.scrollView addSubview:self.nameLabel];
@@ -124,7 +120,7 @@
     self.showMoreOrLess.userInteractionEnabled = YES;
     self.showMoreOrLess.textColor = [Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
     self.showMoreOrLess.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 20];
-    self.showMoreOrLess.text = @"Change your username, password and privacy setting?";
+    self.showMoreOrLess.text = @"Change your password and privacy settings?";
     self.showMoreOrLess.numberOfLines = 0;
     self.showMoreOrLess.lineBreakMode = NSLineBreakByWordWrapping;
     CGSize size = [Helper sizeForLabel:self.showMoreOrLess];
@@ -142,54 +138,6 @@
     [self.scrollView addSubview:self.showMoreOrLess];
     
     Y+=self.showMoreOrLess.frame.size.height + 8 + 8;
-    self.usernameLabelFrame = CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, 12);
-    self.usernameLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
-    self.usernameLabel.alpha = 0.0;
-    self.usernameLabel.textColor = [UIColor grayColor];
-    self.usernameLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
-    self.usernameLabel.text = @"Username";
-    [self.scrollView addSubview:self.usernameLabel];
-    
-    self.passwordLabelFrame = CGRectMake(X + (self.usernameLabelFrame.size.width) + X, Y, self.scrollView.frame.size.width-16, 12);
-    self.passwordLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
-    self.passwordLabel.alpha = 0.0;
-    self.passwordLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
-    self.passwordLabel.textColor = [UIColor grayColor];
-    self.passwordLabel.text = @"Confirm Password";
-    [self.scrollView addSubview:self.passwordLabel];
-    
-    Y += self.usernameLabelFrame.size.height + 8;
-    self.usernameFieldFrame = CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, textFieldHeight);
-    self.usernameField = [[UITextField alloc]initWithFrame:self.showMoreOrLess.frame];
-    self.usernameField.alpha = 0.0;
-    self.usernameField.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.usernameField.textColor = [UIColor darkTextColor];
-    self.usernameField.layer.borderWidth = 1;
-    self.usernameField.layer.cornerRadius = 3;
-    self.usernameField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"username"];
-    [self.usernameField addTarget:self action:@selector(usernameDidChange:) forControlEvents:UIControlEventEditingChanged];
-
-    paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
-    self.usernameField.leftView = paddingView;
-    self.usernameField.leftViewMode = UITextFieldViewModeAlways;
-    self.usernameField.delegate = self;
-    [self.scrollView addSubview:self.usernameField];
-    
-    self.passwordFieldFrame = CGRectMake(X + self.usernameFieldFrame.size.width + X, Y, (self.scrollView.frame.size.width/2)-16, textFieldHeight);
-    self.passwordField = [[UITextField alloc]initWithFrame:self.showMoreOrLess.frame];
-    self.passwordField.alpha = 0.0;
-    self.passwordField.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.passwordField.secureTextEntry = YES;
-    self.passwordField.textColor = [UIColor darkTextColor];
-    self.passwordField.layer.borderWidth = 1;
-    self.passwordField.layer.cornerRadius = 3;
-    paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
-    self.passwordField.leftView = paddingView;
-    self.passwordField.leftViewMode = UITextFieldViewModeAlways;
-    self.passwordField.delegate = self;
-    [self.scrollView addSubview:self.passwordField];
-    
-    Y+=self.passwordFieldFrame.size.height + 8 + 8;
     self.changePasswordFrame = CGRectMake(X, Y, 140, 16);
     self.changePassword =[[CustomUILabel alloc]initWithFrame:self.showMoreOrLess.frame];
     self.changePassword.alpha = 0.0;
@@ -206,6 +154,7 @@
     changePasswordTap.cancelsTouchesInView = YES;
     [self.changePassword addGestureRecognizer:changePasswordTap];
     [self.scrollView addSubview:self.changePassword];
+
     self.changePasswordButtonFrame = CGRectMake(self.changePasswordFrame.size.width, Y+2, 12, 12);
     self.changePasswordButton = [[UIButton alloc]initWithFrame:self.showMoreOrLess.frame];
     self.changePasswordButton.alpha = 0.0;
@@ -245,9 +194,9 @@
     self.privacyExplanation.lineBreakMode = NSLineBreakByWordWrapping;
     self.privacyExplanation.textColor = [UIColor grayColor];
     size = [Helper sizeForLabel:self.privacyExplanation];
-    labelFrame = self.privacyLabelFrame;
+    labelFrame = self.privacyExplanationFrame;
     labelFrame.size.height = size.height;
-    self.privacyLabelFrame = labelFrame;
+    self.privacyExplanationFrame = labelFrame;
     [self.scrollView addSubview:self.privacyExplanation];
     
     Y = self.showMoreOrLess.frame.origin.y + self.showMoreOrLess.frame.size.height + 16;
@@ -260,10 +209,10 @@
     profileTap.cancelsTouchesInView = YES;
     profileTap.numberOfTapsRequired = 1;
     [self.profileView addGestureRecognizer:profileTap];
-//    for (int i = 0; i < [self.profileView.subviews count]; i++){
-//        UIView* view = [self.profileView.subviews objectAtIndex:i];
-//        [view addGestureRecognizer:profileTap];
-//    }
+    //    for (int i = 0; i < [self.profileView.subviews count]; i++){
+    //        UIView* view = [self.profileView.subviews objectAtIndex:i];
+    //        [view addGestureRecognizer:profileTap];
+    //    }
     
     
     Y+= self.profileView.frame.size.height + 10;
@@ -283,7 +232,7 @@
     self.photoTextLabel.highlightTextColor = [UIColor lightGrayColor];
     self.photoTextLabel.unHighlightTextColor = currentColor;
     UIGestureRecognizer *photoTextTapped = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self action:@selector(photoTextTapped:)];
+                                            initWithTarget:self action:@selector(photoTextTapped:)];
     [self.photoTextLabel addGestureRecognizer:photoTextTapped];
     [self.scrollView addSubview:self.photoTextLabel];
     [self.scrollView bringSubviewToFront:self.showMoreOrLess];
@@ -347,6 +296,7 @@
     self.websiteField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"url"];
     self.websiteField.delegate = self;
     [self.scrollView addSubview:self.websiteField];
+    
     [self.view addSubview:self.scrollView];
     [self.scrollView setScrollEnabled:YES];
     
@@ -368,6 +318,7 @@
     self.aboutMeField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"about"];
     self.aboutMeField.delegate = self;
     [self.scrollView addSubview:self.aboutMeField];
+    
     [self.view addSubview:self.scrollView];
     [self.scrollView setScrollEnabled:YES];
     
@@ -381,6 +332,7 @@
     self.saveButton.layer.borderColor = [UIColor darkTextColor].CGColor;
     self.saveButton.layer.cornerRadius = 5.0;
     [self.scrollView addSubview:self.saveButton];
+    
     [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width,Y + 100)];
 }
 -(void)setAvatar{
@@ -416,7 +368,7 @@
 {
     if (self.avatarSet){
         NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
-             [mutable setValue:@"" forKey:@"avatar"];
+        [mutable setValue:@"" forKey:@"avatar"];
         [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
         WebService* webservice = [[WebService alloc]initWithView:self.view];
         [webservice removeAvatar];
@@ -445,16 +397,12 @@
     [self presentPhotoLibrary];
 }
 -(void)showOrHide:(UITapGestureRecognizer *) sender{
-    int heightToAnimate = self.usernameFieldFrame.size.height + self.changePasswordFrame.size.height + self.privacySwitchFrame.size.height + 16 + 16 + 16 + 16;
+    int heightToAnimate = self.changePasswordFrame.size.height + self.privacySwitchFrame.size.height + 16 + 16 + 16;
     self.showingMoreSettings = !self.showingMoreSettings;
     if (self.showingMoreSettings){
         [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-            self.usernameLabel.frame = self.usernameLabelFrame;
-            self.usernameField.frame = self.usernameFieldFrame;
             self.changePassword.frame = self.changePasswordFrame;
-            self.passwordLabel.frame = self.passwordLabelFrame;
             self.privacyLabel.frame = self.privacyLabelFrame;
-            self.passwordField.frame = self.passwordFieldFrame;
             self.privacySwitch.frame = self.privacySwitchFrame;
             self.privacyExplanation.frame = self.privacyExplanationFrame;
             self.changePasswordButton.frame = self.changePasswordButtonFrame;
@@ -507,27 +455,19 @@
             size.height += heightToAnimate;
             [self.scrollView setContentSize:size];
             
-            self.usernameLabel.alpha = 1.0;
-            self.usernameField.alpha = 1.0;
             self.changePassword.alpha = 1.0;
             self.privacyLabel.alpha = 1.0;
             self.privacySwitch.alpha = 1.0;
             self.privacyExplanation.alpha = 1.0;
             self.changePasswordButton.alpha = 1.0;
-            if (![self.usernameField.text isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
-                self.passwordLabel.alpha = 1.0;
-                self.passwordField.alpha = 1.0;
-            }
+            
         } completion:nil];
     }else{
         [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-            self.usernameLabel.frame = self.showMoreOrLess.frame;
-            self.usernameField.frame = self.showMoreOrLess.frame;
             self.changePassword.frame = self.showMoreOrLess.frame;
-            self.passwordLabel.frame = self.showMoreOrLess.frame;            self.privacyLabel.frame = self.showMoreOrLess.frame;
-            self.passwordField.frame = self.showMoreOrLess.frame;
             self.privacySwitch.frame = self.showMoreOrLess.frame;
             self.privacyExplanation.frame = self.showMoreOrLess.frame;
+            self.privacyLabel.frame = self.showMoreOrLess.frame;
             self.changePasswordButton.frame = self.showMoreOrLess.frame;
             
             CGRect newFrame = self.companyNameLabel.frame;
@@ -578,12 +518,8 @@
             size.height -= heightToAnimate;
             [self.scrollView setContentSize:size];
             
-            self.usernameLabel.alpha = 0;
-            self.usernameField.alpha = 0;
             self.changePassword.alpha = 0;
             self.privacyLabel.alpha = 0;
-            self.passwordLabel.alpha = 0;
-            self.passwordField.alpha = 0;
             self.privacySwitch.alpha = 0;
             self.privacyExplanation.alpha = 0;
             self.changePasswordButton.alpha = 0;
@@ -595,23 +531,6 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
-}
-//code for keyboard and views adjusting when focused on text view
--(void)usernameDidChange :(UITextField *)theTextField{
-    if (![self.usernameField.text isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
-        [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-            self.passwordLabel.alpha = 1.0;
-            self.passwordField.alpha = 1.0;
-        }completion:^(BOOL finished) {
-        }];
-    }else{
-        [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-            self.passwordLabel.alpha = 0;
-            self.passwordField.alpha = 0;
-        }completion:^(BOOL finished) {
-        }];
-    }
-    NSLog( @"text changed: %@", theTextField.text);
 }
 -(void)nameDidChange :(UITextField *)theTextField{
     NSLog( @"text changed: %@", theTextField.text);
@@ -735,14 +654,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 - (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize
 {
     double ratio;
@@ -817,86 +736,68 @@
         params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
                    @"avatar" : self.selectedImage,
                    @"name" : self.nameField.text,
-                   @"username" : self.usernameField.text,
+                   @"username" : @"",
                    @"email" : self.emailField.text,
                    @"url" : self.websiteField.text,
                    @"about" : self.aboutMeField.text,
                    @"position" : self.companyPositionField.text,
                    @"company" : self.companyNameField.text,
-                   @"confirm_password" : self.passwordField.text,
+                   @"confirm_password" : @"",
                    @"privacy_mode" :self.privacySwitch.on ? @"true" : @"false"};
     }else{
         params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
                    @"name" : self.nameField.text,
-                   @"username" : self.usernameField.text,
+                   @"username" : @"",
                    @"email" : self.emailField.text,
                    @"url" : self.websiteField.text,
                    @"about" : self.aboutMeField.text,
                    @"position" : self.companyPositionField.text,
                    @"company" : self.companyNameField.text,
-                   @"confirm_password" : self.passwordField.text,
+                   @"confirm_password" : @"",
                    @"privacy_mode" :self.privacySwitch.on ? @"true" : @"false"};
     }
-    if (![self.usernameField.text isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
-        if (self.passwordField.text.length == 0){
+    
+    [webservice editProfile:params callback:^(NSDictionary *response) {
+        self.nameField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.emailField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.companyNameField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.companyPositionField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.websiteField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.aboutMeField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        NSString * status = [response objectForKey:@"status"];
+        if ([status isEqualToString:@"success"]){
+            NSDictionary* user = [response objectForKey:@"user"];
+            NSLog(@"HI");
+            NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
+            [mutable setValue:[user objectForKey:@"position"] forKey:@"position"];
+            [mutable setValue:[user objectForKey:@"privacy_mode"] forKey:@"privacy_mode"];
+            [mutable setValue:[user objectForKey:@"email"] forKey:@"email"];
+            [mutable setValue:[user objectForKey:@"about"] forKey:@"about"];
+            [mutable setValue:[user objectForKey:@"name"] forKey:@"name"];
+            [mutable setValue:[user objectForKey:@"url"] forKey:@"url"];
+            [mutable setValue:[user objectForKey:@"company"] forKey:@"company"];
+            if ([user objectForKey:@"avatar"] != nil){
+                [mutable setValue:[user objectForKey:@"avatar"] forKey:@"avatar"];
+            }
+            
+            [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
+            double window_width = self.view.frame.size.width;
+            double window_height = self.view.frame.size.height;
+            CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
+            ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+            ApplicationViewController.rightNav = nil; //allows us to redraw the right nav button
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
+            });
+        }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:@"Must confirm password to change username"
+                                                            message:status
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
-            float after = 0;
-            if (!self.showingMoreSettings){
-                [self showOrHide:nil];
-                after = .4;
-            }
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, after * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                [webservice hidePageLoader];
-                CGPoint point = self.passwordField.frame.origin;
-                self.scrollView.contentOffset = CGPointMake(0,point.y - 200);
-                [self.passwordField becomeFirstResponder];
-            });
-        }else{
-            [webservice changeUserName:params callback:^(NSDictionary *response) {
-                NSLog(@"%@",response);
-            }];
+            
         }
-    }
-//    [webservice editProfile:params callback:^(NSDictionary *response) {
-//        NSString * status = [response objectForKey:@"status"];
-//        if ([status isEqualToString:@"success"]){
-//            NSDictionary* user = [response objectForKey:@"user"];
-//            NSLog(@"HI");
-//            NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
-//            [mutable setValue:[user objectForKey:@"position"] forKey:@"position"];
-//            [mutable setValue:[user objectForKey:@"privacy_mode"] forKey:@"privacy_mode"];
-//            [mutable setValue:[user objectForKey:@"email"] forKey:@"email"];
-//            [mutable setValue:[user objectForKey:@"about"] forKey:@"about"];
-//            [mutable setValue:[user objectForKey:@"name"] forKey:@"name"];
-//            [mutable setValue:[user objectForKey:@"url"] forKey:@"url"];
-//            [mutable setValue:[user objectForKey:@"company"] forKey:@"company"];
-//            if ([user objectForKey:@"avatar"] != nil){
-//                [mutable setValue:[user objectForKey:@"avatar"] forKey:@"avatar"];
-//            }
-//
-//            [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
-//            double window_width = self.view.frame.size.width;
-//            double window_height = self.view.frame.size.height;
-//            CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
-//             ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
-//            ApplicationViewController.rightNav = nil; //allows us to redraw the right nav button
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//                [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
-//            });
-//        }else{
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                            message:status
-//                                                           delegate:self
-//                                                  cancelButtonTitle:@"OK"
-//                                                  otherButtonTitles:nil];
-//            [alert show];
-//
-//        }
-//    }];
+    }];
 }
 @end

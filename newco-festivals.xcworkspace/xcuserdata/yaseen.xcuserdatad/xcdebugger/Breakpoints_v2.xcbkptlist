@@ -10,171 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479310077.594158"
+            timestampString = "479320123.933309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348"
-            landmarkName = "-adjustUI"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/ScheduleViewController.m"
-            timestampString = "479303654.941384"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/ApplicationViewController.m"
-            timestampString = "479304316.888388"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
-            landmarkName = "-setRightNavButton"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479310077.594158"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "-adjustUI"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479310077.594158"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "860"
-            endingLineNumber = "860"
-            landmarkName = "-saveProfile:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[EditProfileViewController saveProfile:]"
-                  moduleName = "newco-festivals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yaseen/CSCI/IOS/newco-ios/newco-festivals/EditProfileViewController.m"
-                  timestampString = "479308962.218579"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "859"
-                  endingLineNumber = "859"
-                  offsetFromSymbolStart = "3708">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__41-[EditProfileViewController saveProfile:]_block_invoke536"
-                  moduleName = "newco-festivals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yaseen/CSCI/IOS/newco-ios/newco-festivals/EditProfileViewController.m"
-                  timestampString = "479308962.220401"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "859"
-                  endingLineNumber = "859"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479310077.594158"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "853"
-            endingLineNumber = "853"
-            landmarkName = "-saveProfile:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[EditProfileViewController saveProfile:]"
-                  moduleName = "newco-festivals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yaseen/CSCI/IOS/newco-ios/newco-festivals/EditProfileViewController.m"
-                  timestampString = "479308962.238298"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "852"
-                  endingLineNumber = "852"
-                  offsetFromSymbolStart = "3452">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__41-[EditProfileViewController saveProfile:]_block_invoke"
-                  moduleName = "newco-festivals"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yaseen/CSCI/IOS/newco-ios/newco-festivals/EditProfileViewController.m"
-                  timestampString = "479308962.238672"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "853"
-                  endingLineNumber = "853"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479310077.594158"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "861"
-            endingLineNumber = "861"
+            startingLineNumber = "767"
+            endingLineNumber = "767"
             landmarkName = "-saveProfile:"
             landmarkType = "5">
          </BreakpointContent>
@@ -185,29 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "newco-festivals/WebService.m"
-            timestampString = "479309825.244043"
+            filePath = "newco-festivals/EditProfileViewController.m"
+            timestampString = "479320263.718514"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
-            landmarkName = "-changeUserName:callback:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/WebService.m"
-            timestampString = "479309825.244043"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
-            landmarkName = "-changeUserName:callback:"
+            startingLineNumber = "761"
+            endingLineNumber = "761"
+            landmarkName = "-saveProfile:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -217,61 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "newco-festivals/WebService.m"
-            timestampString = "479309825.244043"
+            filePath = "newco-festivals/EditProfileViewController.m"
+            timestampString = "479320272.92698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
-            landmarkName = "-removeAvatar"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/WebService.m"
-            timestampString = "479309825.244043"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
-            landmarkName = "-changeUserName:callback:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/SignInViewController.m"
-            timestampString = "479310431.789151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "-logIn:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/SignInViewController.m"
-            timestampString = "479310436.764958"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-logIn:"
+            startingLineNumber = "768"
+            endingLineNumber = "768"
+            landmarkName = "-saveProfile:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

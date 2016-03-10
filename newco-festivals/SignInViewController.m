@@ -85,6 +85,7 @@
     [Helper setBorder:self.bottomView width:1.0 radius:8 color:[UIColor myLightGray]];
     [Helper setBorder:self.topView width:1.0 radius:5 color:[UIColor myLightGray]];
     [Helper setBorder:self.logIn width:1.0 radius:5 color:[UIColor blackColor]];
+    self.registerEventbrite.text = [NSString stringWithFormat:@"Sign up for Newco %@", [[Credentials sharedCredentials].festival objectForKey:@"city"]];
     if (self.setTheBackButton){
         [super setBackButton];
     }
@@ -236,7 +237,7 @@
 - (void)registerViewTapped:(UITapGestureRecognizer *)recognizer {
 //    [self showWebViewWithUrl:[NSString stringWithFormat:@"%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"url"]]];
     
-   [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+//   [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
 }
 
 @end
