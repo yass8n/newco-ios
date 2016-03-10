@@ -351,6 +351,7 @@ static UIViewController *theTopViewController;
     sessionCell.time.text = [time and [currentSession end_time] ];
     sessionCell.title.text = [currentSession title];
     sessionCell.note1.text = [currentSession note1];
+    sessionCell.location.text = [currentSession audience];
     sessionCell.outerContainer.backgroundColor = [currentSession color];
     sessionCell.innnerContainer.backgroundColor = sessionCell.outerContainer.backgroundColor;
     
