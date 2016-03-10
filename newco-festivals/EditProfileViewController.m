@@ -229,7 +229,7 @@
     self.privacyExplanation.text = @"Hide my profile and schedule";
     self.privacyExplanation.numberOfLines = 0;
     self.privacyExplanation.lineBreakMode = NSLineBreakByWordWrapping;
-    self.privacyExplanation.textColor = [UIColor lightGrayColor];
+    self.privacyExplanation.textColor = [UIColor grayColor];
     size = [Helper sizeForLabel:self.privacyExplanation];
     labelFrame = self.privacyLabelFrame;
     labelFrame.size.height = size.height;
@@ -411,9 +411,50 @@
             self.privacySwitch.frame = self.privacySwitchFrame;
             self.privacyExplanation.frame = self.privacyExplanationFrame;
             self.changePasswordButton.frame = self.changePasswordButtonFrame;
-//            CGRect newFrame = self.companyNameLabel.frame;
-//            newFrame.origin.y += heightToAnimate;
-//            self.companyNameLabel.frame = newFrame;
+            
+            CGRect newFrame = self.companyNameLabel.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.companyNameLabel.frame = newFrame;
+            
+            newFrame = self.companyNameField.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.companyNameField.frame = newFrame;
+            
+            newFrame = self.profileView.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.profileView.frame = newFrame;
+            
+            newFrame = self.photoTextLabel.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.photoTextLabel.frame = newFrame;
+            
+            newFrame = self.companyPositionLabel.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.companyPositionLabel.frame = newFrame;
+            
+            newFrame = self.companyPositionField.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.companyPositionField.frame = newFrame;
+            
+            newFrame = self.websiteLabel.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.websiteLabel.frame = newFrame;
+            
+            newFrame = self.websiteField.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.websiteField.frame = newFrame;
+            
+            newFrame = self.aboutMeLabel.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.aboutMeLabel.frame = newFrame;
+            
+            newFrame = self.aboutMeField.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.aboutMeField.frame = newFrame;
+            
+            CGSize size = self.scrollView.contentSize;
+            size.height += heightToAnimate;
+            [self.scrollView setContentSize:size];
             
             self.usernameLabel.alpha = 1.0;
             self.usernameField.alpha = 1.0;
@@ -435,9 +476,50 @@
             self.privacySwitch.frame = self.showMoreOrLess.frame;
             self.privacyExplanation.frame = self.showMoreOrLess.frame;
             self.changePasswordButton.frame = self.showMoreOrLess.frame;
-//            CGRect newFrame = self.companyNameLabel.frame;
-//            newFrame.origin.y -= heightToAnimate;
-//            self.companyNameLabel.frame = newFrame;
+            
+            CGRect newFrame = self.companyNameLabel.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.companyNameLabel.frame = newFrame;
+            
+            newFrame = self.companyNameField.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.companyNameField.frame = newFrame;
+            
+            newFrame = self.profileView.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.profileView.frame = newFrame;
+            
+            newFrame = self.photoTextLabel.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.photoTextLabel.frame = newFrame;
+            
+            newFrame = self.companyPositionLabel.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.companyPositionLabel.frame = newFrame;
+            
+            newFrame = self.companyPositionField.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.companyPositionField.frame = newFrame;
+            
+            newFrame = self.websiteLabel.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.websiteLabel.frame = newFrame;
+            
+            newFrame = self.websiteField.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.websiteField.frame = newFrame;
+            
+            newFrame = self.aboutMeLabel.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.aboutMeLabel.frame = newFrame;
+            
+            newFrame = self.aboutMeField.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.aboutMeField.frame = newFrame;
+            
+            CGSize size = self.scrollView.contentSize;
+            size.height -= heightToAnimate;
+            [self.scrollView setContentSize:size];
             
             self.usernameLabel.alpha = 0;
             self.usernameField.alpha = 0;
