@@ -350,6 +350,26 @@ static double milliSecondsSinceLastSession = 0;
     [dataTask resume];
     
 }
+- (void)editProfile:(NSDictionary *)params callback:(void (^)(NSString * status)) callback{
+
+    {
+        dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
+        NSString *urlString = [NSString stringWithFormat:@"http://festivals.newco.co/%@/user/edit_profile", [self.credentials.festival objectForKey:@"name"]];
+        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        [manager POST:urlString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            dispatch_async(completion_que, ^{
+                callback( (NSString*) responseObject);
+            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            dispatch_async(completion_que, ^{
+                callback( (NSString*) error);
+            });
+        }];
+    }
+}
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback{
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

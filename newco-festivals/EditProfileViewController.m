@@ -375,7 +375,7 @@
     NSString* avatar = [[Credentials sharedCredentials].currentUser objectForKey:@"avatar"] ;
     if ([ avatar isEqual:[NSNull null]] || [avatar  isEqual: @""] || avatar == nil){
         self.avatarSet = NO;
-        [self setUserInitial:self.profileView.frame withFont:self.profileView.frame.size.width/2 withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
+        [self setUserInitial:self.profileView.bounds withFont:self.profileView.frame.size.width/2 withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
     }else {
         self.avatarSet = YES;
         [self setUserImage:self.profileView.frame withAvatar:avatar withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
@@ -785,5 +785,17 @@
 - (IBAction)saveProfile:(id)sender {
     [Helper buttonTappedAnimation:(UIView*)sender];
     NSLog(@"SAVED");
+    WebService * webservice = [[WebService alloc]initWithView:self.view];
+    NSDictionary* params = @{@"name" : @"name",
+                             @"username" : @"@yaseenaniss",
+                             @"email" : @"yaseenaniss@gmail.com",
+                             @"url" : @"instaapp.io",
+                             @"about" : @"about me",
+                             @"position" : @"mike",
+                             @"company" : @"mik lik",
+                             @"privacy_mode" :@"true"};
+    [webservice editProfile:params callback:^(NSString *response) {
+        NSLog(@"%@", response);
+    }];
 }
 @end
