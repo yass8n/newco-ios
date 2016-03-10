@@ -96,7 +96,7 @@
     [self.scrollView addSubview:self.nameField];
     
     Y += self.nameField.frame.size.height + 8 + 8;
-    self.emailLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
+    self.emailLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, 40, 12)];
     self.emailLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.emailLabel.text = @"Email";
     self.emailLabel.textColor = [UIColor grayColor];
@@ -152,7 +152,7 @@
     self.passwordLabel.alpha = 0.0;
     self.passwordLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.passwordLabel.textColor = [UIColor grayColor];
-    self.passwordLabel.text = @"Password";
+    self.passwordLabel.text = @"Confirm Password";
     [self.scrollView addSubview:self.passwordLabel];
     
     Y += self.usernameLabelFrame.size.height + 8;
@@ -489,6 +489,10 @@
             self.privacySwitch.alpha = 1.0;
             self.privacyExplanation.alpha = 1.0;
             self.changePasswordButton.alpha = 1.0;
+            if (![self.usernameField.text isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
+                self.passwordLabel.alpha = 1.0;
+                self.passwordField.alpha = 1.0;
+            }
         } completion:nil];
     }else{
         [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -552,8 +556,8 @@
             self.usernameLabel.alpha = 0;
             self.usernameField.alpha = 0;
             self.changePassword.alpha = 0;
-            self.passwordLabel.alpha = 0;
             self.privacyLabel.alpha = 0;
+            self.passwordLabel.alpha = 0;
             self.passwordField.alpha = 0;
             self.privacySwitch.alpha = 0;
             self.privacyExplanation.alpha = 0;
@@ -569,6 +573,19 @@
 }
 //code for keyboard and views adjusting when focused on text view
 -(void)usernameDidChange :(UITextField *)theTextField{
+    if (![self.usernameField.text isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
+        [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.passwordLabel.alpha = 1.0;
+            self.passwordField.alpha = 1.0;
+        }completion:^(BOOL finished) {
+        }];
+    }else{
+        [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.passwordLabel.alpha = 0;
+            self.passwordField.alpha = 0;
+        }completion:^(BOOL finished) {
+        }];
+    }
     NSLog( @"text changed: %@", theTextField.text);
 }
 -(void)nameDidChange :(UITextField *)theTextField{

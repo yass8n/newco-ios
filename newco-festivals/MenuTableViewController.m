@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Newco. All rights reserved.
 //
 
+
 #import "MenuTableViewController.h"
 #import "MenuItem.h"
 #import "HeaderMenuCell.h"
@@ -56,13 +57,13 @@
     NSArray * keys = sharedFestivalData.datesDict.allKeys;
     NSMutableArray * fakeDatesToGetThemSorted = [[NSMutableArray alloc]init];
     NSDictionary * order = @{
-                            @"Mon": @"1'",
-                            @"Tue": @"2",
-                            @"Wed": @"3",
-                            @"Thu": @"4",
-                            @"Fri": @"5",
-                            @"Sat": @"6",
-                            @"Sun": @"7",};
+                             @"Mon": @"1'",
+                             @"Tue": @"2",
+                             @"Wed": @"3",
+                             @"Thu": @"4",
+                             @"Fri": @"5",
+                             @"Sat": @"6",
+                             @"Sun": @"7",};
     for (int i = 0; i < [keys count]; i ++){
         NSString * num = [order objectForKey:[[keys objectAtIndex:i]substringWithRange:NSMakeRange(0, 3)]];
         [fakeDatesToGetThemSorted addObject:[NSString stringWithFormat:@"%@%@", num, [keys objectAtIndex:i]]];
@@ -117,14 +118,100 @@
             //            }
             [menuItems addObject:locationItem];
         }
-
+    }
+    
+    
+    NSArray * audienceDict = sharedFestivalData.audienceMapToSessions.allKeys;
+    if ([audienceDict count] > 0){
+        MenuItem * header1 = [[MenuItem alloc]init];
+        header1.title = audience_string;
+        header1.type = headerType;
+        header1.cellIdentifier = HEADER;
+        [menuItems addObject:header1];
+        for (int i = 0; i < audienceDict.count; i++){
+            NSString * aud = [audienceDict objectAtIndex:i];
+            MenuItem * audItem = [[MenuItem alloc]init];
+            audItem.title = aud;
+            audItem.type = selectableType;
+            audItem.cellIdentifier = REGULAR;
+            if ([audience_string isEqualToString:@"Location"]){
+                audItem.icon = [UIImage imageNamed:@"location"];
+            }else{
+                audItem.icon = [UIImage imageNamed:@"industry"];
+            }
+            audItem.stringType = @"audience";
+            [menuItems addObject:audItem];
+        }
+        
+    }
+    
+    MenuItem * header2 = [[MenuItem alloc]init];
+    header2.title = @"Directory";
+    header2.type = headerType;
+    header2.cellIdentifier = HEADER;
+    [menuItems addObject:header2];
+    
+    MenuItem * presenters = [[MenuItem alloc]init];
+    presenters.title = @"Presenters";
+    presenters.function = [NSValue valueWithPointer:@selector(showPresenters)];
+    presenters.type = selectableType;
+    presenters.cellIdentifier = REGULAR;
+    presenters.icon = [UIImage imageNamed:@"group"];
+    [menuItems addObject:presenters];
+    
+    MenuItem * companies = [[MenuItem alloc]init];
+    companies.title = @"Host Companies";
+    companies.function = [NSValue valueWithPointer:@selector(showCompanies)];
+    companies.type = selectableType;
+    companies.cellIdentifier = REGULAR;
+    companies.icon = [UIImage imageNamed:@"group"];
+    [menuItems addObject:companies];
+    
+    MenuItem * volunteers = [[MenuItem alloc]init];
+    volunteers.title = @"Volunteers";
+    volunteers.function = [NSValue valueWithPointer:@selector(showVolunteers)];
+    volunteers.type = selectableType;
+    volunteers.cellIdentifier = REGULAR;
+    volunteers.icon = [UIImage imageNamed:@"group"];
+    [menuItems addObject:volunteers];
+    
+    MenuItem * attendees = [[MenuItem alloc]init];
+    attendees.title = @"Attendees";
+    attendees.function = [NSValue valueWithPointer:@selector(showAttendees)];
+    attendees.type = selectableType;
+    attendees.cellIdentifier = REGULAR;
+    attendees.icon = [UIImage imageNamed:@"group"];
+    [menuItems addObject:attendees];
+    
+    MenuItem * header3 = [[MenuItem alloc]init];
+    header3.title = @"Account";
+    header3.type = headerType;
+    header3.cellIdentifier = HEADER;
+    [menuItems addObject:header3];
+    
+    if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
+        MenuItem * logout = [[MenuItem alloc]init];
+        logout.title = @"Log Out";
+        logout.function = [NSValue valueWithPointer:@selector(logout)];
+        logout.type = selectableType;
+        logout.cellIdentifier = REGULAR;
+        logout.icon = [UIImage imageNamed:@"logout"];
+        [menuItems addObject:logout];
+    }else{
+        MenuItem * login = [[MenuItem alloc]init];
+        login.title = @"Login";
+        login.function = [NSValue valueWithPointer:@selector(login)];
+        login.type = selectableType;
+        login.cellIdentifier = REGULAR;
+        login.icon = [UIImage imageNamed:@"user"];
+        [menuItems addObject:login];
+    }
     
     [self.tableView reloadData];
     [ApplicationViewController setMenuOpen:YES];
     CGRect frame = self.view.bounds;
     frame.origin.y = frame.origin.y + 20;
-    }
-}
+};
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [ApplicationViewController setMenuOpen:NO];
