@@ -387,6 +387,7 @@
     NSString* avatar = [[Credentials sharedCredentials].currentUser objectForKey:@"avatar"] ;
     if ([ avatar isEqual:[NSNull null]] || [avatar  isEqual: @""] || avatar == nil){
         self.avatarSet = NO;
+        self.selectedImage = nil;
         self.photoTextLabel.text = @"Upload Photo";
         self.photoTextLabel.textColor = [Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
         [self setUserInitial:self.profileView.bounds withFont:self.profileView.frame.size.width/2 withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:nil];
@@ -805,15 +806,32 @@
     [Helper buttonTappedAnimation:(UIView*)sender];
     NSLog(@"SAVED");
     WebService * webservice = [[WebService alloc]initWithView:self.view];
-    NSDictionary* params = @{@"name" : self.nameField.text,
-                             @"username" : self.usernameField.text,
-                             @"email" : self.emailField.text,
-                             @"url" : self.websiteField.text,
-                             @"about" : self.aboutMeField.text,
-                             @"position" : self.companyPositionField.text,
-                             @"company" : self.companyNameField.text,
-                             @"confirm_password" : self.passwordField.text,
-                             @"privacy_mode" :self.privacySwitch.selected ? @"true" : @"false"};
+    NSDictionary* params;
+    if (self.selectedImage != nil){
+        params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
+                   @"avata" : self.selectedImage,
+                   @"name" : self.nameField.text,
+                   @"username" : self.usernameField.text,
+                   @"email" : self.emailField.text,
+                   @"url" : self.websiteField.text,
+                   @"about" : self.aboutMeField.text,
+                   @"position" : self.companyPositionField.text,
+                   @"company" : self.companyNameField.text,
+                   @"confirm_password" : self.passwordField.text,
+                   @"privacy_mode" :self.privacySwitch.selected ? @"true" : @"false"};
+    }else{
+        params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
+                   @"name" : self.nameField.text,
+                   @"username" : self.usernameField.text,
+                   @"email" : self.emailField.text,
+                   @"url" : self.websiteField.text,
+                   @"about" : self.aboutMeField.text,
+                   @"position" : self.companyPositionField.text,
+                   @"company" : self.companyNameField.text,
+                   @"confirm_password" : self.passwordField.text,
+                   @"privacy_mode" :self.privacySwitch.selected ? @"true" : @"false"};
+    }
+
     [webservice editProfile:params callback:^(NSDictionary *response) {
         NSString * status = [response objectForKey:@"status"];
         if ([status isEqualToString:@"success"]){

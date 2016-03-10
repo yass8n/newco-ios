@@ -351,26 +351,43 @@ static double milliSecondsSinceLastSession = 0;
     
 }
 - (void)editProfile:(NSDictionary *)params callback:(void (^)(NSDictionary * status)) callback{
-
-    {
-        dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
-        NSString *urlString = [NSString stringWithFormat:@"http://festivals.newco.co/%@/user/edit_profile", [self.credentials.festival objectForKey:@"name"]];
-        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
-        [manager POST:urlString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            dispatch_async(completion_que, ^{
-                [self hidePageLoader];
-                callback( (NSDictionary*) responseObject);
-            });
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            dispatch_async(completion_que, ^{
-                [self hidePageLoader];
-                callback( (NSDictionary*) error);
-            });
-        }];
-    }
+    dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
+    NSString *urlString = [NSString stringWithFormat:@"http://festivals.newco.co/%@/user/edit_profile", [self.credentials.festival objectForKey:@"name"]];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"back"], 1.0);
+        [formData appendPartWithFileData:imageData name:@"avatar" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+    } error:nil];
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionUploadTask *uploadTask;
+    uploadTask = [manager
+                  uploadTaskWithStreamedRequest:request
+                  progress:^(NSProgress * _Nonnull uploadProgress) {
+                      // This is not called back on the main queue.
+                      // You are responsible for dispatching to the main queue for UI updates
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          //Update the progress view
+                          
+                      });
+                  }
+                  completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                      if (error) {
+                          NSLog(@"Errorin edit profile: %@", error);
+                          dispatch_async(completion_que, ^{
+                              [self hidePageLoader];
+                              callback( (NSDictionary*) responseObject);
+                          });
+                      } else {
+                          dispatch_async(completion_que, ^{
+                              [self hidePageLoader];
+                              callback( (NSDictionary*) responseObject);
+                          });
+                      }
+                  }];
+    
+    [uploadTask resume];
+    
 }
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback{
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
