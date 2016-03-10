@@ -145,8 +145,8 @@
     NSString * name = [self.user objectForKey:@"name"];
     self.navigationItem.title = name;
     if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
-        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
+//        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
         if ([[self.user objectForKey:@"username"] isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
             self.hideEditButton = NO;
         }else{
@@ -205,7 +205,7 @@
             cell.website.hidden = YES;
         }else{
             cell.website.hidden = NO;
-               self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
+//               self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
             [cell.website addTarget:self action:@selector(goToWebsite:) forControlEvents:UIControlEventTouchUpInside];
         }
         cell.contentView.userInteractionEnabled = NO;

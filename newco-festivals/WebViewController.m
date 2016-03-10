@@ -18,7 +18,7 @@
 - (NSString *)parseUrl:(NSString *)url {
     if (url.length == 0 || [url isEqualToString:@"http://"]) {
         return @"http://festivals.newco.co/"; // put your desired URL here
-    } else if ([url hasPrefix:@"http://"] || [url hasPrefix:@"https://"]) {
+    } else if ([[url lowercaseString] hasPrefix:@"http://"] || [[url lowercaseString] hasPrefix:@"https://"]) {
         return url;
     } else {
         return [NSString stringWithFormat:@"http://%@", url];
