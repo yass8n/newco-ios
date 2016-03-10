@@ -1,3 +1,4 @@
+
 //
 //  EditProfileViewController.m
 //  newco-festivals
@@ -836,43 +837,66 @@
                    @"confirm_password" : self.passwordField.text,
                    @"privacy_mode" :self.privacySwitch.on ? @"true" : @"false"};
     }
-
-    [webservice editProfile:params callback:^(NSDictionary *response) {
-        NSString * status = [response objectForKey:@"status"];
-        if ([status isEqualToString:@"success"]){
-            NSDictionary* user = [response objectForKey:@"user"];
-            NSLog(@"HI");
-            NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
-            [mutable setValue:[user objectForKey:@"position"] forKey:@"position"];
-            [mutable setValue:[user objectForKey:@"privacy_mode"] forKey:@"privacy_mode"];
-            [mutable setValue:[user objectForKey:@"username"] forKey:@"username"];
-            [mutable setValue:[user objectForKey:@"email"] forKey:@"email"];
-            [mutable setValue:[user objectForKey:@"about"] forKey:@"about"];
-            [mutable setValue:[user objectForKey:@"name"] forKey:@"name"];
-            [mutable setValue:[user objectForKey:@"url"] forKey:@"url"];
-            [mutable setValue:[user objectForKey:@"company"] forKey:@"company"];
-            if ([user objectForKey:@"avatar"] != nil){
-                [mutable setValue:[user objectForKey:@"avatar"] forKey:@"avatar"];
-            }
-
-            [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
-            double window_width = self.view.frame.size.width;
-            double window_height = self.view.frame.size.height;
-            CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
-             ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
-            ApplicationViewController.rightNav = nil; //allows us to redraw the right nav button
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
-            });
-        }else{
+    if (![self.usernameField.text isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
+        if (self.passwordField.text.length == 0){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:status
+                                                            message:@"Must confirm password to change username"
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
-
+            float after = 0;
+            if (!self.showingMoreSettings){
+                [self showOrHide:nil];
+                after = .4;
+            }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, after * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [webservice hidePageLoader];
+                CGPoint point = self.passwordField.frame.origin;
+                self.scrollView.contentOffset = CGPointMake(0,point.y - 200);
+                [self.passwordField becomeFirstResponder];
+            });
+        }else{
+            [webservice changeUserName:params callback:^(NSDictionary *response) {
+                NSLog(@"%@",response);
+            }];
         }
-    }];
+    }
+//    [webservice editProfile:params callback:^(NSDictionary *response) {
+//        NSString * status = [response objectForKey:@"status"];
+//        if ([status isEqualToString:@"success"]){
+//            NSDictionary* user = [response objectForKey:@"user"];
+//            NSLog(@"HI");
+//            NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
+//            [mutable setValue:[user objectForKey:@"position"] forKey:@"position"];
+//            [mutable setValue:[user objectForKey:@"privacy_mode"] forKey:@"privacy_mode"];
+//            [mutable setValue:[user objectForKey:@"email"] forKey:@"email"];
+//            [mutable setValue:[user objectForKey:@"about"] forKey:@"about"];
+//            [mutable setValue:[user objectForKey:@"name"] forKey:@"name"];
+//            [mutable setValue:[user objectForKey:@"url"] forKey:@"url"];
+//            [mutable setValue:[user objectForKey:@"company"] forKey:@"company"];
+//            if ([user objectForKey:@"avatar"] != nil){
+//                [mutable setValue:[user objectForKey:@"avatar"] forKey:@"avatar"];
+//            }
+//
+//            [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
+//            double window_width = self.view.frame.size.width;
+//            double window_height = self.view.frame.size.height;
+//            CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
+//             ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
+//            ApplicationViewController.rightNav = nil; //allows us to redraw the right nav button
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//                [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
+//            });
+//        }else{
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+//                                                            message:status
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"OK"
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+//
+//        }
+//    }];
 }
 @end

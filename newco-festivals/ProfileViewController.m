@@ -136,7 +136,7 @@
     if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
         //        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logUserOut:)];
         //        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
-        if ([[self.user objectForKey:@"username"] isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
+        if ([[self.user objectForKey:@"id"] isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"id"]]){
             self.user = [Credentials sharedCredentials].currentUser;
             self.hideEditButton = NO;
         }else{

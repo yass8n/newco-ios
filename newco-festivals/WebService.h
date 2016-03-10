@@ -27,6 +27,9 @@
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback;
 - (void)editProfile:(NSDictionary *)params callback:(void (^)(NSDictionary * status)) callback;
 -(void)removeAvatar;
+-(void)changeUserName:(NSDictionary*)params callback:(void (^)(NSDictionary* user)) callback;
+-(void) showPageLoader; //forward decleration of private method
+-(void) hidePageLoader; //forward decleration of private method
 
 #pragma Mark-Connectivity Detection
 -(void)showLowInternetBannerIfNotReachable;

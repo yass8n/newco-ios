@@ -10,8 +10,7 @@
 #import "ALAlertBanner.h"
 #import "AppDelegate.h"
 @interface WebService()
--(void) showPageLoader; //forward decleration of private method
--(void) hidePageLoader; //forward decleration of private method
+
 @end
 
 @implementation WebService{
@@ -390,6 +389,28 @@ static double milliSecondsSinceLastSession = 0;
     
     [uploadTask resume];
     
+}
+-(void)changeUserName:(NSDictionary*)params callback:(void (^)(NSDictionary* user)) callback{
+    dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/mod?api_key=%@&uid=%@&password=%@&username=%@", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], [[Credentials sharedCredentials].currentUser objectForKey:@"id"], [params objectForKey:@"confirm_password"], [params objectForKey:@"username"]];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSURL *URL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (!error) {
+            dispatch_async(completion_que, ^{
+                callback((NSDictionary*)responseObject);
+            });
+        } else {
+            NSLog(@"Error: %@", error);
+            NSLog(@"ERROR IN change username");
+        }
+        [self hidePageLoader];
+    }];
+    [dataTask resume];
 }
 -(void)removeAvatar{
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
