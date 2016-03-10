@@ -354,8 +354,10 @@ static double milliSecondsSinceLastSession = 0;
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSString *urlString = [NSString stringWithFormat:@"http://festivals.newco.co/%@/user/edit_profile", [self.credentials.festival objectForKey:@"name"]];
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"back"], 1.0);
-        [formData appendPartWithFileData:imageData name:@"avatar" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+        if ([params objectForKey:@"avatar"] != nil){
+            NSData *imageData = UIImageJPEGRepresentation([params objectForKey:@"avatar"], 1.0);
+            [formData appendPartWithFileData:imageData name:@"avatar" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+        }
     } error:nil];
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];

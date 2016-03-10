@@ -343,7 +343,7 @@
     paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
     self.websiteField.leftView = paddingView;
     self.websiteField.leftViewMode = UITextFieldViewModeAlways;
-    self.websiteField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"website"];
+    self.websiteField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"url"];
     self.websiteField.delegate = self;
     [self.scrollView addSubview:self.websiteField];
     [self.view addSubview:self.scrollView];
@@ -809,7 +809,7 @@
     NSDictionary* params;
     if (self.selectedImage != nil){
         params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
-                   @"avata" : self.selectedImage,
+                   @"avatar" : self.selectedImage,
                    @"name" : self.nameField.text,
                    @"username" : self.usernameField.text,
                    @"email" : self.emailField.text,
@@ -844,8 +844,9 @@
             [mutable setValue:[user objectForKey:@"email"] forKey:@"email"];
             [mutable setValue:[user objectForKey:@"about"] forKey:@"about"];
             [mutable setValue:[user objectForKey:@"name"] forKey:@"name"];
-            [mutable setValue:[user objectForKey:@"url"] forKey:@"website"];
+            [mutable setValue:[user objectForKey:@"url"] forKey:@"url"];
             [mutable setValue:[user objectForKey:@"company"] forKey:@"company"];
+              [mutable setValue:[user objectForKey:@"avatar"] forKey:@"avatar"];
             [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
             double window_width = self.view.frame.size.width;
             double window_height = self.view.frame.size.height;
@@ -856,7 +857,7 @@
             });
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:[NSString stringWithFormat:status]
+                                                            message:status
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
