@@ -49,12 +49,15 @@
 }
 
 - (IBAction)initial:(id)sender {
-    UIViewController * this = [self firstAvailableUIViewController];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ProfileViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"Profile"];
-    [vc setUser:self.user];
-    [vc setType:self.type];
-    [this.navigationController pushViewController:vc animated:YES];
+    if (self.type != nil){
+        UIViewController * this = [self firstAvailableUIViewController];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ProfileViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"Profile"];
+        [vc setUser:self.user];
+        [vc setType:self.type];
+        [this.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 -(void)setup{
     [[NSBundle mainBundle] loadNibNamed:@"UserInitial" owner:self options:nil];

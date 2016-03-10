@@ -253,7 +253,14 @@
     [self setAvatar];
     [self.scrollView addSubview:self.profileView];
     UITapGestureRecognizer *profileTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhotoTapped:)];
+    profileTap.cancelsTouchesInView = YES;
+    profileTap.numberOfTapsRequired = 1;
     [self.profileView addGestureRecognizer:profileTap];
+//    for (int i = 0; i < [self.profileView.subviews count]; i++){
+//        UIView* view = [self.profileView.subviews objectAtIndex:i];
+//        [view addGestureRecognizer:profileTap];
+//    }
+    
     
     Y+= self.profileView.frame.size.height + 10;
     self.photoTextLabel = [[CustomUILabel alloc]initWithFrame:CGRectMake(0, Y, self.scrollView.frame.size.width, 18)];
@@ -261,11 +268,13 @@
     self.photoTextLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     if (self.avatarSet){
         self.photoTextLabel.text = @"Remove Photo";
+        self.photoTextLabel.textColor = [UIColor redColor];
     }else{
         self.photoTextLabel.text = @"Add Photo";
+        self.photoTextLabel.textColor = [Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
+        
     }
     self.photoTextLabel.userInteractionEnabled = YES;
-    self.photoTextLabel.textColor = [Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
     currentColor = self.showMoreOrLess.textColor;
     self.photoTextLabel.highlightTextColor = [UIColor lightGrayColor];
     self.photoTextLabel.unHighlightTextColor = currentColor;
@@ -375,10 +384,14 @@
     NSString* avatar = [[Credentials sharedCredentials].currentUser objectForKey:@"avatar"] ;
     if ([ avatar isEqual:[NSNull null]] || [avatar  isEqual: @""] || avatar == nil){
         self.avatarSet = NO;
-        [self setUserInitial:self.profileView.bounds withFont:self.profileView.frame.size.width/2 withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
+        self.photoTextLabel.text = @"Upload Photo";
+        self.photoTextLabel.textColor = [Helper getUIColorObjectFromHexString:LINK_COLOR alpha:1.0];
+        [self setUserInitial:self.profileView.bounds withFont:self.profileView.frame.size.width/2 withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:nil];
     }else {
         self.avatarSet = YES;
-        [self setUserImage:self.profileView.frame withAvatar:avatar withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:@"attendee"];
+        self.photoTextLabel.text = @"Remove Photo";
+        self.photoTextLabel.textColor = [UIColor redColor];
+        [self setUserImage:self.profileView.frame withAvatar:avatar withUser:[Credentials sharedCredentials].currentUser intoView:self.profileView withType:nil];
         self.profileView.layer.borderColor = [UIColor myLightGray].CGColor;
         self.profileView.layer.cornerRadius = self.profileView.frame.size.width/2;
         self.profileView.layer.borderWidth = 1;
@@ -396,12 +409,11 @@
 }
 -(void)photoTextTapped:(UITapGestureRecognizer *) sender
 {
-    [Helper buttonTappedAnimation:(UIView*)sender];
     if (self.avatarSet){
         [self setAvatar];
         NSLog(@"REMOVING PHOTO");
-
     }else{
+        [self presentPhotoLibrary];
         NSLog(@"UPLOADING PHOTO");
     }
 }
@@ -409,8 +421,7 @@
 {
     [self.view endEditing:YES];
 }
--(void)addPhotoTapped:(UITapGestureRecognizer *) sender
-{
+-(void)presentPhotoLibrary{
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -418,6 +429,10 @@
     
     self.imagePickerController = imagePickerController;
     [self presentViewController:self.imagePickerController animated:YES completion:nil];
+}
+-(void)addPhotoTapped:(UITapGestureRecognizer *) sender
+{
+    [self presentPhotoLibrary];
 }
 -(void)showOrHide:(UITapGestureRecognizer *) sender{
     int heightToAnimate = self.usernameFieldFrame.size.height + self.changePasswordFrame.size.height + self.privacySwitchFrame.size.height + 16 + 16 + 16 + 16;
@@ -767,6 +782,7 @@
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     self.avatarSet = YES;
     self.photoTextLabel.text = @"Remove Photo";
+    self.photoTextLabel.textColor = [UIColor redColor];
     self.selectedImage = [self squareImageWithImage:image scaledToSize:CGSizeMake(self.profileView.frame.size.width, self.profileView.frame.size.height)];
     [self.profileView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     UIImageView * imageView = [[UIImageView alloc]initWithFrame:self.profileView.bounds];
