@@ -494,7 +494,6 @@
 }
 -(void)logout{
     [[Credentials sharedCredentials] logOut];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"setRightNavButton" object:nil];
 }
 
 #pragma mark - Sign In Delegate

@@ -93,6 +93,8 @@ static Credentials *sharedCredentials = nil;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
     [prefs setObject:nil forKey:@"user"];
     [[FestivalData sharedFestivalData] enableAllSessions];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"setRightNavButton" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSessionsUpdated" object:nil];
 }
 -(void)clearFestivalData{
     festival =  nil;
