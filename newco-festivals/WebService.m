@@ -391,6 +391,23 @@ static double milliSecondsSinceLastSession = 0;
     [uploadTask resume];
     
 }
+-(void)removeAvatar{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/mod?api_key=%@&uid=%@&avatar=", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], [[Credentials sharedCredentials].currentUser objectForKey:@"id"]];
+    NSURL *URL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (!error) {
+        } else {
+            NSLog(@"Error: %@", error);
+            NSLog(@"ERROR IN remove avatar");
+        }
+        [self hidePageLoader];
+    }];
+    [dataTask resume];
+}
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback{
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

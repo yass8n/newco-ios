@@ -417,6 +417,8 @@
         NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
              [mutable setValue:@"" forKey:@"avatar"];
         [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
+        WebService* webservice = [[WebService alloc]initWithView:self.view];
+        [webservice removeAvatar];
         [self setAvatar];
         NSLog(@"REMOVING PHOTO");
     }else{
@@ -821,7 +823,7 @@
                    @"position" : self.companyPositionField.text,
                    @"company" : self.companyNameField.text,
                    @"confirm_password" : self.passwordField.text,
-                   @"privacy_mode" :self.privacySwitch.selected ? @"true" : @"false"};
+                   @"privacy_mode" :self.privacySwitch.on ? @"true" : @"false"};
     }else{
         params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
                    @"name" : self.nameField.text,
@@ -832,7 +834,7 @@
                    @"position" : self.companyPositionField.text,
                    @"company" : self.companyNameField.text,
                    @"confirm_password" : self.passwordField.text,
-                   @"privacy_mode" :self.privacySwitch.selected ? @"true" : @"false"};
+                   @"privacy_mode" :self.privacySwitch.on ? @"true" : @"false"};
     }
 
     [webservice editProfile:params callback:^(NSDictionary *response) {

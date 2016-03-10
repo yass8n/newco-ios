@@ -26,6 +26,7 @@
 - (void)findByUsername:username withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary * user)) callback;
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback;
 - (void)editProfile:(NSDictionary *)params callback:(void (^)(NSDictionary * status)) callback;
+-(void)removeAvatar;
 
 #pragma Mark-Connectivity Detection
 -(void)showLowInternetBannerIfNotReachable;
