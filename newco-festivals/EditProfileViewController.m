@@ -370,7 +370,9 @@
         NSMutableDictionary *mutable = [[Credentials sharedCredentials].currentUser mutableCopy];
         [mutable setValue:@"" forKey:@"avatar"];
         [[Credentials sharedCredentials] setCurrentUser:[NSDictionary dictionaryWithDictionary:mutable]];
-        WebService* webservice = [[WebService alloc]initWithView:self.view];
+        ApplicationViewController.rightNav = nil; //allows us to redraw the right nav button
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"setRightNavButton" object:nil];
+        WebService* webservice = [[WebService alloc]init];
         [webservice removeAvatar];
         [self setAvatar];
         NSLog(@"REMOVING PHOTO");
@@ -736,7 +738,7 @@
         params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
                    @"avatar" : self.selectedImage,
                    @"name" : self.nameField.text,
-                   @"username" : @"",
+                   @"username" : [[Credentials sharedCredentials].currentUser objectForKey:@"username"],
                    @"email" : self.emailField.text,
                    @"url" : self.websiteField.text,
                    @"about" : self.aboutMeField.text,
@@ -747,7 +749,7 @@
     }else{
         params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
                    @"name" : self.nameField.text,
-                   @"username" : @"",
+                   @"username" : [[Credentials sharedCredentials].currentUser objectForKey:@"name"],
                    @"email" : self.emailField.text,
                    @"url" : self.websiteField.text,
                    @"about" : self.aboutMeField.text,
@@ -786,6 +788,7 @@
             CGRect rect = CGRectMake(window_width/3, window_height/2, window_width/3, window_width/3);
             ModalView *modalView = [[ModalView alloc] initWithFrame:rect];
             ApplicationViewController.rightNav = nil; //allows us to redraw the right nav button
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"setRightNavButton" object:nil];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
             });

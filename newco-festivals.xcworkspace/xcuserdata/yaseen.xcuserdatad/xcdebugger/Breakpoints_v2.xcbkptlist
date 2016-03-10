@@ -6,32 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479320123.933309"
+            filePath = "newco-festivals/ApplicationViewController.m"
+            timestampString = "479325641.374023"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "767"
-            endingLineNumber = "767"
-            landmarkName = "-saveProfile:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479320263.718514"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "761"
-            endingLineNumber = "761"
-            landmarkName = "-saveProfile:"
+            startingLineNumber = "427"
+            endingLineNumber = "427"
+            landmarkName = "-setUserNavBar:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "newco-festivals/EditProfileViewController.m"
-            timestampString = "479320272.92698"
+            filePath = "newco-festivals/ApplicationViewController.m"
+            timestampString = "479325740.194833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "768"
-            endingLineNumber = "768"
-            landmarkName = "-saveProfile:"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
+            landmarkName = "-setUserNavBar:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

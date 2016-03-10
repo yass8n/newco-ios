@@ -78,6 +78,10 @@ static NSString* ATTEND = @" Attend ";
                 [self.users setObject:user forKey:[user objectForKey:@"username"]];
             }
         }
+        if ([self.users objectForKey:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
+            NSDictionary* user = [Credentials sharedCredentials].currentUser;
+            [self.users setObject:user forKey:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setupScrollView];
         });

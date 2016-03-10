@@ -34,8 +34,8 @@ static NSRecursiveLock *calls_lock;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.loader startAnimating];
-//    [self.loader setHidden:YES];
-
+    //    [self.loader setHidden:YES];
+    
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     ApplicationViewController.navItem = self.navigationItem; //saving current nav bar so we can change its contents later
     
@@ -79,6 +79,43 @@ static NSRecursiveLock *calls_lock;
             self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];
         });
     }];
+    if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
+        [webService findByUsername:[[Credentials sharedCredentials].currentUser objectForKey:@"username"] withAuthToken:[[Credentials sharedCredentials].currentUser objectForKey:@"auth"] callback:^(NSDictionary* user) {
+            if (user) {
+                NSMutableDictionary* mutableUser = [user mutableCopy];
+                [mutableUser setObject:[[Credentials sharedCredentials].currentUser objectForKey:@"auth"] forKey:@"auth"];
+                user = [mutableUser copy];
+                [Credentials sharedCredentials].currentUser = user;
+                [self fetchSessions:webService];
+            }else{
+                [webService findByEmail:[[Credentials sharedCredentials].currentUser objectForKey:@"email"] withAuthToken:[[Credentials sharedCredentials].currentUser objectForKey:@"auth"] callback:^(NSDictionary* user) {
+                    {
+                        if (user) {
+                            NSMutableDictionary* mutableUser = [user mutableCopy];
+                            [mutableUser setObject:[[Credentials sharedCredentials].currentUser objectForKey:@"auth"] forKey:@"auth"];
+                            user = [mutableUser copy];
+                            [Credentials sharedCredentials].currentUser = user;
+                            [self fetchSessions:webService];
+
+                        }else {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self showBadConnectionAlert];
+                                });
+                            }
+                    }
+                    
+                }];
+            }
+        }];
+        
+    }else{
+        [self fetchSessions:webService];
+    }
+    
+}
+-(void)fetchSessions:(WebService*)webService{
+    ApplicationViewController.rightNav = nil;
+    [self setRightNavButton];
     [webService fetchSessions:^(NSArray* jsonArray){
         [[FestivalData sharedFestivalData] initializeSessionArrayWithData: jsonArray];
         NSSortDescriptor *sortStart = [[NSSortDescriptor alloc] initWithKey:@"event_start" ascending:YES];
@@ -95,23 +132,6 @@ static NSRecursiveLock *calls_lock;
                 self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
         }
     }];
-// if ([Credentials sharedCredentials].currentUser && [[Credentials sharedCredentials].currentUser count] > 0){
-//     [webService fetchSessions:^(NSArray* jsonArray){
-//        [[FestivalData sharedFestivalData] initializeSessionArrayWithData: jsonArray];
-//        NSSortDescriptor *sortStart = [[NSSortDescriptor alloc] initWithKey:@"event_start" ascending:YES];
-//        
-//        [[FestivalData sharedFestivalData].sessionsArray  sortUsingDescriptors:[NSMutableArray arrayWithObjects:sortStart, nil]];
-//        if ([Credentials sharedCredentials].currentUser == nil ||[[Credentials sharedCredentials].currentUser count] == 0){
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                int value = [self.numberCompletedCalls intValue];
-//                self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
-//        } else {
-//            [ApplicationViewController fetchCurrentUserSessions:self.view];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                int value = [self.numberCompletedCalls intValue];
-//                self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
-//        }
-//    }];
 
 }
 - (void)viewWillAppear:(BOOL)animated{

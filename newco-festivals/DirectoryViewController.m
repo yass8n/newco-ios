@@ -31,6 +31,8 @@
     self.hostCompanies.unHighlightedColor = [UIColor whiteColor];
     self.volunteers.unHighlightedColor  = [UIColor whiteColor];
     self.attendees.unHighlightedColor  = [UIColor whiteColor];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRightNavButton) name:@"setRightNavButton" object:nil];
     // Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -38,7 +40,6 @@
     ApplicationViewController.currentVC = enumDirectory;
     [self setRightNavButton];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
