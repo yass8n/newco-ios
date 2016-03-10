@@ -92,6 +92,7 @@
     self.nameField.leftViewMode = UITextFieldViewModeAlways;
     self.nameField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"name"];
     self.nameField.delegate = self;
+    [self.nameField addTarget:self action:@selector(nameDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.scrollView addSubview:self.nameField];
     
     Y += self.nameField.frame.size.height + 8 + 8;
@@ -112,6 +113,7 @@
     self.emailField.leftViewMode = UITextFieldViewModeAlways;
     self.emailField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"email"];
     self.emailField.delegate = self;
+    [self.emailField addTarget:self action:@selector(emailDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.scrollView addSubview:self.emailField];
     
     Y+=self.emailField.frame.size.height + 8 + 8;
@@ -161,6 +163,9 @@
     self.usernameField.textColor = [UIColor darkTextColor];
     self.usernameField.layer.borderWidth = 1;
     self.usernameField.layer.cornerRadius = 3;
+    self.usernameField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"username"];
+    [self.usernameField addTarget:self action:@selector(usernameDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
     self.usernameField.leftView = paddingView;
     self.usernameField.leftViewMode = UITextFieldViewModeAlways;
@@ -464,6 +469,10 @@
             newFrame.origin.y += heightToAnimate;
             self.aboutMeField.frame = newFrame;
             
+            newFrame = self.saveButton.frame;
+            newFrame.origin.y += heightToAnimate;
+            self.saveButton.frame = newFrame;
+            
             CGSize size = self.scrollView.contentSize;
             size.height += heightToAnimate;
             [self.scrollView setContentSize:size];
@@ -471,9 +480,7 @@
             self.usernameLabel.alpha = 1.0;
             self.usernameField.alpha = 1.0;
             self.changePassword.alpha = 1.0;
-            self.passwordLabel.alpha = 1.0;
             self.privacyLabel.alpha = 1.0;
-            self.passwordField.alpha = 1.0;
             self.privacySwitch.alpha = 1.0;
             self.privacyExplanation.alpha = 1.0;
             self.changePasswordButton.alpha = 1.0;
@@ -529,6 +536,10 @@
             newFrame.origin.y -= heightToAnimate;
             self.aboutMeField.frame = newFrame;
             
+            newFrame = self.saveButton.frame;
+            newFrame.origin.y -= heightToAnimate;
+            self.saveButton.frame = newFrame;
+            
             CGSize size = self.scrollView.contentSize;
             size.height -= heightToAnimate;
             [self.scrollView setContentSize:size];
@@ -552,6 +563,15 @@
     return YES;
 }
 //code for keyboard and views adjusting when focused on text view
+-(void)usernameDidChange :(UITextField *)theTextField{
+    NSLog( @"text changed: %@", theTextField.text);
+}
+-(void)nameDidChange :(UITextField *)theTextField{
+    NSLog( @"text changed: %@", theTextField.text);
+}
+-(void)emailDidChange :(UITextField *)theTextField{
+    NSLog( @"text changed: %@", theTextField.text);
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     CGRect textFieldRect =
     [self.view.window convertRect:textField.bounds fromView:textField];
