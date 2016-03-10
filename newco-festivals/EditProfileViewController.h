@@ -8,6 +8,6 @@
 
 #import "ApplicationViewController.h"
 
-@interface EditProfileViewController : ApplicationViewController <UIImagePickerControllerDelegate, UITextFieldDelegate>
+@interface EditProfileViewController : ApplicationViewController <UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @end

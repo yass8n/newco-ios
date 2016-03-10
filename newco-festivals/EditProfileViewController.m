@@ -75,6 +75,8 @@
     int X = 8;
     int Y = self.navigationController.navigationBar.frame.size.height;
     self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y+textFieldHeight, self.scrollView.frame.size.width-16, 12)];
+    self.nameLabel.textColor = [UIColor grayColor];
+
     self.nameLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.nameLabel.text = @"Full Name";
     [self.scrollView addSubview:self.nameLabel];
@@ -96,6 +98,7 @@
     self.emailLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
     self.emailLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.emailLabel.text = @"Email";
+    self.emailLabel.textColor = [UIColor grayColor];
     [self.scrollView addSubview:self.emailLabel];
     
     Y += self.emailLabel.frame.size.height + 8;
@@ -137,6 +140,7 @@
     self.usernameLabelFrame = CGRectMake(X, Y, (self.scrollView.frame.size.width/2)-16, 12);
     self.usernameLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
     self.usernameLabel.alpha = 0.0;
+    self.usernameLabel.textColor = [UIColor grayColor];
     self.usernameLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.usernameLabel.text = @"Username";
     [self.scrollView addSubview:self.usernameLabel];
@@ -145,6 +149,7 @@
     self.passwordLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
     self.passwordLabel.alpha = 0.0;
     self.passwordLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
+    self.passwordLabel.textColor = [UIColor grayColor];
     self.passwordLabel.text = @"Password";
     [self.scrollView addSubview:self.passwordLabel];
     
@@ -207,6 +212,7 @@
     self.privacyLabel = [[UILabel alloc]initWithFrame:self.showMoreOrLess.frame];
     self.privacyLabel.alpha = 0.0;
     self.privacyLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
+    self.privacyLabel.textColor = [UIColor grayColor];
     self.privacyLabel.text = @"Privacy";
     [self.scrollView addSubview:self.privacyLabel];
     
@@ -263,6 +269,7 @@
     self.companyNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
     self.companyNameLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.companyNameLabel.text = @"Company Name";
+    self.companyNameLabel.textColor = [UIColor grayColor];
     [self.scrollView addSubview:self.companyNameLabel];
     
     Y += self.companyNameLabel.frame.size.height + 8;
@@ -282,6 +289,7 @@
     self.companyPositionLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
     self.companyPositionLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.companyPositionLabel.text = @"Position";
+    self.companyPositionLabel.textColor = [UIColor grayColor];
     [self.scrollView addSubview:self.companyPositionLabel];
     
     Y += self.companyPositionLabel.frame.size.height + 8;
@@ -301,6 +309,7 @@
     self.websiteLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
     self.websiteLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
     self.websiteLabel.text = @"Website";
+    self.websiteLabel.textColor = [UIColor grayColor];
     [self.scrollView addSubview:self.websiteLabel];
     
     Y += self.websiteLabel.frame.size.height + 8;
@@ -312,13 +321,34 @@
     paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
     self.websiteField.leftView = paddingView;
     self.websiteField.leftViewMode = UITextFieldViewModeAlways;
-    self.websiteField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"position"];
+    self.websiteField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"website"];
     self.websiteField.delegate = self;
     [self.scrollView addSubview:self.websiteField];
     [self.view addSubview:self.scrollView];
     [self.scrollView setScrollEnabled:YES];
-    Y += self.websiteField.frame.size.height + 8;
-    [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width,Y)];
+    
+    Y += self.websiteField.frame.size.height + 8 + 8;
+    self.aboutMeLabel = [[UILabel alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
+    self.aboutMeLabel.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 12.0];
+    self.aboutMeLabel.text = @"Tell us about yourself";
+    self.aboutMeLabel.textColor = [UIColor grayColor];
+    [self.scrollView addSubview:self.aboutMeLabel];
+    
+    Y += self.aboutMeLabel.frame.size.height + 8;
+    self.aboutMeField = [[UITextView alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, textFieldHeight * 5)];
+    self.aboutMeField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.aboutMeField.textColor = [UIColor darkTextColor];
+    self.aboutMeField.layer.borderWidth = 1;
+    self.aboutMeField.layer.cornerRadius = 3;
+    self.aboutMeField.delegate = self;
+    paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 0)];
+    self.aboutMeField.text = [[Credentials sharedCredentials].currentUser objectForKey:@"about"];
+    self.aboutMeField.delegate = self;
+    [self.scrollView addSubview:self.aboutMeField];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView setScrollEnabled:YES];
+    Y += self.websiteField.frame.size.height + 8 + 8;
+    [self.scrollView setContentSize:CGSizeMake(self.scrollView.frame.size.width,Y + 200)];
 }
 -(void)setAvatar{
     [self.profileView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
@@ -381,9 +411,9 @@
             self.privacySwitch.frame = self.privacySwitchFrame;
             self.privacyExplanation.frame = self.privacyExplanationFrame;
             self.changePasswordButton.frame = self.changePasswordButtonFrame;
-            CGRect newFrame = self.companyNameLabel.frame;
-            newFrame.origin.y += heightToAnimate;
-            self.companyNameLabel.frame = newFrame;
+//            CGRect newFrame = self.companyNameLabel.frame;
+//            newFrame.origin.y += heightToAnimate;
+//            self.companyNameLabel.frame = newFrame;
             
             self.usernameLabel.alpha = 1.0;
             self.usernameField.alpha = 1.0;
@@ -405,9 +435,9 @@
             self.privacySwitch.frame = self.showMoreOrLess.frame;
             self.privacyExplanation.frame = self.showMoreOrLess.frame;
             self.changePasswordButton.frame = self.showMoreOrLess.frame;
-            CGRect newFrame = self.companyNameLabel.frame;
-            newFrame.origin.y -= heightToAnimate;
-            self.companyNameLabel.frame = newFrame;
+//            CGRect newFrame = self.companyNameLabel.frame;
+//            newFrame.origin.y -= heightToAnimate;
+//            self.companyNameLabel.frame = newFrame;
             
             self.usernameLabel.alpha = 0;
             self.usernameField.alpha = 0;
@@ -473,6 +503,63 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textfield{
+    
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y += animatedDistance;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    
+    [self.view setFrame:viewFrame];
+    
+    [UIView commitAnimations];
+}
+- (void)textViewDidBeginEditing:(UITextView *)textField{
+    CGRect textFieldRect =
+    [self.view.window convertRect:textField.bounds fromView:textField];
+    CGRect viewRect =
+    [self.view.window convertRect:self.view.bounds fromView:self.view];
+    CGFloat midline = textFieldRect.origin.y + 0.5 * textFieldRect.size.height;
+    CGFloat numerator =
+    midline - viewRect.origin.y
+    - MINIMUM_SCROLL_FRACTION * viewRect.size.height;
+    CGFloat denominator =
+    (MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)
+    * viewRect.size.height;
+    CGFloat heightFraction = numerator / denominator;
+    if (heightFraction < 0.0)
+    {
+        heightFraction = 0.0;
+    }
+    else if (heightFraction > 1.0)
+    {
+        heightFraction = 1.0;
+    }
+    UIInterfaceOrientation orientation =
+    [[UIApplication sharedApplication] statusBarOrientation];
+    if (orientation == UIInterfaceOrientationPortrait ||
+        orientation == UIInterfaceOrientationPortraitUpsideDown)
+    {
+        animatedDistance = floor(PORTRAIT_KEYBOARD_HEIGHT * heightFraction);
+    }
+    else
+    {
+        animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
+    }
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y -= animatedDistance;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    
+    [self.view setFrame:viewFrame];
+    
+    [UIView commitAnimations];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textfield{
     
     CGRect viewFrame = self.view.frame;
     viewFrame.origin.y += animatedDistance;
