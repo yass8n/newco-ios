@@ -7,7 +7,13 @@
 //
 
 #import "ApplicationViewController.h"
+@protocol SignUpDelegate <NSObject>
+@optional
+-(void)goBack;
+@end
+@interface SignUpViewController : ApplicationViewController <UITextFieldDelegate>
 
-@interface SignUpViewController : ApplicationViewController
+@property (nonatomic) BOOL setTheBackButton;
+@property (nonatomic, weak) id<SignUpDelegate> delegate;
 
 @end

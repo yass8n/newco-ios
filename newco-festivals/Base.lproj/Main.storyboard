@@ -1067,7 +1067,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycK-YG-zZq">
-                                <rect key="frame" x="25" y="242" width="550" height="260"/>
+                                <rect key="frame" x="25" y="145" width="550" height="260"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s8m-XT-kkD">
                                         <rect key="frame" x="20" y="20" width="510" height="40"/>
@@ -1159,7 +1159,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="15I-Jf-fFt" customClass="CustomUIView">
-                                <rect key="frame" x="25" y="132" width="550" height="90"/>
+                                <rect key="frame" x="25" y="35" width="550" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to Attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksS-c2-oVY">
                                         <rect key="frame" x="8" y="20" width="534" height="21"/>
@@ -1196,7 +1196,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZC7-m5-fzp">
-                                <rect key="frame" x="40" y="522" width="520" height="30"/>
+                                <rect key="frame" x="40" y="425" width="520" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Vgf-Qq-kPb"/>
                                 </constraints>
@@ -1216,7 +1216,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="15I-Jf-fFt" secondAttribute="trailing" constant="5" id="0fP-mq-eP7"/>
                             <constraint firstItem="ycK-YG-zZq" firstAttribute="leading" secondItem="KSC-YF-kF2" secondAttribute="leadingMargin" constant="5" id="1qU-kQ-eYc"/>
                             <constraint firstItem="ZC7-m5-fzp" firstAttribute="top" secondItem="ycK-YG-zZq" secondAttribute="bottom" constant="20" id="3NA-1M-bg7"/>
-                            <constraint firstItem="15I-Jf-fFt" firstAttribute="top" secondItem="GmA-iR-4tz" secondAttribute="bottom" constant="112" id="7Tl-9s-3vh"/>
+                            <constraint firstItem="15I-Jf-fFt" firstAttribute="top" secondItem="GmA-iR-4tz" secondAttribute="bottom" constant="15" id="7Tl-9s-3vh"/>
                             <constraint firstItem="15I-Jf-fFt" firstAttribute="centerX" secondItem="KSC-YF-kF2" secondAttribute="centerX" id="JYD-zL-yjp"/>
                             <constraint firstItem="ZC7-m5-fzp" firstAttribute="leading" secondItem="KSC-YF-kF2" secondAttribute="leadingMargin" constant="20" id="alm-AV-cEq"/>
                             <constraint firstItem="15I-Jf-fFt" firstAttribute="leading" secondItem="KSC-YF-kF2" secondAttribute="leadingMargin" constant="5" id="pKI-iT-THC"/>

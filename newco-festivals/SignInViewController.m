@@ -7,6 +7,7 @@
 //
 
 #import "SignInViewController.h"
+#import "SignUpViewController.h"
 #import "ScheduleViewController.h"
 #import "ScheduleViewController.h"
 #import "Helper.h"
@@ -60,6 +61,12 @@
     tap.delaysTouchesBegan = NO;
     tap.delaysTouchesEnded = NO;
     [self.topView addGestureRecognizer:tap];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, self.navigationController.navigationBar.frame.size.height)];
+    titleLabel.text = @"Log in to Newco";
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleLabel setAdjustsFontSizeToFitWidth:YES];
+    self.navigationItem.titleView = titleLabel;
 
 
     // Do any additional setup after loading the view.
@@ -235,9 +242,9 @@
 }
 //an event handling method
 - (void)registerViewTapped:(UITapGestureRecognizer *)recognizer {
-//    [self showWebViewWithUrl:[NSString stringWithFormat:@"%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"url"]]];
-    
-//   [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SignUpViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SignUp"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
