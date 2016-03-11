@@ -197,7 +197,6 @@
     [super viewDidAppear:animated];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
      SWRevealViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SWReveal"];
-    [vc setRearViewController:<#(UIViewController *)#>]
     [self presentViewController:vc animated:YES completion:^{
         NSLog(@"COMPLETED");
     }];
