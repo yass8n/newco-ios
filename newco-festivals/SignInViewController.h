@@ -10,7 +10,10 @@
 @optional
 -(void)goBack;
 @end
-@interface SignInViewController : ApplicationViewController <UITextFieldDelegate>
+
+#import "SignUpViewController.h"
+
+@interface SignInViewController : ApplicationViewController <UITextFieldDelegate, SignUpDelegate>
 @property (nonatomic) BOOL setTheBackButton;
 @property (nonatomic, weak) id<SignInDelegate> delegate;
 

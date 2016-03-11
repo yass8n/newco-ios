@@ -106,7 +106,7 @@
     //code to be executed on main thread when block is finished
     dispatch_async(dispatch_get_main_queue(), ^{
         if(self.delegate && [self.delegate respondsToSelector: @selector(goBack)]) {
-            [self.delegate goBack];
+            [self.delegate goBackFromSignUp];
         }else{
             [self goBack];
         }

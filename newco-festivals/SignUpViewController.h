@@ -7,9 +7,11 @@
 //
 
 #import "ApplicationViewController.h"
+#import "SignUpViewController.h"
+
 @protocol SignUpDelegate <NSObject>
 @optional
--(void)goBack;
+-(void)goBackFromSignUp;
 @end
 @interface SignUpViewController : ApplicationViewController <UITextFieldDelegate>
 

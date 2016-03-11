@@ -7,7 +7,6 @@
 //
 
 #import "SignInViewController.h"
-#import "SignUpViewController.h"
 #import "ScheduleViewController.h"
 #import "ScheduleViewController.h"
 #import "Helper.h"
@@ -41,12 +40,15 @@
     ApplicationViewController.rightNav = nil;
     //code to be executed on main thread when block is finished
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(self.delegate && [self.delegate respondsToSelector: @selector(goBack)]) {
-            [self.delegate goBack];
-        }else{
-            [self goBack];
-        }
+        [self goBackFromSignUp];
     });
+}
+-(void)goBackFromSignUp{
+    if(self.delegate && [self.delegate respondsToSelector: @selector(goBack)]) {
+        [self.delegate goBack];
+    }else{
+        [self goBack];
+    }
 }
 
 - (void)viewDidLoad {
@@ -244,6 +246,7 @@
 - (void)registerViewTapped:(UITapGestureRecognizer *)recognizer {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SignUpViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SignUp"];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
