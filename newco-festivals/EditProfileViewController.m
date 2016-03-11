@@ -10,6 +10,8 @@
 #import "EditProfileViewController.h"
 #import "CustomUILabel.h"
 #import "ModalView.h"
+#import "SWRevealViewController.h"
+
 @interface EditProfileViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
@@ -798,7 +800,16 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
                 if (self.dontSetBackButton){ //they have no where to go from here, so take them to scheduleViewController
-                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        SWRevealViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SWReveal"];
+                        [self presentViewController:vc animated:YES completion:^{
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                                [[NSNotificationCenter defaultCenter] postNotificationName:@"setRightNavButton" object:nil];
+                                NSLog(@"COMPLETED");
+                            });
+                        }];
+                    });
                 }
             });
         }else{

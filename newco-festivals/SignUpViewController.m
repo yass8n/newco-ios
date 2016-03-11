@@ -7,10 +7,8 @@
 //
 
 #import "SignUpViewController.h"
-#import "SWRevealViewController.h"
 #import "EditProfileViewController.h"
 #import "NSString+NSStringAdditions.h"
-#import "RootViewController.h"
 
 @interface SignUpViewController ()
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *usernameSpinner;
@@ -195,11 +193,6 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-     SWRevealViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SWReveal"];
-    [self presentViewController:vc animated:YES completion:^{
-        NSLog(@"COMPLETED");
-    }];
 }
 
 -(void)setBorders{
