@@ -16,6 +16,7 @@
 		08A5905A1C80697200890E30 /* proximanova-sbold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590551C80697200890E30 /* proximanova-sbold-webfont.ttf */; };
 		08C48E3C1C75AEE100A53712 /* FestivalCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */; };
 		08C48E3E1C75AEF200A53712 /* FestivalCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */; };
+		08E614CF1C92D3C2004B7DF4 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E614CE1C92D3C2004B7DF4 /* SignUpViewController.m */; };
 		08EBAFFD1C771DD60099979A /* ProfileDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */; };
 		08EBB0001C771E0B0099979A /* ProfileDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08EBAFFF1C771E0B0099979A /* ProfileDetailCell.m */; };
 		08F240171C75FFD900D54B10 /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F240121C75FFD900D54B10 /* ALAlertBanner.m */; };
@@ -108,6 +109,8 @@
 		08C48E3A1C75AEE100A53712 /* FestivalCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalCellHeader.h; sourceTree = "<group>"; };
 		08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalCellHeader.m; sourceTree = "<group>"; };
 		08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalCellHeader.xib; sourceTree = "<group>"; };
+		08E614CD1C92D3C2004B7DF4 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		08E614CE1C92D3C2004B7DF4 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDetailCell.xib; sourceTree = "<group>"; };
 		08EBAFFE1C771E0B0099979A /* ProfileDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileDetailCell.h; sourceTree = "<group>"; };
 		08EBAFFF1C771E0B0099979A /* ProfileDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileDetailCell.m; sourceTree = "<group>"; };
@@ -369,6 +372,15 @@
 			name = EditProfile;
 			sourceTree = "<group>";
 		};
+		08E614CC1C92D3AF004B7DF4 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				08E614CD1C92D3C2004B7DF4 /* SignUpViewController.h */,
+				08E614CE1C92D3C2004B7DF4 /* SignUpViewController.m */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
 		08F2400E1C75FFAC00D54B10 /* ALAlertBAnner */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +502,7 @@
 		08F6F85C1C74944B005BC870 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				08E614CC1C92D3AF004B7DF4 /* SignUp */,
 				083505CF1C830C8600826D63 /* EditProfile */,
 				083505C31C830C2500826D63 /* MenuTable */,
 				083505C41C830C3100826D63 /* WebView */,
@@ -951,6 +964,7 @@
 				083505D21C830C9B00826D63 /* EditProfileViewController.m in Sources */,
 				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
+				08E614CF1C92D3C2004B7DF4 /* SignUpViewController.m in Sources */,
 				9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
