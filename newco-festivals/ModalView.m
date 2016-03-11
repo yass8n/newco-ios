@@ -10,7 +10,7 @@
 #import "Helper.h"
 @implementation ModalView
 
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSString *)modalTitle text:(NSMutableAttributedString *)modalText
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSString *)modalTitle text:(NSMutableAttributedString *)modalText imageColor:(UIColor*)imageColor
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -31,28 +31,30 @@
         [modalContainer addSubview:modalImageContainer];
         
         UIImageView *modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 40, 40)];
-        modalImageView.image = modalImage;
+        modalImageView.image = [modalImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [modalImageView setTintColor:imageColor];
         modalImageView.layer.cornerRadius = modalImageView.frame.size.width / 2;
         modalImageView.layer.masksToBounds = YES;
         [modalImageContainer addSubview:modalImageView];
+
         
         
-        UILabel *modalTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, modalContent.frame.size.width, 30)];
-        modalTitleLabel.font = [UIFont fontWithName: @"ProximaNova-Semibold" size: 23.0f];
-        modalTitleLabel.textColor = [Helper getUIColorObjectFromHexString:@"#555" alpha:1.0];
-        modalTitleLabel.text = modalTitle;
-        modalTitleLabel.textAlignment = NSTextAlignmentCenter;
-        [modalTitleLabel.text uppercaseString];
+//        UILabel *modalTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, modalContent.frame.size.width, 30)];
+//        modalTitleLabel.font = [UIFont fontWithName: @"ProximaNova-Semibold" size: 23.0f];
+//        modalTitleLabel.textColor = [Helper getUIColorObjectFromHexString:@"#555" alpha:1.0];
+//        modalTitleLabel.text = modalTitle;
+//        modalTitleLabel.textAlignment = NSTextAlignmentCenter;
+//        [modalTitleLabel.text uppercaseString];
+//        
+//        [modalContent addSubview:modalTitleLabel];
         
-        [modalContent addSubview:modalTitleLabel];
-        
-        UITextView *modalTextView = [[UITextView alloc] initWithFrame:CGRectMake(5, 55, modalContent.frame.size.width - 10, 100)];
+        UITextView *modalTextView = [[UITextView alloc] initWithFrame:CGRectMake(5, 25, modalContent.frame.size.width - 10, 100)];
         //modalTextView.text = modalText;
         
         modalTextView.attributedText = modalText;
         modalTextView.textAlignment = NSTextAlignmentCenter;
         //modalTextView.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 14.0f];
-        modalTextView.textColor = [Helper getUIColorObjectFromHexString:@"#777" alpha:1.0];
+        modalTextView.textColor = [UIColor darkTextColor];
         
         [modalContent addSubview:modalTextView];
         

@@ -9,6 +9,7 @@
 #import "SignUpViewController.h"
 #import "EditProfileViewController.h"
 #import "NSString+NSStringAdditions.h"
+#import "ModalView.h"
 
 @interface SignUpViewController ()
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *usernameSpinner;
@@ -114,6 +115,19 @@
     
 }
 - (IBAction)whySignUp:(id)sender {
+    CGRect modalFrame = CGRectMake(30, 150, self.view.frame.size.width - 60, 200);
+    
+    NSString *modalTitle = @"Bookmark events you're interested in. Find friends on Facebook, Twitter & Linkedin. Get listed in the attendee directory. Print out or subscribe in your calendar. Embed your schedule on your website or blog!.";
+    
+    UIColor *modalTitleColor =  [UIColor darkGrayColor];
+    UIFont *proximaSemi = [UIFont fontWithName: @"ProximaNova-Semibold" size: 18];
+    NSDictionary *regular = [NSDictionary dictionaryWithObject: proximaSemi forKey:NSFontAttributeName];
+    NSMutableAttributedString *regularString = [[NSMutableAttributedString alloc] initWithString:modalTitle attributes: regular];
+    [regularString addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [regularString length]))];
+    ModalView* modalView = [[ModalView alloc]initWithFrame:modalFrame image:[UIImage imageNamed:@"info"] title:modalTitle text:regularString imageColor:[Helper getUIColorObjectFromHexString:@"#34495e" alpha:1.0]];
+    [self.view.window addSubview:modalView];
+    
+    [modalView showModalAtTop:YES];
 }
 
 

@@ -12,6 +12,6 @@
 
 @interface ModalView : BaseModal <TargetViewDelegate>
 
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSString *)modalTitle text:(NSMutableAttributedString *)modalText;
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)modalImage title:(NSString *)modalTitle text:(NSMutableAttributedString *)modalText imageColor:(UIColor*)imageColor;
 
 @end
