@@ -84,12 +84,20 @@
             } else{
                 [webService findByUsername:username withAuthToken:response callback:^(NSDictionary* user) {
                     if (user) {
-                        [self processLogin:user withAuthToken:response];
+                        [[FestivalData sharedFestivalData] clearAllData];
+                        [webService loginAPIWithUsername:username andPassword:password callback:^(NSString *response) {
+                            [self processLogin:user withAuthToken:response];
+                            
+                        }];
                     }else{
                         [webService findByEmail:username withAuthToken:response callback:^(NSDictionary* user) {
                             {
                                 if (user) {
-                                    [self processLogin:user withAuthToken:response];
+                                    [[FestivalData sharedFestivalData] clearAllData];
+                                    [webService loginAPIWithUsername:username andPassword:password callback:^(NSString *response) {
+                                        [self processLogin:user withAuthToken:response];
+
+                                    }];
                                 }else {
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         [self showBadConnectionAlert];
