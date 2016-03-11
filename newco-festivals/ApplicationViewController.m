@@ -115,7 +115,7 @@ static UIViewController *theTopViewController;
     [regularString addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [regularString length]))];
 
     
-    ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame title:regularString yesText:@"Buy Ticket" noText:@"Not Now" imageColor:[Helper getUIColorObjectFromHexString:@"#B20000" alpha:1.0] image:[UIImage imageNamed:@"ticket"] roundedDisplay:NO];
+    ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame title:regularString yesText:@"Buy Ticket" noText:@"Not Now" imageColor:[Helper getUIColorObjectFromHexString:@"#34495e" alpha:1.0] image:[UIImage imageNamed:@"ticket"] roundedDisplay:NO];
     modalView.modalType = @"ticket";
     modalView.confirmationModalDelegate = self;
     UIView * topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
@@ -124,11 +124,14 @@ static UIViewController *theTopViewController;
     [modalView showModalAtTop:YES];
 
 }
+-(void)buyTickets{
+    [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+}
 - (void)yesButtonClicked:(ConfirmationModalView*)modal{
     if ([modal.modalType isEqualToString:@"ticket"]){
         [modal hideModal];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+            [self buyTickets];
         });
         
     }

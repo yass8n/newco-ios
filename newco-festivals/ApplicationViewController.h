@@ -22,6 +22,7 @@ static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
 static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 static CGFloat animatedDistance;
 @interface ApplicationViewController : UIViewController <UIGestureRecognizerDelegate, ShareModalDelegate, FBSDKSharingDelegate, BaseModalDelegate, ConfirmationModalDelegate>
+-(void)buyTickets;
 -(void)showNeedTicketModal;
 -(void)setErrorView:(UIView*)view;
 -(void)showWebViewWithUrl:(NSString*)url;
