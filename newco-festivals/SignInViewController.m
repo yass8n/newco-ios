@@ -85,12 +85,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void)adjustUI{
-    
-    
+-(void)setBorders{
     [Helper setBorder:self.usernameField width:1.0 radius:5 color:[UIColor myLightGray]];
     [Helper setBorder:self.passwordField width:1.0 radius:5 color:[UIColor myLightGray]];
+}
+- (void)adjustUI{
+    [self setBorders];
     [Helper setBorder:self.bottomView width:1.0 radius:8 color:[UIColor myLightGray]];
     [Helper setBorder:self.topView width:1.0 radius:5 color:[UIColor myLightGray]];
     [Helper setBorder:self.logIn width:1.0 radius:5 color:[UIColor blackColor]];
@@ -114,6 +114,7 @@
     [self.view endEditing:YES];
 }
 - (IBAction)logIn:(id)sender {
+    [self setBorders];
     NSString* username = [self.usernameField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString* password = [self.passwordField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     [self.view endEditing:YES];
@@ -173,9 +174,9 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ([[self.usernameField.text stringByReplacingOccurrencesOfString:@" " withString:@""]  isEqual: @""]){
-        [self.usernameField becomeFirstResponder];
+        [self setErrorView:self.usernameField];
     }else {
-        [self.passwordField becomeFirstResponder];
+        [self setErrorView:self.passwordField];
     }
 }
 

@@ -31,9 +31,10 @@
 }
 
 - (IBAction)signUp:(id)sender {
+    [self setBorders];
     NSString* username = [self.usernameField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString* password = [self.passwordField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString* email = [self.passwordField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString* email = [self.emailField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     [self.view endEditing:YES];
     if ([username isEqual:@""] || [password isEqual:@""] || [email isEqual:@""]){
         NSString* isEmpty = @"Password";
@@ -50,22 +51,23 @@
         [alert show];
     }else {
         WebService * webService = [[WebService alloc] initWithView:self.view];
-        [webService loginAPIWithUsername:username andPassword:password callback:^(NSString *response) {
+        [webService signUpAPIWithUsername:username andPassword:password andEmail:email callback:^(NSString *response) {
             if ([response rangeOfString:@"ERR"].location != NSNotFound){
-                if ([response rangeOfString:@"denied"].location != NSNotFound) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                    message:@"Username or Email does not exist."
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                    [alert show];
-                } else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                    message:@"Wrong password."
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                    [alert show];
+    
+                response = [response stringByReplacingOccurrencesOfString:@"ERR: " withString:@""];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:response
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                if ([[response lowercaseString] rangeOfString:@"email"].location != NSNotFound){
+                    [self setErrorView:self.emailField];
+                }else if([[response lowercaseString] rangeOfString:@"username"].location != NSNotFound){
+                    [self setErrorView:self.usernameField];
+
+                }else if([[response lowercaseString] rangeOfString:@"password"].location != NSNotFound){
+                    [self setErrorView:self.passwordField];
                 }
             } else{
                 [webService findByUsername:username withAuthToken:response callback:^(NSDictionary* user) {
@@ -144,13 +146,14 @@
     self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
 }
 
-
-- (void)adjustUI{
-    
-    
+-(void)setBorders{
     [Helper setBorder:self.usernameField width:1.0 radius:5 color:[UIColor myLightGray]];
     [Helper setBorder:self.passwordField width:1.0 radius:5 color:[UIColor myLightGray]];
-        [Helper setBorder:self.emailField width:1.0 radius:5 color:[UIColor myLightGray]];
+    [Helper setBorder:self.emailField width:1.0 radius:5 color:[UIColor myLightGray]];
+}
+- (void)adjustUI{
+    
+    [self setBorders];
     [Helper setBorder:self.bottomView width:1.0 radius:8 color:[UIColor myLightGray]];
     [Helper setBorder:self.topView width:1.0 radius:5 color:[UIColor myLightGray]];
     [Helper setBorder:self.signUp width:1.0 radius:5 color:[UIColor blackColor]];
@@ -171,11 +174,11 @@
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ([[self.usernameField.text stringByReplacingOccurrencesOfString:@" " withString:@""]  isEqual: @""]){
-        [self.usernameField becomeFirstResponder];
+        [self setErrorView:self.usernameField];
     }else if ([[self.passwordField.text stringByReplacingOccurrencesOfString:@" " withString:@""]  isEqual: @""]){
-        [self.passwordField becomeFirstResponder];
+        [self setErrorView:self.passwordField];
     }else if ([[self.emailField.text stringByReplacingOccurrencesOfString:@" " withString:@""]  isEqual: @""]){
-        [self.emailField becomeFirstResponder];
+        [self setErrorView:self.emailField];
     }
 }
 

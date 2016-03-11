@@ -301,7 +301,30 @@ static double milliSecondsSinceLastSession = 0;
     }];
     [dataTask resume];
 }
-
+- (void) signUpAPIWithUsername:username andPassword:password andEmail:email callback:(void (^)(NSString *response)) callback{
+    dispatch_queue_t completion_que = dispatch_get_main_queue();
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/user/add?api_key=%@&username=%@&full_name=&password=%@&email=%@", [self.credentials.festival objectForKey:@"url"], [self.credentials.festival objectForKey:@"api_key"], username, password, email];
+    NSURL *URL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (!error) {
+            NSString *response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            dispatch_async(completion_que, ^{
+                callback( (NSString*) response);
+            });
+            
+        } else {
+            NSLog(@"Error: %@", error);
+            NSLog(@"ERROR IN SignUp");
+        }
+        [self hidePageLoader];
+    }];
+    [dataTask resume];
+}
 - (void)findByUsername:username withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback{
     dispatch_queue_t completion_que = dispatch_queue_create("", NULL);
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

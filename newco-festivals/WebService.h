@@ -23,6 +23,7 @@
 - (void)removeSessionFromSchedule:(NSString*)id_ callback:(void (^)(NSString *response)) callback;
 - (void)fetchCurrentUserSessions:username withAuthToken:(NSString*)auth callback:(void (^)(NSArray * user)) callback;
 - (void)loginAPIWithUsername:username andPassword:password callback:(void (^)(NSString *response)) callback;
+- (void) signUpAPIWithUsername:username andPassword:password andEmail:email callback:(void (^)(NSString *response)) callback;
 - (void)findByUsername:username withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary * user)) callback;
 - (void)findByEmail:email withAuthToken:(NSString*)auth callback:(void (^)(NSDictionary* user)) callback;
 - (void)editProfile:(NSDictionary *)params callback:(void (^)(NSDictionary * status)) callback;

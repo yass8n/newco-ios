@@ -423,6 +423,12 @@ static UIViewController *theTopViewController;
                                           otherButtonTitles:nil];
     [alert show];
 }
+-(void)setErrorView:(UIView*)view{
+    [view.layer setBorderColor:[UIColor redColor].CGColor];
+    if ([view isKindOfClass:[UITextField class]]){
+        [view becomeFirstResponder];
+    }
+}
 -(void)setUserNavBar:(NSDictionary*)myUser{
     if ( !rightNav ){
         UIButton *user =  [UIButton buttonWithType:UIButtonTypeCustom];
