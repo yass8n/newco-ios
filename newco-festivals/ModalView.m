@@ -37,25 +37,12 @@
         modalImageView.layer.masksToBounds = YES;
         [modalImageContainer addSubview:modalImageView];
 
+    
         
-        
-//        UILabel *modalTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, modalContent.frame.size.width, 30)];
-//        modalTitleLabel.font = [UIFont fontWithName: @"ProximaNova-Semibold" size: 23.0f];
-//        modalTitleLabel.textColor = [Helper getUIColorObjectFromHexString:@"#555" alpha:1.0];
-//        modalTitleLabel.text = modalTitle;
-//        modalTitleLabel.textAlignment = NSTextAlignmentCenter;
-//        [modalTitleLabel.text uppercaseString];
-//        
-//        [modalContent addSubview:modalTitleLabel];
-        
-        UITextView *modalTextView = [[UITextView alloc] initWithFrame:CGRectMake(5, 25, modalContent.frame.size.width - 10, 100)];
-        //modalTextView.text = modalText;
+        UITextView *modalTextView = [[UITextView alloc] initWithFrame:CGRectMake(5, 20, modalContent.frame.size.width - 10, 100)];
         
         modalTextView.attributedText = modalText;
         modalTextView.textAlignment = NSTextAlignmentCenter;
-        //modalTextView.font = [UIFont fontWithName: @"ProximaNova-Regular" size: 14.0f];
-        modalTextView.textColor = [UIColor darkTextColor];
-        
         [modalContent addSubview:modalTextView];
         
         

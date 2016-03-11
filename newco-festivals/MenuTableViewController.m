@@ -57,7 +57,7 @@
     NSArray * keys = sharedFestivalData.datesDict.allKeys;
     NSMutableArray * fakeDatesToGetThemSorted = [[NSMutableArray alloc]init];
     NSDictionary * order = @{
-                             @"Mon": @"1'",
+                             @"Mon": @"1",
                              @"Tue": @"2",
                              @"Wed": @"3",
                              @"Thu": @"4",
