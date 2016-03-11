@@ -1054,6 +1054,24 @@
             </objects>
             <point key="canvasLocation" x="405" y="111"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="r8q-Dk-yem">
+            <objects>
+                <viewController id="iE9-oR-eTg" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GmA-iR-4tz"/>
+                        <viewControllerLayoutGuide type="bottom" id="wBm-r2-qeY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KSC-YF-kF2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jso-gE-bee" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-996" y="841"/>
+        </scene>
         <!--Log in to Newco-->
         <scene sceneID="Q3o-0p-KYJ">
             <objects>
@@ -1234,7 +1252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0x-sy-qzC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-321" y="837"/>
+            <point key="canvasLocation" x="-321" y="859"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="Jdw-yB-RCB">

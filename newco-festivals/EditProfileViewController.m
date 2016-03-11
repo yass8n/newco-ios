@@ -736,6 +736,8 @@
     NSDictionary* params;
     if (self.selectedImage != nil){
         params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
+                   @"api_url" : [[Credentials sharedCredentials].festival objectForKey:@"url"] ,
+                   @"api_key" : [[Credentials sharedCredentials].festival objectForKey:@"api_key"],
                    @"avatar" : self.selectedImage,
                    @"name" : self.nameField.text,
                    @"username" : [[Credentials sharedCredentials].currentUser objectForKey:@"username"],
@@ -748,8 +750,10 @@
                    @"privacy_mode" :self.privacySwitch.on ? @"true" : @"false"};
     }else{
         params = @{@"sched_id" : [[Credentials sharedCredentials].currentUser objectForKey:@"id"],
+                   @"api_url" : [[Credentials sharedCredentials].festival objectForKey:@"url"] ,
+                   @"api_key" : [[Credentials sharedCredentials].festival objectForKey:@"api_key"],
                    @"name" : self.nameField.text,
-                   @"username" : [[Credentials sharedCredentials].currentUser objectForKey:@"name"],
+                   @"username" : [[Credentials sharedCredentials].currentUser objectForKey:@"username"],
                    @"email" : self.emailField.text,
                    @"url" : self.websiteField.text,
                    @"about" : self.aboutMeField.text,
