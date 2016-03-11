@@ -439,13 +439,7 @@ static NSString* ATTEND = @" Attend ";
                                              cancelButtonTitle:@"OK"
                                              otherButtonTitles:nil];
                 } else if ([response rangeOfString:@"noticket"].location != NSNotFound){
-                    alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                       message:@"You need to purchase a ticket before attending a session."
-                                                      delegate:nil
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-                    
-                    
+                    [self showNeedTicketModal];
                 } else if ([response rangeOfString:@"ERR"].location != NSNotFound){
                     alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                        message:@"Event doesn't exist."
@@ -489,6 +483,10 @@ static NSString* ATTEND = @" Attend ";
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)yesButtonClicked:(ConfirmationModalView*)modal{
+    if ([modal.modalType isEqualToString:@"ticket"]){
+        [super yesButtonClicked:modal];
+        return;
+    }
     Session * conflictingSession = [[FestivalData sharedFestivalData] getConflictingSession:self.session];
     
     [[modal.modalImageContainer subviews]
@@ -536,12 +534,7 @@ static NSString* ATTEND = @" Attend ";
                                                  cancelButtonTitle:@"OK"
                                                  otherButtonTitles:nil];
                     } else if ([response rangeOfString:@"noticket"].location != NSNotFound){
-                        alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                           message:@"You need to purchase a ticket before attending a session."
-                                                          delegate:nil
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
-                        
+                        [self showNeedTicketModal];
                         
                     } else if ([response rangeOfString:@"ERR"].location != NSNotFound){
                         alert = [[UIAlertView alloc] initWithTitle:@"Error"

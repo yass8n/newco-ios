@@ -13,6 +13,7 @@
 #import "SessionCellHeader.h"
 #import "Session.h"
 #import "ShareModalView.h"
+#import "ConfirmationModalView.h"
 #import <FBSDKShareKit/FBSDKShareKit.h>
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
@@ -20,7 +21,8 @@ static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
 static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
 static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 static CGFloat animatedDistance;
-@interface ApplicationViewController : UIViewController <UIGestureRecognizerDelegate, ShareModalDelegate, FBSDKSharingDelegate, BaseModalDelegate>
+@interface ApplicationViewController : UIViewController <UIGestureRecognizerDelegate, ShareModalDelegate, FBSDKSharingDelegate, BaseModalDelegate, ConfirmationModalDelegate>
+-(void)showNeedTicketModal;
 -(void)setErrorView:(UIView*)view;
 -(void)showWebViewWithUrl:(NSString*)url;
 -(void)showPageLoader;

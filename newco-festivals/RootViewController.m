@@ -87,6 +87,7 @@ static NSRecursiveLock *calls_lock;
                 user = [mutableUser copy];
                 [Credentials sharedCredentials].currentUser = user;
                 [self fetchSessions:webService];
+        
             }else{
                 [webService findByEmail:[[Credentials sharedCredentials].currentUser objectForKey:@"email"] withAuthToken:[[Credentials sharedCredentials].currentUser objectForKey:@"auth"] callback:^(NSDictionary* user) {
                     {
@@ -124,13 +125,22 @@ static NSRecursiveLock *calls_lock;
         if ([Credentials sharedCredentials].currentUser == nil ||[[Credentials sharedCredentials].currentUser count] == 0){
             dispatch_async(dispatch_get_main_queue(), ^{
                 int value = [self.numberCompletedCalls intValue];
-                self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
+                self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];
+            });
         } else {
             [ApplicationViewController fetchCurrentUserSessions:self.view];
             dispatch_async(dispatch_get_main_queue(), ^{
                 int value = [self.numberCompletedCalls intValue];
-                self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];            });
+                self.numberCompletedCalls = [NSNumber numberWithInt:value + 1];
+                if ([(NSArray*)[[Credentials sharedCredentials].currentUser objectForKey:@"tickets"]count] == 0){
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                        [self showNeedTicketModal];
+                    });
+                }
+            });
         }
+        
     }];
 
 }

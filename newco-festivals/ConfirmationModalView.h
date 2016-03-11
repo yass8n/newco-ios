@@ -12,8 +12,10 @@
 
 @interface ConfirmationModalView : BaseModal <TTTAttributedLabelDelegate>
 - (id)initWithFrame:(CGRect)frame title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor conflictingSession:(Session*)conflictingSession;
+- (id)initWithFrame:(CGRect)frame title:(NSMutableAttributedString *)modalTitle yesText:(NSString*)yesText noText:(NSString*)noText imageColor:(UIColor*)imageColor image:(UIImage*)image roundedDisplay:(BOOL)roundedDisplay;
 @property (nonatomic, weak) id<ConfirmationModalDelegate> confirmationModalDelegate;
 @property (nonatomic, strong) UIView *modalImageContainer;
+@property (nonatomic, strong) NSString *modalType;
 @end
 
 @protocol ConfirmationModalDelegate <NSObject>;

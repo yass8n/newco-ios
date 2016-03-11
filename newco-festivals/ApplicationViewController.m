@@ -101,6 +101,41 @@ static UIViewController *theTopViewController;
     singleFingerTap.delegate = self;
     [self.view addGestureRecognizer:singleFingerTap];
 }
+-(void)showNeedTicketModal{
+    CGRect modalFrame = CGRectMake(30, 150, self.view.frame.size.width - 60, 160);
+    
+    NSString *modalTitle = @"You need a ticket to start building your schedule.";
+    
+    UIColor *modalTitleColor =  [Helper getUIColorObjectFromHexString:@"#34495e" alpha:1.0];
+    UIFont *proximaBold = [UIFont fontWithName: @"ProximaNova-Bold" size: 18];
+    NSDictionary *boldDict = [NSDictionary dictionaryWithObject:proximaBold forKey:NSFontAttributeName];
+    UIFont *proximaSemi = [UIFont fontWithName: @"ProximaNova-Semibold" size: 18];
+    NSDictionary *regular = [NSDictionary dictionaryWithObject: proximaSemi forKey:NSFontAttributeName];
+    NSMutableAttributedString *regularString = [[NSMutableAttributedString alloc] initWithString:modalTitle attributes: regular];
+    [regularString addAttribute:NSForegroundColorAttributeName value:modalTitleColor range:(NSMakeRange(0, [regularString length]))];
+
+    
+    ConfirmationModalView* modalView =  [[ConfirmationModalView alloc] initWithFrame:modalFrame title:regularString yesText:@"Buy Ticket" noText:@"Not Now" imageColor:[Helper getUIColorObjectFromHexString:@"#B20000" alpha:1.0] image:[UIImage imageNamed:@"ticket"] roundedDisplay:NO];
+    modalView.modalType = @"ticket";
+    modalView.confirmationModalDelegate = self;
+    UIView * topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    [topView.window addSubview:modalView];
+    modalView.baseModalDelegate = self;
+    [modalView showModalAtTop:YES];
+
+}
+- (void)yesButtonClicked:(ConfirmationModalView*)modal{
+    if ([modal.modalType isEqualToString:@"ticket"]){
+        [modal hideModal];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+        });
+        
+    }
+}
+- (void)noButtonClicked:(ConfirmationModalView*)modal{
+    [modal hideModal];
+}
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if (menuOpen) {
         return YES;
