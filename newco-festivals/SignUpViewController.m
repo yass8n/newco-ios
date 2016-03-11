@@ -242,9 +242,9 @@
 }
 //an event handling method
 - (void)registerViewTapped:(UITapGestureRecognizer *)recognizer {
-        [self showWebViewWithUrl:[NSString stringWithFormat:@"%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"url"]]];
+//        [self showWebViewWithUrl:[NSString stringWithFormat:@"%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"url"]]];
     
-    //   [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
+       [self showWebViewWithUrl:[NSString stringWithFormat:@"http://festivals.newco.co/%@/tickets", [[Credentials sharedCredentials].festival objectForKey:@"name"]]];
 }
 
 @end
