@@ -466,7 +466,10 @@ static double milliSecondsSinceLastSession = 0;
             });
         } else {
             NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN findByUsername");
+            NSLog(@"ERROR IN findByEmail");
+            dispatch_async(completion_que, ^{
+                callback(nil);
+            });
         }
         [self hidePageLoader];
     }];

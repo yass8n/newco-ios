@@ -10,4 +10,5 @@
 
 @interface NSString (NSStringAdditions)
 -(NSString *) stringByStrippingHTML;
+-(BOOL) isValidEmail;
 @end

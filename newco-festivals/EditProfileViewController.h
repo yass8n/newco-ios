@@ -10,4 +10,6 @@
 
 @interface EditProfileViewController : ApplicationViewController <UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
+@property (nonatomic) BOOL dontSetBackButton;
+
 @end

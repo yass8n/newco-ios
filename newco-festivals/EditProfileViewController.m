@@ -54,7 +54,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
-    [self setBackButton];
+    if (!self.dontSetBackButton){
+        [self setBackButton];
+    }
     self.showingMoreSettings = NO;
     //    [self hidePageLoader];
     // Do any additional setup after loading the view.
@@ -795,6 +797,9 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"setRightNavButton" object:nil];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [modalView showSuccessModal:@"Profile Saved!" onWindow:self.view.window];
+                if (self.dontSetBackButton){ //they have no where to go from here, so take them to scheduleViewController
+                    
+                }
             });
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
