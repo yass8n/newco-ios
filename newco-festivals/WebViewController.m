@@ -26,7 +26,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self showPageLoader];
+    [UIApplication sharedApplication].
+    networkActivityIndicatorVisible = YES;
     self.navigationController.navigationBar.hidden = YES;
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
@@ -43,7 +44,8 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     
     NSLog(@"finish");
-    [self hidePageLoader];
+    [UIApplication sharedApplication].
+    networkActivityIndicatorVisible = NO;
 }
 
 
