@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self adjustUI];
-    usersArray = [self.users allValues];
+    usersArray = [[self.users allValues]sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     cellsArray = [[NSMutableArray alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.

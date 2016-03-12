@@ -22,7 +22,6 @@
 @property (strong, nonatomic) NSMutableDictionary* datesDict;
 @property (strong, nonatomic) NSMutableDictionary* orderOfInsertedDatesDict;
 @property (nonatomic) BOOL dataLoaded;
-@property (nonatomic) BOOL hideEditButton;
 #import "constants.h"
 @end
 
@@ -80,7 +79,7 @@
                 [tv setAlpha:1.0];
                 [tv setFrame:animateUpFrame];
             } completion:^(BOOL finished) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                     [UIView animateWithDuration:.5 animations:^{
                         [tv setAlpha:1.0];
                         [tv setFrame:animateDownFrame];
@@ -138,12 +137,13 @@
         //        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
         if ([[self.user objectForKey:@"id"] isEqualToString:[[Credentials sharedCredentials].currentUser objectForKey:@"id"]]){
             self.user = [Credentials sharedCredentials].currentUser;
-            self.hideEditButton = NO;
-        }else{
-            self.hideEditButton = YES;
+            UIButton *share =  [UIButton buttonWithType:UIButtonTypeCustom];
+            [share setImage:[UIImage imageNamed:@"tool"] forState:UIControlStateNormal];
+            [share addTarget:self action:@selector(editProfile) forControlEvents:UIControlEventTouchUpInside];
+            [share setFrame:CGRectMake(0, 0, 25, 25)];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:share];
+            self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];        }else{
         }
-    }else{
-        self.hideEditButton = YES;
     }
 }
 
@@ -156,6 +156,11 @@
     [self setBackButton];
     NSString * name = [self.user objectForKey:@"name"];
     self.navigationItem.title = name;
+}
+-(void)editProfile{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    EditProfileViewController *vcA  = [storyboard instantiateViewControllerWithIdentifier:@"EditProfile"];
+    [self.navigationController pushViewController:vcA animated:YES];
 }
 -(void)reloadTableView
 {
@@ -220,13 +225,6 @@
         }else{
             [cell.infoIcon removeFromSuperview];
         }
-        if (self.hideEditButton){
-            cell.editProfileButton.hidden = YES;
-            cell.editProfileButton.userInteractionEnabled = NO;
-        }else{
-            cell.editProfileButton.hidden = NO;
-            cell.editProfileButton.userInteractionEnabled = YES;
-        }
         return cell;
     }else{
            return [self setupSessionCellforTableVew:tableView withIndexPath:indexPath withDatesDict:self.datesDict withOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict];
@@ -271,7 +269,6 @@
 
 }
 - (IBAction)logUserOut:(id)sender {
-    self.hideEditButton = YES;
     dispatch_queue_t que = dispatch_queue_create("logOut", NULL);
     dispatch_async(que, ^{
         //code executed in background

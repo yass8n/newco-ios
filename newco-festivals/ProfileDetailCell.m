@@ -22,10 +22,10 @@
 }
 
 - (IBAction)editProfile:(id)sender {
-    [Helper buttonTappedAnimation:self.editProfileButton];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    EditProfileViewController *vcA  = [storyboard instantiateViewControllerWithIdentifier:@"EditProfile"];
-    UIViewController *topVc = [ApplicationViewController topViewController];
-    [topVc.navigationController pushViewController:vcA animated:YES];
+//    [Helper buttonTappedAnimation:self.editProfileButton];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    EditProfileViewController *vcA  = [storyboard instantiateViewControllerWithIdentifier:@"EditProfile"];
+//    UIViewController *topVc = [ApplicationViewController topViewController];
+//    [topVc.navigationController pushViewController:vcA animated:YES];
 }
 @end

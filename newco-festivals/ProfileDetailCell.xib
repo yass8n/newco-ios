@@ -96,7 +96,7 @@
                                 <constraint firstAttribute="width" constant="15" id="KrU-6A-9K5"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbB-wr-xVV">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbB-wr-xVV">
                             <rect key="frame" x="527" y="8" width="50" height="30"/>
                             <color key="backgroundColor" red="0.81194196429999999" green="0.81194196429999999" blue="0.81194196429999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>

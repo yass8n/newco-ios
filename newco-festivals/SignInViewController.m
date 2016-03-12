@@ -148,6 +148,7 @@
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];
                     [alert show];
+                    [self setErrorView:self.passwordField];
                 }
             } else{
                 [webService findByUsername:username withAuthToken:response callback:^(NSDictionary* user) {
