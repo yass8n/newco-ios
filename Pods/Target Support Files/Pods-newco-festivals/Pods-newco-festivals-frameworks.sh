@@ -82,22 +82,3 @@ strip_invalid_archs() {
   fi
 }
 
-
-if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-newco-festivals/AFNetworking.framework"
-  install_framework "Pods-newco-festivals/Firebase.framework"
-  install_framework "Pods-newco-festivals/Mantle.framework"
-  install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
-  install_framework "Pods-newco-festivals/SDWebImage.framework"
-  install_framework "Pods-newco-festivals/SVProgressHUD.framework"
-  install_framework "Pods-newco-festivals/TTTAttributedLabel.framework"
-fi
-if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-newco-festivals/AFNetworking.framework"
-  install_framework "Pods-newco-festivals/Firebase.framework"
-  install_framework "Pods-newco-festivals/Mantle.framework"
-  install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
-  install_framework "Pods-newco-festivals/SDWebImage.framework"
-  install_framework "Pods-newco-festivals/SVProgressHUD.framework"
-  install_framework "Pods-newco-festivals/TTTAttributedLabel.framework"
-fi

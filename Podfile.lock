@@ -21,7 +21,6 @@ PODS:
   - Mantle (2.0.6):
     - Mantle/extobjc (= 2.0.6)
   - Mantle/extobjc (2.0.6)
-  - Mapbox-iOS-SDK (3.1.2)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -34,7 +33,6 @@ DEPENDENCIES:
   - Fabric
   - Firebase (>= 2.5.0)
   - Mantle (~> 2.0.6)
-  - Mapbox-iOS-SDK
   - SDWebImage (~> 3.7)
   - SVProgressHUD (HEAD)
   - TTTAttributedLabel
@@ -45,7 +43,6 @@ SPEC CHECKSUMS:
   Fabric: 1abc1e59f11fa39ede6f690ef7309d8563e3ec59
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   Mantle: 299966b00759634931699f69cb6a30b9239b944d
-  Mapbox-iOS-SDK: 0a910c2cce1aa8cff5b9ec2a990e7a32332a776a
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SVProgressHUD: 6e48a1dda09ce3b58adc41d013baed3a8e8980ff
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f

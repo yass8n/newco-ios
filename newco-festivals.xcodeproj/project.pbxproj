@@ -76,7 +76,7 @@
 		929107351C6C532D004B517C /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107341C6C532D004B517C /* DirectoryViewController.m */; };
 		929107381C6C5A4E004B517C /* UserImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107371C6C5A4E004B517C /* UserImage.m */; };
 		9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107391C6C5A5A004B517C /* UserImage.xib */; };
-		C63A58568C8866CF0B571080 /* Pods_newco_festivals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A4D806A525370621750C9A /* Pods_newco_festivals.framework */; };
+		C25334307A09B7FEB3B7CFFC /* libPods-newco-festivals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C099766019DEB63FA53093 /* libPods-newco-festivals.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +97,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06C099766019DEB63FA53093 /* libPods-newco-festivals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newco-festivals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		083505D01C830C9B00826D63 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		083505D11C830C9B00826D63 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		08A590441C805CAC00890E30 /* ConfirmationModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationModalView.h; sourceTree = "<group>"; };
@@ -222,7 +223,6 @@
 		929107361C6C5A4E004B517C /* UserImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserImage.h; sourceTree = "<group>"; };
 		929107371C6C5A4E004B517C /* UserImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserImage.m; sourceTree = "<group>"; };
 		929107391C6C5A5A004B517C /* UserImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserImage.xib; sourceTree = "<group>"; };
-		B4A4D806A525370621750C9A /* Pods_newco_festivals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newco_festivals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BE9EEA39E8146406331267 /* Pods-newco-festivals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.release.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.release.xcconfig"; sourceTree = "<group>"; };
 		D68E18AACEFFC5496CB930E2 /* Pods-newco-festivals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newco-festivals.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newco-festivals/Pods-newco-festivals.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,7 +234,7 @@
 			files = (
 				08F6F8501C7491DB005BC870 /* FBSDKShareKit.framework in Frameworks */,
 				08F6F84E1C7491CE005BC870 /* FBSDKCoreKit.framework in Frameworks */,
-				C63A58568C8866CF0B571080 /* Pods_newco_festivals.framework in Frameworks */,
+				C25334307A09B7FEB3B7CFFC /* libPods-newco-festivals.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,7 +695,7 @@
 		CFAA25233C1B4C1175BD2FA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B4A4D806A525370621750C9A /* Pods_newco_festivals.framework */,
+				06C099766019DEB63FA53093 /* libPods-newco-festivals.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
