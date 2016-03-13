@@ -21,8 +21,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];
-    
-    [self setUpMap:self.sessionsArray];
 }
 
 - (void)viewDidLoad {
@@ -41,22 +39,23 @@
     [filter setFrame:CGRectMake(0, 0, 25, 25)];
     UIBarButtonItem * filterButton = [[UIBarButtonItem alloc]initWithCustomView:filter];
     [self navigationItem].rightBarButtonItem = filterButton;
-    
+    [self setUpMap:self.sessionsArray];
     // Do any additional setup after loading the view.
 }
 -(void)setLocalFilters:(filterSessionEnum)filterSessions filterDate:(NSString*)filterDate sessionsArray:(NSMutableArray*)sessionsArray{
     self.filterSessions = filterSessions;
     self.filterDate = filterDate;
     self.sessionsArray = sessionsArray;
+    [self setUpMap:self.sessionsArray];
 }
 -(void)setUpMap:(NSArray*)sessionsArray {
     
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.
-    Session * sessionInitial = [self.sessionsArray objectAtIndex:0];
+    Session * sessionInitial = [[FestivalData sharedFestivalData].sessionsArray objectAtIndex:0];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[sessionInitial.lat floatValue]
                                                             longitude:[sessionInitial.lon floatValue]
-                                                                 zoom:6];
+                                                                 zoom:11];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.myLocationEnabled = YES;
     self.view = mapView_;

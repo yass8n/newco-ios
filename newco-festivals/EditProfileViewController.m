@@ -63,8 +63,6 @@
     //    [self hidePageLoader];
     // Do any additional setup after loading the view.
 }
--(void)viewDidAppear:(BOOL)animated{
-}
 -(void)adjustUI{
     UIGestureRecognizer *dismiss = [[UITapGestureRecognizer alloc]
                                     initWithTarget:self action:@selector(dismissKeyboard:)];

@@ -415,7 +415,7 @@
     [navController setViewControllers: @[map] animated: YES];
     map.sessionsArray = [FestivalData sharedFestivalData].sessionsArray;
     map.filterSessions = all;
-    map.filterDate = @"all";
+    map.filterDate = @"All";
     UIButton *back =  [UIButton buttonWithType:UIButtonTypeCustom];
     [back setImage:[UIImage imageNamed:@"back.jpg"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
