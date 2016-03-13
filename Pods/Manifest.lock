@@ -18,6 +18,7 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.6)
   - Firebase (2.5.1)
+  - GoogleMaps (1.12.3)
   - Mantle (2.0.6):
     - Mantle/extobjc (= 2.0.6)
   - Mantle/extobjc (2.0.6)
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Firebase (>= 2.5.0)
+  - GoogleMaps
   - Mantle (~> 2.0.6)
   - SDWebImage (~> 3.7)
   - SVProgressHUD (HEAD)
@@ -42,6 +44,7 @@ SPEC CHECKSUMS:
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: 1abc1e59f11fa39ede6f690ef7309d8563e3ec59
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
+  GoogleMaps: a4ac67918d0b5ba5f6b9893ac80487e357779e6c
   Mantle: 299966b00759634931699f69cb6a30b9239b944d
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SVProgressHUD: 6e48a1dda09ce3b58adc41d013baed3a8e8980ff

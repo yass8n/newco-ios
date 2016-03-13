@@ -4,7 +4,8 @@
 target 'newco-festivals' do
     pod 'SDWebImage', '~> 3.7'
     source 'https://github.com/CocoaPods/Specs.git'
-    platform :ios, '8.0'
+    platform :ios, '8.1'
+    pod 'GoogleMaps'
     pod 'Mantle', '~>2.0.6'
     pod 'SVProgressHUD', :head
     pod 'AFNetworking', '~> 3.0'
