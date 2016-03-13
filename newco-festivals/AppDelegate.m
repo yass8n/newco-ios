@@ -10,6 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Mapbox/Mapbox.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +20,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Fabric with:@[[MGLAccountManager class]]];
+    [MGLAccountManager setAccessToken:@"pk.eyJ1IjoieWFzczhuIiwiYSI6ImNpbHB6aThyMTA4cXF1bGtuYWZ5bjZ2enUifQ.OqPml3rb_MKDcpACe_s6sA"];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     self.webservice = [[WebService alloc] init];

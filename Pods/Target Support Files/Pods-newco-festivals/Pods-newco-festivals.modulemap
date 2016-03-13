@@ -1,0 +1,6 @@
+framework module Pods_newco_festivals {
+  umbrella header "Pods-newco-festivals-umbrella.h"
+
+  export *
+  module * { export * }
+}

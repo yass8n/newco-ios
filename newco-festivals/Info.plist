@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoieWFzczhuIiwiYSI6ImNpbHB6aThyMTA4cXF1bGtuYWZ5bjZ2enUifQ.OqPml3rb_MKDcpACe_s6sA</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>proximanova-black-webfont.ttf</string>

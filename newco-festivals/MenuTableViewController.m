@@ -18,7 +18,7 @@
 #import "AppDelegate.h"
 #import "colors.h"
 #import "Credentials.h"
-
+@import Mapbox;
 
 @interface MenuTableViewController ()
 
@@ -52,6 +52,14 @@
     changeCity.cellIdentifier = REGULAR;
     changeCity.icon = [[UIImage imageNamed:@"swap"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [menuItems addObject:changeCity];
+    
+    MenuItem * map = [[MenuItem alloc]init];
+    map.title = @"Map";
+    map.function = [NSValue valueWithPointer:@selector(map)];
+    map.type = selectableType;
+    map.cellIdentifier = REGULAR;
+    map.icon = [[UIImage imageNamed:@"map"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [menuItems addObject:map];
     
     FestivalData *sharedFestivalData = [FestivalData sharedFestivalData];
     NSArray * keys = sharedFestivalData.datesDict.allKeys;
@@ -392,6 +400,15 @@
 
 #pragma mark - functions for menu
 -(void)changeCity{
+    [[Credentials sharedCredentials] clearFestivalData];
+    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Festivals"];
+    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+    
+    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+    
+    [appDelegateTemp changeRootViewController:navigation animSize:1];
+}
+-(void)map{
     [[Credentials sharedCredentials] clearFestivalData];
     UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Festivals"];
     UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
