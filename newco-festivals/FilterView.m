@@ -9,6 +9,11 @@
 #import "FilterView.h"
 
 @implementation FilterView
+-(void)awakeFromNib
+{
+    self.highlightedColor = [UIColor myLightGray];
+    self.unHighlightedColor = [UIColor whiteColor];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

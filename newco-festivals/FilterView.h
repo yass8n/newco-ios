@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MapFilterViewController.h"
 
-@interface FilterView : UIView
+@interface FilterView : CustomUIView
 @property (weak, nonatomic) IBOutlet UIImageView *check;
 @property (weak, nonatomic) IBOutlet UILabel *title;
-
+@property (nonatomic) filterSessionEnum filterSession;
 @end

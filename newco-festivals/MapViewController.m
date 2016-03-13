@@ -77,6 +77,8 @@
 -(IBAction)goToFilter:(id)sender  {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MapFilterViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"MapFilter"];
+    vc.filterSessions = self.filterSessions;
+    vc.filterDate = self.filterDate;
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }

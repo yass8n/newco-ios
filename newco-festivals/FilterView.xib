@@ -11,15 +11,15 @@
             <rect key="frame" x="0.0" y="0.0" width="359" height="119"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_plain" translatesAutoresizingMaskIntoConstraints="NO" id="mIm-C0-mvY">
-                    <rect key="frame" x="8" y="40" width="40" height="40"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="check_plain" translatesAutoresizingMaskIntoConstraints="NO" id="mIm-C0-mvY">
+                    <rect key="frame" x="8" y="48" width="30" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="HNv-Rj-iH7"/>
-                        <constraint firstAttribute="width" constant="40" id="geE-c2-3Dt"/>
+                        <constraint firstAttribute="height" constant="25" id="HNv-Rj-iH7"/>
+                        <constraint firstAttribute="width" constant="25" id="geE-c2-3Dt"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTy-fK-BvD">
-                    <rect key="frame" x="56" y="49" width="295" height="21"/>
+                    <rect key="frame" x="41" y="49" width="310" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>

@@ -19,4 +19,6 @@ typedef enum filterSessionEnum{
 @end
 @interface MapFilterViewController : ApplicationViewController
 @property (nonatomic, weak) id<MapFilterDelegate> delegate;
+@property (nonatomic) filterSessionEnum filterSessions;
+@property (strong, nonatomic) NSString* filterDate;
 @end
