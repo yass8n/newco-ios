@@ -98,6 +98,8 @@
         if ([active isEqualToString:@"Y"]){
             NSString* description = [session_ objectForKey:@"description"];
             NSString* event_key = [session_ objectForKey:@"event_key"];
+            NSString* lat = [session_ objectForKey:@"lat"];
+            NSString* lon = [session_ objectForKey:@"lon"];
             NSString* name = [session_ objectForKey:@"name"];
             NSString* address = [session_ objectForKey:@"address"];
             NSDate* event_start = [Helper UTCtoNSDate:[session_ objectForKey:@"event_start"]];
@@ -152,7 +154,9 @@
                                               companies: artists
                                             description: description
                                                   goers:goers
-                                                  seats:seats];
+                                                  seats:seats
+                                                  lat:lat
+                                                  lon:lon];
             [sessionsArray addObject: s];
             [sessionsDict setObject:s forKey:s.event_key];
             

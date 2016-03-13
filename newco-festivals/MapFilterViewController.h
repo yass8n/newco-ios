@@ -1,0 +1,22 @@
+//
+//  MapFilterViewController.h
+//  newco-festivals
+//
+//  Created by Yaseen Anss on 3/13/16.
+//  Copyright © 2016 newco. All rights reserved.
+//
+
+#import "ApplicationViewController.h"
+typedef enum filterSessionEnum{
+    all = 0, my = 1
+}filterSessionEnum;
+
+@protocol MapFilterDelegate <NSObject>
+
+@required
+-(void)setLocalFilters:(filterSessionEnum)filterSessions filterDate:(NSString*)filterDate sessionsArray:(NSMutableArray*)sessionsArray;
+
+@end
+@interface MapFilterViewController : ApplicationViewController
+@property (nonatomic, weak) id<MapFilterDelegate> delegate;
+@end

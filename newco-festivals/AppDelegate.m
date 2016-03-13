@@ -10,7 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import <Mapbox/Mapbox.h>
+@import GoogleMaps;
 
 @interface AppDelegate ()
 
@@ -20,8 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Fabric with:@[[MGLAccountManager class]]];
-    [MGLAccountManager setAccessToken:@"pk.eyJ1IjoieWFzczhuIiwiYSI6ImNpbHB6aThyMTA4cXF1bGtuYWZ5bjZ2enUifQ.OqPml3rb_MKDcpACe_s6sA"];
+    [GMSServices provideAPIKey:@"AIzaSyDxVsQqkSGGRRAzd93Y85O5kRd_bf1L4LY"];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     self.webservice = [[WebService alloc] init];
@@ -72,7 +71,7 @@
             [self.webservice registerTimeStamp:@"0"];
         }
     }
-
+    
 }
 -(void)checkInternetConnectivity{
     [self.webservice showLowInternetBannerIfNotReachable];

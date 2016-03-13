@@ -18,8 +18,8 @@
 #import "AppDelegate.h"
 #import "colors.h"
 #import "Credentials.h"
-@import Mapbox;
-
+#import "MapViewController.h"
+#import "MapFilterViewController.h"
 @interface MenuTableViewController ()
 
 @end
@@ -368,6 +368,7 @@
     [back setImage:[UIImage imageNamed:@"back.jpg"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [back setFrame:CGRectMake(0, 0, 25, 25)];
+    back.transform = CGAffineTransformMakeRotation(M_PI + M_PI/2);
     UIBarButtonItem * backButton = [[UIBarButtonItem alloc]initWithCustomView:back];
     [vc navigationItem].leftBarButtonItem = backButton;
     
@@ -409,14 +410,22 @@
     [appDelegateTemp changeRootViewController:navigation animSize:1];
 }
 -(void)map{
-    [[Credentials sharedCredentials] clearFestivalData];
-    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Festivals"];
-    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+    MapViewController * map = [[MapViewController alloc]init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:map];
+    [navController setViewControllers: @[map] animated: YES];
+    map.sessionsArray = [FestivalData sharedFestivalData].sessionsArray;
+    map.filterSessions = all;
+    map.filterDate = @"all";
+    UIButton *back =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [back setImage:[UIImage imageNamed:@"back.jpg"] forState:UIControlStateNormal];
+    [back addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
+    [back setFrame:CGRectMake(0, 0, 25, 25)];
+    back.transform = CGAffineTransformMakeRotation(M_PI + M_PI/2);
+    UIBarButtonItem * backButton = [[UIBarButtonItem alloc]initWithCustomView:back];
+    [map navigationItem].leftBarButtonItem = backButton;
     
-    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
-    
-    [appDelegateTemp changeRootViewController:navigation animSize:1];
-}
+    [self.revealViewController presentViewController:navController animated:YES completion:^{
+    }];}
 -(void)showPresenters{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ProfileTableViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ProfileTable"];
@@ -431,6 +440,7 @@
     [back setImage:[UIImage imageNamed:@"back.jpg"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [back setFrame:CGRectMake(0, 0, 25, 25)];
+    back.transform = CGAffineTransformMakeRotation(M_PI + M_PI/2);
     UIBarButtonItem * backButton = [[UIBarButtonItem alloc]initWithCustomView:back];
     [vc navigationItem].leftBarButtonItem = backButton;
     [self.revealViewController presentViewController:navController animated:YES completion:^{
@@ -450,6 +460,7 @@
     [back setImage:[UIImage imageNamed:@"back.jpg"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [back setFrame:CGRectMake(0, 0, 25, 25)];
+    back.transform = CGAffineTransformMakeRotation(M_PI + M_PI/2);
     UIBarButtonItem * backButton = [[UIBarButtonItem alloc]initWithCustomView:back];
     [vc navigationItem].leftBarButtonItem = backButton;
     [self.revealViewController presentViewController:navController animated:YES completion:^{
@@ -469,6 +480,7 @@
     [back setImage:[UIImage imageNamed:@"back.jpg"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [back setFrame:CGRectMake(0, 0, 25, 25)];
+    back.transform = CGAffineTransformMakeRotation(M_PI + M_PI/2);
     UIBarButtonItem * backButton = [[UIBarButtonItem alloc]initWithCustomView:back];
     [vc navigationItem].leftBarButtonItem = backButton;
     [self.revealViewController presentViewController:navController animated:YES completion:^{
@@ -488,6 +500,7 @@
     [back setImage:[UIImage imageNamed:@"back.jpg"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [back setFrame:CGRectMake(0, 0, 25, 25)];
+    back.transform = CGAffineTransformMakeRotation(M_PI + M_PI/2);
     UIBarButtonItem * backButton = [[UIBarButtonItem alloc]initWithCustomView:back];
     [vc navigationItem].leftBarButtonItem = backButton;
     [self.revealViewController presentViewController:navController animated:YES completion:^{
@@ -503,6 +516,7 @@
     [back setImage:[UIImage imageNamed:@"back.jpg"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [back setFrame:CGRectMake(0, 0, 25, 25)];
+    back.transform = CGAffineTransformMakeRotation(M_PI + M_PI/2);
     UIBarButtonItem * backButton = [[UIBarButtonItem alloc]initWithCustomView:back];
     [vc navigationItem].leftBarButtonItem = backButton;
     vc.delegate = self;

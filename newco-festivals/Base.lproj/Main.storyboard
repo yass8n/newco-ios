@@ -1824,6 +1824,24 @@
             </objects>
             <point key="canvasLocation" x="-1916" y="121"/>
         </scene>
+        <!--Map Filter View Controller-->
+        <scene sceneID="VOi-xL-bzj">
+            <objects>
+                <viewController storyboardIdentifier="MapFilter" id="boU-KN-8sL" customClass="MapFilterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9tW-VY-KKb"/>
+                        <viewControllerLayoutGuide type="bottom" id="IIb-08-uWJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mkP-pd-Dg0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wYl-L2-BMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1906" y="811"/>
+        </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="kYv-5n-EFs">
             <objects>
