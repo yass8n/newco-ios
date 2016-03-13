@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FilterView">
+        <view contentMode="scaleToFill" restorationIdentifier="filter" id="iN0-l3-epB" customClass="FilterView">
             <rect key="frame" x="0.0" y="0.0" width="359" height="119"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -39,7 +39,7 @@
                 <outlet property="check" destination="mIm-C0-mvY" id="fqi-OL-0rB"/>
                 <outlet property="title" destination="JTy-fK-BvD" id="YVy-ey-CS2"/>
             </connections>
-            <point key="canvasLocation" x="159.5" y="509.5"/>
+            <point key="canvasLocation" x="179.5" y="490.5"/>
         </view>
     </objects>
     <resources>

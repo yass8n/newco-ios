@@ -7,9 +7,12 @@
 //
 
 #import "MapFilterViewController.h"
+#import "FilterView.h"
 
 @interface MapFilterViewController ()
-
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet CustomUIView *sessionView;
+@property (strong, nonatomic) IBOutlet CustomUIView *dateView;
 @end
 
 @implementation MapFilterViewController
@@ -25,6 +28,25 @@
     self.navigationItem.titleView = titleLabel;
     UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStylePlain target:self action:@selector(done:)];
     self.navigationItem.rightBarButtonItem = anotherButton;
+    
+    self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.frame];
+    self.scrollView.userInteractionEnabled = YES;
+    self.scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    int X = 8;
+    int Y = 8;
+    self.sessionView = [[CustomUIView alloc]initWithFrame:CGRectMake(X, Y, self.scrollView.frame.size.width-16, 12)];
+    self.sessionView.layer.borderWidth = 1.0;
+    self.sessionView.layer.borderColor = [UIColor myLightGray].CGColor;
+    self.sessionView.layer.cornerRadius = 5.0;
+    
+    UIView *rootView = [[[NSBundle mainBundle] loadNibNamed:@"FilterView" owner:self options:nil] objectAtIndex:0];
+
+    [self.sessionView addSubview:rootView];
+    [self.sessionView sizeToFit];
+    
+    [self.scrollView addSubview:self.sessionView];
+    [self.view addSubview:self.scrollView];
+    
 }
 -(IBAction)done:(id)sender  {
     NSLog(@"asdasd");
