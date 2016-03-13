@@ -16,11 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIButton *filter =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [filter setTitle:@"Apply" forState:UIControlStateNormal];
-    [filter addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * filterButton = [[UIBarButtonItem alloc]initWithCustomView:filter];
-    [self navigationItem].rightBarButtonItem = filterButton;    // Do any additional setup after loading the view.
+    [self setBackButton];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, self.navigationController.navigationBar.frame.size.height)];
+    titleLabel.text =  @"Map Filter";
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleLabel setAdjustsFontSizeToFitWidth:YES];
+    self.navigationItem.titleView = titleLabel;
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStylePlain target:self action:@selector(done:)];
+    self.navigationItem.rightBarButtonItem = anotherButton;
 }
 -(IBAction)done:(id)sender  {
     NSLog(@"asdasd");
