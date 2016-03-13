@@ -1,0 +1,21 @@
+//
+//  FilterView.m
+//  newco-festivals
+//
+//  Created by Yaseen Anss on 3/13/16.
+//  Copyright © 2016 newco. All rights reserved.
+//
+
+#import "FilterView.h"
+
+@implementation FilterView
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end

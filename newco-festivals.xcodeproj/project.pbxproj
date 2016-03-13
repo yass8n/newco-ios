@@ -18,6 +18,8 @@
 		08C48E3E1C75AEF200A53712 /* FestivalCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */; };
 		08E0081E1C95B91F008C7049 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E0081D1C95B91F008C7049 /* MapViewController.m */; };
 		08E008211C95B945008C7049 /* MapFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E008201C95B945008C7049 /* MapFilterViewController.m */; };
+		08E008251C95BB16008C7049 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E008241C95BB16008C7049 /* FilterView.m */; };
+		08E008271C95BB1F008C7049 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E008261C95BB1F008C7049 /* FilterView.xib */; };
 		08E614CF1C92D3C2004B7DF4 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E614CE1C92D3C2004B7DF4 /* SignUpViewController.m */; };
 		08EBAFFD1C771DD60099979A /* ProfileDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */; };
 		08EBB0001C771E0B0099979A /* ProfileDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08EBAFFF1C771E0B0099979A /* ProfileDetailCell.m */; };
@@ -116,6 +118,9 @@
 		08E0081D1C95B91F008C7049 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		08E0081F1C95B945008C7049 /* MapFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapFilterViewController.h; sourceTree = "<group>"; };
 		08E008201C95B945008C7049 /* MapFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapFilterViewController.m; sourceTree = "<group>"; };
+		08E008231C95BB16008C7049 /* FilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
+		08E008241C95BB16008C7049 /* FilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
+		08E008261C95BB1F008C7049 /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		08E614CD1C92D3C2004B7DF4 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		08E614CE1C92D3C2004B7DF4 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDetailCell.xib; sourceTree = "<group>"; };
@@ -396,6 +401,16 @@
 			name = MapFilter;
 			sourceTree = "<group>";
 		};
+		08E008221C95BB03008C7049 /* FilterView */ = {
+			isa = PBXGroup;
+			children = (
+				08E008231C95BB16008C7049 /* FilterView.h */,
+				08E008241C95BB16008C7049 /* FilterView.m */,
+				08E008261C95BB1F008C7049 /* FilterView.xib */,
+			);
+			name = FilterView;
+			sourceTree = "<group>";
+		};
 		08E614CC1C92D3AF004B7DF4 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -489,6 +504,7 @@
 		08F6F8591C74943A005BC870 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				08E008221C95BB03008C7049 /* FilterView */,
 				08F6F85F1C74958C005BC870 /* Custom */,
 				08F6F85E1C749567005BC870 /* Modals */,
 				929107361C6C5A4E004B517C /* UserImage.h */,
@@ -857,6 +873,7 @@
 				92470D0B1C389081003E6F7E /* Main.storyboard in Resources */,
 				92880C331C6D472100315DF0 /* SessionCellHeader.xib in Resources */,
 				08EBAFFD1C771DD60099979A /* ProfileDetailCell.xib in Resources */,
+				08E008271C95BB1F008C7049 /* FilterView.xib in Resources */,
 				08F6F82D1C748AF9005BC870 /* FestivalCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -991,6 +1008,7 @@
 				083505D21C830C9B00826D63 /* EditProfileViewController.m in Sources */,
 				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
+				08E008251C95BB16008C7049 /* FilterView.m in Sources */,
 				08E0081E1C95B91F008C7049 /* MapViewController.m in Sources */,
 				08E614CF1C92D3C2004B7DF4 /* SignUpViewController.m in Sources */,
 				9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */,
