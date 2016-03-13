@@ -55,7 +55,7 @@
     Session * sessionInitial = [[FestivalData sharedFestivalData].sessionsArray objectAtIndex:0];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[sessionInitial.lat floatValue]
                                                             longitude:[sessionInitial.lon floatValue]
-                                                                 zoom:11];
+                                                                 zoom:10];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.myLocationEnabled = YES;
     self.view = mapView_;
