@@ -18,6 +18,8 @@
 #import "AppDelegate.h"
 #import "colors.h"
 #import "Credentials.h"
+#import <Mapbox/Mapbox.h>
+#import "MapViewController.h"
 @import Mapbox;
 
 @interface MenuTableViewController ()
@@ -409,8 +411,7 @@
     [appDelegateTemp changeRootViewController:navigation animSize:1];
 }
 -(void)map{
-    [[Credentials sharedCredentials] clearFestivalData];
-    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Festivals"];
+    UIViewController* rootController = [[MapViewController alloc]init];
     UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
     
     AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];

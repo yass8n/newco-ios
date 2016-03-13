@@ -16,6 +16,7 @@
 		08A5905A1C80697200890E30 /* proximanova-sbold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08A590551C80697200890E30 /* proximanova-sbold-webfont.ttf */; };
 		08C48E3C1C75AEE100A53712 /* FestivalCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */; };
 		08C48E3E1C75AEF200A53712 /* FestivalCellHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */; };
+		08E0080A1C957B43008C7049 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E008091C957B43008C7049 /* MapViewController.m */; };
 		08E614CF1C92D3C2004B7DF4 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E614CE1C92D3C2004B7DF4 /* SignUpViewController.m */; };
 		08EBAFFD1C771DD60099979A /* ProfileDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */; };
 		08EBB0001C771E0B0099979A /* ProfileDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08EBAFFF1C771E0B0099979A /* ProfileDetailCell.m */; };
@@ -48,6 +49,7 @@
 		08F6F8751C749BFB005BC870 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8741C749BFB005BC870 /* MenuItem.m */; };
 		08F6F8781C749C43005BC870 /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F8771C749C43005BC870 /* MenuTableViewController.m */; };
 		08F8536D1C7588A000E66966 /* AppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F8536C1C7588A000E66966 /* AppConst.m */; };
+		8672A0BF2B8C305CBB048DAB /* Pods_newco_festivals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB9A319EB17893165DBFADA /* Pods_newco_festivals.framework */; };
 		9212EB3D1C61499F00D17504 /* colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212EB3C1C61499F00D17504 /* colors.m */; };
 		9216595B1C58CC9E006239D6 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 9216595A1C58CC9E006239D6 /* session.m */; };
 		923D14941C6B05A400629F78 /* SessionCellHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 923D14931C6B05A400629F78 /* SessionCellHeader.m */; };
@@ -76,7 +78,6 @@
 		929107351C6C532D004B517C /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107341C6C532D004B517C /* DirectoryViewController.m */; };
 		929107381C6C5A4E004B517C /* UserImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 929107371C6C5A4E004B517C /* UserImage.m */; };
 		9291073A1C6C5A5A004B517C /* UserImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929107391C6C5A5A004B517C /* UserImage.xib */; };
-		C25334307A09B7FEB3B7CFFC /* libPods-newco-festivals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C099766019DEB63FA53093 /* libPods-newco-festivals.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,7 +98,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06C099766019DEB63FA53093 /* libPods-newco-festivals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-newco-festivals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		083505D01C830C9B00826D63 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		083505D11C830C9B00826D63 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		08A590441C805CAC00890E30 /* ConfirmationModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationModalView.h; sourceTree = "<group>"; };
@@ -110,6 +110,8 @@
 		08C48E3A1C75AEE100A53712 /* FestivalCellHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FestivalCellHeader.h; sourceTree = "<group>"; };
 		08C48E3B1C75AEE100A53712 /* FestivalCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FestivalCellHeader.m; sourceTree = "<group>"; };
 		08C48E3D1C75AEF200A53712 /* FestivalCellHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FestivalCellHeader.xib; sourceTree = "<group>"; };
+		08E008081C957B43008C7049 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		08E008091C957B43008C7049 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		08E614CD1C92D3C2004B7DF4 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		08E614CE1C92D3C2004B7DF4 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		08EBAFFC1C771DD60099979A /* ProfileDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDetailCell.xib; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		08F6F8771C749C43005BC870 /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
 		08F8536C1C7588A000E66966 /* AppConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConst.m; sourceTree = "<group>"; };
 		08F8536E1C7588A700E66966 /* AppConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConst.h; sourceTree = "<group>"; };
+		8DB9A319EB17893165DBFADA /* Pods_newco_festivals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newco_festivals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9212EB3B1C61499F00D17504 /* colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colors.h; sourceTree = "<group>"; };
 		9212EB3C1C61499F00D17504 /* colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = colors.m; sourceTree = "<group>"; };
 		9212EB3E1C6149A800D17504 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
@@ -234,7 +237,7 @@
 			files = (
 				08F6F8501C7491DB005BC870 /* FBSDKShareKit.framework in Frameworks */,
 				08F6F84E1C7491CE005BC870 /* FBSDKCoreKit.framework in Frameworks */,
-				C25334307A09B7FEB3B7CFFC /* libPods-newco-festivals.a in Frameworks */,
+				8672A0BF2B8C305CBB048DAB /* Pods_newco_festivals.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +375,15 @@
 			name = EditProfile;
 			sourceTree = "<group>";
 		};
+		08E008071C957B33008C7049 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				08E008081C957B43008C7049 /* MapViewController.h */,
+				08E008091C957B43008C7049 /* MapViewController.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
 		08E614CC1C92D3AF004B7DF4 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +514,7 @@
 		08F6F85C1C74944B005BC870 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				08E008071C957B33008C7049 /* Map */,
 				08E614CC1C92D3AF004B7DF4 /* SignUp */,
 				083505CF1C830C8600826D63 /* EditProfile */,
 				083505C31C830C2500826D63 /* MenuTable */,
@@ -695,7 +708,7 @@
 		CFAA25233C1B4C1175BD2FA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				06C099766019DEB63FA53093 /* libPods-newco-festivals.a */,
+				8DB9A319EB17893165DBFADA /* Pods_newco_festivals.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -964,6 +977,7 @@
 				083505D21C830C9B00826D63 /* EditProfileViewController.m in Sources */,
 				923D14971C6B08AE00629F78 /* SessionDetailViewController.m in Sources */,
 				924ECB6B1C6136440093CAA1 /* SessionCell.m in Sources */,
+				08E0080A1C957B43008C7049 /* MapViewController.m in Sources */,
 				08E614CF1C92D3C2004B7DF4 /* SignUpViewController.m in Sources */,
 				9291072F1C6C5268004B517C /* ProfileTableViewController.m in Sources */,
 			);

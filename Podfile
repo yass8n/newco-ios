@@ -12,4 +12,6 @@ target 'newco-festivals' do
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'TTTAttributedLabel'
+    pod 'Mapbox-iOS-SDK'
+    use_frameworks!
 end
