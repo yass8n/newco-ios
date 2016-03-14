@@ -6,6 +6,7 @@
 //  Copyright © 2016 Newco. All rights reserved.
 //
 
+#import "constants.h"
 
 @implementation Credentials
 
@@ -34,11 +35,14 @@ static Credentials *sharedCredentials = nil;
 }
 -(NSDictionary*) currentUser{
     if (!currentUser || [currentUser count] == 0){
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
-        NSDictionary *myUser = [prefs dictionaryForKey:@"user"];
-        if (myUser){
-            currentUser = [[NSDictionary alloc] init];
-            currentUser = myUser;
+        if (festival && [festival count]){
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
+            
+            NSDictionary *myUser = [prefs dictionaryForKey:[[festival objectForKey:@"name"] stringByAppendingString: @"user" ]];
+            if (myUser){
+                currentUser = [[NSDictionary alloc] init];
+                currentUser = myUser;
+            }
         }
     }
     return currentUser;
@@ -58,7 +62,8 @@ static Credentials *sharedCredentials = nil;
 - (void)setCurrentUser:(NSDictionary*) user{
     currentUser = user;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
-    [prefs setObject:user forKey:@"user"];
+    NSString* key = [ [festival objectForKey:@"name"] stringByAppendingString:@"user" ];
+    [prefs setObject:user forKey:key];
 }
 
 - (void)setFestival:(NSDictionary *)theFestival{
@@ -91,17 +96,18 @@ static Credentials *sharedCredentials = nil;
     ApplicationViewController.rightNav = nil;
     [FestivalData sharedFestivalData].currentUserSessions = nil;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
-    [prefs setObject:nil forKey:@"user"];
+    NSString* key = [ [festival objectForKey:@"name"] stringByAppendingString:@"user" ];
+    [prefs setObject:nil forKey:key];
     [[FestivalData sharedFestivalData] enableAllSessions];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setRightNavButton" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UserSessionsUpdated" object:nil];
 }
 -(void)clearFestivalData{
     festival =  nil;
+    currentUser = nil;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];  //load NSUserDefaults
     [prefs setObject:nil forKey:@"festival"];
     [[FestivalData sharedFestivalData] clearAllData];
-    [self logOut];
 }
 
 
