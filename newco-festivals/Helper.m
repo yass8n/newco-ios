@@ -40,13 +40,16 @@
 }
 + (NSString*) myDateToFormat:(NSDate *)date withFormat:(NSString*)format{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    [formatter setTimeZone:timeZone];
     [formatter setDateFormat:format];
     return [formatter stringFromDate:date];
 }
 + (NSDate*) UTCtoNSDate:(NSString*)utc{
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    [dateFormat setTimeZone:timeZone];
     return [dateFormat dateFromString:utc];
 }
 +(void)buttonTappedAnimation:(UIView *)view{
