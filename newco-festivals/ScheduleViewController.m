@@ -61,7 +61,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    ApplicationViewController.currentVC = enumSchedule;
     [self setRightNavButton];
     [self reloadTableView];
 }
@@ -112,6 +111,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewWithDelay) name:@"UserSessionsUpdated" object:nil ];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setRightNavButton) name:@"setRightNavButton" object:nil];
     self.sessionTableView.contentInset = UIEdgeInsetsMake(-1.0f, 0.0f, 0.0f, 0.0); //to get rid of extra space for the 1pt header for the festival cell
+    ApplicationViewController.rightNav = nil;
+    [self setRightNavButton];
 }
 -(void)reloadTableViewWithDelay{
      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{

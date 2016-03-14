@@ -43,7 +43,6 @@
 @implementation ApplicationViewController
 static BOOL menuOpen = NO;
 static GLfloat sysVer;
-static CurrentViewController currentVC;
 static UINavigationItem* navItem;
 static UIView* rightNav;
 static UIView* leftNav;
@@ -53,7 +52,6 @@ static UIViewController *theTopViewController;
 + (UIView*) rightNav { return rightNav; }
 + (UIView*) leftNav { return leftNav; }
 + (UINavigationItem*) navItem {return navItem;};
-+ (CurrentViewController) currentVC { return currentVC; }
 + (GLfloat) sysVer { return sysVer; }
 + (BOOL) menuOpen {return menuOpen; }
 + (UIViewController *)topViewController{return theTopViewController;}
@@ -74,9 +72,6 @@ static UIViewController *theTopViewController;
 }
 + (void) setRightNav:(UIView*) object{
     rightNav = object;
-}
-+ (void) setCurrentVC:(CurrentViewController) object{
-    currentVC = object;
 }
 
 + (void) setSysVer:(GLfloat) dummy{

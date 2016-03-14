@@ -116,7 +116,6 @@ static NSRecursiveLock *calls_lock;
 }
 -(void)fetchSessions:(WebService*)webService{
     ApplicationViewController.rightNav = nil;
-    [self setRightNavButton];
     [webService fetchSessions:^(NSArray* jsonArray){
         [[FestivalData sharedFestivalData] initializeSessionArrayWithData: jsonArray];
         NSSortDescriptor *sortStart = [[NSSortDescriptor alloc] initWithKey:@"event_start" ascending:YES];
@@ -151,7 +150,6 @@ static NSRecursiveLock *calls_lock;
     self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
     [self.segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateSelected];
     [self.segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateNormal];
-    ApplicationViewController.currentVC = enumRoot;
 }
 
 - (void)didReceiveMemoryWarning {

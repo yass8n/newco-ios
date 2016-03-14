@@ -76,9 +76,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor myLightGray];
-    self.navigationController.navigationBar.tintColor = [UIColor myLightGray];
-    ApplicationViewController.currentVC = enumSignin;
-    
+    self.navigationController.navigationBar.tintColor = [UIColor myLightGray];    
 }
 
 - (void)didReceiveMemoryWarning {

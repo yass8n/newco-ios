@@ -91,7 +91,6 @@ static NSString* ATTEND = @" Attend ";
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = self.session.color;
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    ApplicationViewController.currentVC = enumSessionDetail;
     //[self.superView removeConstraint:self.statusContainerConstraint];
     //self.statusContainer.translatesAutoresizingMaskIntoConstraints = YES;
 

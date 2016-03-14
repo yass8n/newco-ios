@@ -36,7 +36,6 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    ApplicationViewController.currentVC = enumProfileTable;
     if (self.session){
         self.navigationController.navigationBar.barTintColor = self.session.color;
         self.navigationController.navigationBar.tintColor = [UIColor blackColor];

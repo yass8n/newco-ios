@@ -37,7 +37,6 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    ApplicationViewController.currentVC = enumDirectory;
     [self setRightNavButton];
 }
 - (void)didReceiveMemoryWarning {

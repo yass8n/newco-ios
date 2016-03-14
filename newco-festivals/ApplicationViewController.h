@@ -51,20 +51,7 @@ static CGFloat animatedDistance;
 -(void)setInvisibleRightButton;
 -(void)setDefaultUserIcon;
 
-typedef NS_ENUM(NSInteger, CurrentViewController)
-{
-    enumRoot = 1,
-    enumSchedule,
-    enumDirectory,
-    enumProfileTable,
-    enumProfile,
-    enumSessionDetail,
-    enumSignin
-};
-
-
 + (void) setSysVer:(GLfloat) duummy;
-+ (void) setCurrentVC:(CurrentViewController) object;
 + (void) setNavItem:(UINavigationItem*) object;
 + (void) setLeftNav:(UIView*) object;
 + (void) setRightNav:(UIView*) object;
@@ -77,7 +64,6 @@ typedef NS_ENUM(NSInteger, CurrentViewController)
 + (UIView*) leftNav;
 + (UIView*) rightNav;
 + (GLfloat) sysVer;
-+ (CurrentViewController) currentVC;
 + (UINavigationItem*) navItem;
 + (BOOL) menuOpen;
 + (UIViewController *)topViewController;
