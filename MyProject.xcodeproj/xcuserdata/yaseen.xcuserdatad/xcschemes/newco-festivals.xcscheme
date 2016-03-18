@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92470CFC1C389081003E6F7E"
-               BuildableName = "now-festivals.app"
-               BlueprintName = "now-sessions"
-               ReferencedContainer = "container:now-sessions.xcodeproj">
+               BuildableName = "now-sessions.app"
+               BlueprintName = "MyProject"
+               ReferencedContainer = "container:MyProject.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92470D181C389082003E6F7E"
-               BuildableName = "now-sessions.xctest"
-               BlueprintName = "now-sessionsTests"
-               ReferencedContainer = "container:now-sessions.xcodeproj">
+               BuildableName = "MyProject.xctest"
+               BlueprintName = "MyProjectTests"
+               ReferencedContainer = "container:MyProject.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92470D231C389082003E6F7E"
-               BuildableName = "now-sessions.xctest"
-               BlueprintName = "now-sessionsUITests"
-               ReferencedContainer = "container:now-sessions.xcodeproj">
+               BuildableName = "MyProject.xctest"
+               BlueprintName = "MyProjectUITests"
+               ReferencedContainer = "container:MyProject.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92470CFC1C389081003E6F7E"
-            BuildableName = "now-festivals.app"
-            BlueprintName = "now-sessions"
-            ReferencedContainer = "container:now-sessions.xcodeproj">
+            BuildableName = "now-sessions.app"
+            BlueprintName = "MyProject"
+            ReferencedContainer = "container:MyProject.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92470CFC1C389081003E6F7E"
-            BuildableName = "now-festivals.app"
-            BlueprintName = "now-sessions"
-            ReferencedContainer = "container:now-sessions.xcodeproj">
+            BuildableName = "now-sessions.app"
+            BlueprintName = "MyProject"
+            ReferencedContainer = "container:MyProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92470CFC1C389081003E6F7E"
-            BuildableName = "now-festivals.app"
-            BlueprintName = "now-sessions"
-            ReferencedContainer = "container:now-sessions.xcodeproj">
+            BuildableName = "now-sessions.app"
+            BlueprintName = "MyProject"
+            ReferencedContainer = "container:MyProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
