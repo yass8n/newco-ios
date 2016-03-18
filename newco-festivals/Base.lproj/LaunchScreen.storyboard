@@ -26,10 +26,19 @@
                                     <navigationItem id="3qh-91-HjJ"/>
                                 </items>
                             </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="n7H-sz-Nkx">
+                                <rect key="frame" x="-50" y="20" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="3ki-SH-4c4"/>
+                                    <constraint firstAttribute="height" constant="25" id="5Fc-JP-6pq"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="n7H-sz-Nkx" firstAttribute="centerY" secondItem="9Bn-1C-2rN" secondAttribute="centerY" id="6DP-yR-EVu"/>
                             <constraint firstItem="9Bn-1C-2rN" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="CA7-l9-mpx"/>
+                            <constraint firstItem="9Bn-1C-2rN" firstAttribute="leading" secondItem="n7H-sz-Nkx" secondAttribute="trailing" constant="25" id="g33-Vr-64Y"/>
                             <constraint firstItem="9Bn-1C-2rN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="uVH-uI-TrW"/>
                             <constraint firstItem="9Bn-1C-2rN" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="-20" id="uoo-Di-xhX"/>
                         </constraints>
@@ -40,4 +49,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="menu" width="32" height="32"/>
+    </resources>
 </document>
