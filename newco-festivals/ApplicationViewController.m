@@ -187,7 +187,6 @@ static UIViewController *theTopViewController;
     
     if (needs_image_info){
         cell.title.hidden = NO;
-        cell.logo.hidden = NO;
         cell.dateView.hidden = NO;
         cell.date.text = [festival objectForKey:@"date"];
         cell.title.text = [[festival objectForKey:@"city"] uppercaseString];
@@ -195,7 +194,6 @@ static UIViewController *theTopViewController;
     }else{
         cell.dateView.hidden = YES;
         cell.title.hidden = YES;
-        cell.logo.hidden = YES;
     }
     cell.contentView.backgroundColor = color;
     

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/ApplicationViewController.m"
-            timestampString = "479647897.978308"
+            timestampString = "480009960.413724"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
             landmarkName = "-setUserNavBar:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newco-festivals/ApplicationViewController.m"
-            timestampString = "479647897.978308"
+            timestampString = "480009960.413724"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "-goToUserProfile:"
             landmarkType = "5">
          </BreakpointContent>
