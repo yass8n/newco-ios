@@ -492,6 +492,7 @@ static double milliSecondsSinceLastSession = 0;
                                 @"url": [festival objectForKey:@"url"],
                                 @"event_type_is_location": [festival objectForKey:@"event_type_is_location"],
                                 @"active": [festival objectForKey: @"active"],
+                                @"share": [festival objectForKey: @"share"],
                                 @"api_key" : [festival objectForKey:@"api_key"]};
         [hopperRef setValue: keep];
     }

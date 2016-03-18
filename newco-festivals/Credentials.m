@@ -79,6 +79,7 @@ static Credentials *sharedCredentials = nil;
                        @"url": @YES,
                        @"event_type_is_location": @YES,
                        @"active": @YES,
+                       @"share": @YES,
                        @"date" : @YES,
                        @"api_key" : @YES};
     for(id attribute in theFestival) {

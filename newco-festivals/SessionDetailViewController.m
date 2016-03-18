@@ -327,13 +327,15 @@ static NSString* ATTEND = @" Attend ";
     self.addressView.backgroundColor = [UIColor whiteColor];
     self.addressView.passTouchesToSubViews = YES;
     self.superView.backgroundColor = [Helper getUIColorObjectFromHexString:@"ece4e1" alpha:1.0];
-    
-    UIButton *share =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [share setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-    [share addTarget:self action:@selector(showSocialShareDialog) forControlEvents:UIControlEventTouchUpInside];
-    [share setFrame:CGRectMake(0, 0, 25, 25)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:share];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    if ([[[Credentials sharedCredentials].festival objectForKey:@"share"]boolValue]){
+        UIButton *share =  [UIButton buttonWithType:UIButtonTypeCustom];
+        [share setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+        [share addTarget:self action:@selector(showSocialShareDialog) forControlEvents:UIControlEventTouchUpInside];
+        [share setFrame:CGRectMake(0, 0, 25, 25)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:share];
+        self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    }
+  
     
     self.desc.text = [self.session.desc stringByStrippingHTML];
     self.desc.lineBreakMode = NSLineBreakByWordWrapping;
