@@ -20,7 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [GMSServices provideAPIKey:@"AIzaSyDxVsQqkSGGRRAzd93Y85O5kRd_bf1L4LY"];
+    [GMSServices provideAPIKey:@"AIzaSyAMfOPaB0JSm4zjCMam7tveE5_WZajLofg"];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     self.webservice = [[WebService alloc] init];
