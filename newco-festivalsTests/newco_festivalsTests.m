@@ -1,9 +1,9 @@
 //
 //  newco_festivalsTests.m
-//  newco-festivalsTests
+//  now-sessionsTests
 //
 //  Created by Yassen Aniss
-//  Copyright © 2016 newco. All rights reserved.
+//  Copyright © 2016 now. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

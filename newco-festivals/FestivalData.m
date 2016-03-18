@@ -1,9 +1,9 @@
 //
 //  FestivalData.m
-//  newco-IOS
+//  now-sessions
 //
 //  Created by Yassen Aniss
-//  Copyright Â© 2016 Newco. All rights reserved.
+//  Copyright Â© 2016 now. All rights reserved.
 //
 
 #import "Helper.h"

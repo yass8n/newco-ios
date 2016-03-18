@@ -1,9 +1,9 @@
 //
 //  FilterView.h
-//  newco-festivals
+//  now-sessions
 //
 //  Created by Yaseen Anss on 3/13/16.
-//  Copyright © 2016 newco. All rights reserved.
+//  Copyright © 2016 now. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -1,9 +1,9 @@
 //
 //  ProfileDetailCell.m
-//  newco-festivals
+//  now-sessions
 //
 //  Created by Yaseen Anss on 2/19/16.
-//  Copyright © 2016 newco. All rights reserved.
+//  Copyright © 2016 now. All rights reserved.
 //
 
 #import "ProfileDetailCell.h"

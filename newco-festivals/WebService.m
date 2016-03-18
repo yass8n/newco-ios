@@ -1,9 +1,9 @@
 //
 //  WebService.m
-//  newco-IOS
+//  now-sessions
 //
 //  Created by Yassen Aniss
-//  Copyright © 2016 Newco. All rights reserved.
+//  Copyright © 2016 now. All rights reserved.
 //
 #include "SVProgressHUD.h"
 #import <Firebase/Firebase.h>

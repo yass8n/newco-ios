@@ -1,9 +1,9 @@
 //
 //  SignInViewController.h
-//  newco-IOS
+//  now-sessions
 //
 //  Created by Yassen Aniss
-//  Copyright (c) 2016 Newco. All rights reserved.
+//  Copyright (c) 2016 now. All rights reserved.
 //
 @protocol SignInDelegate <NSObject>
 

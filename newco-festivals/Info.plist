@@ -2,18 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>proximanova-black-webfont.ttf</string>
-		<string>proximanova-bold-webfont.ttf</string>
-		<string>proximanova-light-webfont.ttf</string>
-		<string>proximanova-reg-webfont.ttf</string>
-		<string>proximanova-sbold-webfont.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -57,6 +47,8 @@
 	<string>226752407665179</string>
 	<key>FacebookDisplayName</key>
 	<string>Newco-IOS</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi20150629</string>
@@ -74,6 +66,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>proximanova-black-webfont.ttf</string>
+		<string>proximanova-bold-webfont.ttf</string>
+		<string>proximanova-light-webfont.ttf</string>
+		<string>proximanova-reg-webfont.ttf</string>
+		<string>proximanova-sbold-webfont.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
