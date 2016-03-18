@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92470CFC1C389081003E6F7E"
-               BuildableName = "now-sessions.app"
-               BlueprintName = "MyProject"
-               ReferencedContainer = "container:MyProject.xcodeproj">
+               BuildableName = "MyProject.app"
+               BlueprintName = "Instafest"
+               ReferencedContainer = "container:Instafest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92470D181C389082003E6F7E"
-               BuildableName = "MyProject.xctest"
-               BlueprintName = "MyProjectTests"
-               ReferencedContainer = "container:MyProject.xcodeproj">
+               BuildableName = "Instafest.xctest"
+               BlueprintName = "InstafestTests"
+               ReferencedContainer = "container:Instafest.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92470D231C389082003E6F7E"
-               BuildableName = "MyProject.xctest"
-               BlueprintName = "MyProjectUITests"
-               ReferencedContainer = "container:MyProject.xcodeproj">
+               BuildableName = "Instafest.xctest"
+               BlueprintName = "InstafestUITests"
+               ReferencedContainer = "container:Instafest.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92470CFC1C389081003E6F7E"
-            BuildableName = "now-sessions.app"
-            BlueprintName = "MyProject"
-            ReferencedContainer = "container:MyProject.xcodeproj">
+            BuildableName = "MyProject.app"
+            BlueprintName = "Instafest"
+            ReferencedContainer = "container:Instafest.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92470CFC1C389081003E6F7E"
-            BuildableName = "now-sessions.app"
-            BlueprintName = "MyProject"
-            ReferencedContainer = "container:MyProject.xcodeproj">
+            BuildableName = "MyProject.app"
+            BlueprintName = "Instafest"
+            ReferencedContainer = "container:Instafest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92470CFC1C389081003E6F7E"
-            BuildableName = "now-sessions.app"
-            BlueprintName = "MyProject"
-            ReferencedContainer = "container:MyProject.xcodeproj">
+            BuildableName = "MyProject.app"
+            BlueprintName = "Instafest"
+            ReferencedContainer = "container:Instafest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
