@@ -191,7 +191,7 @@
 		923D14931C6B05A400629F78 /* SessionCellHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCellHeader.m; sourceTree = "<group>"; };
 		923D14951C6B08AE00629F78 /* SessionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionDetailViewController.h; sourceTree = "<group>"; };
 		923D14961C6B08AE00629F78 /* SessionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDetailViewController.m; sourceTree = "<group>"; };
-		92470CFD1C389081003E6F7E /* Instafest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instafest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92470CFD1C389081003E6F7E /* MyProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92470D011C389081003E6F7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92470D031C389081003E6F7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		92470D041C389081003E6F7E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -200,10 +200,10 @@
 		92470D0F1C389081003E6F7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92470D121C389081003E6F7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92470D141C389081003E6F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92470D191C389082003E6F7E /* Instafest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Instafest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92470D191C389082003E6F7E /* MyProject.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyProject.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92470D1D1C389082003E6F7E /* newco_festivalsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = newco_festivalsTests.m; sourceTree = "<group>"; };
 		92470D1F1C389082003E6F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92470D241C389082003E6F7E /* Instafest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Instafest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92470D241C389082003E6F7E /* MyProject.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyProject.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92470D281C389082003E6F7E /* newco_festivalsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = newco_festivalsUITests.m; sourceTree = "<group>"; };
 		92470D2A1C389082003E6F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		924ECB661C6134AC0093CAA1 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
@@ -676,9 +676,9 @@
 		92470CFE1C389081003E6F7E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92470CFD1C389081003E6F7E /* Instafest.app */,
-				92470D191C389082003E6F7E /* Instafest.xctest */,
-				92470D241C389082003E6F7E /* Instafest.xctest */,
+				92470CFD1C389081003E6F7E /* MyProject.app */,
+				92470D191C389082003E6F7E /* MyProject.xctest */,
+				92470D241C389082003E6F7E /* MyProject.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -754,9 +754,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92470CFC1C389081003E6F7E /* Instafest */ = {
+		92470CFC1C389081003E6F7E /* MyProject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92470D2D1C389082003E6F7E /* Build configuration list for PBXNativeTarget "Instafest" */;
+			buildConfigurationList = 92470D2D1C389082003E6F7E /* Build configuration list for PBXNativeTarget "MyProject" */;
 			buildPhases = (
 				E3E5AF6589E41DEC7C230BE1 /* Check Pods Manifest.lock */,
 				92470CF91C389081003E6F7E /* Sources */,
@@ -770,14 +770,14 @@
 			);
 			dependencies = (
 			);
-			name = Instafest;
+			name = MyProject;
 			productName = "newco-festivals";
-			productReference = 92470CFD1C389081003E6F7E /* Instafest.app */;
+			productReference = 92470CFD1C389081003E6F7E /* MyProject.app */;
 			productType = "com.apple.product-type.application";
 		};
-		92470D181C389082003E6F7E /* InstafestTests */ = {
+		92470D181C389082003E6F7E /* MyProjectTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92470D301C389082003E6F7E /* Build configuration list for PBXNativeTarget "InstafestTests" */;
+			buildConfigurationList = 92470D301C389082003E6F7E /* Build configuration list for PBXNativeTarget "MyProjectTests" */;
 			buildPhases = (
 				92470D151C389082003E6F7E /* Sources */,
 				92470D161C389082003E6F7E /* Frameworks */,
@@ -788,14 +788,14 @@
 			dependencies = (
 				92470D1B1C389082003E6F7E /* PBXTargetDependency */,
 			);
-			name = InstafestTests;
+			name = MyProjectTests;
 			productName = "newco-festivalsTests";
-			productReference = 92470D191C389082003E6F7E /* Instafest.xctest */;
+			productReference = 92470D191C389082003E6F7E /* MyProject.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		92470D231C389082003E6F7E /* InstafestUITests */ = {
+		92470D231C389082003E6F7E /* MyProjectUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92470D331C389082003E6F7E /* Build configuration list for PBXNativeTarget "InstafestUITests" */;
+			buildConfigurationList = 92470D331C389082003E6F7E /* Build configuration list for PBXNativeTarget "MyProjectUITests" */;
 			buildPhases = (
 				92470D201C389082003E6F7E /* Sources */,
 				92470D211C389082003E6F7E /* Frameworks */,
@@ -806,9 +806,9 @@
 			dependencies = (
 				92470D261C389082003E6F7E /* PBXTargetDependency */,
 			);
-			name = InstafestUITests;
+			name = MyProjectUITests;
 			productName = "newco-festivalsUITests";
-			productReference = 92470D241C389082003E6F7E /* Instafest.xctest */;
+			productReference = 92470D241C389082003E6F7E /* MyProject.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -833,7 +833,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92470CF81C389081003E6F7E /* Build configuration list for PBXProject "Instafest" */;
+			buildConfigurationList = 92470CF81C389081003E6F7E /* Build configuration list for PBXProject "MyProject" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -846,9 +846,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92470CFC1C389081003E6F7E /* Instafest */,
-				92470D181C389082003E6F7E /* InstafestTests */,
-				92470D231C389082003E6F7E /* InstafestUITests */,
+				92470CFC1C389081003E6F7E /* MyProject */,
+				92470D181C389082003E6F7E /* MyProjectTests */,
+				92470D231C389082003E6F7E /* MyProjectUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1036,12 +1036,12 @@
 /* Begin PBXTargetDependency section */
 		92470D1B1C389082003E6F7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92470CFC1C389081003E6F7E /* Instafest */;
+			target = 92470CFC1C389081003E6F7E /* MyProject */;
 			targetProxy = 92470D1A1C389082003E6F7E /* PBXContainerItemProxy */;
 		};
 		92470D261C389082003E6F7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92470CFC1C389081003E6F7E /* Instafest */;
+			target = 92470CFC1C389081003E6F7E /* MyProject */;
 			targetProxy = 92470D251C389082003E6F7E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1160,7 +1160,7 @@
 				INFOPLIST_FILE = "newco-festivals/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = instaapp.instafest;
-				PRODUCT_NAME = Instafest;
+				PRODUCT_NAME = MyProject;
 			};
 			name = Debug;
 		};
@@ -1178,7 +1178,7 @@
 				INFOPLIST_FILE = "newco-festivals/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = instaapp.instafest;
-				PRODUCT_NAME = Instafest;
+				PRODUCT_NAME = MyProject;
 			};
 			name = Release;
 		};
@@ -1189,8 +1189,8 @@
 				INFOPLIST_FILE = "newco-festivalsTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "newco.newco-festivalsTests";
-				PRODUCT_NAME = Instafest;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Instafest.app/Instafest";
+				PRODUCT_NAME = MyProject;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyProject.app/MyProject";
 			};
 			name = Debug;
 		};
@@ -1201,8 +1201,8 @@
 				INFOPLIST_FILE = "newco-festivalsTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "newco.newco-festivalsTests";
-				PRODUCT_NAME = Instafest;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Instafest.app/Instafest";
+				PRODUCT_NAME = MyProject;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyProject.app/MyProject";
 			};
 			name = Release;
 		};
@@ -1212,7 +1212,7 @@
 				INFOPLIST_FILE = "newco-festivalsUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "newco.newco-festivalsUITests";
-				PRODUCT_NAME = Instafest;
+				PRODUCT_NAME = MyProject;
 				TEST_TARGET_NAME = "newco-festivals";
 				USES_XCTRUNNER = YES;
 			};
@@ -1224,7 +1224,7 @@
 				INFOPLIST_FILE = "newco-festivalsUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "newco.newco-festivalsUITests";
-				PRODUCT_NAME = Instafest;
+				PRODUCT_NAME = MyProject;
 				TEST_TARGET_NAME = "newco-festivals";
 				USES_XCTRUNNER = YES;
 			};
@@ -1233,7 +1233,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92470CF81C389081003E6F7E /* Build configuration list for PBXProject "Instafest" */ = {
+		92470CF81C389081003E6F7E /* Build configuration list for PBXProject "MyProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92470D2B1C389082003E6F7E /* Debug */,
@@ -1242,7 +1242,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92470D2D1C389082003E6F7E /* Build configuration list for PBXNativeTarget "Instafest" */ = {
+		92470D2D1C389082003E6F7E /* Build configuration list for PBXNativeTarget "MyProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92470D2E1C389082003E6F7E /* Debug */,
@@ -1251,7 +1251,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92470D301C389082003E6F7E /* Build configuration list for PBXNativeTarget "InstafestTests" */ = {
+		92470D301C389082003E6F7E /* Build configuration list for PBXNativeTarget "MyProjectTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92470D311C389082003E6F7E /* Debug */,
@@ -1260,7 +1260,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92470D331C389082003E6F7E /* Build configuration list for PBXNativeTarget "InstafestUITests" */ = {
+		92470D331C389082003E6F7E /* Build configuration list for PBXNativeTarget "MyProjectUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92470D341C389082003E6F7E /* Debug */,

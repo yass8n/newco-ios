@@ -46,7 +46,9 @@
     self.filterSessions = filterSessions;
     self.filterDate = filterDate;
     self.sessionsArray = sessionsArray;
-    [self setUpMap:self.sessionsArray];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self setUpMap:self.sessionsArray];
+    });
 }
 -(void)setUpMap:(NSArray*)sessionsArray {
     
