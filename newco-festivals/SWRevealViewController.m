@@ -43,7 +43,8 @@ static CGFloat statusBarAdjustment( UIView* view )
     if ( CGRectIntersectsRect(viewFrame, statusBarFrame) )
         adjustment = fminf(statusBarFrame.size.width, statusBarFrame.size.height);
 
-    return adjustment;
+//    return adjustment;
+    return 0;
 }
 
 #pragma mark - SWRevealView Class

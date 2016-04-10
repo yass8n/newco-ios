@@ -380,24 +380,15 @@
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (!decelerate) {
-        [self scrollingFinish];
-    }
+//    if (!decelerate) {
+//        [self scrollingFinish];
+//    }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [self scrollingFinish];
+//    [self scrollingFinish];
 }
-- (void)scrollingFinish {
-    CGRect frame = self.view.bounds;
-    frame.origin.y = frame.origin.y + 20;
-    [UIView animateWithDuration:.25
-                     animations:^(void) {
-                         self.view.bounds = frame;
-                         
-                     }];
-    
-}
+
 
 #pragma mark - functions for menu
 -(void)changeCity{

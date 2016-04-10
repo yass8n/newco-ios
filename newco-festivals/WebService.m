@@ -87,6 +87,7 @@ static double milliSecondsSinceLastSession = 0;
         milliSecondsSinceLastAlert =[[NSDate date] timeIntervalSince1970];
         [ALAlertBanner hideAllAlertBanners];
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
         ALAlertBanner *banner = [ALAlertBanner alertBannerForView:appDelegate.window
                                                             style:ALAlertBannerStyleWarning
                                                          position:ALAlertBannerPositionUnderNavBar
@@ -373,8 +374,10 @@ static double milliSecondsSinceLastSession = 0;
     
 }
 - (void)editProfile:(NSDictionary *)params callback:(void (^)(NSDictionary * status)) callback{
+    //NSString* const apiUrl = @"http://192.168.0.14:3000"; //develeopment
+
     dispatch_queue_t completion_que = dispatch_get_main_queue();
-    NSString *urlString = [NSString stringWithFormat:@"https://afternoon-crag-73506.herokuapp.com/%@/user/edit_profile", [self.credentials.festival objectForKey:@"name"]];
+    NSString *urlString = [NSString stringWithFormat:@"http://192.168.0.14:3000/%@/user/edit_profile", [self.credentials.festival objectForKey:@"name"]];
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if ([params objectForKey:@"avatar"] != nil){
             NSData *imageData = UIImageJPEGRepresentation([params objectForKey:@"avatar"], 1.0);

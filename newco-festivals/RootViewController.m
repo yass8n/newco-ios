@@ -84,6 +84,13 @@ static NSRecursiveLock *calls_lock;
             if (user) {
                 NSMutableDictionary* mutableUser = [user mutableCopy];
                 [mutableUser setObject:[[Credentials sharedCredentials].currentUser objectForKey:@"auth"] forKey:@"auth"];
+                if ([[mutableUser objectForKey:@"avatar"]length] >= 2 &&
+                    ![[[mutableUser objectForKey:@"avatar"] substringToIndex:4] isEqualToString:@"http"]
+                    ){
+                    NSString* avatar = [NSString stringWithFormat:@"http:%@", [mutableUser objectForKey:@"avatar"] ];
+                    [mutableUser setValue:avatar forKey:@"avatar"];
+                }
+                NSLog(@"%@", [[user objectForKey:@"avatar"] substringToIndex:4]);
                 user = [mutableUser copy];
                 [Credentials sharedCredentials].currentUser = user;
                 [self fetchSessions:webService];

@@ -78,9 +78,14 @@ static NSString* ATTEND = @" Attend ";
                 [self.users setObject:user forKey:[user objectForKey:@"username"]];
             }
         }
-        if ([self.users objectForKey:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]]){
-            NSDictionary* user = [Credentials sharedCredentials].currentUser;
-            [self.users setObject:user forKey:[[Credentials sharedCredentials].currentUser objectForKey:@"username"]];
+        NSDictionary* user = [Credentials sharedCredentials].currentUser;
+        if ([[user objectForKey:@"privacy_mode"] isEqualToString:@"Y"]
+            || [[user objectForKey:@"privacy_mode"] isEqualToString:@"1"]){
+            [self.users removeObjectForKey:[user objectForKey:@"username"]];
+        }else if (self.session.picked){
+            [self.users setObject:user forKey:[user objectForKey:@"username"]];
+        }else{
+            [self.users removeObjectForKey:[user objectForKey:@"username"]];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setupScrollView];
