@@ -1,3 +1,3 @@
 # newco-ios
 
-![alt tag](Newco-poster.pdf)
+![alt tag](https://github.com/yass8n/newco-ios.pdf)
