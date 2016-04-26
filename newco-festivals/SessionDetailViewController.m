@@ -84,7 +84,7 @@ static NSString* ATTEND = @" Attend ";
             [self.users removeObjectForKey:[user objectForKey:@"username"]];
         }else if (self.session.picked){
             [self.users setObject:user forKey:[user objectForKey:@"username"]];
-        }else{
+        }else if([user objectForKey:@"username"]) {
             [self.users removeObjectForKey:[user objectForKey:@"username"]];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
