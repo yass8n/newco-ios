@@ -70,7 +70,10 @@ static NSRecursiveLock *calls_lock;
                     [[FestivalData sharedFestivalData].presentersDict setObject:user forKey:[user objectForKey:@"username"]];
                 }
                 if ([role rangeOfString:@"artist"].location != NSNotFound) {
-                    [[FestivalData sharedFestivalData].companiesDict setObject:user forKey:[user objectForKey:@"username"]];
+                    if (![[user objectForKey:@"avatar"] isEqualToString:@""]){
+                                 [[FestivalData sharedFestivalData].companiesDict setObject:user forKey:[user objectForKey:@"username"]];
+                    }
+          
                 }
             }
         }
@@ -90,7 +93,6 @@ static NSRecursiveLock *calls_lock;
                     NSString* avatar = [NSString stringWithFormat:@"http:%@", [mutableUser objectForKey:@"avatar"] ];
                     [mutableUser setValue:avatar forKey:@"avatar"];
                 }
-                NSLog(@"%@", [[user objectForKey:@"avatar"] substringToIndex:4]);
                 user = [mutableUser copy];
                 [Credentials sharedCredentials].currentUser = user;
                 [self fetchSessions:webService];

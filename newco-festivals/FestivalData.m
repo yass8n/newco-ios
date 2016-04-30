@@ -95,7 +95,12 @@
     for (int i = 0; i < jsonArray.count; i++){
         NSDictionary* session_ = [jsonArray objectAtIndex:i];
         NSString * active = [session_ objectForKey:@"active"];
-        if ([active isEqualToString:@"Y"]){
+        NSString * startString = [session_ objectForKey:@"event_start"];
+        if ([active isEqualToString:@"Y"] ){
+            if ([[[Credentials sharedCredentials].festival objectForKey:@"name"] isEqualToString:@"utopia"] &&
+                ![startString hasPrefix:@"2017-08"]){
+                continue;
+            }
             NSString* description = [session_ objectForKey:@"description"];
             NSString* event_key = [session_ objectForKey:@"event_key"];
             NSString* lat = [session_ objectForKey:@"lat"];
@@ -460,8 +465,30 @@
                               [UIColor lightGrayColor],
                               [UIColor greenColor],
                               [UIColor purpleColor],
-                              
-                              
+                              [UIColor myDarkTeal],
+                              [UIColor myDarkYellow],
+                              [UIColor myPink],
+                              [UIColor myLightGray],
+                              [UIColor myLightOrange],
+                              [UIColor myLightPink],
+                              [UIColor myFadedTurquoise],
+                              [UIColor myBrown],
+                              [UIColor myTurquoise],
+                              [UIColor myPuke],
+                              [UIColor myRed],
+                              [UIColor myGreen],
+                              [UIColor myBlue],
+                              [UIColor myOrange],
+                              [UIColor myPurple],
+                              [UIColor myTeal],
+                              [UIColor myYellow],
+                              [UIColor myPink],
+                              [UIColor myDarkBlue],
+                              [UIColor myDarkRed],
+                              [UIColor myDarkPurple],
+                              [UIColor myDarkOrange],
+                              [UIColor myMiddleBlue],
+                              [UIColor myLimeGreen],
                               nil];
     }
     
