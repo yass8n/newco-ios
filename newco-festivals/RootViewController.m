@@ -64,16 +64,22 @@ static NSRecursiveLock *calls_lock;
                     [[FestivalData sharedFestivalData].attendeesDict setObject:user forKey:[user objectForKey:@"username"]];
                 }
                 if ([role rangeOfString:@"volunteer"].location != NSNotFound) {
+                    if ([[[Credentials sharedCredentials].festival objectForKey:@"name"] isEqualToString:@"utopia"] && [[user objectForKey:@"avatar"] isEqualToString:@""]){
+                        continue;
+                    }
                     [[FestivalData sharedFestivalData].volunteersDict setObject:user forKey:[user objectForKey:@"username"]];
                 }
                 if ([role rangeOfString:@"speaker"].location != NSNotFound) {
+                    if ([[[Credentials sharedCredentials].festival objectForKey:@"name"] isEqualToString:@"utopia"] && [[user objectForKey:@"avatar"] isEqualToString:@""]){
+                        continue;
+                    }
                     [[FestivalData sharedFestivalData].presentersDict setObject:user forKey:[user objectForKey:@"username"]];
                 }
                 if ([role rangeOfString:@"artist"].location != NSNotFound) {
-                    if (![[user objectForKey:@"avatar"] isEqualToString:@""]){
-                                 [[FestivalData sharedFestivalData].companiesDict setObject:user forKey:[user objectForKey:@"username"]];
+                    if ([[[Credentials sharedCredentials].festival objectForKey:@"name"] isEqualToString:@"utopia"] && [[user objectForKey:@"avatar"] isEqualToString:@""]){
+                        continue;
                     }
-          
+                    [[FestivalData sharedFestivalData].companiesDict setObject:user forKey:[user objectForKey:@"username"]];
                 }
             }
         }
