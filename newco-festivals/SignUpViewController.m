@@ -64,6 +64,8 @@
         [alert show];
     }else {
         WebService * webService = [[WebService alloc] initWithView:self.view];
+          username = [username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+          email = [email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [webService signUpAPIWithUsername:username andPassword:password andEmail:email callback:^(NSString *response) {
             if ([response rangeOfString:@"ERR"].location != NSNotFound){
                 
@@ -271,7 +273,8 @@
     }
     self.usernameSpinner.hidden = NO;
     WebService * webservice = [[WebService alloc]init];
-    [webservice findByUsername:self.usernameField.text withAuthToken:nil callback:^(NSDictionary *user) {
+    NSString *trimmedString = [self.usernameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    [webservice findByUsername:trimmedString withAuthToken:nil callback:^(NSDictionary *user) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             self.usernameSpinner.hidden = YES;
             if (user == nil){
@@ -299,7 +302,8 @@
     }
     self.emailSpinner.hidden = NO;
     WebService * webservice = [[WebService alloc]init];
-    [webservice findByEmail:self.emailField.text withAuthToken:nil callback:^(NSDictionary *user) {
+    NSString *trimmedString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    [webservice findByEmail:trimmedString withAuthToken:nil callback:^(NSDictionary *user) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             self.emailSpinner.hidden = YES;
             
