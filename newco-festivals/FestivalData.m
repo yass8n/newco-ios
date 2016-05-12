@@ -103,15 +103,16 @@
             NSString* lon = [session_ objectForKey:@"lon"];
             NSString* name = [session_ objectForKey:@"name"];
             NSString* address = [session_ objectForKey:@"address"];
-            if (lat == nil && address != nil){
-                CLLocationCoordinate2D center = [Helper getLocationFromAddressString:address];
-                double  latFrom= center.latitude;
-                double  lonFrom= center.longitude;
-                lat = [NSString stringWithFormat:@"%f", latFrom];
-                lon = [NSString stringWithFormat:@"%f", lonFrom];
-            }else if(address == nil){
+            if (lat == nil || address == nil){
                 continue;
-            }
+//                CLLocationCoordinate2D center = [Helper getLocationFromAddressString:address];
+//                double  latFrom= center.latitude;
+//                double  lonFrom= center.longitude;
+//                lat = [NSString stringWithFormat:@"%f", latFrom];
+//                lon = [NSString stringWithFormat:@"%f", lonFrom];
+            }/*else if(address == nil){
+                continue;
+            }*/
             NSDate* event_start = [Helper UTCtoNSDate:[session_ objectForKey:@"event_start"]];
             NSDate* event_end = [Helper UTCtoNSDate:[session_ objectForKey:@"event_end"]];
             

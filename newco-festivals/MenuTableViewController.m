@@ -98,6 +98,7 @@
     
     
     NSArray * colorDict = sharedFestivalData.locationColorDict.allKeys;
+    colorDict = [colorDict sortedArrayUsingSelector:@selector(compare:)];
     if ([colorDict count] >0){
         MenuItem * header = [[MenuItem alloc]init];
         header.title = location_string;
@@ -123,6 +124,7 @@
     
     
     NSArray * audienceDict = sharedFestivalData.audienceMapToSessions.allKeys;
+    audienceDict = [audienceDict sortedArrayUsingSelector:@selector(compare:)];
     if ([audienceDict count] > 0){
         MenuItem * header1 = [[MenuItem alloc]init];
         header1.title = audience_string;

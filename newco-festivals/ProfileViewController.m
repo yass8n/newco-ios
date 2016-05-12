@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSMutableArray * sessionsArray;
 @property (strong, nonatomic) NSMutableDictionary* datesDict;
 @property (strong, nonatomic) NSMutableDictionary* orderOfInsertedDatesDict;
+@property (strong, nonatomic) UIRefreshControl* refreshControl;
 @property (nonatomic) BOOL dataLoaded;
 #import "constants.h"
 @end
@@ -90,13 +91,16 @@
             
         }
     });
+    [self.refreshControl endRefreshing];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataLoaded = NO;
-    [self allocateMemory];
     [self adjustUI];
-    [self addDataToTable];
+    [self registerNibs];
+    [self refresh];
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.sessionTableView addSubview:self.refreshControl];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"UserSessionsUpdated" object:nil];
     
     // Do any additional setup after loading the view.
@@ -105,28 +109,10 @@
     self.datesDict = [[NSMutableDictionary alloc] init];
     self.orderOfInsertedDatesDict =[[NSMutableDictionary alloc] init];
 }
-- (void) addDataToTable{
+- (void) registerNibs{
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCell" bundle:nil]forCellReuseIdentifier:@"session_cell"];
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"SessionCellHeader" bundle:nil]forCellReuseIdentifier:@"session_cell_header"];
     [self.sessionTableView registerNib:[UINib nibWithNibName:@"ProfileDetailCell" bundle:nil]forCellReuseIdentifier:@"profile_detail_cell"];
-    
-    NSString * username = [self.user objectForKey:@"username"];
-    if ([self.type isEqual:@"speaker"] || [self.type isEqual:@"company"] ){
-        dispatch_async(dispatch_queue_create("", NULL), ^{[self getSessionForUser:username forType:self.type];});
-        
-    } else {
-        WebService * webService = [[WebService alloc] initWithView:self.view];
-        [webService fetchSesionsForUser:^(NSArray *allSessionTransactions) {
-            self.sessionsArray = [[NSMutableArray alloc] init];
-            for (int i =0; i < [allSessionTransactions count]; i++){
-                NSMutableDictionary* sessionTransaction = [allSessionTransactions objectAtIndex:i];
-                if ([[sessionTransaction objectForKey:@"username"] isEqual:username]){
-                    [self.sessionsArray addObject:[[FestivalData sharedFestivalData].sessionsDict objectForKey:[sessionTransaction objectForKey:@"event_key"]]];
-                }
-            }
-            [self sortAndSetSessionObjects];
-        }];
-    }
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -280,6 +266,48 @@
             [self setInvisibleRightButton];
         });
     });
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView*)scrollView
+{
+    if( self.refreshControl.isRefreshing )
+        [self refresh];
+}
+-(void)refresh{
+    [self allocateMemory];
+    NSString * username = [self.user objectForKey:@"username"];
+    if ([self.type isEqual:@"speaker"] || [self.type isEqual:@"company"] ){
+        dispatch_async(dispatch_queue_create("", NULL), ^{[self getSessionForUser:username forType:self.type];});
+        
+    } else {
+        WebService * webService = [[WebService alloc] initWithView:self.view];
+        [webService fetchSesionsForUser:^(NSArray *allSessionTransactions) {
+            self.sessionsArray = [[NSMutableArray alloc] init];
+            for (int i =0; i < [allSessionTransactions count]; i++){
+                NSMutableDictionary* sessionTransaction = [allSessionTransactions objectAtIndex:i];
+                if ([[sessionTransaction objectForKey:@"username"] isEqual:username]){
+                    if ([[FestivalData sharedFestivalData].sessionsDict objectForKey:[sessionTransaction objectForKey:@"event_key"]] != nil){
+                        [self.sessionsArray addObject:[[FestivalData sharedFestivalData].sessionsDict objectForKey:[sessionTransaction objectForKey:@"event_key"]]];
+                    }
+                    
+                }
+            }
+            if ([[Credentials sharedCredentials].currentUser count] > 0){
+                if ([[[Credentials sharedCredentials].currentUser objectForKey:@"username"] isEqualToString:[self.user objectForKey:@"username"]]){
+                    [FestivalData sharedFestivalData].currentUserSessions = nil;
+                    [[FestivalData sharedFestivalData] enableAllSessions];
+                    
+                    for (Session * session in self.sessionsArray){
+                        
+                        [[FestivalData sharedFestivalData].currentUserSessions setObject:@"YES" forKey:session.event_key];
+                        [[FestivalData sharedFestivalData] updateSessionsValidity:[[NSArray alloc] initWithObjects:session.event_key, nil] invalidateSessions:YES];
+                    }
+                    
+                }
+            }
+            [self sortAndSetSessionObjects];
+        }];
+    }
+
 }
 
 //- (IBAction)hideTopView:(id)sender {
