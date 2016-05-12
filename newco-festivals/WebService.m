@@ -150,8 +150,8 @@ static double milliSecondsSinceLastSession = 0;
             });
             
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN removeSession");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN removeSession");
         }
         [self hidePageLoader];
     }];
@@ -175,8 +175,8 @@ static double milliSecondsSinceLastSession = 0;
             });
             
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN addSession");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN addSession");
         }
         [self hidePageLoader];
     }];
@@ -199,8 +199,8 @@ static double milliSecondsSinceLastSession = 0;
                 });
             }
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN setAttendeesFor...");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN setAttendeesFor...");
         }
         [self hidePageLoader];
     }];
@@ -223,8 +223,8 @@ static double milliSecondsSinceLastSession = 0;
                 });
             }
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN fetchSessions");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN fetchSessions");
         }
         [self hidePageLoader];
     }];
@@ -247,8 +247,8 @@ static double milliSecondsSinceLastSession = 0;
                 });
             }
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN fetchUsers");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN fetchUsers");
         }
         [self hidePageLoader];
     }];
@@ -270,8 +270,8 @@ static double milliSecondsSinceLastSession = 0;
                 });
             }
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN fetchSesionsForUser");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN fetchSesionsForUser");
         }
         [self hidePageLoader];
     }];
@@ -295,8 +295,8 @@ static double milliSecondsSinceLastSession = 0;
             });
             
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN login");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN login");
         }
         [self hidePageLoader];
     }];
@@ -319,8 +319,8 @@ static double milliSecondsSinceLastSession = 0;
             });
             
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN SignUp");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN SignUp");
         }
         [self hidePageLoader];
     }];
@@ -343,8 +343,8 @@ static double milliSecondsSinceLastSession = 0;
                 });
         } else {
             [self hidePageLoader];
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN findByUsername");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN findByUsername");
         }
     }];
     [dataTask resume];
@@ -365,8 +365,8 @@ static double milliSecondsSinceLastSession = 0;
                 });
             }
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN fetchCurrentUserSessions...");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN fetchCurrentUserSessions...");
         }
         [self hidePageLoader];
     }];
@@ -431,8 +431,8 @@ static double milliSecondsSinceLastSession = 0;
                 callback((NSDictionary*)responseObject);
             });
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN change username");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN change username");
         }
         [self hidePageLoader];
     }];
@@ -448,8 +448,8 @@ static double milliSecondsSinceLastSession = 0;
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (!error) {
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN remove avatar");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN remove avatar");
         }
         [self hidePageLoader];
     }];
@@ -468,8 +468,8 @@ static double milliSecondsSinceLastSession = 0;
                 callback((NSDictionary*)responseObject);
             });
         } else {
-            NSLog(@"Error: %@", error);
-            NSLog(@"ERROR IN findByEmail");
+//            NSLog(@"Error: %@", error);
+//            NSLog(@"ERROR IN findByEmail");
             dispatch_async(completion_que, ^{
                 callback(nil);
             });

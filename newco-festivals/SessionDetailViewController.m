@@ -685,7 +685,12 @@ static NSString* ATTEND = @" Attend ";
     double window_height = self.view.frame.size.height;
     
     if (result == MFMailComposeResultCancelled){
-        
+        UIAlertView * alert =  [[UIAlertView alloc] initWithTitle:@"Cancelled"
+                                                          message:@"Please set up a mail account in Settings->Mail->Accounts."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [alert show];
     }else if (result == MFMailComposeResultFailed){
         NSLog(@"Mail sent failure: %@", [error localizedDescription]);
         UIAlertView * alert =  [[UIAlertView alloc] initWithTitle:@"Failure"
