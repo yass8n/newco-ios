@@ -542,7 +542,7 @@ static double milliSecondsSinceLastSession = 0;
             return;
         }
         milliSecondsSinceLastSession =[[NSDate date] timeIntervalSince1970];
-        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/activity/",  [[Credentials sharedCredentials].festival objectForKey:@"name"]];
+        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/user-activity/",  [[Credentials sharedCredentials].festival objectForKey:@"name"]];
         Firebase *ref = [[Firebase alloc] initWithUrl:[Helper firebaseSafeUrl:subUrl]];
         Firebase *hopperRef = [ref childByAppendingPath: userId];
         Firebase *postRef = [hopperRef childByAutoId];
@@ -557,27 +557,40 @@ static double milliSecondsSinceLastSession = 0;
 
 -(void)registerSharedSession:(NSString*)sessionTitle note:(NSString*)note userId:(NSString*)userId{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/%@/", [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle];
+        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/sessions/%@/shared/%@/%@/count", [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle, userId, note];
         Firebase *ref = [[Firebase alloc] initWithUrl:[Helper firebaseSafeUrl:subUrl]];
-        Firebase *hopperRef = [ref childByAppendingPath: @"shared"];
-        Firebase *postRef = [hopperRef childByAutoId];
-        NSDictionary *dict = @{
-                               @"note" : note,
-                               @"userId" : userId
-                               };
-        [postRef setValue: dict];
+        [ref observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            int count;
+            if (snapshot.value != [NSNull null]){
+                count = [snapshot.value integerValue];
+                count ++;
+            }else{
+                count = 1;
+            }
+           NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/sessions/%@/shared/%@/%@/", [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle, userId, note];
+            Firebase *ref = [[Firebase alloc] initWithUrl:[Helper firebaseSafeUrl:subUrl]];
+            [ref setValue: @{@"count" : [NSNumber numberWithInt:count]} withCompletionBlock:^(NSError *error, Firebase *ref) {
+            }];
+        }];
     });
 }
 -(void)registerViewedSession:(NSString*)sessionTitle userId:(NSString*)userId {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/%@/", [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle];
+        NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/sessions/%@/viewed/%@/count", [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle, userId];
         Firebase *ref = [[Firebase alloc] initWithUrl:[Helper firebaseSafeUrl:subUrl]];
-        Firebase *hopperRef = [ref childByAppendingPath: @"viewed"];
-        Firebase *postRef = [hopperRef childByAutoId];
-        NSDictionary *dict = @{
-                               @"userId" : userId
-                               };
-        [postRef setValue: dict];
+        [ref observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            int count;
+            if (snapshot.value != [NSNull null]){
+                count = [snapshot.value integerValue];
+                count ++;
+            }else{
+                count = 1;
+            }
+             NSString* subUrl = [NSString stringWithFormat:@"festivals/%@/data-tracking/sessions/%@/viewed/%@/", [[Credentials sharedCredentials].festival objectForKey:@"name"], sessionTitle, userId];
+            Firebase *ref = [[Firebase alloc] initWithUrl:[Helper firebaseSafeUrl:subUrl]];
+            [ref setValue: @{@"count" : [NSNumber numberWithInt:count]} withCompletionBlock:^(NSError *error, Firebase *ref) {
+            }];
+        }];
         
     });
 }
