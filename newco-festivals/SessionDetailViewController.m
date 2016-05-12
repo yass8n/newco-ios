@@ -22,6 +22,7 @@
 @interface SessionDetailViewController ()
 #import "constants.h"
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeight;
 @property (strong, readwrite, nonatomic) NSLayoutConstraint *statusContainerConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *status;
 @property (weak, nonatomic) IBOutlet UIView *statusContainer;
@@ -205,56 +206,69 @@ static NSString* ATTEND = @" Attend ";
     self.attendeesLabel.text = [self.attendeesLabel.text and @")"];
     if ([self.users count] == 0){
         [self.allAttendees removeFromSuperview];
-        [self.scrollView removeFromSuperview];
+        self.scrollViewHeight.constant = 0;
     } else{
-        self.scrollView.pagingEnabled = YES;
-        self.scrollView.bounces = NO;
-        UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(allAttendees:)];
-        singleTapGestureRecognizer.numberOfTapsRequired = 1;
-        singleTapGestureRecognizer.enabled = YES;
-        singleTapGestureRecognizer.cancelsTouchesInView = YES;
-        [self.scrollView addGestureRecognizer:singleTapGestureRecognizer];
-        [self.scrollView setIndicatorStyle:UIScrollViewIndicatorStyleDefault];
-        int i;
-        NSArray * users = [self.users allValues];
-        [[self.scrollView subviews]
-         makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        NSUInteger count = [users count];
-        if (count > 24) { count = 24; };
-        for (i = 0; i < count; i++) {
-            NSDictionary * user = [users objectAtIndex:i];
-            if (user){
-                CGFloat xOrigin = i * 35;
-                NSString * avatar = [user objectForKey:@"avatar"];
-                CGRect rect = CGRectMake(xOrigin,0,30,30);
-                if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""]){
-                    UIView * initial = [self setUserInitial:rect withFont:rect.size.width/2 withUser:user intoView:self.scrollView withType:@"attendee"];
-                    initial.layer.borderColor = [UIColor myLightGray].CGColor;
-                    initial.layer.borderWidth = 1;
-                    initial.layer.cornerRadius = 15;
-                    initial.clipsToBounds = YES;
-                    initial.frame = rect;
-                    [initial setUserInteractionEnabled:NO];
-                    
-                }else {
-                    if ([[avatar substringToIndex:2]  isEqual: @"//"]){
-                        avatar = [@"https:" and avatar];
+        CompletionBlock block = ^{
+            self.scrollView.pagingEnabled = YES;
+            self.scrollView.bounces = NO;
+            UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(allAttendees:)];
+            singleTapGestureRecognizer.numberOfTapsRequired = 1;
+            singleTapGestureRecognizer.enabled = YES;
+            singleTapGestureRecognizer.cancelsTouchesInView = YES;
+            [self.scrollView addGestureRecognizer:singleTapGestureRecognizer];
+            [self.scrollView setIndicatorStyle:UIScrollViewIndicatorStyleDefault];
+            int i;
+            NSArray * users = [self.users allValues];
+            [[self.scrollView subviews]
+             makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            NSUInteger count = [users count];
+            if (count > 24) { count = 24; };
+            for (i = 0; i < count; i++) {
+                NSDictionary * user = [users objectAtIndex:i];
+                if (user){
+                    CGFloat xOrigin = i * 35;
+                    NSString * avatar = [user objectForKey:@"avatar"];
+                    CGRect rect = CGRectMake(xOrigin,0,30,30);
+                    if ([avatar isEqual:[NSNull null]] || [avatar  isEqual: @""]){
+                        UIView * initial = [self setUserInitial:rect withFont:rect.size.width/2 withUser:user intoView:self.scrollView withType:@"attendee"];
+                        initial.layer.borderColor = [UIColor myLightGray].CGColor;
+                        initial.layer.borderWidth = 1;
+                        initial.layer.cornerRadius = 15;
+                        initial.clipsToBounds = YES;
+                        initial.frame = rect;
+                        [initial setUserInteractionEnabled:NO];
+                        
+                    }else {
+                        if ([[avatar substringToIndex:2]  isEqual: @"//"]){
+                            avatar = [@"https:" and avatar];
+                        }
+                        UIImageView * imageContainer = [[UIImageView alloc] init];
+                        [self setUserImage:rect withAvatar:avatar withUser:user intoView:imageContainer withType:@"attendee"];
+                        imageContainer.layer.borderColor = [UIColor myLightGray].CGColor;
+                        imageContainer.layer.borderWidth = 1;
+                        imageContainer.layer.cornerRadius = 15;
+                        imageContainer.clipsToBounds = YES;
+                        imageContainer.frame = rect;
+                        [self.scrollView addSubview:imageContainer];
                     }
-                    UIImageView * imageContainer = [[UIImageView alloc] init];
-                    [self setUserImage:rect withAvatar:avatar withUser:user intoView:imageContainer withType:@"attendee"];
-                    imageContainer.layer.borderColor = [UIColor myLightGray].CGColor;
-                    imageContainer.layer.borderWidth = 1;
-                    imageContainer.layer.cornerRadius = 15;
-                    imageContainer.clipsToBounds = YES;
-                    imageContainer.frame = rect;
-                    [self.scrollView addSubview:imageContainer];
+                }else {
+                    break;
                 }
-            }else {
-                break;
             }
+            
+            self.scrollView.contentSize = CGSizeMake(i * 30, 0);
+            
+        };
+        if (self.scrollViewHeight.constant == 0){
+            [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+                self.scrollViewHeight.constant = 50;
+            }completion:^(BOOL finished) {
+                block();
+            }];
+        }else{
+            block();
         }
         
-        self.scrollView.contentSize = CGSizeMake(i * 30, 0);
     }
 }
 - (void)setupNavBar{
@@ -505,20 +519,24 @@ static NSString* ATTEND = @" Attend ";
     activityView.center=v.center;
     [activityView startAnimating];
     [modal.modalImageContainer addSubview:v];
-    if (conflictingSession.goers >= conflictingSession.seats){
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [modal hideModal];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Swap failed"
-                                                                message:@"Sorry, the session you tried to add is already full."
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            });
-        });
-        return;
-    }
+//    if (self.session.goers >= self.session.seats){
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//            [modal hideModal];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//                NSString* message = @"Sorry, the session you tried to add is already full.";
+//                            if ([[[Credentials sharedCredentials].festival objectForKey:@"name"] isEqualToString:@"utopia"]){
+//                                message = @"Sorry, this session is not ready. Please try again later.";
+//                            }
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Swap failed"
+//                                                                message:message
+//                                                               delegate:nil
+//                                                      cancelButtonTitle:@"OK"
+//                                                      otherButtonTitles:nil];
+//                [alert show];
+//            });
+//        });
+//        return;
+//    }
         WebService * webService = [[WebService alloc] init];
         [webService removeSessionFromSchedule:conflictingSession.id_ callback:^(NSString *response) {
             UIAlertView *alert;

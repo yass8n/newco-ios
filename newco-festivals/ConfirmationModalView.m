@@ -48,8 +48,8 @@
         NSDictionary *company = [[FestivalData sharedFestivalData].companiesDict objectForKey:[companyTemp objectForKey:@"username"]];
         NSString * companyAvatar = [company objectForKey:@"avatar"];
         NSURL *imageURL = [NSURL URLWithString:companyAvatar];
-        if (imageURL == nil){
-            modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(1, 1, 64, 64)];
+        if (imageURL == nil || [companyAvatar isEqual:@""]){
+            modalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(13, 13, 40, 40)];
             modalImageView.image = [[UIImage imageNamed:@"swap"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             [modalImageView setTintColor:imageColor];
         }else{

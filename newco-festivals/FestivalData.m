@@ -97,16 +97,21 @@
         NSString * active = [session_ objectForKey:@"active"];
         NSString * startString = [session_ objectForKey:@"event_start"];
         if ([active isEqualToString:@"Y"] ){
-            if ([[[Credentials sharedCredentials].festival objectForKey:@"name"] isEqualToString:@"utopia"] &&
-                ![startString hasPrefix:@"2017-08"]){
-                continue;
-            }
             NSString* description = [session_ objectForKey:@"description"];
             NSString* event_key = [session_ objectForKey:@"event_key"];
             NSString* lat = [session_ objectForKey:@"lat"];
             NSString* lon = [session_ objectForKey:@"lon"];
             NSString* name = [session_ objectForKey:@"name"];
             NSString* address = [session_ objectForKey:@"address"];
+            if (lat == nil && address != nil){
+                CLLocationCoordinate2D center = [Helper getLocationFromAddressString:address];
+                double  latFrom= center.latitude;
+                double  lonFrom= center.longitude;
+                lat = [NSString stringWithFormat:@"%f", latFrom];
+                lon = [NSString stringWithFormat:@"%f", lonFrom];
+            }else if(address == nil){
+                continue;
+            }
             NSDate* event_start = [Helper UTCtoNSDate:[session_ objectForKey:@"event_start"]];
             NSDate* event_end = [Helper UTCtoNSDate:[session_ objectForKey:@"event_end"]];
             
@@ -214,6 +219,13 @@
         }
         
         
+    }
+    if ([[[Credentials sharedCredentials].festival objectForKey:@"name"] isEqualToString:@"utopia"]){
+        NSArray * locationArray = [ApplicationViewController locationArray];
+        NSArray * audienceArray = [ApplicationViewController audienceArray];
+        [locationMapToSessions removeObjectsForKeys:locationArray];
+        [locationColorDict removeObjectsForKeys:locationArray];
+        [audienceMapToSessions removeObjectsForKeys:audienceArray];
     }
     [self setDatesDict:datesDict setOrderOfInsertedDatesDict:orderOfInsertedDatesDict forSessions:sessionsArray initializeEverything:YES modifyOrderOfInsertedDictKeysByAddingNumber:1];
 }

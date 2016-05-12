@@ -67,6 +67,8 @@ static CGFloat animatedDistance;
 + (UINavigationItem*) navItem;
 + (BOOL) menuOpen;
 + (UIViewController *)topViewController;
++ (NSArray *)audienceArray;
++ (NSArray *)locationArray;
 
 
 @end

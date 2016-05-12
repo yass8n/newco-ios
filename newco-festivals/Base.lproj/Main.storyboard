@@ -975,6 +975,7 @@
                         <outlet property="region" destination="j5t-Za-BNa" id="AA4-ea-vGw"/>
                         <outlet property="regionColor" destination="Rj5-7k-8Fj" id="cyg-3i-kvi"/>
                         <outlet property="scrollView" destination="PdC-WY-3Uu" id="74j-05-Fq6"/>
+                        <outlet property="scrollViewHeight" destination="G42-gk-3MP" id="Yik-ls-bqX"/>
                         <outlet property="status" destination="i1d-8Z-QD5" id="acb-XR-prF"/>
                         <outlet property="statusContainer" destination="cmv-HV-pkN" id="aE6-Rh-q4g"/>
                         <outlet property="superView" destination="63t-WY-yVs" id="5sz-Rw-VVT"/>

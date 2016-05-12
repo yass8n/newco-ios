@@ -57,11 +57,11 @@
     [self reloadTableView];
 }
 -(void)sortAndSetSessionObjects{
+    NSSortDescriptor *sortStart = [[NSSortDescriptor alloc] initWithKey:@"event_start" ascending:YES];
+    [self.sessionsArray sortUsingDescriptors:[NSMutableArray arrayWithObjects:sortStart, nil]];
     [[FestivalData sharedFestivalData] setDatesDict:self.datesDict setOrderOfInsertedDatesDict:self.orderOfInsertedDatesDict forSessions:self.sessionsArray initializeEverything:NO modifyOrderOfInsertedDictKeysByAddingNumber:1];
     
-    NSSortDescriptor *sortStart = [[NSSortDescriptor alloc] initWithKey:@"event_start" ascending:YES];
-    
-    [self.sessionsArray sortUsingDescriptors:[NSMutableArray arrayWithObjects:sortStart, nil]];
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self reloadTableView];
         if ( [[self.datesDict allKeys] count] == 0){

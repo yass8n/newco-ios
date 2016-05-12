@@ -81,6 +81,12 @@ static UIViewController *theTopViewController;
 +(void) fakeMenuTap{
     [(UIButton*)leftNav sendActionsForControlEvents: UIControlEventTouchUpInside];
 }
++(NSArray*)locationArray{
+    return [[NSArray alloc]initWithObjects:@"Palo Alto", @"San Bruno", @"San Jose", @"Sunnyvale", @"Menlo Park", @"Redwood City", @"Ancillary Event - SF", @"San Mateo", @"Mtn View", nil];
+}
++(NSArray*)audienceArray{
+    return [[NSArray alloc]initWithObjects:@"Maker-Manufacturer", @"Energy-Transportation-Sustainability", @"Culinary Arts-Hospitality-Tourism", @"Internet-Mobile", @"Professional Services-VC-Incubator", @"Productivity-Tools", @"Ad Tech", @"Fashion-Retail-Shopping-e-Commerce", @"Health", @"Education", @"Non-Profit", @"Mid-Market", @"Media", nil];
+}
 - (BOOL)prefersStatusBarHidden {
     return NO;
 }

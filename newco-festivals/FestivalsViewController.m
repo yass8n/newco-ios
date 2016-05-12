@@ -127,9 +127,9 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
        FestivalCellHeader* headerCell = [tableView dequeueReusableCellWithIdentifier:@"festival_cell_header"];
     if (section == 0){
-        headerCell.title.text = @"CURRENT EVENTS";
+        headerCell.title.text = @"UPCOMING";
     }else{
-        headerCell.title.text = @"PAST EVENTS";
+        headerCell.title.text = @"PREVIOUS";
     }
     return headerCell;
 }

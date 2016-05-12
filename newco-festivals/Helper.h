@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@import GoogleMaps;
+typedef void (^ CompletionBlock)(void);
 @interface Helper : NSObject
 + (NSString*) myDateToFormat:(NSDate*) date withFormat:(NSString*)format;
 + (NSDate*) UTCtoNSDate:(NSString*)utc;
@@ -18,4 +19,6 @@
 + (CGSize)sizeForLabel:(UILabel *)label ;
 + (NSString*)firebaseSafeUrl:(NSString*)url;
 +(void)buttonTappedAnimation:(UIView*)view;
++(NSDictionary*)order;
++(CLLocationCoordinate2D) getLocationFromAddressString: (NSString*) addressStr;
 @end
